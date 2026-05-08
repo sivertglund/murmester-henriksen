@@ -349,11 +349,10 @@ h2 em {
   position: relative;
   display: inline-block;
   margin: 0;
-  padding-bottom: .18em; /* room for the marker underline below text */
   font-size: clamp(2.6rem, 7.5vw, 6.4rem);
   line-height: 1;
   --reveal: 0;
-  animation: heroReveal 3.4s cubic-bezier(.4,.1,.25,1) .6s forwards;
+  animation: heroReveal 3.4s cubic-bezier(.4,.1,.25,1) 1.8s forwards;
 }
 @keyframes heroReveal {
   from { --reveal: 0; }
@@ -382,26 +381,9 @@ h2 em {
 }
 .hero__write-text em {
   font-style: normal;
-  color: var(--clay-500);
+  color: #fff;
   font-family: inherit;
   text-shadow: 0 2px 30px rgba(0,0,0,.45);
-}
-
-/* Tusjet understrek — kun under "Alle trenger", ender før "en murer!" */
-.hero__write-stroke {
-  position: absolute;
-  left: 1%;
-  right: 51%;
-  bottom: 0;
-  height: .22em;
-  pointer-events: none;
-  color: var(--clay-500);
-  filter: drop-shadow(0 2px 12px rgba(0,0,0,.35));
-}
-.hero__write-stroke path {
-  stroke-width: 6;
-  stroke-dasharray: 480;
-  stroke-dashoffset: calc(480 - 480 * var(--reveal, 0));
 }
 
 /* Stenset signatur i en dempet mørk-rød boks — klikkbar, lander på /kontakt */
@@ -423,7 +405,7 @@ h2 em {
   cursor: pointer;
   opacity: 0;
   transform: translateY(8px);
-  animation: heroSignatureIn .55s cubic-bezier(.2,.8,.2,1) 4.05s forwards;
+  animation: heroSignatureIn .55s cubic-bezier(.2,.8,.2,1) 5.25s forwards;
   transition:
     background .25s ease,
     transform .25s cubic-bezier(.2,.8,.2,1),
@@ -455,7 +437,7 @@ h2 em {
   opacity: 0;
   pointer-events: none;
   will-change: transform, opacity;
-  animation: heroPen 3.4s cubic-bezier(.4,.1,.25,1) .6s forwards;
+  animation: heroPen 3.4s cubic-bezier(.4,.1,.25,1) 1.8s forwards;
 }
 @keyframes heroPen {
   0%   { left: 0;    opacity: 0; }
