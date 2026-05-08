@@ -395,29 +395,31 @@ h2 em {
   stroke-dashoffset: calc(480 - 480 * var(--reveal, 0));
 }
 
-/* Stenset signatur — ren tekst, ingen boks. Klikkbar med subtil understrek. */
+/* Stenset signatur i en dempet mørk-rød boks — klikkbar, lander på /kontakt */
 .hero__signature {
   display: inline-block;
   text-decoration: none;
   font-family: 'Saira Stencil One', 'Bricolage Grotesque', sans-serif;
   font-weight: 400;
-  font-size: clamp(1.05rem, 1.7vw, 1.45rem);
+  font-size: clamp(1rem, 1.55vw, 1.3rem);
   letter-spacing: .04em;
   line-height: 1.2;
-  color: rgba(255, 240, 220, .92);
-  text-shadow: 0 2px 14px rgba(0, 0, 0, .55);
-  margin: clamp(20px, 2.4vw, 32px) 0 clamp(28px, 3vw, 40px);
-  padding: 4px 2px;
-  border-bottom: 1px solid transparent;
+  color: rgba(255, 240, 220, .96);
+  background: var(--clay-700);
+  padding: 9px 18px;
+  border-radius: 6px;
+  border: 1px solid rgba(255, 200, 170, .12);
+  box-shadow: 0 8px 18px -8px rgba(0, 0, 0, .55);
+  margin: clamp(18px, 2.2vw, 28px) 0 clamp(28px, 3vw, 40px);
   cursor: pointer;
   /* Skjult inntil tittelen er ferdig skrevet — JS toggler .is-shown */
   opacity: 0;
   transform: translateY(8px);
   transition:
     opacity .5s ease,
-    transform .5s cubic-bezier(.2,.8,.2,1),
-    color .25s ease,
-    border-color .3s ease;
+    transform .35s cubic-bezier(.2,.8,.2,1),
+    background .25s ease,
+    box-shadow .25s ease;
 }
 .hero__signature.is-shown {
   opacity: 1;
@@ -426,8 +428,9 @@ h2 em {
 .hero__signature:hover,
 .hero__signature:focus-visible {
   outline: none;
-  color: #fff;
-  border-bottom-color: var(--clay-500);
+  background: var(--clay-600);
+  transform: translateY(-2px);
+  box-shadow: 0 12px 24px -8px rgba(0, 0, 0, .6);
 }
 /* The pen tip — a glowing marker following the right edge of the reveal */
 .hero__pen {
