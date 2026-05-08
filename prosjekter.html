@@ -4,12 +4,12 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Prosjekter — Murmester Henriksen AS</title>
-<meta name="description" content="Prosjektarkiv for Murmester Henriksen AS — kommer snart." />
+<meta name="description" content="Et utvalg arbeider fra Murmester Henriksen AS — teglforblending, puss, kalkrestaurering, peis og pipe i Vestfold." />
 <meta name="theme-color" content="#1a0f0a" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&display=swap" rel="stylesheet" />
-<link rel="stylesheet" href="styles.css" />
+<link rel="stylesheet" href="/styles.css" />
 </head>
 <body>
 
@@ -35,27 +35,47 @@
   </div>
 </header>
 
-<main class="placeholder">
-  <div class="container placeholder__inner">
-    <p class="kicker">Prosjekter</p>
-    <h1 class="placeholder__title display">
-      Mer info <em>kommer.</em>
-    </h1>
-    <p class="placeholder__lede">
-      Vi jobber med å samle prosjektene våre. I mellomtiden kan du se et utvalg
-      arbeider på forsiden — eller ta kontakt direkte for å se referanser
-      innenfor et bestemt fagområde.
-    </p>
-    <div class="placeholder__cta">
-      <a href="index.html" class="btn btn--primary">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
-        Tilbake til forsiden
-      </a>
-      <a href="/#kontakt" class="btn btn--ghost btn--ghost-dark">
-        Be om referanser
-      </a>
+<main>
+  <section class="subhero">
+    <div class="container subhero__inner">
+      <p class="subhero__crumbs">
+        <a href="/">Hjem</a>
+        <span aria-hidden="true">/</span>
+        <span>Prosjekter</span>
+      </p>
+      <p class="kicker kicker--light">Prosjekter</p>
+      <h1>Et utvalg <em>arbeider</em>.</h1>
+      <p class="subhero__lede">
+        Et knippe oppdrag fra Vestfold — fra teglforblending og puss til
+        kalkrestaurering og peis. Trenger du referanser innenfor et bestemt
+        fagområde, ta kontakt så viser vi deg flere.
+      </p>
     </div>
-  </div>
+  </section>
+
+  <section class="projects">
+    <div class="container">
+      <div class="projects__grid">
+        <figure class="projects__item"><img src="/assets/projects/project-01.jpg" alt="Pussfasade på sokkel" loading="lazy" decoding="async" /></figure>
+        <figure class="projects__item"><img src="/assets/projects/project-02.jpg" alt="Murverk" loading="lazy" decoding="async" /></figure>
+        <figure class="projects__item"><img src="/assets/projects/project-03.jpg" alt="Restaurert murverk" loading="lazy" decoding="async" /></figure>
+        <figure class="projects__item"><img src="/assets/projects/project-04.jpg" alt="Peis" loading="lazy" decoding="async" /></figure>
+        <figure class="projects__item"><img src="/assets/projects/project-05.jpg" alt="Pipe-rehabilitering" loading="lazy" decoding="async" /></figure>
+        <figure class="projects__item"><img src="/assets/projects/project-06.jpg" alt="Teglforblending" loading="lazy" decoding="async" /></figure>
+        <figure class="projects__item"><img src="/assets/projects/project-07.jpg" alt="Flislegging" loading="lazy" decoding="async" /></figure>
+        <figure class="projects__item"><img src="/assets/projects/project-08.jpg" alt="Sparkling og gulvavretting" loading="lazy" decoding="async" /></figure>
+        <figure class="projects__item"><img src="/assets/projects/project-09.jpg" alt="Skifer og naturstein" loading="lazy" decoding="async" /></figure>
+        <figure class="projects__item"><img src="/assets/projects/project-10.jpg" alt="Murverk" loading="lazy" decoding="async" /></figure>
+        <figure class="projects__item"><img src="/assets/projects/project-11.jpg" alt="Murverk" loading="lazy" decoding="async" /></figure>
+        <figure class="projects__item"><img src="/assets/projects/project-12.jpg" alt="Elementpipe" loading="lazy" decoding="async" /></figure>
+      </div>
+
+      <p class="projects__note">
+        Vil du se referanser for et bestemt fagområde — pipe, kalk, tegl eller flis?
+        <a href="/kontakt">Ta kontakt</a> så viser vi deg flere.
+      </p>
+    </div>
+  </section>
 </main>
 
 <footer class="footer">
@@ -78,8 +98,9 @@
     <div class="footer__col">
       <h4>Bedriften</h4>
       <ul>
-        <li><a href="/#om-oss">Om oss</a></li>
-        <li><a href="/#kontakt">Kontakt oss</a></li>
+        <li><a href="/om-oss">Om oss</a></li>
+        <li><a href="/prosjekter">Prosjekter</a></li>
+        <li><a href="/kontakt">Kontakt</a></li>
         <li><a href="https://www.facebook.com/murmesterhenriksen" target="_blank" rel="noopener">Facebook</a></li>
         <li><a href="https://www.instagram.com/murmesterhenriksen/" target="_blank" rel="noopener">Instagram</a></li>
       </ul>
@@ -90,6 +111,12 @@
         <li><a href="tel:+4795523763">955 23 763</a></li>
         <li><a href="mailto:post@murmesterhenriksen.no">post@murmesterhenriksen.no</a></li>
       </ul>
+      <h4 class="footer__sub">Åpningstider</h4>
+      <ul class="footer__hours">
+        <li><span>Man–Tor</span><span>07:00–15:30</span></li>
+        <li><span>Fredag</span><span>07:00–13:00</span></li>
+        <li><span>Lør &amp; søn</span><span>Stengt</span></li>
+      </ul>
     </div>
   </div>
   <div class="footer__bottom">
@@ -98,6 +125,6 @@
   </div>
 </footer>
 
-<script src="script.js"></script>
+<script src="/script.js"></script>
 </body>
 </html>

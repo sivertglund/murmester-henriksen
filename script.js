@@ -15,6 +15,52 @@
   const yearEl = $('#year');
   if (yearEl) yearEl.textContent = new Date().getFullYear();
 
+  /* ---------- Live opening-hours status pill ----------
+     Mon–Thu 07:00–15:30 · Fri 07:00–13:00 · Sat–Sun closed.
+     Updates immediately, then re-checks every minute. */
+  const statusEl = $('#navStatus');
+  if (statusEl) {
+    const textEl = statusEl.querySelector('.nav__status-text');
+    const HOURS = {
+      // 0=Sun, 1=Mon, ... 6=Sat
+      1: [7*60, 15*60+30],
+      2: [7*60, 15*60+30],
+      3: [7*60, 15*60+30],
+      4: [7*60, 15*60+30],
+      5: [7*60, 13*60],
+    };
+    const fmt = (mins) => {
+      const h = Math.floor(mins/60), m = mins%60;
+      return `${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}`;
+    };
+    const update = () => {
+      const now = new Date();
+      const day = now.getDay();
+      const mins = now.getHours()*60 + now.getMinutes();
+      const today = HOURS[day];
+      let state, label;
+      if (today && mins >= today[0] && mins < today[1]) {
+        state = 'open';
+        label = `Åpent nå · til ${fmt(today[1])}`;
+      } else {
+        // find next open day
+        state = 'closed';
+        for (let i = 1; i <= 7; i++) {
+          const d = (day + i) % 7;
+          if (HOURS[d]) {
+            const dayName = i === 1 ? 'i morgen' : ['søndag','mandag','tirsdag','onsdag','torsdag','fredag','lørdag'][d];
+            label = `Stengt · åpner ${dayName} kl ${fmt(HOURS[d][0])}`;
+            break;
+          }
+        }
+      }
+      statusEl.dataset.state = state;
+      if (textEl) textEl.textContent = label;
+    };
+    update();
+    setInterval(update, 60_000);
+  }
+
   /* ---------- Nav: solid background after hero ---------- */
   const nav = $('#nav');
   const heroEl = $('#hero');
@@ -48,12 +94,29 @@
 
   /* ---------- Reveal-on-scroll ---------- */
   const reveals = document.querySelectorAll(
-    '.section--intro .intro__head, .section--intro .intro__quote, .section--intro .intro__col, ' +
+    '.intro__kicker, .intro__title, .intro__lede, .intro__chips, ' +
     '.stack__head, .stack__card, ' +
     '.about__copy, .about__facts, ' +
-    '.contact__copy, .contact__form'
+    '.contact__copy, .contact__form, ' +
+    '.why__head, .why__card, ' +
+    '.process__head, .process__step, ' +
+    '.testimonials__head, .quote, ' +
+    '.services-grid__head, .svc-card, ' +
+    '.subhero__inner, .article__main > *, .article__aside, ' +
+    '.projects__item'
   );
-  reveals.forEach(el => el.classList.add('reveal'));
+  reveals.forEach((el, i) => {
+    el.classList.add('reveal');
+    // Stagger siblings within a grid for a "pour" effect
+    if (el.matches('.why__card, .process__step, .quote, .svc-card, .projects__item')) {
+      const parent = el.parentElement;
+      const idx = Array.from(parent.children).indexOf(el);
+      el.style.setProperty('--reveal-delay', `${Math.min(idx, 5) * 70}ms`);
+    }
+  });
+
+  /* Animation-only triggers (don't apply opacity-fade, just toggle .is-in) */
+  const animTargets = document.querySelectorAll('.why__bricks, .intro__stroke');
 
   if ('IntersectionObserver' in window) {
     const io = new IntersectionObserver((entries) => {
@@ -65,8 +128,10 @@
       });
     }, { threshold: 0.12 });
     reveals.forEach(el => io.observe(el));
+    animTargets.forEach(el => io.observe(el));
   } else {
     reveals.forEach(el => el.classList.add('is-in'));
+    animTargets.forEach(el => el.classList.add('is-in'));
   }
 
   /* ---------- Scroll-driven hero ----------
@@ -94,15 +159,22 @@
     let progressCurrent = 0;
     let ticking = false;
 
+    /* ----- Hero video scroll mapping -----
+       Source video plays the wall coming apart top-down. Reversed playback
+       from 55% → 0% gives "litt over halve muren intakt" at the top of scroll
+       and the wall builds upward to complete by the bottom of the hero. */
+    const HERO_START_FRAC = 0.55;
+    const HERO_END_FRAC   = 0.0;
+
     const setDuration = () => {
       if (isFinite(video.duration) && video.duration > 0) {
         duration = video.duration;
       }
     };
-    const showEndFrame = () => {
-      // Show END frame initially — wall is "built" before user scrolls
+    const showInitialFrame = () => {
       if (duration) {
-        try { video.currentTime = Math.max(0, duration - 0.001); } catch (_) {}
+        const t0 = Math.max(0, Math.min(duration - 0.001, HERO_START_FRAC * duration));
+        try { video.currentTime = t0; } catch (_) {}
       }
     };
 
@@ -121,7 +193,7 @@
       } else {
         video.pause();
       }
-      showEndFrame();
+      showInitialFrame();
       onScroll();
     };
     video.addEventListener('canplay', onCanPlay, { once: true });
@@ -135,10 +207,11 @@
     const REVEAL_END   = 0.92;
 
     const applyProgress = (p) => {
-      // Reverse video playback — only after the browser has frame data
       if (canScrub && duration) {
-        const t = Math.max(0, Math.min(duration - 0.001, (1 - p) * duration));
-        if (Math.abs(video.currentTime - t) > 0.015) {
+        const raw = (HERO_START_FRAC + p * (HERO_END_FRAC - HERO_START_FRAC)) * duration;
+        const t = Math.max(0, Math.min(duration - 0.001, raw));
+        // Tighter threshold = more frame updates = smoother scrub
+        if (Math.abs(video.currentTime - t) > 0.008) {
           try { video.currentTime = t; } catch (_) {}
         }
       }
@@ -169,7 +242,10 @@
 
     const update = () => {
       ticking = false;
-      progressCurrent += (progressTarget - progressCurrent) * 0.18;
+      // Higher lerp = snappier (closer to direct scroll). 0.32 follows scroll
+      // tightly without jumping; lower values feel laggy with the compressed
+      // 55%–100% video time range.
+      progressCurrent += (progressTarget - progressCurrent) * 0.32;
       applyProgress(Math.max(0, Math.min(1, progressCurrent)));
       if (Math.abs(progressTarget - progressCurrent) > 0.001) {
         ticking = true;

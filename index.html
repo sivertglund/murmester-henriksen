@@ -54,6 +54,10 @@
       <a href="/om-oss">Om oss</a>
       <a href="/kontakt">Kontakt</a>
     </nav>
+    <span class="nav__status" id="navStatus" aria-live="polite">
+      <span class="nav__status-dot" aria-hidden="true"></span>
+      <span class="nav__status-text">Sjekker åpningstid…</span>
+    </span>
     <a href="tel:+4795523763" class="nav__cta">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92V21a1 1 0 01-1.11 1A19 19 0 012 4.11 1 1 0 013 3h4.09a1 1 0 011 .75l1 4a1 1 0 01-.27 1L7 10.5a16 16 0 006.5 6.5l1.75-1.75a1 1 0 011-.27l4 1a1 1 0 01.75 1z"/></svg>
       955 23 763
@@ -72,13 +76,14 @@
     <video
       id="heroVideo"
       class="hero__video"
-      src="/assets/hero-wall-scrub.mp4"
+      src="/assets/hero-wall-scrub.mp4?v=hq"
       muted
       playsinline
       preload="auto"
       disableremoteplayback
       tabindex="-1"
-      aria-hidden="true"></video>
+      aria-hidden="true"
+      poster="/assets/hero-wall-poster.jpg"></video>
     <div class="hero__overlay"></div>
 
     <div class="hero__content">
@@ -94,8 +99,14 @@
         Vincent Henriksen i Vestfold.
       </p>
       <div class="hero__cta">
-        <a href="/kontakt" class="btn btn--primary">Få gratis befaring</a>
-        <a href="/tjenester/" class="btn btn--ghost">Se tjenestene</a>
+        <a href="/kontakt" class="btn btn--primary">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M16 3v4M8 3v4M3 11h18"/><path d="M9 16l2 2 4-4"/></svg>
+          Få gratis befaring
+        </a>
+        <a href="/tjenester/" class="btn btn--ghost">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+          Se tjenestene
+        </a>
       </div>
       <p class="hero__microcopy">NM Sølv 2014 · Leder, Murmesterlauget</p>
     </div>
@@ -110,187 +121,210 @@
 <!-- ===== Intro / Velkommen ===== -->
 <section class="section section--intro" id="intro">
   <div class="container intro">
-    <h2 class="intro__title">Alle trenger en murer!</h2>
+    <p class="intro__kicker">Mestermur · Vear, Vestfold · siden 2008</p>
+    <h2 class="intro__title">Alle trenger <em>en murer</em>.</h2>
 
-    <div class="intro__grid">
-      <div class="intro__quote">
-        <p class="intro__lede">
-          <strong>Velkommen til Murmester Henriksen AS</strong> — din pålitelige
-          partner for murverk, puss, flis, naturstein, peis, pipe og mer.
-        </p>
-        <p>
-          Med over <strong>15 års bransjeerfaring</strong>, <strong>NM-sølv 2014</strong>
-          og rollen som leder for det lokale murmesterlauget, leverer mestermur
-          <strong>Vincent Henriksen</strong> kvalitetshåndverk til både privat-
-          og næringskunder i hele Vestfold.
-        </p>
-        <p>
-          Vi er stolte av å tilby skreddersydde løsninger med fokus på
-          kvalitet og detaljer. Mestermur leder hver eneste jobb selv,
-          fra første befaring til siste fuge.
-        </p>
-      </div>
+    <p class="intro__lede">
+      Murmester Henriksen AS er en liten, dedikert mestermurbedrift i Vear.
+      Mestermur Vincent Henriksen leder <em>hver eneste jobb selv</em> —
+      fra første befaring til siste fuge er trukket.
+    </p>
 
-      <div class="intro__col">
-        <h3 class="intro__col-title">Verkstedet i Vear</h3>
-        <p class="intro__col-sub">
-          Vi tar oppdrag i hele Vestfold — for privat- og næringskunder,
-          borettslag og offentlig sektor.
-        </p>
+    <svg class="intro__stroke" viewBox="0 0 220 14" fill="none" aria-hidden="true">
+      <path d="M3 8 Q 35 3, 75 7 T 145 7 Q 180 5, 217 8" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+    </svg>
 
-        <dl class="intro__hours">
-          <div><dt>Mandag–Torsdag</dt><dd>07:00–15:30</dd></div>
-          <div><dt>Fredag</dt><dd>07:00–13:00</dd></div>
-          <div><dt>Lørdag &amp; søndag</dt><dd>Stengt</dd></div>
-        </dl>
-
-        <a href="/kontakt" class="btn btn--primary intro__cta">
-          Få et uforpliktende tilbud
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-        </a>
-      </div>
-    </div>
+    <ul class="intro__chips">
+      <li><span class="intro__chip-num">15+</span> års erfaring</li>
+      <li><span class="intro__chip-num">2014</span> NM-sølv</li>
+      <li><span class="intro__chip-num">9</span> fagområder</li>
+      <li>Hele Vestfold</li>
+    </ul>
   </div>
 </section>
 
-<!-- ===== Tjenester: 9-card horizontal accordion ===== -->
-<section class="services-row" id="tjenester">
-  <div class="container services-row__head">
+<!-- ===== Hvorfor velge oss — credentials row ===== -->
+<section class="why" id="hvorfor">
+  <div class="container why__inner">
+    <div class="why__head">
+      <p class="kicker">Hvorfor oss</p>
+      <h2>Mestermurens <em>målestokk</em>.</h2>
+      <p class="lead">
+        Det er meningen at fagbrev, mesterbrev og NM-resultater skal bety noe i
+        praksis. Hos oss gjør de det — fordi det er mestermur som <em>selv</em>
+        leder hver eneste jobb.
+      </p>
+    </div>
+
+    <ul class="why__grid">
+      <li class="why__card">
+        <span class="why__icon" aria-hidden="true">
+          <!-- Medal / NM-sølv -->
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2l-3 6 4 .8M16 2l3 6-4 .8"/><circle cx="12" cy="15" r="6"/><path d="M9.5 13.5l1.7 1.7 3.3-3.3"/></svg>
+        </span>
+        <h3>NM-sølv 2014</h3>
+        <p>Sølv i NM for unge murere. Målestokken på håndverket — vurdert av fagets egne.</p>
+      </li>
+      <li class="why__card">
+        <span class="why__icon" aria-hidden="true">
+          <!-- Trowel / mestermurens redskap -->
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21l4-4"/><path d="M7 17l3-3"/><path d="M10 14l9-9c.7-.7 2-.4 2.4.5.4.9 0 2-.7 2.5L13 16l-3 .5L10 14z"/><path d="M11.5 12.5l1 1"/></svg>
+        </span>
+        <h3>Mestermur leder selv</h3>
+        <p>Vincent Henriksen står på byggeplass — ikke bak et skrivebord. Ingen mellomledd, ingen ledd som ikke kjenner saken.</p>
+      </li>
+      <li class="why__card">
+        <span class="why__icon" aria-hidden="true">
+          <!-- Crossed trowel + hammer / laug-emblem -->
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20l5-5"/><path d="M9 15l3.5-3.5c.4-.4.4-1 0-1.4L10 7.5c-.4-.4-.4-1 0-1.4L13 3l4.5 4.5L14.5 10.5c-.4.4-1 .4-1.4 0L11 8.5"/><path d="M20 20l-5-5"/><path d="M15 15l-3-3"/><circle cx="17.5" cy="17.5" r="1.5" fill="currentColor"/></svg>
+        </span>
+        <h3>Leder lauget</h3>
+        <p>Leder lokalt murmesterlaug, sitter i prøvenemnd. Vurderer fag, tar svenneprøver, lærer opp neste generasjon.</p>
+      </li>
+      <li class="why__card">
+        <span class="why__icon" aria-hidden="true">
+          <!-- Single brick / liten av valg -->
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="18" height="5" rx=".5"/><rect x="3" y="13" width="9" height="5" rx=".5"/><rect x="14" y="13" width="7" height="5" rx=".5"/><path d="M9 6v0M16 6v0"/></svg>
+        </span>
+        <h3>Liten — av valg</h3>
+        <p>Etablert 2008. Vi har bevisst holdt oss små, så hver jobb får mesterens øye fra første befaring til siste fuge.</p>
+      </li>
+    </ul>
+
+    <!-- Animert tegl-rad: bricks "legges" når seksjonen kommer i syne -->
+    <svg class="why__bricks" viewBox="0 0 360 60" fill="none" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+      <g class="brick-row">
+        <rect x="2"   y="36" width="56" height="20" rx="2"/>
+        <rect x="62"  y="36" width="56" height="20" rx="2"/>
+        <rect x="122" y="36" width="56" height="20" rx="2"/>
+        <rect x="182" y="36" width="56" height="20" rx="2"/>
+        <rect x="242" y="36" width="56" height="20" rx="2"/>
+        <rect x="302" y="36" width="56" height="20" rx="2"/>
+      </g>
+      <g class="brick-row brick-row--top">
+        <rect x="32"  y="12" width="56" height="20" rx="2"/>
+        <rect x="92"  y="12" width="56" height="20" rx="2"/>
+        <rect x="152" y="12" width="56" height="20" rx="2"/>
+        <rect x="212" y="12" width="56" height="20" rx="2"/>
+        <rect x="272" y="12" width="56" height="20" rx="2"/>
+      </g>
+    </svg>
+  </div>
+</section>
+
+<!-- ===== Tjenester: 6-card grid (3x2) ===== -->
+<section class="services-grid-section" id="tjenester">
+  <div class="container services-grid__head">
     <p class="kicker">Våre tjenester</p>
     <h2>Faget i sin <em>fulle&nbsp;bredde</em>.</h2>
     <p class="lead">
-      Mestermurens domene strekker seg fra grunnmur og forblending til
-      antikvarisk kalkrestaurering. Hold over et kort for å se mer — eller
-      åpne tjenesten for detaljer.
+      Fra grunnmur og forblending til antikvarisk kalkrestaurering — her er
+      kjerneområdene vi tar oppdrag på.
     </p>
   </div>
 
-  <div class="services-row__strip" id="servicesStrip">
+  <div class="container">
+    <div class="services-grid">
 
-    <a class="service-card" href="/tjenester/teglforblending" style="--card-img: url('/assets/projects/project-06.jpg');">
-      <span class="service-card__num">01</span>
-      <h3 class="service-card__label">Teglforblending</h3>
-      <div class="service-card__expanded">
-        <span class="service-card__num service-card__num--inner">01 — Tjeneste</span>
-        <h4 class="service-card__title">Teglforblending og muring</h4>
-        <p class="service-card__desc">Leverer alt innen teglforblending, leca, thermomur og mer.</p>
-        <span class="service-card__cta">Mer info
+      <a class="svc-card" href="/tjenester/teglforblending" style="--svc-img: url('/assets/services/teglforblending.jpg'), url('/assets/projects/project-06.jpg');">
+        <span class="svc-card__num">01</span>
+        <h3 class="svc-card__title">Teglforblending</h3>
+        <p class="svc-card__desc">Teglforblending, leca og thermomur — utført med presisjon.</p>
+        <span class="svc-card__cta">Mer info
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
         </span>
-      </div>
-    </a>
+      </a>
 
-    <a class="service-card" href="/tjenester/puss" style="--card-img: url('/assets/projects/project-01.jpg');">
-      <span class="service-card__num">02</span>
-      <h3 class="service-card__label">Puss</h3>
-      <div class="service-card__expanded">
-        <span class="service-card__num service-card__num--inner">02 — Tjeneste</span>
-        <h4 class="service-card__title">Puss</h4>
-        <p class="service-card__desc">Mørtelpuss, fasadepuss, fiberpuss, finpuss — det aller meste innen overflatebehandling til mur.</p>
-        <span class="service-card__cta">Mer info
+      <a class="svc-card" href="/tjenester/puss" style="--svc-img: url('/assets/services/puss.jpg'), url('/assets/projects/project-01.jpg');">
+        <span class="svc-card__num">02</span>
+        <h3 class="svc-card__title">Puss</h3>
+        <p class="svc-card__desc">Mørtelpuss, fasadepuss, fiberpuss og finpuss — alt innen overflatebehandling.</p>
+        <span class="svc-card__cta">Mer info
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
         </span>
-      </div>
-    </a>
+      </a>
 
-    <a class="service-card" href="/tjenester/restaurering-av-murverk" style="--card-img: url('/assets/projects/project-03.jpg');">
-      <span class="service-card__num">03</span>
-      <h3 class="service-card__label">Restaurering</h3>
-      <div class="service-card__expanded">
-        <span class="service-card__num service-card__num--inner">03 — Tjeneste</span>
-        <h4 class="service-card__title">Restaurering av murverk</h4>
-        <p class="service-card__desc">Restaurering av eldre murverk med hydraulisk kalk og mer.</p>
-        <span class="service-card__cta">Mer info
+      <a class="svc-card" href="/tjenester/restaurering-av-murverk" style="--svc-img: url('/assets/services/restaurering.jpg'), url('/assets/projects/project-03.jpg');">
+        <span class="svc-card__num">03</span>
+        <h3 class="svc-card__title">Restaurering</h3>
+        <p class="svc-card__desc">Antikvarisk restaurering av eldre murverk med hydraulisk kalk.</p>
+        <span class="svc-card__cta">Mer info
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
         </span>
-      </div>
-    </a>
+      </a>
 
-    <a class="service-card" href="/tjenester/rehabilitering-av-pipe" style="--card-img: url('/assets/projects/project-05.jpg');">
-      <span class="service-card__num">04</span>
-      <h3 class="service-card__label">Pipe-rehab</h3>
-      <div class="service-card__expanded">
-        <span class="service-card__num service-card__num--inner">04 — Tjeneste</span>
-        <h4 class="service-card__title">Rehabilitering av pipe / skorstein</h4>
-        <p class="service-card__desc">Rehabilitering av eldre skorsteiner som er underkjent av feiervesenet. Stål- eller keramiske rør, søknadsarbeid inkludert.</p>
-        <span class="service-card__cta">Mer info
+      <a class="svc-card" href="/tjenester/rehabilitering-av-pipe" style="--svc-img: url('/assets/services/pipe-rehab.jpg'), url('/assets/projects/project-05.jpg');">
+        <span class="svc-card__num">04</span>
+        <h3 class="svc-card__title">Pipe-rehab</h3>
+        <p class="svc-card__desc">Rehabilitering av skorstein som er underkjent av feiervesenet — søknad inkludert.</p>
+        <span class="svc-card__cta">Mer info
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
         </span>
-      </div>
-    </a>
+      </a>
 
-    <a class="service-card" href="/tjenester/elementpipe" style="--card-img: url('/assets/projects/project-12.jpg');">
-      <span class="service-card__num">05</span>
-      <h3 class="service-card__label">Elementpipe</h3>
-      <div class="service-card__expanded">
-        <span class="service-card__num service-card__num--inner">05 — Tjeneste</span>
-        <h4 class="service-card__title">Elementpipe &amp; stålpipe</h4>
-        <p class="service-card__desc">Oppføring av elementpipe og stålpipe fra A til Å, inkludert søknadsarbeid.</p>
-        <span class="service-card__cta">Mer info
+      <a class="svc-card" href="/tjenester/peis-og-vedovn" style="--svc-img: url('/assets/services/peis.jpg'), url('/assets/projects/project-04.jpg');">
+        <span class="svc-card__num">05</span>
+        <h3 class="svc-card__title">Peis &amp; vedovn</h3>
+        <p class="svc-card__desc">Montering av vedovner og peisinnsatser med brannforebyggende tiltak.</p>
+        <span class="svc-card__cta">Mer info
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
         </span>
-      </div>
-    </a>
+      </a>
 
-    <a class="service-card" href="/tjenester/peis-og-vedovn" style="--card-img: url('/assets/projects/project-04.jpg');">
-      <span class="service-card__num">06</span>
-      <h3 class="service-card__label">Peis &amp; vedovn</h3>
-      <div class="service-card__expanded">
-        <span class="service-card__num service-card__num--inner">06 — Tjeneste</span>
-        <h4 class="service-card__title">Peis &amp; vedovn</h4>
-        <p class="service-card__desc">Montering av vedovner, peisinnsatser og brannforebyggende tiltak — for både næring og privatkunde.</p>
-        <span class="service-card__cta">Mer info
+      <a class="svc-card" href="/tjenester/flislegging-og-vatrom" style="--svc-img: url('/assets/services/flis.jpg'), url('/assets/projects/project-07.jpg');">
+        <span class="svc-card__num">06</span>
+        <h3 class="svc-card__title">Flis &amp; våtrom</h3>
+        <p class="svc-card__desc">Flislegging og membran til bad og andre våtromssoner.</p>
+        <span class="svc-card__cta">Mer info
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
         </span>
-      </div>
-    </a>
+      </a>
 
-    <a class="service-card" href="/tjenester/flislegging-og-vatrom" style="--card-img: url('/assets/projects/project-07.jpg');">
-      <span class="service-card__num">07</span>
-      <h3 class="service-card__label">Flis &amp; våtrom</h3>
-      <div class="service-card__expanded">
-        <span class="service-card__num service-card__num--inner">07 — Tjeneste</span>
-        <h4 class="service-card__title">Flislegging &amp; våtrom</h4>
-        <p class="service-card__desc">Flislegging og membran til bad og andre våtromssoner.</p>
-        <span class="service-card__cta">Mer info
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-        </span>
-      </div>
-    </a>
-
-    <a class="service-card" href="/tjenester/sparkling-og-gulvavretting" style="--card-img: url('/assets/projects/project-08.jpg');">
-      <span class="service-card__num">08</span>
-      <h3 class="service-card__label">Sparkling</h3>
-      <div class="service-card__expanded">
-        <span class="service-card__num service-card__num--inner">08 — Tjeneste</span>
-        <h4 class="service-card__title">Sparkling og gulvavretting</h4>
-        <p class="service-card__desc">Gulvavretting og sparkling for privatkunder.</p>
-        <span class="service-card__cta">Mer info
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-        </span>
-      </div>
-    </a>
-
-    <a class="service-card" href="/tjenester/skifer-og-naturstein" style="--card-img: url('/assets/projects/project-09.jpg');">
-      <span class="service-card__num">09</span>
-      <h3 class="service-card__label">Skifer &amp; Naturstein</h3>
-      <div class="service-card__expanded">
-        <span class="service-card__num service-card__num--inner">09 — Tjeneste</span>
-        <h4 class="service-card__title">Skifer &amp; Naturstein</h4>
-        <p class="service-card__desc">Legging av skifer eller naturstein i alle former og fasonger.</p>
-        <span class="service-card__cta">Mer info
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-        </span>
-      </div>
-    </a>
-
+    </div>
   </div>
 
-  <div class="container services-row__foot">
+  <div class="container services-grid__foot">
     <a class="btn btn--ghost-dark" href="/tjenester/">
       Se alle tjenester i detalj
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
     </a>
+  </div>
+</section>
+
+<!-- ===== Slik jobber vi — process steps ===== -->
+<section class="process" id="prosess">
+  <div class="container process__inner">
+    <div class="process__head">
+      <p class="kicker kicker--light">Slik jobber vi</p>
+      <h2>Fra <em>første prat</em> til siste fuge.</h2>
+      <p class="lead">
+        Fire trinn — uten overraskelser. Du vet hva du får, hva det koster og
+        hvem som faktisk gjør jobben.
+      </p>
+    </div>
+
+    <ol class="process__steps">
+      <li class="process__step">
+        <span class="process__num">01</span>
+        <h3>Befaring</h3>
+        <p>Vi kommer ut, ser jobben og lytter på hva du trenger. Uforpliktende — og som regel innen én uke.</p>
+      </li>
+      <li class="process__step">
+        <span class="process__num">02</span>
+        <h3>Tilbud</h3>
+        <p>Skriftlig, tydelig og uten skjult forbehold. Du vet hva som skal gjøres, med hvilke materialer, til hvilken pris.</p>
+      </li>
+      <li class="process__step">
+        <span class="process__num">03</span>
+        <h3>Utførelse</h3>
+        <p>Mestermur leder hver dag på byggeplass. Vi holder deg oppdatert, og avviker ikke fra avtalen uten at vi har snakket om det.</p>
+      </li>
+      <li class="process__step">
+        <span class="process__num">04</span>
+        <h3>Overlevering</h3>
+        <p>Gjennomgang sammen med deg. Garantier dokumentert. Etterarbeid — eller småjusteringer — innen rimelig tid.</p>
+      </li>
+    </ol>
   </div>
 </section>
 
@@ -333,6 +367,55 @@
   </div>
 </section>
 
+<!-- ===== Testimonials — hva kunder sier ===== -->
+<section class="testimonials" id="anbefalinger">
+  <div class="container testimonials__inner">
+    <div class="testimonials__head">
+      <p class="kicker">Anbefalinger</p>
+      <h2>Hva kundene <em>faktisk sier</em>.</h2>
+    </div>
+
+    <div class="testimonials__grid">
+      <figure class="quote">
+        <div class="quote__stars" aria-label="Fem av fem stjerner">★★★★★</div>
+        <blockquote>
+          <p>Vincent kom på befaring innen uka, leverte tilbud dagen etter, og så gjorde han akkurat det han hadde sagt han skulle. Pussfasaden er upåklagelig.</p>
+        </blockquote>
+        <figcaption>
+          <strong>Privatkunde</strong>
+          <span>Tønsberg · puss og restaurering</span>
+        </figcaption>
+      </figure>
+
+      <figure class="quote">
+        <div class="quote__stars" aria-label="Fem av fem stjerner">★★★★★</div>
+        <blockquote>
+          <p>Vi fikk pipa godkjent på første forsøk etter rehab. Søknadsarbeidet tok han seg av — vi trengte ikke løfte en finger på papirene.</p>
+        </blockquote>
+        <figcaption>
+          <strong>Borettslag</strong>
+          <span>Vestfold · pipe-rehabilitering</span>
+        </figcaption>
+      </figure>
+
+      <figure class="quote">
+        <div class="quote__stars" aria-label="Fem av fem stjerner">★★★★★</div>
+        <blockquote>
+          <p>Sjeldent å se en håndverker som faktisk bryr seg om detaljene. Hver fuge er trukket presist — det merkes når man kommer tett innpå.</p>
+        </blockquote>
+        <figcaption>
+          <strong>Privatkunde</strong>
+          <span>Sandefjord · teglforblending</span>
+        </figcaption>
+      </figure>
+    </div>
+
+    <p class="testimonials__note">
+      Vil du snakke med tidligere kunder? <a href="/kontakt">Be om referanser</a> — vi sender deg gjerne kontaktinfo til oppdragsgivere innenfor det fagområdet du er nysgjerrig på.
+    </p>
+  </div>
+</section>
+
 <!-- ===== CTA-strip før kart ===== -->
 <section class="cta-strip section--dark">
   <div class="container cta-strip__inner">
@@ -343,8 +426,14 @@
       Ingen forpliktelser — bare en ærlig prat om hva som trengs.
     </p>
     <div class="cta-strip__btns">
-      <a href="/kontakt" class="btn btn--primary btn--lg">Be om befaring</a>
-      <a href="tel:+4795523763" class="btn btn--ghost btn--lg">Ring 955 23 763</a>
+      <a href="/kontakt" class="btn btn--primary btn--lg">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M16 3v4M8 3v4M3 11h18"/><path d="M9 16l2 2 4-4"/></svg>
+        Be om befaring
+      </a>
+      <a href="tel:+4795523763" class="btn btn--ghost btn--lg">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92V21a1 1 0 01-1.11 1A19 19 0 012 4.11 1 1 0 013 3h4.09a1 1 0 011 .75l1 4a1 1 0 01-.27 1L7 10.5a16 16 0 006.5 6.5l1.75-1.75a1 1 0 011-.27l4 1a1 1 0 01.75 1z"/></svg>
+        Ring 955 23 763
+      </a>
     </div>
   </div>
 </section>
@@ -392,6 +481,12 @@
       <ul>
         <li><a href="tel:+4795523763">955 23 763</a></li>
         <li><a href="mailto:post@murmesterhenriksen.no">post@murmesterhenriksen.no</a></li>
+      </ul>
+      <h4 class="footer__sub">Åpningstider</h4>
+      <ul class="footer__hours">
+        <li><span>Man–Tor</span><span>07:00–15:30</span></li>
+        <li><span>Fredag</span><span>07:00–13:00</span></li>
+        <li><span>Lør &amp; søn</span><span>Stengt</span></li>
       </ul>
     </div>
   </div>
