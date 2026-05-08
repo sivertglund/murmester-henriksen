@@ -1568,83 +1568,106 @@ h2 em {
 }
 .article__aside .related a:hover { border-bottom-color: var(--clay-500); }
 
-/* ===== Tjenester overview grid (3×3) ===== */
+/* ===== Tjenester overview grid (3×3, terracotta cards w/ icon circle) ===== */
 .tj-grid {
-  padding: clamp(60px, 8vw, 100px) 0 clamp(80px, 10vw, 130px);
+  padding: clamp(80px, 10vw, 130px) 0 clamp(80px, 10vw, 130px);
   background: var(--bg);
 }
 .tj-grid__inner {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: clamp(18px, 2vw, 28px);
+  gap: clamp(40px, 4vw, 56px) clamp(20px, 2vw, 32px);
+  /* Top row needs space for the overhanging icon circle */
+  padding-top: 44px;
 }
 .tj-card {
-  background: var(--white);
-  border: 1px solid var(--line);
+  position: relative;
+  background: var(--clay-500);
+  color: #fff;
   border-radius: var(--radius-lg);
-  overflow: hidden;
+  padding: clamp(60px, 6vw, 80px) clamp(24px, 2.6vw, 36px) clamp(28px, 3vw, 40px);
   display: flex;
   flex-direction: column;
+  align-items: center;
+  text-align: center;
   text-decoration: none;
-  color: var(--ink);
-  transition: transform .35s cubic-bezier(.2,.8,.2,1), box-shadow .35s ease, border-color .35s ease;
-  box-shadow: 0 1px 2px rgba(26,15,10,.04);
+  transition: transform .35s cubic-bezier(.2,.8,.2,1), box-shadow .35s ease;
+  box-shadow: 0 14px 32px -10px rgba(26,15,10,.18);
+  min-height: 360px;
 }
 .tj-card:hover {
   transform: translateY(-4px);
-  box-shadow: 0 28px 60px rgba(26,15,10,.14);
-  border-color: var(--clay-500);
+  box-shadow: 0 26px 50px -14px rgba(26,15,10,.30);
 }
-.tj-card__media {
-  aspect-ratio: 16/10;
-  background-color: var(--sand-200);
-  background-size: cover;
-  background-position: center;
-  position: relative;
-  overflow: hidden;
-}
-.tj-card__media::after {
-  content: "";
-  position: absolute; inset: 0;
-  background: linear-gradient(180deg, transparent 50%, rgba(20,8,4,.45) 100%);
-}
-.tj-card__num {
+
+/* The overhanging icon circle */
+.tj-card__icon {
   position: absolute;
-  top: 16px; left: 16px;
-  font-family: 'Super Wonder', var(--font), serif;
-  font-size: 1.6rem;
+  top: -36px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background: var(--clay-700);
   color: #fff;
-  z-index: 1;
-  text-shadow: 0 2px 12px rgba(0,0,0,.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Super Wonder', var(--font), serif;
+  font-size: 1.8rem;
+  letter-spacing: -.005em;
+  border: 4px solid var(--bg);
+  overflow: hidden;
+  z-index: 2;
 }
-.tj-card__body { padding: 22px 24px 26px; flex: 1; display: flex; flex-direction: column; }
+.tj-card__icon img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  background: #fff;
+}
+/* When icon is an image, give it a white background ring */
+.tj-card__icon--img {
+  background: #fff;
+}
+
 .tj-card__title {
   font-family: 'Super Wonder', var(--font), serif;
   font-weight: 400;
-  font-size: 1.5rem;
-  line-height: 1.1;
+  font-size: clamp(1.25rem, 1.5vw, 1.55rem);
+  line-height: 1.15;
   letter-spacing: -.005em;
-  margin: 0 0 10px;
+  margin: 0 0 16px;
+  color: #fff;
+  text-wrap: balance;
 }
 .tj-card__lede {
-  margin: 0 0 18px;
-  color: var(--ink-soft);
-  font-size: .98rem;
-  line-height: 1.5;
+  margin: 0 0 28px;
+  color: rgba(255,255,255,.94);
+  font-size: 1rem;
+  line-height: 1.55;
+  flex: 1;
+  text-wrap: pretty;
 }
 .tj-card__cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
   margin-top: auto;
-  font-weight: 600;
-  font-size: .82rem;
-  letter-spacing: .14em;
-  text-transform: uppercase;
+  background: var(--white);
   color: var(--clay-500);
-  border-bottom: 1px solid currentColor;
-  padding-bottom: 4px;
-  align-self: flex-start;
-  transition: color .2s ease, transform .25s ease;
+  padding: 11px 24px;
+  border-radius: 999px;
+  font-weight: 600;
+  font-size: .9rem;
+  border: 2px solid var(--white);
+  transition: background .2s ease, color .2s ease;
 }
-.tj-card:hover .tj-card__cta { color: var(--clay-700); }
+.tj-card:hover .tj-card__cta {
+  background: transparent;
+  color: #fff;
+}
 
 @media (max-width: 980px) {
   .tj-grid__inner { grid-template-columns: repeat(2, 1fr); }
