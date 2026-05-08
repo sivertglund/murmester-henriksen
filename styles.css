@@ -633,12 +633,20 @@ h2 em {
   font-weight: 400;
 }
 .founder__lede {
-  font-size: clamp(1.06rem, 1.35vw, 1.22rem);
+  font-size: clamp(1.04rem, 1.3vw, 1.18rem);
   line-height: 1.6;
   color: var(--ink);
-  max-width: 52ch;
+  max-width: 56ch;
   margin: 0 0 26px;
   text-wrap: pretty;
+  /* Lett gjennomsiktig boks — slipper akvarellen subtilt gjennom */
+  background: rgba(255, 255, 255, .55);
+  backdrop-filter: saturate(140%) blur(10px);
+  -webkit-backdrop-filter: saturate(140%) blur(10px);
+  border: 1px solid rgba(255, 255, 255, .65);
+  border-radius: var(--radius-lg);
+  padding: clamp(18px, 2vw, 26px) clamp(20px, 2.4vw, 30px);
+  box-shadow: 0 16px 36px -18px rgba(26, 15, 10, .18);
 }
 .founder__lede strong { color: var(--ink); font-weight: 600; }
 .founder__lede em {
