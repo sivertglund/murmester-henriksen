@@ -94,7 +94,7 @@
 
   /* ---------- Reveal-on-scroll ---------- */
   const reveals = document.querySelectorAll(
-    '.founder__kicker, .founder__portrait, .founder__copy, .feature, ' +
+    '.founder__kicker, .founder__portrait, .founder__copy, .chip, ' +
     '.about__copy, .about__facts, ' +
     '.contact__copy, .contact__form, ' +
     '.areas__inner > *, ' +
@@ -106,7 +106,7 @@
   reveals.forEach((el, i) => {
     el.classList.add('reveal');
     // Stagger siblings within a grid for a "pour" effect
-    if (el.matches('.feature, .quote, .svc-card, .projects__item')) {
+    if (el.matches('.chip, .quote, .svc-card, .projects__item')) {
       const parent = el.parentElement;
       const idx = Array.from(parent.children).indexOf(el);
       el.style.setProperty('--reveal-delay', `${Math.min(idx, 5) * 70}ms`);
