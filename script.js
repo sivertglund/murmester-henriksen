@@ -109,15 +109,26 @@
     video.addEventListener('loadedmetadata', setDuration);
     video.addEventListener('durationchange', setDuration);
     // canplay fires when frame data is available — *now* scrubbing works visually
-    video.addEventListener('canplay', () => {
+    const onCanPlay = () => {
       setDuration();
       canScrub = true;
+      // Force the decode pipeline to wake up — some browsers (Chrome, Safari)
+      // won't render new frames after currentTime changes unless play() has
+      // been called at least once.
+      const p = video.play();
+      if (p && typeof p.then === 'function') {
+        p.then(() => video.pause()).catch(() => {});
+      } else {
+        video.pause();
+      }
       showEndFrame();
       onScroll();
-    });
+    };
+    video.addEventListener('canplay', onCanPlay, { once: true });
+    video.addEventListener('canplaythrough', () => { canScrub = true; }, { once: true });
     // Force-buffer the whole video so seeks land on cached frames
     try { video.load(); } catch (_) {}
-    if (video.readyState >= 2) { canScrub = true; setDuration(); showEndFrame(); }
+    if (video.readyState >= 2) onCanPlay();
 
     // Map scroll → reveal range — bias so writing starts a bit late and finishes a bit early
     const REVEAL_START = 0.06;

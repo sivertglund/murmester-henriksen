@@ -466,19 +466,9 @@ h2 em {
   inset: 0;
   z-index: -1;
   background:
-    /* Soft top-to-bottom warm wash so text stays readable */
-    linear-gradient(180deg, rgba(250,246,239,.35) 0%, rgba(250,246,239,.65) 100%),
-    /* Watercolor illustration of a mason at work */
-    url('assets/intro-bg.jpg') right center / cover no-repeat,
+    radial-gradient(ellipse at 30% 20%, rgba(180, 100, 60, .10), transparent 60%),
+    radial-gradient(ellipse at 80% 90%, rgba(180, 100, 60, .08), transparent 70%),
     var(--bg);
-}
-@media (max-width: 1024px) {
-  .section--intro::before {
-    background:
-      linear-gradient(180deg, rgba(250,246,239,.45) 0%, rgba(250,246,239,.78) 100%),
-      url('assets/intro-bg.jpg') 65% center / cover no-repeat,
-      var(--bg);
-  }
 }
 .intro {
   display: block;
@@ -968,13 +958,20 @@ h2 em {
   content: "";
   position: absolute; inset: 0; z-index: -1;
   background:
-    linear-gradient(180deg, rgba(250,246,239,.6) 0%, rgba(250,246,239,.92) 100%),
-    radial-gradient(ellipse at 80% 20%, rgba(150, 80, 50, .18), transparent 60%),
-    radial-gradient(ellipse at 10% 80%, rgba(150, 80, 50, .15), transparent 60%),
-    repeating-linear-gradient(0deg, rgba(120, 60, 30, .03) 0 1px, transparent 1px 28px),
-    repeating-linear-gradient(90deg, rgba(120, 60, 30, .03) 0 1px, transparent 1px 80px),
+    /* Soft warm wash so text stays readable */
+    linear-gradient(180deg, rgba(250,246,239,.55) 0%, rgba(250,246,239,.78) 100%),
+    /* Watercolor illustration of a mason at work */
+    url('assets/intro-bg.jpg') right center / cover no-repeat,
     var(--bg);
-  background-attachment: fixed;
+  background-attachment: fixed, fixed, fixed;
+}
+@media (max-width: 1024px) {
+  #kontakt::before {
+    background:
+      linear-gradient(180deg, rgba(250,246,239,.6) 0%, rgba(250,246,239,.86) 100%),
+      url('assets/intro-bg.jpg') 65% center / cover no-repeat,
+      var(--bg);
+  }
 }
 @media (max-width: 720px) {
   #kontakt::before { background-attachment: scroll; }
