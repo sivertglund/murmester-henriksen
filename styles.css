@@ -1066,45 +1066,44 @@ h2 em {
   width: clamp(170px, 20vw, 215px);
   height: clamp(220px, 26vw, 270px);
   padding: 18px 18px 20px;
-  background: var(--clay-500);
-  color: #fff;
+  background: var(--white);
+  color: var(--ink);
   border-radius: 16px;
   text-decoration: none;
   position: relative;
   overflow: hidden;
   isolation: isolate;
-  box-shadow: 0 14px 30px -12px rgba(26,15,10,.35);
-  border: 1px solid rgba(255,255,255,.10);
-  transition: transform .35s cubic-bezier(.2,.8,.2,1), box-shadow .35s ease;
+  box-shadow: 0 14px 30px -14px rgba(26,15,10,.20);
+  border: 1px solid var(--line);
+  transition: transform .35s cubic-bezier(.2,.8,.2,1), box-shadow .35s ease, border-color .25s ease;
 }
 .mini-card:hover,
 .mini-card:focus-visible {
   outline: none;
   transform: translateY(-6px) rotate(0) !important;
-  box-shadow: 0 26px 50px -14px rgba(26,15,10,.55);
+  box-shadow: 0 26px 48px -16px rgba(26,15,10,.28);
+  border-color: rgba(179,90,59,.32);
   z-index: 5;
 }
 .mini-card__icon {
   position: absolute;
-  inset: 26% 6% 16% 6%;
+  inset: 26% 6% 18% 6%;
   width: auto;
-  height: 60%;
+  height: 58%;
   margin: auto;
   object-fit: contain;
-  opacity: .70;
-  mix-blend-mode: multiply;
+  opacity: .9;
   pointer-events: none;
-  transition: opacity .35s ease, transform .55s cubic-bezier(.2,.8,.2,1);
+  transition: transform .55s cubic-bezier(.2,.8,.2,1);
 }
 .mini-card:hover .mini-card__icon {
-  opacity: .82;
   transform: scale(1.06);
 }
 .mini-card__num {
   font-family: 'Super Wonder', var(--font), serif;
   font-size: 1rem;
   letter-spacing: .04em;
-  color: rgba(255,255,255,.78);
+  color: var(--clay-500);
   align-self: flex-start;
   position: relative;
   z-index: 1;
@@ -1115,8 +1114,7 @@ h2 em {
   font-size: clamp(1.15rem, 1.5vw, 1.45rem);
   letter-spacing: -.005em;
   line-height: 1.05;
-  color: #fff;
-  text-shadow: 0 2px 14px rgba(0,0,0,.45);
+  color: var(--ink);
   position: relative;
   z-index: 1;
 }
@@ -1124,18 +1122,17 @@ h2 em {
   font-size: .76rem;
   letter-spacing: .14em;
   text-transform: uppercase;
-  color: rgba(255,255,255,.78);
+  color: var(--clay-500);
   font-weight: 600;
   position: relative;
   z-index: 1;
   align-self: flex-start;
-  border-bottom: 1px solid rgba(255,255,255,.4);
+  border-bottom: 1px solid currentColor;
   padding-bottom: 3px;
-  transition: border-color .25s ease, color .25s ease;
+  transition: color .25s ease;
 }
 .mini-card:hover .mini-card__cta {
-  color: #fff;
-  border-bottom-color: #fff;
+  color: var(--clay-700);
 }
 
 .services-mini__foot {
@@ -1909,7 +1906,7 @@ h2 em {
   overflow: hidden;
   isolation: isolate;
 }
-/* Minimalistisk ikon som watermark på den oransje boksen, 70% synlighet */
+/* Minimalistisk ikon mot den røde bakgrunnen, 60% synlighet */
 .tj-card__bg {
   position: absolute;
   inset: 18% 8% 22% 8%;
@@ -1917,15 +1914,14 @@ h2 em {
   height: 60%;
   margin: auto;
   object-fit: contain;
-  opacity: .70;
-  mix-blend-mode: multiply;
+  opacity: .60;
   pointer-events: none;
   z-index: 0;
   transition: transform .55s cubic-bezier(.2,.8,.2,1), opacity .35s ease;
 }
 .tj-card--has-bg:hover .tj-card__bg {
-  transform: scale(1.05);
-  opacity: .82;
+  transform: scale(1.04);
+  opacity: .72;
 }
 .tj-card > * { position: relative; z-index: 1; }
 .tj-card:hover {
@@ -2300,6 +2296,13 @@ h2 em {
   transform: translateY(-3px);
   box-shadow: 0 20px 40px -14px rgba(26,15,10,.16);
 }
+.quote--empty {
+  min-height: clamp(180px, 22vw, 240px);
+  background: rgba(255,255,255,.5);
+  border-style: dashed;
+  border-color: rgba(26,15,10,.10);
+}
+.quote--empty:hover { transform: none; box-shadow: 0 0 0 transparent; }
 .quote__stars {
   color: var(--clay-500);
   font-size: 1.1rem;
