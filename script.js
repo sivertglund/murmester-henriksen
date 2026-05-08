@@ -249,8 +249,9 @@
 
     const tick = () => {
       raf = false;
-      // Lerp toward target — smooths rapid scroll deltas
-      progressCurrent += (progressTarget - progressCurrent) * 0.16;
+      // Lerp toward target — smooths rapid scroll deltas. Higher = snappier
+      // (closer to direct scroll), lower = floatier. ~0.22 is a sweet spot.
+      progressCurrent += (progressTarget - progressCurrent) * 0.22;
       apply(progressCurrent);
       if (needsApply || Math.abs(progressTarget - progressCurrent) > 0.0005) {
         needsApply = false;
