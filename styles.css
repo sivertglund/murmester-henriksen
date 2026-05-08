@@ -564,8 +564,7 @@ h2 em {
   overflow: hidden;
   background: var(--bg);
 }
-/* Akvarell sitter som dempet illustrasjon nede i høyre hjørne — tar
-   ikke plassen til portrettet, og fader naturlig inn i bakgrunnen. */
+/* Akvarell-bakgrunnen lever sterkest øverst og fader naturlig ned i bg */
 .founder::before {
   content: "";
   position: absolute;
@@ -573,21 +572,21 @@ h2 em {
   z-index: -1;
   background:
     linear-gradient(180deg,
-      rgba(250,246,239,.55) 0%,
-      rgba(250,246,239,.30) 30%,
-      rgba(250,246,239,.55) 65%,
+      rgba(250,246,239,.18) 0%,
+      rgba(250,246,239,.55) 38%,
+      rgba(250,246,239,.92) 78%,
       rgba(250,246,239,1) 100%),
-    url('/assets/intro-bg.jpg') right bottom / clamp(420px, 48%, 760px) auto no-repeat,
+    url('/assets/intro-bg.jpg') right top / cover no-repeat,
     var(--bg);
 }
-@media (max-width: 880px) {
+@media (max-width: 1024px) {
   .founder::before {
     background:
       linear-gradient(180deg,
-        rgba(250,246,239,.65) 0%,
-        rgba(250,246,239,.85) 70%,
+        rgba(250,246,239,.45) 0%,
+        rgba(250,246,239,.85) 60%,
         rgba(250,246,239,1) 100%),
-      url('/assets/intro-bg.jpg') right bottom / clamp(280px, 70vw, 460px) auto no-repeat,
+      url('/assets/intro-bg.jpg') 70% top / cover no-repeat,
       var(--bg);
   }
 }
@@ -602,8 +601,8 @@ h2 em {
 /* Header-grid: stort sirkulært portrett + tittel/lede/chips */
 .founder__hero {
   display: grid;
-  grid-template-columns: minmax(0, 320px) 1fr;
-  gap: clamp(36px, 5vw, 80px);
+  grid-template-columns: minmax(0, 240px) 1fr;
+  gap: clamp(28px, 4vw, 64px);
   align-items: center;
   margin: 0 auto clamp(60px, 7vw, 96px);
 }
@@ -611,14 +610,14 @@ h2 em {
 .founder__portrait {
   margin: 0;
   position: relative;
-  width: clamp(220px, 26vw, 320px);
+  width: clamp(180px, 20vw, 240px);
   aspect-ratio: 1;
   border-radius: 50%;
   overflow: hidden;
   isolation: isolate;
-  /* Litt til venstre på desktop så vi gir akvarellen luft i høyre side */
+  /* Trukket mot venstre kant av kolonnen + skjøvet utenfor for å unngå akvarell-figuren */
   justify-self: start;
-  margin-left: clamp(-40px, -2.4vw, -8px);
+  margin-left: clamp(-60px, -3.5vw, -16px);
   /* Halo: hvit ring + myk skygge + ekstra varm utenforring */
   box-shadow:
     0 0 0 1px rgba(255,255,255,.65),
