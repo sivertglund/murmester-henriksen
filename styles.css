@@ -494,8 +494,9 @@ h2 em {
   line-height: 1.0;
   letter-spacing: -.01em;
   color: var(--ink);
-  margin: 0;
+  margin: 0 0 clamp(40px, 6vw, 64px);
   white-space: nowrap;
+  text-align: center;
 }
 
 .intro__grid {
