@@ -94,11 +94,9 @@
 
   /* ---------- Reveal-on-scroll ---------- */
   const reveals = document.querySelectorAll(
-    '.intro__kicker, .intro__title, .intro__lede, .intro__chips, ' +
-    '.stack__head, .stack__card, ' +
+    '.founder__kicker, .founder__portrait, .founder__copy, .cred, ' +
     '.about__copy, .about__facts, ' +
     '.contact__copy, .contact__form, ' +
-    '.why__head, .why__card, ' +
     '.process__head, .process__step, ' +
     '.testimonials__head, .quote, ' +
     '.services-grid__head, .svc-card, ' +
@@ -108,15 +106,12 @@
   reveals.forEach((el, i) => {
     el.classList.add('reveal');
     // Stagger siblings within a grid for a "pour" effect
-    if (el.matches('.why__card, .process__step, .quote, .svc-card, .projects__item')) {
+    if (el.matches('.cred, .process__step, .quote, .svc-card, .projects__item')) {
       const parent = el.parentElement;
       const idx = Array.from(parent.children).indexOf(el);
       el.style.setProperty('--reveal-delay', `${Math.min(idx, 5) * 70}ms`);
     }
   });
-
-  /* Animation-only triggers (don't apply opacity-fade, just toggle .is-in) */
-  const animTargets = document.querySelectorAll('.why__bricks, .intro__stroke');
 
   if ('IntersectionObserver' in window) {
     const io = new IntersectionObserver((entries) => {
@@ -128,10 +123,8 @@
       });
     }, { threshold: 0.12 });
     reveals.forEach(el => io.observe(el));
-    animTargets.forEach(el => io.observe(el));
   } else {
     reveals.forEach(el => el.classList.add('is-in'));
-    animTargets.forEach(el => el.classList.add('is-in'));
   }
 
   /* ---------- Scroll-driven hero ----------
