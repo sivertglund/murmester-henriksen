@@ -198,73 +198,93 @@
   </div>
 </section>
 
-<!-- ===== Tjenester: kompakt swipe-stack med ikoner ===== -->
-<section class="services-mini" id="tjenester">
-  <div class="container services-mini__head">
+<!-- ===== Tjenester: vertikal sticky-stack — kort legger seg oppå hverandre ved scroll ===== -->
+<section class="services-stack" id="tjenester">
+  <div class="container services-stack__head">
     <p class="kicker">Våre tjenester</p>
     <h2>Faget i sin <em>fulle&nbsp;bredde</em>.</h2>
     <p class="lead">
       Murmester Henriksen tilbyr <em>skreddersydde løsninger</em> innen
       murerarbeid — med fokus på kvalitet og detaljer.
-      <a href="/kontakt" class="services-mini__inline-cta">Kontakt oss</a>
+      <a href="/kontakt" class="services-stack__inline-cta">Kontakt oss</a>
       for en uforpliktende samtale.
     </p>
   </div>
 
-  <div class="services-mini__rail">
-    <ul class="services-mini__stack">
-      <li><a class="mini-card" href="/tjenester/teglforblending">
-        <span class="mini-card__num">01</span>
-        <span class="mini-card__title">Teglforblending</span>
-        <span class="mini-card__cta">Mer info →</span>
-      </a></li>
-      <li><a class="mini-card mini-card--has-icon" href="/tjenester/puss">
-        <img class="mini-card__icon" src="/assets/services/puss.png" alt="" loading="lazy" decoding="async" aria-hidden="true" />
-        <span class="mini-card__num">02</span>
-        <span class="mini-card__title">Puss</span>
-        <span class="mini-card__cta">Mer info →</span>
-      </a></li>
-      <li><a class="mini-card mini-card--has-icon" href="/tjenester/restaurering-av-murverk">
-        <img class="mini-card__icon" src="/assets/services/restaurering.jpg" alt="" loading="lazy" decoding="async" aria-hidden="true" />
-        <span class="mini-card__num">03</span>
-        <span class="mini-card__title">Restaurering</span>
-        <span class="mini-card__cta">Mer info →</span>
-      </a></li>
-      <li><a class="mini-card mini-card--has-icon" href="/tjenester/rehabilitering-av-pipe">
-        <img class="mini-card__icon" src="/assets/services/pipe-rehab.jpg" alt="" loading="lazy" decoding="async" aria-hidden="true" />
-        <span class="mini-card__num">04</span>
-        <span class="mini-card__title">Pipe-rehab</span>
-        <span class="mini-card__cta">Mer info →</span>
-      </a></li>
-      <li><a class="mini-card" href="/tjenester/elementpipe">
-        <span class="mini-card__num">05</span>
-        <span class="mini-card__title">Elementpipe</span>
-        <span class="mini-card__cta">Mer info →</span>
-      </a></li>
-      <li><a class="mini-card" href="/tjenester/peis-og-vedovn">
-        <span class="mini-card__num">06</span>
-        <span class="mini-card__title">Peis &amp; vedovn</span>
-        <span class="mini-card__cta">Mer info →</span>
-      </a></li>
-      <li><a class="mini-card" href="/tjenester/flislegging-og-vatrom">
-        <span class="mini-card__num">07</span>
-        <span class="mini-card__title">Flis &amp; våtrom</span>
-        <span class="mini-card__cta">Mer info →</span>
-      </a></li>
-      <li><a class="mini-card" href="/tjenester/sparkling-og-gulvavretting">
-        <span class="mini-card__num">08</span>
-        <span class="mini-card__title">Sparkling</span>
-        <span class="mini-card__cta">Mer info →</span>
-      </a></li>
-      <li><a class="mini-card" href="/tjenester/skifer-og-naturstein">
-        <span class="mini-card__num">09</span>
-        <span class="mini-card__title">Skifer &amp; Naturstein</span>
-        <span class="mini-card__cta">Mer info →</span>
-      </a></li>
+  <div class="container">
+    <ul class="stack-cards">
+      <li class="stack-card">
+        <a class="stack-card__inner" href="/tjenester/teglforblending">
+          <span class="stack-card__num">01</span>
+          <span class="stack-card__title">Teglforblending</span>
+          <span class="stack-card__cta">Mer info <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+        </a>
+      </li>
+      <li class="stack-card stack-card--has-icon">
+        <a class="stack-card__inner" href="/tjenester/puss">
+          <img class="stack-card__icon" src="/assets/services/puss.png" alt="" loading="lazy" decoding="async" aria-hidden="true" />
+          <span class="stack-card__num">02</span>
+          <span class="stack-card__title">Puss</span>
+          <span class="stack-card__cta">Mer info <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+        </a>
+      </li>
+      <li class="stack-card stack-card--has-icon">
+        <a class="stack-card__inner" href="/tjenester/restaurering-av-murverk">
+          <img class="stack-card__icon" src="/assets/services/restaurering.jpg" alt="" loading="lazy" decoding="async" aria-hidden="true" />
+          <span class="stack-card__num">03</span>
+          <span class="stack-card__title">Restaurering</span>
+          <span class="stack-card__cta">Mer info <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+        </a>
+      </li>
+      <li class="stack-card stack-card--has-icon">
+        <a class="stack-card__inner" href="/tjenester/rehabilitering-av-pipe">
+          <img class="stack-card__icon" src="/assets/services/pipe-rehab.jpg" alt="" loading="lazy" decoding="async" aria-hidden="true" />
+          <span class="stack-card__num">04</span>
+          <span class="stack-card__title">Pipe-rehab</span>
+          <span class="stack-card__cta">Mer info <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+        </a>
+      </li>
+      <li class="stack-card stack-card--has-icon">
+        <a class="stack-card__inner" href="/tjenester/elementpipe">
+          <img class="stack-card__icon" src="/assets/services/elementpipe.jpg" alt="" loading="lazy" decoding="async" aria-hidden="true" />
+          <span class="stack-card__num">05</span>
+          <span class="stack-card__title">Elementpipe</span>
+          <span class="stack-card__cta">Mer info <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+        </a>
+      </li>
+      <li class="stack-card stack-card--has-icon">
+        <a class="stack-card__inner" href="/tjenester/peis-og-vedovn">
+          <img class="stack-card__icon" src="/assets/services/peis.jpg" alt="" loading="lazy" decoding="async" aria-hidden="true" />
+          <span class="stack-card__num">06</span>
+          <span class="stack-card__title">Peis &amp; vedovn</span>
+          <span class="stack-card__cta">Mer info <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+        </a>
+      </li>
+      <li class="stack-card">
+        <a class="stack-card__inner" href="/tjenester/flislegging-og-vatrom">
+          <span class="stack-card__num">07</span>
+          <span class="stack-card__title">Flis &amp; våtrom</span>
+          <span class="stack-card__cta">Mer info <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+        </a>
+      </li>
+      <li class="stack-card">
+        <a class="stack-card__inner" href="/tjenester/sparkling-og-gulvavretting">
+          <span class="stack-card__num">08</span>
+          <span class="stack-card__title">Sparkling</span>
+          <span class="stack-card__cta">Mer info <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+        </a>
+      </li>
+      <li class="stack-card">
+        <a class="stack-card__inner" href="/tjenester/skifer-og-naturstein">
+          <span class="stack-card__num">09</span>
+          <span class="stack-card__title">Skifer &amp; Naturstein</span>
+          <span class="stack-card__cta">Mer info <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+        </a>
+      </li>
     </ul>
   </div>
 
-  <div class="container services-mini__foot">
+  <div class="container services-stack__foot">
     <a class="btn btn--ghost-dark" href="/tjenester/">
       Se alle tjenester i detalj
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>

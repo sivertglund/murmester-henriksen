@@ -1000,94 +1000,90 @@ h2 em {
   background: var(--clay-500);
 }
 
-/* ===== Services mini — kompakt swipe-stack med overlappende ikon-kort ===== */
-.services-mini {
+/* ===== Services stack — vertikal sticky-stable, ark-på-ark ved scroll ===== */
+.services-stack {
   background: var(--bg);
-  padding: clamp(70px, 8vw, 100px) 0 clamp(50px, 6vw, 80px);
+  padding: clamp(70px, 8vw, 100px) 0 clamp(80px, 10vw, 130px);
   border-top: 1px solid var(--line);
   position: relative;
 }
-.services-mini__head {
+.services-stack__head {
   max-width: 720px;
-  margin: 0 auto clamp(36px, 4vw, 52px);
+  margin: 0 auto clamp(40px, 5vw, 56px);
   text-align: center;
 }
-.services-mini__head .lead { margin: 0 auto; }
-.services-mini__head h2 em {
+.services-stack__head .lead { margin: 0 auto; }
+.services-stack__head h2 em {
   font-style: normal;
   font-family: 'Super Wonder', var(--font), serif;
   color: var(--clay-500);
   font-weight: 400;
 }
-.services-mini__inline-cta {
+.services-stack__inline-cta {
   color: var(--clay-500);
   font-weight: 600;
   border-bottom: 1px solid currentColor;
   transition: color .2s;
 }
-.services-mini__inline-cta:hover { color: var(--clay-700); }
+.services-stack__inline-cta:hover { color: var(--clay-700); }
 
-/* Horisontal scroll-rail med snap */
-.services-mini__rail {
-  overflow-x: auto;
-  overflow-y: hidden;
-  scroll-snap-type: x mandatory;
-  -webkit-overflow-scrolling: touch;
-  scrollbar-width: none;
-  padding: 24px clamp(20px, 4vw, 60px) 38px;
-  /* Soft fade på kantene så kortene ikke kuttes hardt */
-  -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 4%, #000 96%, transparent 100%);
-          mask-image: linear-gradient(90deg, transparent 0, #000 4%, #000 96%, transparent 100%);
-}
-.services-mini__rail::-webkit-scrollbar { display: none; }
-
-.services-mini__stack {
+/* Container for kortene */
+.stack-cards {
   list-style: none;
-  margin: 0;
+  margin: 0 auto;
   padding: 0;
-  display: flex;
-  width: max-content;
-}
-.services-mini__stack > li {
-  margin-right: -32px;  /* overlapp med neste kort */
-  scroll-snap-align: start;
   position: relative;
+  max-width: 460px;
 }
-.services-mini__stack > li:last-child { margin-right: 0; }
 
-/* Cardene "stables" med litt rotasjon variasjon for playing-cards-feel */
-.services-mini__stack > li:nth-child(odd) .mini-card { transform: rotate(-.6deg); }
-.services-mini__stack > li:nth-child(even) .mini-card { transform: rotate(.6deg); }
+/* Hvert kort sitter sticky med litt forskjøvet top — gir "stack of cards"-effekt */
+.stack-card {
+  position: sticky;
+  margin-bottom: clamp(80px, 12vh, 140px);
+  /* Gir hvert kort sin egen plass i scroll-flyten før det stikker */
+}
+.stack-card:nth-child(1)  { top: clamp(80px, 12vh, 110px); }
+.stack-card:nth-child(2)  { top: calc(clamp(80px, 12vh, 110px) + 10px); }
+.stack-card:nth-child(3)  { top: calc(clamp(80px, 12vh, 110px) + 20px); }
+.stack-card:nth-child(4)  { top: calc(clamp(80px, 12vh, 110px) + 30px); }
+.stack-card:nth-child(5)  { top: calc(clamp(80px, 12vh, 110px) + 40px); }
+.stack-card:nth-child(6)  { top: calc(clamp(80px, 12vh, 110px) + 50px); }
+.stack-card:nth-child(7)  { top: calc(clamp(80px, 12vh, 110px) + 60px); }
+.stack-card:nth-child(8)  { top: calc(clamp(80px, 12vh, 110px) + 70px); }
+.stack-card:nth-child(9)  { top: calc(clamp(80px, 12vh, 110px) + 80px); }
+.stack-card:last-child { margin-bottom: 0; }
 
-.mini-card {
+/* Selve kort-innholdet — kvadratisk, hvit boks, ikon sentrert */
+.stack-card__inner {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  width: clamp(170px, 20vw, 215px);
-  height: clamp(220px, 26vw, 270px);
-  padding: 18px 18px 20px;
+  width: 100%;
+  aspect-ratio: 1;            /* kvadratiske kort */
+  padding: clamp(28px, 3vw, 40px);
   background: var(--white);
   color: var(--ink);
-  border-radius: 16px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  box-shadow: 0 24px 48px -16px rgba(26,15,10,.18);
   text-decoration: none;
   position: relative;
   overflow: hidden;
   isolation: isolate;
-  box-shadow: 0 14px 30px -14px rgba(26,15,10,.20);
-  border: 1px solid var(--line);
   transition: transform .35s cubic-bezier(.2,.8,.2,1), box-shadow .35s ease, border-color .25s ease;
 }
-.mini-card:hover,
-.mini-card:focus-visible {
+.stack-card__inner:hover,
+.stack-card__inner:focus-visible {
   outline: none;
-  transform: translateY(-6px) rotate(0) !important;
-  box-shadow: 0 26px 48px -16px rgba(26,15,10,.28);
+  transform: translateY(-4px);
+  box-shadow: 0 32px 60px -18px rgba(26,15,10,.28);
   border-color: rgba(179,90,59,.32);
-  z-index: 5;
 }
-.mini-card__icon {
+
+/* Ikon-bilde fyller midt-området av kortet */
+.stack-card__icon {
   position: absolute;
-  inset: 26% 6% 18% 6%;
+  inset: 20% 12% 22% 12%;
   width: auto;
   height: 58%;
   margin: auto;
@@ -1096,30 +1092,36 @@ h2 em {
   pointer-events: none;
   transition: transform .55s cubic-bezier(.2,.8,.2,1);
 }
-.mini-card:hover .mini-card__icon {
-  transform: scale(1.06);
+.stack-card__inner:hover .stack-card__icon {
+  transform: scale(1.05);
 }
-.mini-card__num {
+
+.stack-card__num {
   font-family: 'Super Wonder', var(--font), serif;
-  font-size: 1rem;
+  font-size: 1.05rem;
   letter-spacing: .04em;
   color: var(--clay-500);
   align-self: flex-start;
   position: relative;
   z-index: 1;
 }
-.mini-card__title {
+.stack-card__title {
   font-family: 'Super Wonder', var(--font), serif;
   font-weight: 400;
-  font-size: clamp(1.15rem, 1.5vw, 1.45rem);
-  letter-spacing: -.005em;
+  font-size: clamp(1.6rem, 2.6vw, 2.2rem);
+  letter-spacing: -.01em;
   line-height: 1.05;
   color: var(--ink);
   position: relative;
   z-index: 1;
+  align-self: flex-start;
+  max-width: 14ch;
 }
-.mini-card__cta {
-  font-size: .76rem;
+.stack-card__cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: .82rem;
   letter-spacing: .14em;
   text-transform: uppercase;
   color: var(--clay-500);
@@ -1129,15 +1131,25 @@ h2 em {
   align-self: flex-start;
   border-bottom: 1px solid currentColor;
   padding-bottom: 3px;
-  transition: color .25s ease;
+  transition: color .25s ease, gap .25s ease;
 }
-.mini-card:hover .mini-card__cta {
+.stack-card__cta svg { width: 14px; height: 14px; }
+.stack-card__inner:hover .stack-card__cta {
   color: var(--clay-700);
+  gap: 12px;
 }
 
-.services-mini__foot {
+.services-stack__foot {
   text-align: center;
-  margin-top: clamp(20px, 3vw, 36px);
+  margin-top: clamp(40px, 5vw, 60px);
+}
+
+@media (max-width: 720px) {
+  .stack-cards { max-width: 100%; }
+  .stack-card { margin-bottom: clamp(40px, 8vh, 80px); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .stack-card { position: static; }
 }
 
 /* ===== Services Grid — gammel 3x2 (beholdt for andre sider) ===== */
@@ -1885,16 +1897,14 @@ h2 em {
 .tj-grid__inner {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: clamp(40px, 4vw, 56px) clamp(20px, 2vw, 32px);
-  /* Top row needs space for the overhanging icon circle */
-  padding-top: 44px;
+  gap: clamp(20px, 2.2vw, 32px);
 }
 .tj-card {
   position: relative;
   background: var(--clay-500);
   color: #fff;
   border-radius: var(--radius-lg);
-  padding: clamp(60px, 6vw, 80px) clamp(24px, 2.6vw, 36px) clamp(28px, 3vw, 40px);
+  padding: clamp(74px, 8vw, 100px) clamp(20px, 2.4vw, 32px) clamp(24px, 2.6vw, 32px);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -1902,21 +1912,22 @@ h2 em {
   text-decoration: none;
   transition: transform .35s cubic-bezier(.2,.8,.2,1), box-shadow .35s ease;
   box-shadow: 0 14px 32px -10px rgba(26,15,10,.18);
-  min-height: 360px;
+  aspect-ratio: 1;          /* kvadratiske bokser */
+  min-height: 0;
   overflow: hidden;
   isolation: isolate;
 }
-/* Minimalistisk ikon mot den røde bakgrunnen, 60% synlighet */
+/* Bildet dekker hele boksen, sitter bak teksten ved 60% synlighet */
 .tj-card__bg {
   position: absolute;
-  inset: 18% 8% 22% 8%;
-  width: auto;
-  height: 60%;
-  margin: auto;
+  inset: 0;
+  width: 100%;
+  height: 100%;
   object-fit: contain;
   opacity: .60;
   pointer-events: none;
   z-index: 0;
+  border-radius: inherit;
   transition: transform .55s cubic-bezier(.2,.8,.2,1), opacity .35s ease;
 }
 .tj-card--has-bg:hover .tj-card__bg {
@@ -1929,14 +1940,14 @@ h2 em {
   box-shadow: 0 26px 50px -14px rgba(26,15,10,.30);
 }
 
-/* The overhanging icon circle */
+/* Tall-sirkel inni kortets toppkant (ikke overhang — beholder fullt synlig nummer) */
 .tj-card__icon {
   position: absolute;
-  top: -36px;
+  top: clamp(16px, 2vw, 26px);
   left: 50%;
   transform: translateX(-50%);
-  width: 72px;
-  height: 72px;
+  width: 60px;
+  height: 60px;
   border-radius: 50%;
   background: var(--clay-700);
   color: #fff;
@@ -1944,11 +1955,12 @@ h2 em {
   align-items: center;
   justify-content: center;
   font-family: 'Super Wonder', var(--font), serif;
-  font-size: 1.8rem;
+  font-size: 1.5rem;
   letter-spacing: -.005em;
-  border: 4px solid var(--bg);
+  border: 2px solid rgba(255,255,255,.85);
   overflow: hidden;
   z-index: 2;
+  box-shadow: 0 6px 14px -6px rgba(26,15,10,.4);
 }
 .tj-card__icon img {
   width: 100%;
