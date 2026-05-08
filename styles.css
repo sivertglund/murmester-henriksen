@@ -1188,18 +1188,20 @@ h2 em {
   gap: clamp(14px, 1.6vw, 22px);
   width: max-content;
   will-change: transform;
-  /* set by JS; CSS fallback: gentle drift via animation */
-  animation: marquee-drift 60s linear infinite;
+  animation: marquee-drift 80s linear infinite;
 }
+/* Begge retninger driftes selvstendig. Default = mot venstre, "right" reverseres. */
 .marquee__row[data-direction="right"] .marquee__track {
   animation-direction: reverse;
 }
 @keyframes marquee-drift {
-  from { transform: translateX(0); }
-  to   { transform: translateX(calc(-50%)); }
+  from { transform: translate3d(0, 0, 0); }
+  to   { transform: translate3d(-50%, 0, 0); }
 }
-.marquee__row.is-coupled .marquee__track {
-  animation: none;
+/* Hold over en rad for å pause driftet — gir kunden anledning til å studere */
+.marquee__row:hover .marquee__track,
+.marquee__row:focus-within .marquee__track {
+  animation-play-state: paused;
 }
 .marquee__item {
   flex: 0 0 auto;
