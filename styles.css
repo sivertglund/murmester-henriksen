@@ -1961,21 +1961,6 @@ h2 em {
   .nav__status { display: none; }
 }
 
-/* Subtil tegl-mønster bakgrunn på process-seksjonen */
-.process::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  opacity: .07;
-  background-image:
-    repeating-linear-gradient(0deg,  rgba(245,239,230,.28) 0 1px, transparent 1px 28px),
-    repeating-linear-gradient(90deg, rgba(245,239,230,.18) 0 1px, transparent 1px 86px);
-  background-position: 0 0, 14px 14px;
-  z-index: 0;
-}
-.process > .process__inner { position: relative; z-index: 1; }
-
 /* Footer hours block */
 .footer__sub {
   margin-top: 22px !important;
@@ -2009,106 +1994,68 @@ h2 em {
   font-weight: 500;
 }
 
-/* ===== Slik jobber vi (process) ===== */
-.process {
-  background: var(--clay-900);
-  color: var(--sand-100);
-  padding: clamp(80px, 10vw, 120px) 0;
-  position: relative;
-  overflow: hidden;
-}
-.process::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background:
-    radial-gradient(ellipse at 20% 0%, rgba(180,90,60,.16), transparent 50%),
-    radial-gradient(ellipse at 80% 100%, rgba(150,80,40,.12), transparent 60%);
-  pointer-events: none;
-}
-.process__inner { position: relative; }
-.process__head {
-  max-width: 720px;
-  margin: 0 auto clamp(48px, 6vw, 72px);
+/* ===== Service area pills ===== */
+.areas {
+  background: var(--bg);
+  padding: clamp(60px, 7vw, 90px) 0;
   text-align: center;
+  border-top: 1px solid var(--line);
 }
-.process__head .lead {
-  margin: 0 auto;
-  color: rgba(245,239,230,.78);
+.areas__inner { max-width: 800px; }
+.areas h2 {
+  margin: 0 0 14px;
 }
-.process__head h2 { color: #fff; }
-.process__head h2 em {
+.areas h2 em {
   font-style: normal;
   color: var(--clay-500);
   font-family: 'Super Wonder', var(--font), serif;
   font-weight: 400;
 }
-.process__steps {
+.areas__lede {
+  color: var(--ink-soft);
+  font-size: 1.02rem;
+  max-width: 56ch;
+  margin: 0 auto clamp(28px, 3vw, 38px);
+}
+.areas__list {
   list-style: none;
   padding: 0;
   margin: 0;
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: clamp(20px, 2.2vw, 32px);
-  position: relative;
-  counter-reset: step;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
 }
-.process__step {
-  position: relative;
-  padding: clamp(24px, 2.4vw, 32px);
-  border-radius: var(--radius-lg);
-  background: rgba(255,255,255,.04);
-  border: 1px solid rgba(255,255,255,.10);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  transition: transform .35s cubic-bezier(.2,.8,.2,1), background .25s ease, border-color .25s ease;
+.areas__list li {
+  background: var(--white);
+  border: 1px solid var(--line);
+  padding: 10px 18px;
+  border-radius: 999px;
+  font-weight: 500;
+  font-size: .95rem;
+  color: var(--ink);
+  transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
 }
-.process__step:hover {
-  transform: translateY(-4px);
-  background: rgba(255,255,255,.07);
-  border-color: rgba(180,90,60,.4);
+.areas__list li:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 20px -10px rgba(26,15,10,.18);
+  border-color: rgba(179,90,59,.3);
 }
-.process__num {
-  display: block;
-  font-family: 'Super Wonder', var(--font), serif;
-  font-size: 2.4rem;
-  line-height: 1;
+
+/* Inline Kontakt-link inni services-lead */
+.services-grid__inline-cta {
   color: var(--clay-500);
-  margin-bottom: 14px;
-  letter-spacing: -.01em;
+  font-weight: 600;
+  border-bottom: 1px solid currentColor;
+  transition: color .2s;
 }
-.process__step h3 {
+.services-grid__inline-cta:hover { color: var(--clay-700); }
+
+.services-grid__head .lead em {
+  font-style: normal;
+  color: var(--clay-500);
   font-family: 'Super Wonder', var(--font), serif;
   font-weight: 400;
-  font-size: 1.4rem;
-  letter-spacing: -.005em;
-  color: #fff;
-  margin: 0 0 10px;
-}
-.process__step p {
-  margin: 0;
-  font-size: .96rem;
-  line-height: 1.55;
-  color: rgba(245,239,230,.82);
-}
-/* Connector line through cards (desktop) */
-@media (min-width: 981px) {
-  .process__steps::before {
-    content: "";
-    position: absolute;
-    top: clamp(56px, 5vw, 72px);
-    left: 6%;
-    right: 6%;
-    height: 1px;
-    background: linear-gradient(90deg, transparent 0%, rgba(180,90,60,.4) 12%, rgba(180,90,60,.4) 88%, transparent 100%);
-    z-index: 0;
-  }
-}
-@media (max-width: 980px) {
-  .process__steps { grid-template-columns: repeat(2, 1fr); }
-}
-@media (max-width: 520px) {
-  .process__steps { grid-template-columns: 1fr; }
 }
 
 /* ===== Testimonials ===== */

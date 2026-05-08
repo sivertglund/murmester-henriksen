@@ -97,7 +97,7 @@
     '.founder__kicker, .founder__portrait, .founder__copy, .cred, ' +
     '.about__copy, .about__facts, ' +
     '.contact__copy, .contact__form, ' +
-    '.process__head, .process__step, ' +
+    '.areas__inner > *, ' +
     '.testimonials__head, .quote, ' +
     '.services-grid__head, .svc-card, ' +
     '.subhero__inner, .article__main > *, .article__aside, ' +
@@ -106,7 +106,7 @@
   reveals.forEach((el, i) => {
     el.classList.add('reveal');
     // Stagger siblings within a grid for a "pour" effect
-    if (el.matches('.cred, .process__step, .quote, .svc-card, .projects__item')) {
+    if (el.matches('.cred, .quote, .svc-card, .projects__item')) {
       const parent = el.parentElement;
       const idx = Array.from(parent.children).indexOf(el);
       el.style.setProperty('--reveal-delay', `${Math.min(idx, 5) * 70}ms`);
