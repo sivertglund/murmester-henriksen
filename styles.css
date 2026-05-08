@@ -1468,7 +1468,8 @@ h2 em {
 /* Portrait variant: photo on right, text on left, horizontal dark→light overlay */
 .subhero--portrait::before {
   filter: saturate(.95) brightness(.85);
-  background-position: right center;
+  /* Hold hodet i syne — anchor til toppen av portrettet */
+  background-position: var(--subhero-pos, right top);
 }
 .subhero--portrait::after {
   background:
