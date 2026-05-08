@@ -144,13 +144,11 @@
   */
   const hero = $('#hero');
   const video = $('#heroVideo');
+  const writeRoot = $('.hero__write');
   const writeText = $('#heroWriteText');
   const pen       = $('#heroPen');
-  const heroSub     = $('.hero__sub');
-  const heroCta     = $('.hero__cta');
   const heroWelcome = $('.hero__welcome');
-  const heroMicro   = $('.hero__microcopy');
-  const scrollHint  = $('.hero__scroll-hint');
+  const heroSignature = $('.hero__signature');
 
   if (hero && video) {
     let duration = 0;
@@ -220,8 +218,10 @@
       const r = Math.max(0, Math.min(1,
         (p - REVEAL_START) / (REVEAL_END - REVEAL_START)
       ));
-      if (writeText) {
-        writeText.style.setProperty('--reveal', r.toFixed(4));
+      // Set --reveal on the H1 root so it's inherited by the text mask
+       // AND the marker-underline path (drawn in sync with the text).
+      if (writeRoot) {
+        writeRoot.style.setProperty('--reveal', r.toFixed(4));
       }
       if (pen && writeText) {
         const w = writeText.offsetWidth;
@@ -232,12 +232,11 @@
         pen.style.opacity = String(r > 0.001 && r < 0.999 ? edge : 0);
       }
 
-      // Surrounding copy: keep visible, gently dim toward the end
+      // Welcome copy fades toward the end of the hero scroll. Buttons stay solid.
       if (heroWelcome) heroWelcome.style.opacity = String(1 - Math.max(0, p - 0.55) * 2.2);
-      if (heroSub)     heroSub.style.opacity     = String(1 - Math.max(0, p - 0.45) * 1.6);
-      if (heroCta)     heroCta.style.opacity     = String(1 - Math.max(0, p - 0.50) * 1.4);
-      if (heroMicro)   heroMicro.style.opacity   = String(1 - Math.max(0, p - 0.40) * 2.0);
-      if (scrollHint)  scrollHint.style.opacity  = String(1 - Math.min(1, p * 4));
+
+      // Signature appears once the handwritten title has finished drawing.
+      if (heroSignature) heroSignature.classList.toggle('is-shown', r >= 0.96);
     };
 
     const update = () => {

@@ -310,19 +310,23 @@ h2 em {
 }
 .hero__content {
   position: absolute;
-  left: 0; right: 0; bottom: 12vh;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
   padding: 0 var(--pad);
-  max-width: var(--max);
-  margin: 0 auto;
   color: #fff;
   z-index: 2;
 }
+.hero__content > * { max-width: min(100%, 80ch); }
 .hero__welcome {
-  font-size: .8rem;
+  font-size: .85rem;
   letter-spacing: .22em;
   text-transform: uppercase;
-  font-weight: 600;
-  color: rgba(255,255,255,.72);
+  font-weight: 700;
+  color: rgba(255,255,255,.92);
   margin: 0 0 18px;
 }
 .hero__title {
@@ -339,9 +343,12 @@ h2 em {
   position: relative;
   display: inline-block;
   margin: 0;
-  /* Prevent layout shift during clip animation */
+  padding-bottom: .18em; /* room for the marker underline below text */
   font-size: clamp(2.6rem, 7.5vw, 6.4rem);
   line-height: 1;
+  /* --reveal is set on the parent so both the text mask AND the marker
+     underline can share the same scroll-driven progress (0 → 1). */
+  --reveal: 0;
 }
 .hero__write-text {
   display: inline-block;
@@ -355,8 +362,6 @@ h2 em {
   text-shadow:
     0 2px 30px rgba(0,0,0,.45),
     0 0 22px rgba(255, 220, 190, .25);
-  /* Drawn-in-from-the-left mask, driven by JS via custom property. */
-  --reveal: 0;
   -webkit-mask-image: linear-gradient(90deg,
     #000 0,
     #000 calc(var(--reveal) * 100%),
@@ -365,6 +370,51 @@ h2 em {
     #000 0,
     #000 calc(var(--reveal) * 100%),
     transparent calc(var(--reveal) * 100% + 0.5%));
+}
+.hero__write-text em {
+  font-style: normal;
+  color: var(--clay-500);
+  font-family: inherit;
+  text-shadow: 0 2px 30px rgba(0,0,0,.45);
+}
+
+/* Tusjet understrek — tegnes i takt med skrive-animasjonen */
+.hero__write-stroke {
+  position: absolute;
+  left: 1%;
+  right: 7%;          /* ender før "!" */
+  bottom: 0;
+  height: .22em;
+  pointer-events: none;
+  color: var(--clay-500);
+  filter: drop-shadow(0 2px 12px rgba(0,0,0,.35));
+}
+.hero__write-stroke path {
+  stroke-width: 6;
+  stroke-dasharray: 480;
+  stroke-dashoffset: calc(480 - 480 * var(--reveal, 0));
+}
+
+/* Murstein-signatur under tittelen (Saira Stencil One — stenset/stemplet feel) */
+.hero__signature {
+  font-family: 'Saira Stencil One', 'Bricolage Grotesque', sans-serif;
+  font-weight: 400;
+  font-size: clamp(1rem, 1.8vw, 1.4rem);
+  letter-spacing: .04em;
+  line-height: 1.25;
+  color: rgba(255,255,255,.94);
+  margin: clamp(22px, 2.6vw, 36px) 0 clamp(28px, 3vw, 40px);
+  text-shadow:
+    0 2px 24px rgba(0,0,0,.55),
+    0 0 18px rgba(255, 220, 190, .12);
+  /* Skjult inntil tittelen er ferdig skrevet — JS setter opacity */
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity .5s ease, transform .5s cubic-bezier(.2,.8,.2,1);
+}
+.hero__signature.is-shown {
+  opacity: 1;
+  transform: none;
 }
 /* The pen tip — a glowing marker following the right edge of the reveal */
 .hero__pen {
