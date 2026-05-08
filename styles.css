@@ -395,26 +395,77 @@ h2 em {
   stroke-dashoffset: calc(480 - 480 * var(--reveal, 0));
 }
 
-/* Murstein-signatur under tittelen (Saira Stencil One — stenset/stemplet feel) */
+/* Murstein-boks med stenset signatur — klikkbar, lander på /kontakt */
 .hero__signature {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  margin: clamp(22px, 2.6vw, 36px) 0 clamp(30px, 3.2vw, 44px);
+  padding: clamp(14px, 1.4vw, 20px) clamp(22px, 2.6vw, 36px);
+  border-radius: 6px;
+  /* Stablet skygge gir teglsteinen "tyngde" — toppkant lyser, bunnkant
+     setter den i bakken, og en horisontal fugelinje midt på antyder mørtel. */
+  background:
+    /* subtil "mortel"-fuge på midten */
+    linear-gradient(180deg, transparent 49%, rgba(0,0,0,.18) 49.5%, rgba(0,0,0,.18) 50.5%, transparent 51%) center/100% 100% no-repeat,
+    /* organisk teglfarge-overgang */
+    linear-gradient(165deg, #8a3d24 0%, #6b3019 55%, #4d2210 100%);
+  background-color: var(--clay-700);
+  border: 1px solid rgba(255, 200, 170, .14);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, .22),
+    inset 0 -1px 0 rgba(0, 0, 0, .35),
+    0 6px 0 -3px rgba(0, 0, 0, .45),
+    0 16px 30px rgba(0, 0, 0, .45);
   font-family: 'Saira Stencil One', 'Bricolage Grotesque', sans-serif;
   font-weight: 400;
-  font-size: clamp(1rem, 1.8vw, 1.4rem);
+  font-size: clamp(1.15rem, 2vw, 1.7rem);
   letter-spacing: .04em;
-  line-height: 1.25;
-  color: rgba(255,255,255,.94);
-  margin: clamp(22px, 2.6vw, 36px) 0 clamp(28px, 3vw, 40px);
+  line-height: 1.2;
+  color: rgba(255, 238, 220, .98);
   text-shadow:
-    0 2px 24px rgba(0,0,0,.55),
-    0 0 18px rgba(255, 220, 190, .12);
-  /* Skjult inntil tittelen er ferdig skrevet — JS setter opacity */
+    0 2px 4px rgba(0, 0, 0, .6),
+    0 0 10px rgba(255, 200, 160, .12);
+  cursor: pointer;
+  transition:
+    transform .35s cubic-bezier(.2,.8,.2,1),
+    box-shadow .35s ease,
+    background .35s ease,
+    opacity .5s ease;
   opacity: 0;
-  transform: translateY(8px);
-  transition: opacity .5s ease, transform .5s cubic-bezier(.2,.8,.2,1);
+  /* Skjult inntil tittelen er ferdig skrevet — JS toggler .is-shown */
+  transform: translateY(10px);
+}
+.hero__signature-text {
+  position: relative;
+  z-index: 1;
 }
 .hero__signature.is-shown {
   opacity: 1;
   transform: none;
+}
+.hero__signature:hover,
+.hero__signature:focus-visible {
+  outline: none;
+  transform: translateY(-3px);
+  background:
+    linear-gradient(180deg, transparent 49%, rgba(0,0,0,.18) 49.5%, rgba(0,0,0,.18) 50.5%, transparent 51%) center/100% 100% no-repeat,
+    linear-gradient(165deg, #9c4729 0%, #7a3520 55%, #582814 100%);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, .28),
+    inset 0 -1px 0 rgba(0, 0, 0, .35),
+    0 9px 0 -3px rgba(0, 0, 0, .5),
+    0 22px 44px rgba(0, 0, 0, .55),
+    0 0 0 1px rgba(180, 90, 60, .35);
+}
+.hero__signature:active {
+  transform: translateY(-1px);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, .18),
+    inset 0 -1px 0 rgba(0, 0, 0, .35),
+    0 4px 0 -3px rgba(0, 0, 0, .45),
+    0 10px 22px rgba(0, 0, 0, .5);
 }
 /* The pen tip — a glowing marker following the right edge of the reveal */
 .hero__pen {
