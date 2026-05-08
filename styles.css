@@ -1000,7 +1000,150 @@ h2 em {
   background: var(--clay-500);
 }
 
-/* ===== Services Grid — 3x2 cards, alltid synlig innhold ===== */
+/* ===== Services mini — kompakt swipe-stack med overlappende ikon-kort ===== */
+.services-mini {
+  background: var(--bg);
+  padding: clamp(70px, 8vw, 100px) 0 clamp(50px, 6vw, 80px);
+  border-top: 1px solid var(--line);
+  position: relative;
+}
+.services-mini__head {
+  max-width: 720px;
+  margin: 0 auto clamp(36px, 4vw, 52px);
+  text-align: center;
+}
+.services-mini__head .lead { margin: 0 auto; }
+.services-mini__head h2 em {
+  font-style: normal;
+  font-family: 'Super Wonder', var(--font), serif;
+  color: var(--clay-500);
+  font-weight: 400;
+}
+.services-mini__inline-cta {
+  color: var(--clay-500);
+  font-weight: 600;
+  border-bottom: 1px solid currentColor;
+  transition: color .2s;
+}
+.services-mini__inline-cta:hover { color: var(--clay-700); }
+
+/* Horisontal scroll-rail med snap */
+.services-mini__rail {
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  padding: 24px clamp(20px, 4vw, 60px) 38px;
+  /* Soft fade på kantene så kortene ikke kuttes hardt */
+  -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 4%, #000 96%, transparent 100%);
+          mask-image: linear-gradient(90deg, transparent 0, #000 4%, #000 96%, transparent 100%);
+}
+.services-mini__rail::-webkit-scrollbar { display: none; }
+
+.services-mini__stack {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  width: max-content;
+}
+.services-mini__stack > li {
+  margin-right: -32px;  /* overlapp med neste kort */
+  scroll-snap-align: start;
+  position: relative;
+}
+.services-mini__stack > li:last-child { margin-right: 0; }
+
+/* Cardene "stables" med litt rotasjon variasjon for playing-cards-feel */
+.services-mini__stack > li:nth-child(odd) .mini-card { transform: rotate(-.6deg); }
+.services-mini__stack > li:nth-child(even) .mini-card { transform: rotate(.6deg); }
+
+.mini-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: clamp(170px, 20vw, 215px);
+  height: clamp(220px, 26vw, 270px);
+  padding: 18px 18px 20px;
+  background: var(--clay-500);
+  color: #fff;
+  border-radius: 16px;
+  text-decoration: none;
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  box-shadow: 0 14px 30px -12px rgba(26,15,10,.35);
+  border: 1px solid rgba(255,255,255,.10);
+  transition: transform .35s cubic-bezier(.2,.8,.2,1), box-shadow .35s ease;
+}
+.mini-card:hover,
+.mini-card:focus-visible {
+  outline: none;
+  transform: translateY(-6px) rotate(0) !important;
+  box-shadow: 0 26px 50px -14px rgba(26,15,10,.55);
+  z-index: 5;
+}
+.mini-card__icon {
+  position: absolute;
+  inset: 26% 6% 16% 6%;
+  width: auto;
+  height: 60%;
+  margin: auto;
+  object-fit: contain;
+  opacity: .70;
+  mix-blend-mode: multiply;
+  pointer-events: none;
+  transition: opacity .35s ease, transform .55s cubic-bezier(.2,.8,.2,1);
+}
+.mini-card:hover .mini-card__icon {
+  opacity: .82;
+  transform: scale(1.06);
+}
+.mini-card__num {
+  font-family: 'Super Wonder', var(--font), serif;
+  font-size: 1rem;
+  letter-spacing: .04em;
+  color: rgba(255,255,255,.78);
+  align-self: flex-start;
+  position: relative;
+  z-index: 1;
+}
+.mini-card__title {
+  font-family: 'Super Wonder', var(--font), serif;
+  font-weight: 400;
+  font-size: clamp(1.15rem, 1.5vw, 1.45rem);
+  letter-spacing: -.005em;
+  line-height: 1.05;
+  color: #fff;
+  text-shadow: 0 2px 14px rgba(0,0,0,.45);
+  position: relative;
+  z-index: 1;
+}
+.mini-card__cta {
+  font-size: .76rem;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,.78);
+  font-weight: 600;
+  position: relative;
+  z-index: 1;
+  align-self: flex-start;
+  border-bottom: 1px solid rgba(255,255,255,.4);
+  padding-bottom: 3px;
+  transition: border-color .25s ease, color .25s ease;
+}
+.mini-card:hover .mini-card__cta {
+  color: #fff;
+  border-bottom-color: #fff;
+}
+
+.services-mini__foot {
+  text-align: center;
+  margin-top: clamp(20px, 3vw, 36px);
+}
+
+/* ===== Services Grid — gammel 3x2 (beholdt for andre sider) ===== */
 .services-grid-section {
   background: var(--bg);
   padding: clamp(70px, 8vw, 100px) 0;
@@ -1763,7 +1906,28 @@ h2 em {
   transition: transform .35s cubic-bezier(.2,.8,.2,1), box-shadow .35s ease;
   box-shadow: 0 14px 32px -10px rgba(26,15,10,.18);
   min-height: 360px;
+  overflow: hidden;
+  isolation: isolate;
 }
+/* Minimalistisk ikon som watermark på den oransje boksen, 70% synlighet */
+.tj-card__bg {
+  position: absolute;
+  inset: 18% 8% 22% 8%;
+  width: auto;
+  height: 60%;
+  margin: auto;
+  object-fit: contain;
+  opacity: .70;
+  mix-blend-mode: multiply;
+  pointer-events: none;
+  z-index: 0;
+  transition: transform .55s cubic-bezier(.2,.8,.2,1), opacity .35s ease;
+}
+.tj-card--has-bg:hover .tj-card__bg {
+  transform: scale(1.05);
+  opacity: .82;
+}
+.tj-card > * { position: relative; z-index: 1; }
 .tj-card:hover {
   transform: translateY(-4px);
   box-shadow: 0 26px 50px -14px rgba(26,15,10,.30);
