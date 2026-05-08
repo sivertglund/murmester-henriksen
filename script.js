@@ -198,62 +198,96 @@
   }
 
   /* ---------- Marquee: scroll-coupled horizontal rows ----------
-     Two rows of project images. While the marquee section is in view, the
-     scroll progress (0 → 1) drives a horizontal translate. Row[direction=left]
-     slides leftward as the user scrolls down; the row marked direction=right
-     slides rightward. Falls back to a slow CSS animation when JS is disabled
-     (or before the section enters the viewport).
+     Smooth, GPU-accelerated horizontal scroll-coupling.
+       • Measurements cached (only re-measured on load/resize) — no
+         layout-thrash from getBoundingClientRect every frame.
+       • Lerp between current and target progress so rapid scroll deltas
+         (trackpad swipes) animate as a buttery slide rather than jumping.
+       • All transforms use translate3d for GPU compositing.
   */
   const marquee = $('#prosjekter-utvalg');
   if (marquee) {
-    const rows = marquee.querySelectorAll('.marquee__row');
-    const tracks = Array.from(rows).map((r) => r.querySelector('.marquee__track'));
+    const rows = Array.from(marquee.querySelectorAll('.marquee__row'));
+    const tracks = rows.map((r) => r.querySelector('.marquee__track'));
+
+    let cachedTop = 0;
+    let cachedHeight = 0;
+    let cachedOverflow = [];
+    let progressTarget = 0;
+    let progressCurrent = 0;
     let raf = false;
+    let needsApply = false;
 
-    const updateMarquee = () => {
-      raf = false;
+    const measure = () => {
       const rect = marquee.getBoundingClientRect();
-      const vh = window.innerHeight;
-      // Progress: starts when section top crosses bottom of viewport,
-      // ends when section bottom crosses top of viewport.
-      const total = rect.height + vh;
-      const traveled = vh - rect.top;
-      const p = Math.max(0, Math.min(1, traveled / total));
+      cachedTop = rect.top + window.scrollY;
+      cachedHeight = rect.height;
+      cachedOverflow = tracks.map((t, i) =>
+        t ? Math.max(0, t.scrollWidth - rows[i].clientWidth) : 0
+      );
+      rows.forEach((r) => r.classList.add('is-coupled'));
+      needsApply = true;
+    };
 
-      rows.forEach((row, i) => {
+    const computeProgress = () => {
+      const vh = window.innerHeight;
+      const traveled = (window.scrollY + vh) - cachedTop;
+      const total = cachedHeight + vh;
+      return total > 0 ? Math.max(0, Math.min(1, traveled / total)) : 0;
+    };
+
+    const apply = (p) => {
+      for (let i = 0; i < rows.length; i++) {
         const track = tracks[i];
-        if (!track) return;
-        if (!row.classList.contains('is-coupled')) row.classList.add('is-coupled');
-        const max = Math.max(0, track.scrollWidth - row.clientWidth);
-        const dir = row.dataset.direction || 'left';
-        // direction=left  : slides leftward → x goes from +max/4 down to -max + max/4
-        //                   we keep some padding on each side so first frame doesn't show empty space.
-        // direction=right : slides rightward (mirrored)
-        const overflow = max;
-        let x;
-        if (dir === 'right') {
-          x = -overflow + p * overflow;       // -max → 0
-        } else {
-          x = -p * overflow;                  //  0   → -max
-        }
-        track.style.transform = `translate3d(${x}px, 0, 0)`;
-      });
+        if (!track) continue;
+        const max = cachedOverflow[i];
+        const dir = rows[i].dataset.direction || 'left';
+        const x = dir === 'right' ? -max + p * max : -p * max;
+        track.style.transform = `translate3d(${x.toFixed(2)}px, 0, 0)`;
+      }
+    };
+
+    const tick = () => {
+      raf = false;
+      // Lerp toward target — smooths rapid scroll deltas
+      progressCurrent += (progressTarget - progressCurrent) * 0.16;
+      apply(progressCurrent);
+      if (needsApply || Math.abs(progressTarget - progressCurrent) > 0.0005) {
+        needsApply = false;
+        raf = true;
+        requestAnimationFrame(tick);
+      }
     };
 
     const onMarqueeScroll = () => {
-      if (raf) return;
-      raf = true;
-      requestAnimationFrame(updateMarquee);
+      progressTarget = computeProgress();
+      if (!raf) { raf = true; requestAnimationFrame(tick); }
     };
 
+    const onResize = () => { measure(); onMarqueeScroll(); };
+
+    // Wait for images so scrollWidth is final
+    const imgs = Array.from(marquee.querySelectorAll('img'));
+    let pending = imgs.length;
+    const ready = () => { measure(); onMarqueeScroll(); };
+    if (pending === 0) {
+      ready();
+    } else {
+      imgs.forEach((img) => {
+        const done = () => { pending--; if (pending === 0) ready(); };
+        if (img.complete) done();
+        else {
+          img.addEventListener('load', done, { once: true });
+          img.addEventListener('error', done, { once: true });
+        }
+      });
+      // First measure with current dims so something shows immediately
+      measure();
+      onMarqueeScroll();
+    }
+
     window.addEventListener('scroll', onMarqueeScroll, { passive: true });
-    window.addEventListener('resize', onMarqueeScroll);
-    // Also re-run when images load (so scrollWidth is accurate)
-    marquee.querySelectorAll('img').forEach((img) => {
-      if (img.complete) return;
-      img.addEventListener('load', onMarqueeScroll, { once: true });
-    });
-    updateMarquee();
+    window.addEventListener('resize', onResize);
   }
 
   /* ---------- Contact form: send via mailto ---------- */
