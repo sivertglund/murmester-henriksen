@@ -1194,7 +1194,28 @@ h2 em {
   isolation: isolate;
   overflow: hidden;
 }
-/* (Removed: #kontakt::before — moved to .section--intro) */
+/* Contact page — watercolor brick wall as a soft ambient backdrop */
+#kontakt-form {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+}
+#kontakt-form::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background:
+    /* Warm cream wash so text and form stay readable */
+    linear-gradient(180deg, rgba(250,246,239,.78) 0%, rgba(250,246,239,.92) 100%),
+    /* Watercolor brick texture */
+    url('/assets/contact-bg.jpg') center/cover no-repeat,
+    var(--bg);
+  background-attachment: fixed, fixed, fixed;
+}
+@media (max-width: 720px) {
+  #kontakt-form::before { background-attachment: scroll; }
+}
 
 .contact {
   display: grid;
