@@ -132,142 +132,16 @@
   }
 
 
-  /* ---------- Scroll-driven hero ----------
-     The .hero section is taller than the viewport. As the user scrolls, we
-     map scroll progress (0 → 1) to:
-       • video.currentTime = (1 - p) * duration  — plays REVERSED (wall opens)
-       • CSS custom property --reveal on the brand text — drawn left-to-right
-         like marker ink in real time
-       • opacity fade for ancillary copy as the title fully appears
-  */
-  const hero = $('#hero');
+  /* ---------- Hero video ----------
+     Autoplays forward in a loop. Handwriting reveal is CSS-animated. */
   const video = $('#heroVideo');
-  const writeRoot = $('.hero__write');
-  const writeText = $('#heroWriteText');
-  const pen       = $('#heroPen');
-  const heroWelcome = $('.hero__welcome');
-  const heroSignature = $('.hero__signature');
-
-  if (hero && video) {
-    let duration = 0;
-    let canScrub = false;
-    let progressTarget = 0;
-    let progressCurrent = 0;
-    let ticking = false;
-
-    /* ----- Hero video scroll mapping -----
-       Source video plays the wall coming apart top-down. Reversed playback
-       from 55% → 0% gives "litt over halve muren intakt" at the top of scroll
-       and the wall builds upward to complete by the bottom of the hero. */
-    const HERO_START_FRAC = 0.55;
-    const HERO_END_FRAC   = 0.0;
-
-    const setDuration = () => {
-      if (isFinite(video.duration) && video.duration > 0) {
-        duration = video.duration;
-      }
-    };
-    const showInitialFrame = () => {
-      if (duration) {
-        const t0 = Math.max(0, Math.min(duration - 0.001, HERO_START_FRAC * duration));
-        try { video.currentTime = t0; } catch (_) {}
-      }
-    };
-
-    video.addEventListener('loadedmetadata', setDuration);
-    video.addEventListener('durationchange', setDuration);
-    // canplay fires when frame data is available — *now* scrubbing works visually
-    const onCanPlay = () => {
-      setDuration();
-      canScrub = true;
-      // Force the decode pipeline to wake up — some browsers (Chrome, Safari)
-      // won't render new frames after currentTime changes unless play() has
-      // been called at least once.
+  if (video) {
+    const tryPlay = () => {
       const p = video.play();
-      if (p && typeof p.then === 'function') {
-        p.then(() => video.pause()).catch(() => {});
-      } else {
-        video.pause();
-      }
-      showInitialFrame();
-      onScroll();
+      if (p && typeof p.catch === 'function') p.catch(() => {});
     };
-    video.addEventListener('canplay', onCanPlay, { once: true });
-    video.addEventListener('canplaythrough', () => { canScrub = true; }, { once: true });
-    // Force-buffer the whole video so seeks land on cached frames
-    try { video.load(); } catch (_) {}
-    if (video.readyState >= 2) onCanPlay();
-
-    // Map scroll → reveal range — bias so writing starts a bit late and finishes a bit early
-    const REVEAL_START = 0.06;
-    const REVEAL_END   = 0.92;
-
-    const applyProgress = (p) => {
-      if (canScrub && duration) {
-        const raw = (HERO_START_FRAC + p * (HERO_END_FRAC - HERO_START_FRAC)) * duration;
-        const t = Math.max(0, Math.min(duration - 0.001, raw));
-        // Tighter threshold = more frame updates = smoother scrub
-        if (Math.abs(video.currentTime - t) > 0.008) {
-          try { video.currentTime = t; } catch (_) {}
-        }
-      }
-
-      // Handwriting reveal (0 → 1)
-      const r = Math.max(0, Math.min(1,
-        (p - REVEAL_START) / (REVEAL_END - REVEAL_START)
-      ));
-      // Set --reveal on the H1 root so it's inherited by the text mask
-       // AND the marker-underline path (drawn in sync with the text).
-      if (writeRoot) {
-        writeRoot.style.setProperty('--reveal', r.toFixed(4));
-      }
-      if (pen && writeText) {
-        const w = writeText.offsetWidth;
-        const x = r * w;
-        pen.style.transform = `translate3d(${x}px, 0, 0)`;
-        // Pen visible while drawing, fading at the very ends
-        const edge = Math.min(r * 8, (1 - r) * 8, 1);
-        pen.style.opacity = String(r > 0.001 && r < 0.999 ? edge : 0);
-      }
-
-      // Welcome copy fades toward the end of the hero scroll. Buttons stay solid.
-      if (heroWelcome) heroWelcome.style.opacity = String(1 - Math.max(0, p - 0.55) * 2.2);
-
-      // Signature appears once the handwritten title has finished drawing.
-      if (heroSignature) heroSignature.classList.toggle('is-shown', r >= 0.96);
-    };
-
-    const update = () => {
-      ticking = false;
-      // Higher lerp = snappier (closer to direct scroll). 0.32 follows scroll
-      // tightly without jumping; lower values feel laggy with the compressed
-      // 55%–100% video time range.
-      progressCurrent += (progressTarget - progressCurrent) * 0.32;
-      applyProgress(Math.max(0, Math.min(1, progressCurrent)));
-      if (Math.abs(progressTarget - progressCurrent) > 0.001) {
-        ticking = true;
-        requestAnimationFrame(update);
-      }
-    };
-
-    const computeProgress = () => {
-      const rect = hero.getBoundingClientRect();
-      const total = hero.offsetHeight - window.innerHeight;
-      const p = total > 0 ? (-rect.top) / total : 0;
-      return Math.max(0, Math.min(1, p));
-    };
-
-    const onScroll = () => {
-      progressTarget = computeProgress();
-      if (!ticking) {
-        ticking = true;
-        requestAnimationFrame(update);
-      }
-    };
-
-    window.addEventListener('scroll', onScroll, { passive: true });
-    window.addEventListener('resize', onScroll);
-    onScroll();
+    if (video.readyState >= 2) tryPlay();
+    else video.addEventListener('canplay', tryPlay, { once: true });
   }
 
   /* ---------- Marquee: autonomous infinite drift ----------

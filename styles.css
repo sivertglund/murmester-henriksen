@@ -275,19 +275,25 @@ h2 em {
 /* ===== Hero ===== */
 .hero {
   position: relative;
-  height: 200vh;
+  height: 100vh;
   background: var(--clay-900);
+  overflow: hidden;
 }
 .hero__sticky {
-  position: sticky;
-  top: 0;
+  position: relative;
   height: 100vh;
   width: 100%;
   overflow: hidden;
   background: var(--clay-900);
 }
 
-/* Hero video — scroll-driven, played in reverse so the wall "opens" */
+@property --reveal {
+  syntax: '<number>';
+  inherits: true;
+  initial-value: 0;
+}
+
+/* Hero video — autoplays forward */
 .hero__video {
   position: absolute;
   inset: 0;
@@ -346,9 +352,12 @@ h2 em {
   padding-bottom: .18em; /* room for the marker underline below text */
   font-size: clamp(2.6rem, 7.5vw, 6.4rem);
   line-height: 1;
-  /* --reveal is set on the parent so both the text mask AND the marker
-     underline can share the same scroll-driven progress (0 → 1). */
   --reveal: 0;
+  animation: heroReveal 3.4s cubic-bezier(.4,.1,.25,1) .6s forwards;
+}
+@keyframes heroReveal {
+  from { --reveal: 0; }
+  to   { --reveal: 1; }
 }
 .hero__write-text {
   display: inline-block;
@@ -412,18 +421,16 @@ h2 em {
   box-shadow: 0 8px 18px -8px rgba(0, 0, 0, .55);
   margin: clamp(18px, 2.2vw, 28px) 0 clamp(28px, 3vw, 40px);
   cursor: pointer;
-  /* Skjult inntil tittelen er ferdig skrevet — JS toggler .is-shown */
   opacity: 0;
   transform: translateY(8px);
+  animation: heroSignatureIn .55s cubic-bezier(.2,.8,.2,1) 4.05s forwards;
   transition:
-    opacity .5s ease,
-    transform .35s cubic-bezier(.2,.8,.2,1),
     background .25s ease,
+    transform .25s cubic-bezier(.2,.8,.2,1),
     box-shadow .25s ease;
 }
-.hero__signature.is-shown {
-  opacity: 1;
-  transform: none;
+@keyframes heroSignatureIn {
+  to { opacity: 1; transform: none; }
 }
 .hero__signature:hover,
 .hero__signature:focus-visible {
@@ -446,9 +453,15 @@ h2 em {
     0 0 22px rgba(255, 200, 150, .8),
     0 0 40px rgba(180, 90, 60, .6);
   opacity: 0;
-  transform: translateX(0);
   pointer-events: none;
   will-change: transform, opacity;
+  animation: heroPen 3.4s cubic-bezier(.4,.1,.25,1) .6s forwards;
+}
+@keyframes heroPen {
+  0%   { left: 0;    opacity: 0; }
+  6%   { opacity: 1; }
+  94%  { opacity: 1; }
+  100% { left: 100%; opacity: 0; }
 }
 .hero__sub {
   max-width: 56ch;
@@ -1000,156 +1013,84 @@ h2 em {
   background: var(--clay-500);
 }
 
-/* ===== Services stack — vertikal sticky-stable, ark-på-ark ved scroll ===== */
-.services-stack {
+/* ===== Services list — kompakt rad-liste på forsiden ===== */
+.services-list {
   background: var(--bg);
-  padding: clamp(70px, 8vw, 100px) 0 clamp(80px, 10vw, 130px);
+  padding: clamp(70px, 8vw, 100px) 0 clamp(70px, 8vw, 100px);
   border-top: 1px solid var(--line);
   position: relative;
 }
-.services-stack__head {
+.services-list__head {
   max-width: 720px;
-  margin: 0 auto clamp(40px, 5vw, 56px);
+  margin: 0 auto clamp(32px, 4vw, 48px);
   text-align: center;
 }
-.services-stack__head .lead { margin: 0 auto; }
-.services-stack__head h2 em {
+.services-list__head .lead { margin: 0 auto; }
+.services-list__head h2 em {
   font-style: normal;
   font-family: 'Super Wonder', var(--font), serif;
   color: var(--clay-500);
   font-weight: 400;
 }
-.services-stack__inline-cta {
-  color: var(--clay-500);
-  font-weight: 600;
-  border-bottom: 1px solid currentColor;
-  transition: color .2s;
-}
-.services-stack__inline-cta:hover { color: var(--clay-700); }
 
-/* Container for kortene */
-.stack-cards {
+.svc-list {
   list-style: none;
   margin: 0 auto;
   padding: 0;
-  position: relative;
-  max-width: 460px;
+  max-width: 720px;
+  border-top: 1px solid var(--line);
 }
-
-/* Hvert kort sitter sticky med litt forskjøvet top — gir "stack of cards"-effekt */
-.stack-card {
-  position: sticky;
-  margin-bottom: clamp(80px, 12vh, 140px);
-  /* Gir hvert kort sin egen plass i scroll-flyten før det stikker */
+.svc-list > li {
+  border-bottom: 1px solid var(--line);
 }
-.stack-card:nth-child(1)  { top: clamp(80px, 12vh, 110px); }
-.stack-card:nth-child(2)  { top: calc(clamp(80px, 12vh, 110px) + 10px); }
-.stack-card:nth-child(3)  { top: calc(clamp(80px, 12vh, 110px) + 20px); }
-.stack-card:nth-child(4)  { top: calc(clamp(80px, 12vh, 110px) + 30px); }
-.stack-card:nth-child(5)  { top: calc(clamp(80px, 12vh, 110px) + 40px); }
-.stack-card:nth-child(6)  { top: calc(clamp(80px, 12vh, 110px) + 50px); }
-.stack-card:nth-child(7)  { top: calc(clamp(80px, 12vh, 110px) + 60px); }
-.stack-card:nth-child(8)  { top: calc(clamp(80px, 12vh, 110px) + 70px); }
-.stack-card:nth-child(9)  { top: calc(clamp(80px, 12vh, 110px) + 80px); }
-.stack-card:last-child { margin-bottom: 0; }
-
-/* Selve kort-innholdet — kvadratisk, hvit boks, ikon sentrert */
-.stack-card__inner {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  width: 100%;
-  aspect-ratio: 1;            /* kvadratiske kort */
-  padding: clamp(28px, 3vw, 40px);
-  background: var(--white);
-  color: var(--ink);
-  border: 1px solid var(--line);
-  border-radius: var(--radius-lg);
-  box-shadow: 0 24px 48px -16px rgba(26,15,10,.18);
+.svc-row {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: clamp(16px, 2.4vw, 28px);
+  padding: clamp(14px, 1.8vw, 20px) clamp(8px, 1.4vw, 16px);
   text-decoration: none;
-  position: relative;
-  overflow: hidden;
-  isolation: isolate;
-  transition: transform .35s cubic-bezier(.2,.8,.2,1), box-shadow .35s ease, border-color .25s ease;
+  color: var(--ink);
+  transition: background .2s ease, padding .25s ease, color .2s ease;
 }
-.stack-card__inner:hover,
-.stack-card__inner:focus-visible {
+.svc-row:hover,
+.svc-row:focus-visible {
   outline: none;
-  transform: translateY(-4px);
-  box-shadow: 0 32px 60px -18px rgba(26,15,10,.28);
-  border-color: rgba(179,90,59,.32);
+  background: rgba(179,90,59,.06);
+  padding-left: clamp(14px, 2.2vw, 22px);
+  color: var(--clay-700);
 }
-
-/* Ikon-bilde fyller midt-området av kortet */
-.stack-card__icon {
-  position: absolute;
-  inset: 20% 12% 22% 12%;
-  width: auto;
-  height: 58%;
-  margin: auto;
-  object-fit: contain;
-  opacity: .9;
-  pointer-events: none;
-  transition: transform .55s cubic-bezier(.2,.8,.2,1);
-}
-.stack-card__inner:hover .stack-card__icon {
-  transform: scale(1.05);
-}
-
-.stack-card__num {
+.svc-row__num {
   font-family: 'Super Wonder', var(--font), serif;
-  font-size: 1.05rem;
+  font-size: .95rem;
   letter-spacing: .04em;
   color: var(--clay-500);
-  align-self: flex-start;
-  position: relative;
-  z-index: 1;
+  width: 2.4em;
 }
-.stack-card__title {
+.svc-row__title {
   font-family: 'Super Wonder', var(--font), serif;
   font-weight: 400;
-  font-size: clamp(1.6rem, 2.6vw, 2.2rem);
-  letter-spacing: -.01em;
-  line-height: 1.05;
-  color: var(--ink);
-  position: relative;
-  z-index: 1;
-  align-self: flex-start;
-  max-width: 14ch;
+  font-size: clamp(1.1rem, 1.6vw, 1.35rem);
+  letter-spacing: -.005em;
+  line-height: 1.2;
 }
-.stack-card__cta {
+.svc-row__arrow {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
-  font-size: .82rem;
-  letter-spacing: .14em;
-  text-transform: uppercase;
+  justify-content: center;
   color: var(--clay-500);
-  font-weight: 600;
-  position: relative;
-  z-index: 1;
-  align-self: flex-start;
-  border-bottom: 1px solid currentColor;
-  padding-bottom: 3px;
-  transition: color .25s ease, gap .25s ease;
+  transition: transform .25s ease, color .2s ease;
 }
-.stack-card__cta svg { width: 14px; height: 14px; }
-.stack-card__inner:hover .stack-card__cta {
+.svc-row__arrow svg { width: 18px; height: 18px; }
+.svc-row:hover .svc-row__arrow,
+.svc-row:focus-visible .svc-row__arrow {
+  transform: translateX(4px);
   color: var(--clay-700);
-  gap: 12px;
 }
 
-.services-stack__foot {
+.services-list__foot {
   text-align: center;
-  margin-top: clamp(40px, 5vw, 60px);
-}
-
-@media (max-width: 720px) {
-  .stack-cards { max-width: 100%; }
-  .stack-card { margin-bottom: clamp(40px, 8vh, 80px); }
-}
-@media (prefers-reduced-motion: reduce) {
-  .stack-card { position: static; }
+  margin-top: clamp(32px, 4vw, 48px);
 }
 
 /* ===== Services Grid — gammel 3x2 (beholdt for andre sider) ===== */
@@ -1917,30 +1858,12 @@ h2 em {
   overflow: hidden;
   isolation: isolate;
 }
-/* Bildet dekker hele boksen, sitter bak teksten ved 60% synlighet */
-.tj-card__bg {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-  opacity: .60;
-  pointer-events: none;
-  z-index: 0;
-  border-radius: inherit;
-  transition: transform .55s cubic-bezier(.2,.8,.2,1), opacity .35s ease;
-}
-.tj-card--has-bg:hover .tj-card__bg {
-  transform: scale(1.04);
-  opacity: .72;
-}
-.tj-card > * { position: relative; z-index: 1; }
 .tj-card:hover {
   transform: translateY(-4px);
   box-shadow: 0 26px 50px -14px rgba(26,15,10,.30);
 }
 
-/* Tall-sirkel inni kortets toppkant (ikke overhang — beholder fullt synlig nummer) */
+/* Tall-sirkel i toppkant av kortet */
 .tj-card__icon {
   position: absolute;
   top: clamp(16px, 2vw, 26px);
@@ -1958,19 +1881,8 @@ h2 em {
   font-size: 1.5rem;
   letter-spacing: -.005em;
   border: 2px solid rgba(255,255,255,.85);
-  overflow: hidden;
   z-index: 2;
   box-shadow: 0 6px 14px -6px rgba(26,15,10,.4);
-}
-.tj-card__icon img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  background: #fff;
-}
-/* When icon is an image, give it a white background ring */
-.tj-card__icon--img {
-  background: #fff;
 }
 
 .tj-card__title {
@@ -2409,7 +2321,7 @@ h2 em {
     box-shadow: var(--shadow-md);
     border-top: 1px solid var(--line);
   }
-  .hero { height: 220vh; }
+  .hero { height: 100vh; }
   .hero__title { font-size: clamp(2.4rem, 9vw, 3.4rem); }
   .hero__write { font-size: clamp(1.8rem, 8.4vw, 3.2rem); }
   .hero__sub { font-size: 1rem; max-width: 32ch; }
