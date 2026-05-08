@@ -1188,7 +1188,7 @@ h2 em {
   gap: clamp(14px, 1.6vw, 22px);
   width: max-content;
   will-change: transform;
-  animation: marquee-drift 80s linear infinite;
+  animation: marquee-drift 65s linear infinite;
 }
 /* Begge retninger driftes selvstendig. Default = mot venstre, "right" reverseres. */
 .marquee__row[data-direction="right"] .marquee__track {
