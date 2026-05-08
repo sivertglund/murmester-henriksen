@@ -1319,7 +1319,7 @@ h2 em {
   z-index: -1;
   background-image: var(--subhero-img);
   background-size: cover;
-  background-position: center;
+  background-position: var(--subhero-pos, center);
   filter: saturate(.85) brightness(.55);
 }
 .subhero::after {
@@ -1331,6 +1331,70 @@ h2 em {
     rgba(20,8,4,.4) 0%,
     rgba(20,8,4,.6) 60%,
     rgba(20,8,4,.95) 100%);
+}
+/* Portrait variant: photo on right, text on left, horizontal dark→light overlay */
+.subhero--portrait::before {
+  filter: saturate(.95) brightness(.85);
+  background-position: right center;
+}
+.subhero--portrait::after {
+  background:
+    linear-gradient(90deg,
+      rgba(20,8,4,.92) 0%,
+      rgba(20,8,4,.78) 30%,
+      rgba(20,8,4,.4) 60%,
+      rgba(20,8,4,.05) 100%),
+    linear-gradient(180deg,
+      rgba(20,8,4,0) 60%,
+      rgba(20,8,4,.6) 100%);
+}
+@media (max-width: 720px) {
+  .subhero--portrait::after {
+    background:
+      linear-gradient(180deg,
+        rgba(20,8,4,.55) 0%,
+        rgba(20,8,4,.85) 70%,
+        rgba(20,8,4,.95) 100%);
+  }
+}
+
+/* Inline portrait card (e.g. inside article__main) */
+.portrait-card {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  padding: 18px;
+  margin: 8px 0 28px;
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  max-width: 480px;
+}
+.portrait-card img {
+  width: 88px;
+  height: 88px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+  background: var(--sand-200);
+}
+.portrait-card__body strong {
+  display: block;
+  font-family: 'Super Wonder', var(--font), serif;
+  font-weight: 400;
+  font-size: 1.2rem;
+  line-height: 1.1;
+  color: var(--ink);
+  margin-bottom: 4px;
+  letter-spacing: -.005em;
+}
+.portrait-card__body span {
+  font-size: .82rem;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  font-weight: 600;
 }
 .subhero__inner {
   max-width: 880px;
