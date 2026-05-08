@@ -123,8 +123,45 @@
       });
     }, { threshold: 0.12 });
     reveals.forEach(el => io.observe(el));
+
+    /* Animation-only triggers — apply .is-in without the fade-up reveal */
+    document.querySelectorAll('.founder__bricks').forEach(el => io.observe(el));
   } else {
     reveals.forEach(el => el.classList.add('is-in'));
+    document.querySelectorAll('.founder__bricks').forEach(el => el.classList.add('is-in'));
+  }
+
+  /* ---------- Counter animation on founder chips ----------
+     Tall som 15+, 9 teller seg opp i ~1100ms ease-out når radten blir synlig.
+     Året 2014 står stille — det er en dato, ikke en teller.
+  */
+  const animateNumber = (el, to, duration, suffix) => {
+    const start = performance.now();
+    const tick = (now) => {
+      const t = Math.min(1, (now - start) / duration);
+      const eased = 1 - Math.pow(1 - t, 3);  // easeOutCubic
+      el.textContent = Math.round(to * eased) + suffix;
+      if (t < 1) requestAnimationFrame(tick);
+    };
+    el.textContent = '0' + suffix;
+    requestAnimationFrame(tick);
+  };
+
+  const chipNums = document.querySelectorAll('.founder__chip-num[data-count]');
+  const chipParent = $('.founder__chips');
+  if (chipNums.length && chipParent && 'IntersectionObserver' in window) {
+    const chipObs = new IntersectionObserver((entries, obs) => {
+      entries.forEach(e => {
+        if (!e.isIntersecting) return;
+        chipNums.forEach(el => {
+          const to = Number(el.dataset.count);
+          const suffix = el.dataset.suffix || '';
+          animateNumber(el, to, 1100, suffix);
+        });
+        obs.unobserve(e.target);
+      });
+    }, { threshold: 0.5 });
+    chipObs.observe(chipParent);
   }
 
   /* ---------- Scroll-driven hero ----------
