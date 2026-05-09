@@ -619,19 +619,9 @@ h2 em {
   line-height: 1.6;
   color: var(--ink);
   max-width: 56ch;
-  margin: 0 0 14px;
+  margin: 0;
   text-wrap: pretty;
-  /* Lett gjennomsiktig boks — slipper akvarellen subtilt gjennom */
-  background: rgba(255, 255, 255, .55);
-  backdrop-filter: saturate(140%) blur(10px);
-  -webkit-backdrop-filter: saturate(140%) blur(10px);
-  border: 1px solid rgba(255, 255, 255, .65);
-  border-radius: var(--radius-lg);
-  padding: clamp(18px, 2vw, 26px) clamp(20px, 2.4vw, 30px);
-  box-shadow: 0 16px 36px -18px rgba(26, 15, 10, .18);
-  transition: transform .35s cubic-bezier(.2,.8,.2,1), box-shadow .35s ease;
 }
-.founder__lede:last-child { margin-bottom: 0; }
 .founder__lede strong { color: var(--ink); font-weight: 600; }
 .founder__lede em {
   font-style: normal;
@@ -639,13 +629,6 @@ h2 em {
   font-family: 'Super Wonder', var(--font), serif;
   font-weight: 400;
 }
-/* Rød-tonet variant — samme glass-effekt, varm clay-bunntone */
-.founder__lede--accent {
-  background: rgba(179, 90, 59, .14);
-  border-color: rgba(179, 90, 59, .28);
-  box-shadow: 0 16px 36px -18px rgba(107, 58, 38, .25);
-}
-.founder__lede--accent strong { color: var(--clay-700); }
 
 /* Chip-bokser — kompakt 2x2 rute under teksten med ikon + tall + label */
 .founder__chips {
@@ -2112,6 +2095,24 @@ h2 em {
   padding: clamp(60px, 7vw, 90px) 0;
   text-align: center;
   border-top: 1px solid var(--line);
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+}
+/* Subtil mur-grid som fader ut mot kantene — samme tekstur som testimonials */
+.areas::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  opacity: .07;
+  background-image:
+    repeating-linear-gradient(0deg,  rgba(26,15,10,.5) 0 1px, transparent 1px 28px),
+    repeating-linear-gradient(90deg, rgba(26,15,10,.4) 0 1px, transparent 1px 86px);
+  background-position: 0 0, 14px 14px;
+  -webkit-mask-image: radial-gradient(ellipse at center, #000 30%, transparent 85%);
+          mask-image: radial-gradient(ellipse at center, #000 30%, transparent 85%);
 }
 .areas__inner { max-width: 800px; }
 .areas h2 {
@@ -2292,6 +2293,29 @@ h2 em {
   opacity: 1;
   transform: none;
 }
+
+/* "Les mer om oss" — subtil pil-link under chips, ikke rød boks */
+.founder__more {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: clamp(22px, 2.6vw, 30px);
+  padding-bottom: 4px;
+  font-weight: 600;
+  font-size: .96rem;
+  color: var(--ink);
+  border-bottom: 1px solid var(--ink-soft);
+  transition: color .2s ease, border-color .2s ease;
+}
+.founder__more svg {
+  width: 14px; height: 14px;
+  transition: transform .25s cubic-bezier(.2,.8,.2,1);
+}
+.founder__more:hover {
+  color: var(--clay-500);
+  border-bottom-color: var(--clay-500);
+}
+.founder__more:hover svg { transform: translateX(3px); }
 
 /* Svc-row hover — varm glød når musen passerer over en tjeneste */
 .svc-row {
