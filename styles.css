@@ -2317,6 +2317,51 @@ h2 em {
 }
 .founder__more:hover svg { transform: translateX(3px); }
 
+/* Footer-credit "Designet av Nettsnekkeren" — subtil understrek */
+.footer__bottom a {
+  color: rgba(255,255,255,.95);
+  border-bottom: 1px solid rgba(255,255,255,.32);
+  transition: border-color .2s ease, color .2s ease;
+}
+.footer__bottom a:hover {
+  color: #fff;
+  border-bottom-color: rgba(255,255,255,.7);
+}
+
+/* Forhåndsvisnings-stempel — fixed nederst i viewport på alle sider */
+.watermark {
+  position: fixed;
+  bottom: 14px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 200;
+  background: rgba(26, 15, 10, .92);
+  color: rgba(255, 255, 255, .95);
+  padding: 9px 18px;
+  border-radius: 999px;
+  font-size: .76rem;
+  letter-spacing: .03em;
+  font-weight: 500;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, .55);
+  border: 1px solid rgba(255, 255, 255, .12);
+  white-space: nowrap;
+  max-width: 92vw;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.watermark a {
+  color: #fff;
+  font-weight: 600;
+  border-bottom: 1px solid rgba(255, 255, 255, .45);
+  transition: border-color .2s ease;
+}
+.watermark a:hover { border-bottom-color: rgba(255, 255, 255, .9); }
+@media (max-width: 480px) {
+  .watermark { font-size: .7rem; padding: 7px 14px; bottom: 10px; }
+}
+
 /* Svc-row hover — varm glød når musen passerer over en tjeneste */
 .svc-row {
   transition: background .2s ease, padding .25s ease, color .2s ease, box-shadow .35s ease;
