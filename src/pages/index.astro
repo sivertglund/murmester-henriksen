@@ -2,7 +2,7 @@
 import Layout from '../layouts/Layout.astro';
 import {
   getHero, getFounder, getTjenester, getProsjekter,
-  getTestimonials, getAreas, getCTA, prosjektImageSrc,
+  getTestimonials, getAreas, getCTA, prosjektImageSrc, urlFor,
 } from '../lib/sanity';
 
 const hero = await getHero();
@@ -83,7 +83,7 @@ const chipIcons: Record<string, string> = {
 
     <div class="founder__hero">
       <figure class="founder__portrait">
-        <img src="/assets/vincent-portrait.jpg" alt="Mestermur Vincent Henriksen" loading="lazy" decoding="async" />
+        <img src={founder.portrett ? urlFor(founder.portrett).width(500).url() : '/assets/vincent-portrait.jpg'} alt="Mestermur Vincent Henriksen" loading="lazy" decoding="async" />
       </figure>
       <div class="founder__copy">
         <h2 class="founder__title">{founder.tittel} <em>{founder.tittelAksent}</em>{founder.tittelSlutt}</h2>

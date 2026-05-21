@@ -186,6 +186,7 @@ export function prosjektImageSrc(p: Prosjekt): string {
 export type Chip = { tall: string; label: string; ikon: 'clock' | 'trophy' | 'grid' | 'pin' };
 export type Founder = {
   kicker: string;
+  portrett?: any;
   tittel: string;
   tittelAksent: string;
   tittelSlutt: string;
@@ -213,7 +214,7 @@ export async function getFounder(): Promise<Founder> {
   try {
     const data = await client.fetch<Founder | null>(
       `*[_type == "founder" && _id == "founder"][0]{
-        kicker, tittel, tittelAksent, tittelSlutt, lede, chips, lesMerTekst
+        kicker, portrett, tittel, tittelAksent, tittelSlutt, lede, chips, lesMerTekst
       }`
     );
     return data ?? FOUNDER_FALLBACK;
@@ -354,6 +355,10 @@ export async function getFooter(): Promise<Footer> {
 export type Fakta = { label: string; verdi: string };
 export type OmOss = {
   kicker: string;
+  subheroBilde?: any;
+  portrettKortBilde?: any;
+  portrettKortNavn: string;
+  portrettKortRolle: string;
   h1: string;
   h1Aksent: string;
   h1Slutt: string;
@@ -364,6 +369,8 @@ export type OmOss = {
 
 const OM_OSS_FALLBACK: OmOss = {
   kicker: 'Om oss',
+  portrettKortNavn: 'Vincent Henriksen',
+  portrettKortRolle: 'Mestermur · Daglig leder',
   h1: 'Mestermur Vincent',
   h1Aksent: 'Henriksen',
   h1Slutt: '.',
@@ -383,7 +390,8 @@ export async function getOmOss(): Promise<OmOss> {
   try {
     const data = await client.fetch<OmOss | null>(
       `*[_type == "omOss" && _id == "omOss"][0]{
-        kicker, h1, h1Aksent, h1Slutt, subheroLede, innhold, nokkelfakta
+        kicker, subheroBilde, portrettKortBilde, portrettKortNavn, portrettKortRolle,
+        h1, h1Aksent, h1Slutt, subheroLede, innhold, nokkelfakta
       }`
     );
     return data ?? OM_OSS_FALLBACK;

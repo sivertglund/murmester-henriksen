@@ -1,10 +1,13 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import { getOmOss } from '../lib/sanity';
+import { getOmOss, urlFor } from '../lib/sanity';
 import { toHTML } from '@portabletext/to-html';
 
 const om = await getOmOss();
 const innholdHtml = om.innhold ? toHTML(om.innhold) : '';
+
+const subheroImg = om.subheroBilde ? urlFor(om.subheroBilde).width(1400).url() : '/assets/vincent-portrait.jpg';
+const portrettKortImg = om.portrettKortBilde ? urlFor(om.portrettKortBilde).width(800).url() : '/assets/vincent-workshop.jpg';
 ---
 <Layout
   title="Om oss — Murmester Henriksen AS"
@@ -13,7 +16,7 @@ const innholdHtml = om.innhold ? toHTML(om.innhold) : '';
 >
 
 <main>
-  <section class="subhero subhero--portrait" style="--subhero-img: url('/assets/vincent-portrait.jpg'); --subhero-pos: right top;">
+  <section class="subhero subhero--portrait" style={`--subhero-img: url('${subheroImg}'); --subhero-pos: right top;`}>
     <div class="container subhero__inner">
       <p class="subhero__crumbs">
         <a href="/">Hjem</a>
@@ -43,10 +46,10 @@ const innholdHtml = om.innhold ? toHTML(om.innhold) : '';
             <h2>Vincent Henriksen</h2>
 
             <div class="portrait-card">
-              <img src="/assets/vincent-workshop.jpg" alt="Vincent Henriksen, mestermur" loading="lazy" decoding="async" />
+              <img src={portrettKortImg} alt={`${om.portrettKortNavn}, mestermur`} loading="lazy" decoding="async" />
               <div class="portrait-card__body">
-                <strong>Vincent Henriksen</strong>
-                <span>Mestermur · Daglig leder</span>
+                <strong>{om.portrettKortNavn}</strong>
+                <span>{om.portrettKortRolle}</span>
               </div>
             </div>
 

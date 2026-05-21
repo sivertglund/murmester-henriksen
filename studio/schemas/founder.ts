@@ -6,6 +6,7 @@ export default defineType({
   type: 'document',
   fields: [
     { name: 'kicker', title: 'Kicker (liten tekst over)', type: 'string', initialValue: 'Mestermur · Vear, Vestfold · siden 2008' },
+    { name: 'portrett', title: 'Portrettbilde (Vincent)', type: 'image', options: { hotspot: true }, description: 'Last opp et nytt bilde for å endre portrettet på forsiden.' },
     { name: 'tittel', title: 'Tittel (første del)', type: 'string', initialValue: 'Murmester' },
     { name: 'tittelAksent', title: 'Tittel-aksent (i håndskrift-farge)', type: 'string', initialValue: 'Henriksen' },
     { name: 'tittelSlutt', title: 'Tittel — etter aksent (valgfri)', type: 'string', initialValue: '.' },
