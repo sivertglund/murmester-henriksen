@@ -1,4 +1,6 @@
-export default {
+import { defineType } from 'sanity';
+
+export default defineType({
   name: 'tjeneste',
   title: 'Tjeneste',
   type: 'document',
@@ -41,4 +43,4 @@ export default {
       return { title: `${nummer || '?'} — ${title || 'Tjeneste'}`, subtitle };
     },
   },
-};
+});

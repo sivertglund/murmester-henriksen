@@ -1,5 +1,8 @@
 ---
 import Layout from '../../layouts/Layout.astro';
+import { getTjenester } from '../../lib/sanity';
+
+const tjenester = await getTjenester();
 ---
 <Layout
   title="Tjenester — Murmester Henriksen AS"
@@ -27,60 +30,14 @@ import Layout from '../../layouts/Layout.astro';
 
   <section class="tj-grid">
     <div class="container tj-grid__inner">
-      <a class="tj-card" href="/tjenester/teglforblending">
-        <span class="tj-card__icon" aria-hidden="true">01</span>
-        <h3 class="tj-card__title">Teglforblending og muring</h3>
-        <p class="tj-card__lede">Leverer alt innen teglforblending, leca, thermomur og mer.</p>
-        <span class="tj-card__cta">Mer info</span>
-      </a>
-      <a class="tj-card" href="/tjenester/puss">
-        <span class="tj-card__icon" aria-hidden="true">02</span>
-        <h3 class="tj-card__title">Puss</h3>
-        <p class="tj-card__lede">Mørtelpuss, fasadepuss, fiberpuss, finpuss — det aller meste innen overflatebehandling til mur.</p>
-        <span class="tj-card__cta">Mer info</span>
-      </a>
-      <a class="tj-card" href="/tjenester/restaurering-av-murverk">
-        <span class="tj-card__icon" aria-hidden="true">03</span>
-        <h3 class="tj-card__title">Restaurering av murverk</h3>
-        <p class="tj-card__lede">Restaurering av eldre murverk med hydraulisk kalk og mer.</p>
-        <span class="tj-card__cta">Mer info</span>
-      </a>
-      <a class="tj-card" href="/tjenester/rehabilitering-av-pipe">
-        <span class="tj-card__icon" aria-hidden="true">04</span>
-        <h3 class="tj-card__title">Rehabilitering av pipe / skorstein</h3>
-        <p class="tj-card__lede">Rehabilitering av eldre skorsteiner som er underkjent av feiervesenet. Leverer enten stål- eller keramiske rør, inkludert søknadsarbeid.</p>
-        <span class="tj-card__cta">Mer info</span>
-      </a>
-      <a class="tj-card" href="/tjenester/elementpipe">
-        <span class="tj-card__icon" aria-hidden="true">05</span>
-        <h3 class="tj-card__title">Elementpipe &amp; stålpipe</h3>
-        <p class="tj-card__lede">Oppføring av elementpipe og stålpipe fra A til Å, inkludert søknadsarbeid.</p>
-        <span class="tj-card__cta">Mer info</span>
-      </a>
-      <a class="tj-card" href="/tjenester/peis-og-vedovn">
-        <span class="tj-card__icon" aria-hidden="true">06</span>
-        <h3 class="tj-card__title">Peis &amp; vedovn</h3>
-        <p class="tj-card__lede">Montering av vedovner, peisinnsatser og brannforebyggende tiltak — for både næring og privatkunde.</p>
-        <span class="tj-card__cta">Mer info</span>
-      </a>
-      <a class="tj-card" href="/tjenester/flislegging-og-vatrom">
-        <span class="tj-card__icon" aria-hidden="true">07</span>
-        <h3 class="tj-card__title">Flislegging &amp; våtrom</h3>
-        <p class="tj-card__lede">Flislegging og membran til bad og andre våtromssoner.</p>
-        <span class="tj-card__cta">Mer info</span>
-      </a>
-      <a class="tj-card" href="/tjenester/sparkling-og-gulvavretting">
-        <span class="tj-card__icon" aria-hidden="true">08</span>
-        <h3 class="tj-card__title">Sparkling og gulvavretting</h3>
-        <p class="tj-card__lede">Gulvavretting og sparkling for privatkunder.</p>
-        <span class="tj-card__cta">Mer info</span>
-      </a>
-      <a class="tj-card" href="/tjenester/skifer-og-naturstein">
-        <span class="tj-card__icon" aria-hidden="true">09</span>
-        <h3 class="tj-card__title">Skifer &amp; Naturstein</h3>
-        <p class="tj-card__lede">Legging av skifer eller naturstein i alle former og fasonger.</p>
-        <span class="tj-card__cta">Mer info</span>
-      </a>
+      {tjenester.map((t) => (
+        <a class="tj-card" href={`/tjenester/${t.slug.current}`}>
+          <span class="tj-card__icon" aria-hidden="true">{t.nummer}</span>
+          <h3 class="tj-card__title" set:html={t.tittel} />
+          {t.kortLede && <p class="tj-card__lede">{t.kortLede}</p>}
+          <span class="tj-card__cta">Mer info</span>
+        </a>
+      ))}
     </div>
   </section>
 

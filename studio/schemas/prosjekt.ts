@@ -1,4 +1,6 @@
-export default {
+import { defineType } from 'sanity';
+
+export default defineType({
   name: 'prosjekt',
   title: 'Prosjekt',
   type: 'document',
@@ -24,4 +26,4 @@ export default {
   preview: {
     select: { title: 'tittel', subtitle: 'sted', media: 'bilde' },
   },
-};
+});

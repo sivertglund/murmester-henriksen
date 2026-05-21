@@ -11,7 +11,9 @@ export const client = createClient({
 const builder = imageUrlBuilder(client);
 export const urlFor = (source: any) => builder.image(source);
 
-// Kontaktinfo — én singleton-document med id 'kontakt'
+// =====================================================================
+// Kontakt — singleton document with id 'kontakt'
+// =====================================================================
 export type Kontakt = {
   telefon: string;
   telefonRaw: string;
@@ -24,8 +26,6 @@ export type Kontakt = {
   };
 };
 
-// Fallback brukes hvis Sanity er tomt eller utilgjengelig under build.
-// Det betyr at siden alltid har data — selv før Vincent fyller inn Studio.
 const KONTAKT_FALLBACK: Kontakt = {
   telefon: '955 23 763',
   telefonRaw: '+4795523763',
@@ -50,4 +50,132 @@ export async function getKontakt(): Promise<Kontakt> {
     console.warn('[sanity] kontakt fetch failed, using fallback', err);
     return KONTAKT_FALLBACK;
   }
+}
+
+// =====================================================================
+// Hero — singleton document with id 'hero'
+// =====================================================================
+export type Hero = {
+  welcome: string;
+  title: string;
+  titleEmphasis: string;
+  signature: string;
+  primaryCtaText: string;
+  secondaryCtaText: string;
+};
+
+const HERO_FALLBACK: Hero = {
+  welcome: 'Mestermur · Etablert 2008 · Vear, Vestfold',
+  title: 'Alle trenger',
+  titleEmphasis: 'en murer!',
+  signature: 'Murmester Henriksen er her for å hjelpe deg!',
+  primaryCtaText: 'Få gratis befaring',
+  secondaryCtaText: 'Se tjenestene',
+};
+
+export async function getHero(): Promise<Hero> {
+  try {
+    const data = await client.fetch<Hero | null>(
+      `*[_type == "hero" && _id == "hero"][0]{
+        welcome, title, titleEmphasis, signature, primaryCtaText, secondaryCtaText
+      }`
+    );
+    return data ?? HERO_FALLBACK;
+  } catch (err) {
+    console.warn('[sanity] hero fetch failed, using fallback', err);
+    return HERO_FALLBACK;
+  }
+}
+
+// =====================================================================
+// Tjenester (services)
+// =====================================================================
+export type Tjeneste = {
+  _id: string;
+  nummer: string;
+  tittel: string;
+  slug: { current: string };
+  kortLede?: string;
+  subheroBilde?: any;
+  artikkelH2?: string;
+  artikkelInnhold?: any[]; // Portable Text blocks
+  rekkefolge?: number;
+};
+
+// Hard-coded fallback list mirrors the current site exactly so the
+// page keeps working before Vincent fills in Sanity.
+const TJENESTER_FALLBACK: Tjeneste[] = [
+  { _id: 'fb-01', nummer: '01', tittel: 'Teglforblending og muring', slug: { current: 'teglforblending' }, kortLede: 'Leverer alt innen teglforblending, leca, thermomur og mer.', rekkefolge: 1 },
+  { _id: 'fb-02', nummer: '02', tittel: 'Puss', slug: { current: 'puss' }, kortLede: 'Mørtelpuss, fasadepuss, fiberpuss, finpuss — det aller meste innen overflatebehandling til mur.', rekkefolge: 2 },
+  { _id: 'fb-03', nummer: '03', tittel: 'Restaurering av murverk', slug: { current: 'restaurering-av-murverk' }, kortLede: 'Restaurering av eldre murverk med hydraulisk kalk og mer.', rekkefolge: 3 },
+  { _id: 'fb-04', nummer: '04', tittel: 'Rehabilitering av pipe', slug: { current: 'rehabilitering-av-pipe' }, kortLede: 'Rehabilitering av eldre skorsteiner som er underkjent av feiervesenet.', rekkefolge: 4 },
+  { _id: 'fb-05', nummer: '05', tittel: 'Elementpipe & stålpipe', slug: { current: 'elementpipe' }, kortLede: 'Oppføring av elementpipe og stålpipe fra A til Å, inkludert søknadsarbeid.', rekkefolge: 5 },
+  { _id: 'fb-06', nummer: '06', tittel: 'Peis & vedovn', slug: { current: 'peis-og-vedovn' }, kortLede: 'Montering av vedovner, peisinnsatser og brannforebyggende tiltak.', rekkefolge: 6 },
+  { _id: 'fb-07', nummer: '07', tittel: 'Flislegging & våtrom', slug: { current: 'flislegging-og-vatrom' }, kortLede: 'Flislegging og membran til bad og andre våtromssoner.', rekkefolge: 7 },
+  { _id: 'fb-08', nummer: '08', tittel: 'Sparkling og gulvavretting', slug: { current: 'sparkling-og-gulvavretting' }, kortLede: 'Gulvavretting og sparkling for privatkunder.', rekkefolge: 8 },
+  { _id: 'fb-09', nummer: '09', tittel: 'Skifer & naturstein', slug: { current: 'skifer-og-naturstein' }, kortLede: 'Legging av skifer eller naturstein i alle former og fasonger.', rekkefolge: 9 },
+];
+
+export async function getTjenester(): Promise<Tjeneste[]> {
+  try {
+    const data = await client.fetch<Tjeneste[]>(
+      `*[_type == "tjeneste"] | order(rekkefolge asc, nummer asc){
+        _id, nummer, tittel, slug, kortLede, subheroBilde, artikkelH2, artikkelInnhold, rekkefolge
+      }`
+    );
+    return data && data.length > 0 ? data : TJENESTER_FALLBACK;
+  } catch (err) {
+    console.warn('[sanity] tjenester fetch failed, using fallback', err);
+    return TJENESTER_FALLBACK;
+  }
+}
+
+// =====================================================================
+// Prosjekter (projects)
+// =====================================================================
+export type Prosjekt = {
+  _id: string;
+  tittel: string;
+  bilde?: any;
+  bildeUrl?: string; // Used when fallback is in play
+  sted?: string;
+  aar?: string;
+  rekkefolge?: number;
+};
+
+// Fallback list mirrors current static project files in /assets/projects/
+const PROSJEKTER_FALLBACK: Prosjekt[] = [
+  { _id: 'fb-p01', tittel: 'Pussfasade på sokkel', bildeUrl: '/assets/projects/project-01.jpg', rekkefolge: 1 },
+  { _id: 'fb-p02', tittel: 'Murverk', bildeUrl: '/assets/projects/project-02.jpg', rekkefolge: 2 },
+  { _id: 'fb-p03', tittel: 'Restaurert murverk', bildeUrl: '/assets/projects/project-03.jpg', rekkefolge: 3 },
+  { _id: 'fb-p04', tittel: 'Peis', bildeUrl: '/assets/projects/project-04.jpg', rekkefolge: 4 },
+  { _id: 'fb-p05', tittel: 'Pipe-rehabilitering', bildeUrl: '/assets/projects/project-05.jpg', rekkefolge: 5 },
+  { _id: 'fb-p06', tittel: 'Teglforblending', bildeUrl: '/assets/projects/project-06.jpg', rekkefolge: 6 },
+  { _id: 'fb-p07', tittel: 'Flislegging', bildeUrl: '/assets/projects/project-07.jpg', rekkefolge: 7 },
+  { _id: 'fb-p08', tittel: 'Sparkling og gulvavretting', bildeUrl: '/assets/projects/project-08.jpg', rekkefolge: 8 },
+  { _id: 'fb-p09', tittel: 'Skifer og naturstein', bildeUrl: '/assets/projects/project-09.jpg', rekkefolge: 9 },
+  { _id: 'fb-p10', tittel: 'Murverk', bildeUrl: '/assets/projects/project-10.jpg', rekkefolge: 10 },
+  { _id: 'fb-p11', tittel: 'Murverk', bildeUrl: '/assets/projects/project-11.jpg', rekkefolge: 11 },
+  { _id: 'fb-p12', tittel: 'Elementpipe', bildeUrl: '/assets/projects/project-12.jpg', rekkefolge: 12 },
+];
+
+export async function getProsjekter(): Promise<Prosjekt[]> {
+  try {
+    const data = await client.fetch<Prosjekt[]>(
+      `*[_type == "prosjekt"] | order(rekkefolge asc){
+        _id, tittel, bilde, sted, aar, rekkefolge
+      }`
+    );
+    return data && data.length > 0 ? data : PROSJEKTER_FALLBACK;
+  } catch (err) {
+    console.warn('[sanity] prosjekter fetch failed, using fallback', err);
+    return PROSJEKTER_FALLBACK;
+  }
+}
+
+// Helper: get image src for a project (works for both Sanity and fallback)
+export function prosjektImageSrc(p: Prosjekt): string {
+  if (p.bildeUrl) return p.bildeUrl;
+  if (p.bilde) return urlFor(p.bilde).width(800).url();
+  return '';
 }

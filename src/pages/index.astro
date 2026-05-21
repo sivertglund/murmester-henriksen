@@ -1,5 +1,15 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import { getHero, getTjenester, getProsjekter, prosjektImageSrc } from '../lib/sanity';
+
+const hero = await getHero();
+const tjenester = await getTjenester();
+const prosjekter = await getProsjekter();
+
+// Split projects into two rows for the marquee (alternating direction).
+const half = Math.ceil(prosjekter.length / 2);
+const rad1 = prosjekter.slice(0, half);
+const rad2 = prosjekter.slice(half);
 ---
 <Layout
   title="Murmester Henriksen AS — Mestermur i Vestfold · Tegl, puss, kalk, peis"
@@ -27,25 +37,25 @@ import Layout from '../layouts/Layout.astro';
     <div class="hero__overlay"></div>
 
     <div class="hero__content">
-      <p class="hero__welcome">Mestermur · Etablert 2008 · Vear, Vestfold</p>
+      <p class="hero__welcome">{hero.welcome}</p>
 
-      <h1 class="hero__write" aria-label="Alle trenger en murer!">
-        <span class="hero__write-text" id="heroWriteText">Alle trenger <em>en murer!</em></span>
+      <h1 class="hero__write" aria-label={`${hero.title} ${hero.titleEmphasis}`}>
+        <span class="hero__write-text" id="heroWriteText">{hero.title} <em>{hero.titleEmphasis}</em></span>
         <span class="hero__pen" id="heroPen" aria-hidden="true"></span>
       </h1>
 
       <a href="/kontakt" class="hero__signature">
-        <span class="hero__signature-text">Murmester Henriksen er her for å hjelpe deg!</span>
+        <span class="hero__signature-text">{hero.signature}</span>
       </a>
 
       <div class="hero__cta">
         <a href="/kontakt" class="btn btn--primary">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M16 3v4M8 3v4M3 11h18"/><path d="M9 16l2 2 4-4"/></svg>
-          Få gratis befaring
+          {hero.primaryCtaText}
         </a>
         <a href="/tjenester/" class="btn btn--ghost">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
-          Se tjenestene
+          {hero.secondaryCtaText}
         </a>
       </div>
     </div>
@@ -149,15 +159,17 @@ import Layout from '../layouts/Layout.astro';
 
   <div class="container">
     <ul class="svc-list">
-      <li><a class="svc-row" href="/tjenester/teglforblending"><span class="svc-row__num">01</span><span class="svc-row__title">Teglforblending og muring</span><span class="svc-row__arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span></a></li>
-      <li><a class="svc-row" href="/tjenester/puss"><span class="svc-row__num">02</span><span class="svc-row__title">Puss</span><span class="svc-row__arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span></a></li>
-      <li><a class="svc-row" href="/tjenester/restaurering-av-murverk"><span class="svc-row__num">03</span><span class="svc-row__title">Restaurering av murverk</span><span class="svc-row__arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span></a></li>
-      <li><a class="svc-row" href="/tjenester/rehabilitering-av-pipe"><span class="svc-row__num">04</span><span class="svc-row__title">Rehabilitering av pipe</span><span class="svc-row__arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span></a></li>
-      <li><a class="svc-row" href="/tjenester/elementpipe"><span class="svc-row__num">05</span><span class="svc-row__title">Elementpipe &amp; stålpipe</span><span class="svc-row__arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span></a></li>
-      <li><a class="svc-row" href="/tjenester/peis-og-vedovn"><span class="svc-row__num">06</span><span class="svc-row__title">Peis &amp; vedovn</span><span class="svc-row__arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span></a></li>
-      <li><a class="svc-row" href="/tjenester/flislegging-og-vatrom"><span class="svc-row__num">07</span><span class="svc-row__title">Flislegging &amp; våtrom</span><span class="svc-row__arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span></a></li>
-      <li><a class="svc-row" href="/tjenester/sparkling-og-gulvavretting"><span class="svc-row__num">08</span><span class="svc-row__title">Sparkling og gulvavretting</span><span class="svc-row__arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span></a></li>
-      <li><a class="svc-row" href="/tjenester/skifer-og-naturstein"><span class="svc-row__num">09</span><span class="svc-row__title">Skifer &amp; naturstein</span><span class="svc-row__arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span></a></li>
+      {tjenester.map((t) => (
+        <li>
+          <a class="svc-row" href={`/tjenester/${t.slug.current}`}>
+            <span class="svc-row__num">{t.nummer}</span>
+            <span class="svc-row__title" set:html={t.tittel} />
+            <span class="svc-row__arrow" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </span>
+          </a>
+        </li>
+      ))}
     </ul>
   </div>
 
@@ -180,22 +192,20 @@ import Layout from '../layouts/Layout.astro';
   <div class="marquee__rows">
     <div class="marquee__row" data-direction="right">
       <div class="marquee__track">
-        <figure class="marquee__item"><img src="/assets/projects/project-01.jpg" alt="Prosjekt — pussfasade på sokkel" loading="eager" decoding="async"/></figure>
-        <figure class="marquee__item"><img src="/assets/projects/project-02.jpg" alt="Prosjekt — murverk" loading="eager" decoding="async"/></figure>
-        <figure class="marquee__item"><img src="/assets/projects/project-03.jpg" alt="Prosjekt — murverk" loading="eager" decoding="async"/></figure>
-        <figure class="marquee__item"><img src="/assets/projects/project-04.jpg" alt="Prosjekt — murverk" loading="eager" decoding="async"/></figure>
-        <figure class="marquee__item"><img src="/assets/projects/project-05.jpg" alt="Prosjekt — murverk" loading="eager" decoding="async"/></figure>
-        <figure class="marquee__item"><img src="/assets/projects/project-06.jpg" alt="Prosjekt — teglforblending" loading="eager" decoding="async"/></figure>
+        {rad1.map((p) => (
+          <figure class="marquee__item">
+            <img src={prosjektImageSrc(p)} alt={`Prosjekt — ${p.tittel}`} loading="eager" decoding="async"/>
+          </figure>
+        ))}
       </div>
     </div>
     <div class="marquee__row" data-direction="left">
       <div class="marquee__track">
-        <figure class="marquee__item"><img src="/assets/projects/project-07.jpg" alt="Prosjekt — murverk" loading="eager" decoding="async"/></figure>
-        <figure class="marquee__item"><img src="/assets/projects/project-08.jpg" alt="Prosjekt — murverk" loading="eager" decoding="async"/></figure>
-        <figure class="marquee__item"><img src="/assets/projects/project-09.jpg" alt="Prosjekt — murverk" loading="eager" decoding="async"/></figure>
-        <figure class="marquee__item"><img src="/assets/projects/project-10.jpg" alt="Prosjekt — murverk" loading="eager" decoding="async"/></figure>
-        <figure class="marquee__item"><img src="/assets/projects/project-11.jpg" alt="Prosjekt — murverk" loading="eager" decoding="async"/></figure>
-        <figure class="marquee__item"><img src="/assets/projects/project-12.jpg" alt="Prosjekt — murverk" loading="eager" decoding="async"/></figure>
+        {rad2.map((p) => (
+          <figure class="marquee__item">
+            <img src={prosjektImageSrc(p)} alt={`Prosjekt — ${p.tittel}`} loading="eager" decoding="async"/>
+          </figure>
+        ))}
       </div>
     </div>
   </div>

@@ -1,4 +1,6 @@
-export default {
+import { defineType } from 'sanity';
+
+export default defineType({
   name: 'kontakt',
   title: 'Kontaktinfo',
   type: 'document',
@@ -9,7 +11,7 @@ export default {
     { name: 'adresseLinje', title: 'Adresse (én linje)', type: 'string', initialValue: 'Vear, 3173 Tønsberg · Vestfold' },
     {
       name: 'apningstider',
-      title: 'Åpningstider (4 linjer)',
+      title: 'Åpningstider',
       type: 'object',
       fields: [
         { name: 'manTor', title: 'Man–Tor', type: 'string', initialValue: '07:00–15:30' },
@@ -23,4 +25,4 @@ export default {
       return { title: 'Kontaktinfo' };
     },
   },
-};
+});

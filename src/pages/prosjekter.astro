@@ -1,5 +1,8 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import { getProsjekter, prosjektImageSrc } from '../lib/sanity';
+
+const prosjekter = await getProsjekter();
 ---
 <Layout
   title="Prosjekter — Murmester Henriksen AS"
@@ -28,18 +31,11 @@ import Layout from '../layouts/Layout.astro';
   <section class="projects">
     <div class="container">
       <div class="projects__grid">
-        <figure class="projects__item"><img src="/assets/projects/project-01.jpg" alt="Pussfasade på sokkel" loading="lazy" decoding="async" /></figure>
-        <figure class="projects__item"><img src="/assets/projects/project-02.jpg" alt="Murverk" loading="lazy" decoding="async" /></figure>
-        <figure class="projects__item"><img src="/assets/projects/project-03.jpg" alt="Restaurert murverk" loading="lazy" decoding="async" /></figure>
-        <figure class="projects__item"><img src="/assets/projects/project-04.jpg" alt="Peis" loading="lazy" decoding="async" /></figure>
-        <figure class="projects__item"><img src="/assets/projects/project-05.jpg" alt="Pipe-rehabilitering" loading="lazy" decoding="async" /></figure>
-        <figure class="projects__item"><img src="/assets/projects/project-06.jpg" alt="Teglforblending" loading="lazy" decoding="async" /></figure>
-        <figure class="projects__item"><img src="/assets/projects/project-07.jpg" alt="Flislegging" loading="lazy" decoding="async" /></figure>
-        <figure class="projects__item"><img src="/assets/projects/project-08.jpg" alt="Sparkling og gulvavretting" loading="lazy" decoding="async" /></figure>
-        <figure class="projects__item"><img src="/assets/projects/project-09.jpg" alt="Skifer og naturstein" loading="lazy" decoding="async" /></figure>
-        <figure class="projects__item"><img src="/assets/projects/project-10.jpg" alt="Murverk" loading="lazy" decoding="async" /></figure>
-        <figure class="projects__item"><img src="/assets/projects/project-11.jpg" alt="Murverk" loading="lazy" decoding="async" /></figure>
-        <figure class="projects__item"><img src="/assets/projects/project-12.jpg" alt="Elementpipe" loading="lazy" decoding="async" /></figure>
+        {prosjekter.map((p) => (
+          <figure class="projects__item">
+            <img src={prosjektImageSrc(p)} alt={p.tittel} loading="lazy" decoding="async" />
+          </figure>
+        ))}
       </div>
 
       <p class="projects__note">
