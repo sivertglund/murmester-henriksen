@@ -179,3 +179,256 @@ export function prosjektImageSrc(p: Prosjekt): string {
   if (p.bilde) return urlFor(p.bilde).width(800).url();
   return '';
 }
+
+// =====================================================================
+// Founder / Murmester-seksjon — singleton 'founder'
+// =====================================================================
+export type Chip = { tall: string; label: string; ikon: 'clock' | 'trophy' | 'grid' | 'pin' };
+export type Founder = {
+  kicker: string;
+  tittel: string;
+  tittelAksent: string;
+  tittelSlutt: string;
+  lede: string;
+  chips: Chip[];
+  lesMerTekst: string;
+};
+
+const FOUNDER_FALLBACK: Founder = {
+  kicker: 'Mestermur · Vear, Vestfold · siden 2008',
+  tittel: 'Murmester',
+  tittelAksent: 'Henriksen',
+  tittelSlutt: '.',
+  lede: 'Velkommen til Murmester Henriksen AS, din pålitelige partner for mur, puss, flis, naturstein, peis, pipe og mer. Med over 15 års bransjeerfaring leverer vi kvalitetstjenester til både privat- og næringskunder.',
+  chips: [
+    { tall: '15+', label: 'års erfaring', ikon: 'clock' },
+    { tall: '2014', label: 'NM-sølv i muring', ikon: 'trophy' },
+    { tall: '9', label: 'fagområder', ikon: 'grid' },
+    { tall: 'Vestfold', label: 'hele fylket', ikon: 'pin' },
+  ],
+  lesMerTekst: 'Les mer om oss',
+};
+
+export async function getFounder(): Promise<Founder> {
+  try {
+    const data = await client.fetch<Founder | null>(
+      `*[_type == "founder" && _id == "founder"][0]{
+        kicker, tittel, tittelAksent, tittelSlutt, lede, chips, lesMerTekst
+      }`
+    );
+    return data ?? FOUNDER_FALLBACK;
+  } catch (err) {
+    console.warn('[sanity] founder fetch failed, using fallback', err);
+    return FOUNDER_FALLBACK;
+  }
+}
+
+// =====================================================================
+// Testimonials — singleton 'testimonials'
+// =====================================================================
+export type Sitat = { tekst: string; navn: string; meta?: string };
+export type Testimonials = {
+  kicker: string;
+  tittel: string;
+  tittelAksent: string;
+  tittelSlutt: string;
+  sitater: Sitat[];
+};
+
+const TESTIMONIALS_FALLBACK: Testimonials = {
+  kicker: 'Anbefalinger',
+  tittel: 'Hva kundene',
+  tittelAksent: 'faktisk sier',
+  tittelSlutt: '.',
+  sitater: [],
+};
+
+export async function getTestimonials(): Promise<Testimonials> {
+  try {
+    const data = await client.fetch<Testimonials | null>(
+      `*[_type == "testimonials" && _id == "testimonials"][0]{
+        kicker, tittel, tittelAksent, tittelSlutt, sitater
+      }`
+    );
+    return data ?? TESTIMONIALS_FALLBACK;
+  } catch (err) {
+    return TESTIMONIALS_FALLBACK;
+  }
+}
+
+// =====================================================================
+// Areas — singleton 'areas'
+// =====================================================================
+export type Areas = {
+  tittel: string;
+  tittelAksent: string;
+  tittelSlutt: string;
+  byer: string[];
+};
+
+const AREAS_FALLBACK: Areas = {
+  tittel: 'Vi dekker hele',
+  tittelAksent: 'Vestfold',
+  tittelSlutt: '.',
+  byer: ['Hvasser', 'Nøtterøy', 'Tønsberg', 'Larvik', 'Tjøme', 'Sandefjord', 'Horten', 'Skoppum', 'Sande', 'Stokke'],
+};
+
+export async function getAreas(): Promise<Areas> {
+  try {
+    const data = await client.fetch<Areas | null>(
+      `*[_type == "areas" && _id == "areas"][0]{ tittel, tittelAksent, tittelSlutt, byer }`
+    );
+    return data ?? AREAS_FALLBACK;
+  } catch (err) {
+    return AREAS_FALLBACK;
+  }
+}
+
+// =====================================================================
+// CTA strip — singleton 'cta'
+// =====================================================================
+export type CTA = {
+  kicker: string;
+  tittel: string;
+  tittelAksent: string;
+  tittelSlutt: string;
+  primarBtnTekst: string;
+  ringBtnTekst: string;
+};
+
+const CTA_FALLBACK: CTA = {
+  kicker: 'Klar for å starte?',
+  tittel: 'La oss',
+  tittelAksent: 'se på jobben',
+  tittelSlutt: '.',
+  primarBtnTekst: 'Be om befaring',
+  ringBtnTekst: 'Ring 955 23 763',
+};
+
+export async function getCTA(): Promise<CTA> {
+  try {
+    const data = await client.fetch<CTA | null>(
+      `*[_type == "cta" && _id == "cta"][0]{ kicker, tittel, tittelAksent, tittelSlutt, primarBtnTekst, ringBtnTekst }`
+    );
+    return data ?? CTA_FALLBACK;
+  } catch (err) {
+    return CTA_FALLBACK;
+  }
+}
+
+// =====================================================================
+// Footer — singleton 'footer'
+// =====================================================================
+export type Footer = {
+  firmanavn: string;
+  firmaadresse: string;
+  tagline: string;
+  medlemTekst: string;
+  facebookUrl: string;
+  instagramUrl: string;
+};
+
+const FOOTER_FALLBACK: Footer = {
+  firmanavn: 'Murmester Henriksen AS',
+  firmaadresse: 'Vear, Vestfold',
+  tagline: 'Mestermur · Etablert 2008 · NM Sølv 2014',
+  medlemTekst: 'Medlem · Norges Murmesterforening',
+  facebookUrl: 'https://www.facebook.com/murmesterhenriksen',
+  instagramUrl: 'https://www.instagram.com/murmesterhenriksen/',
+};
+
+export async function getFooter(): Promise<Footer> {
+  try {
+    const data = await client.fetch<Footer | null>(
+      `*[_type == "footer" && _id == "footer"][0]{ firmanavn, firmaadresse, tagline, medlemTekst, facebookUrl, instagramUrl }`
+    );
+    return data ?? FOOTER_FALLBACK;
+  } catch (err) {
+    return FOOTER_FALLBACK;
+  }
+}
+
+// =====================================================================
+// Om oss-siden — singleton 'omOss'
+// =====================================================================
+export type Fakta = { label: string; verdi: string };
+export type OmOss = {
+  kicker: string;
+  h1: string;
+  h1Aksent: string;
+  h1Slutt: string;
+  subheroLede: string;
+  innhold?: any[]; // Portable Text
+  nokkelfakta: Fakta[];
+};
+
+const OM_OSS_FALLBACK: OmOss = {
+  kicker: 'Om oss',
+  h1: 'Mestermur Vincent',
+  h1Aksent: 'Henriksen',
+  h1Slutt: '.',
+  subheroLede: 'En liten mestermurbedrift i Vear, Vestfold.',
+  innhold: undefined,
+  nokkelfakta: [
+    { label: 'Etablert', verdi: '2008 · Vear, Vestfold' },
+    { label: 'Mester', verdi: 'Vincent Henriksen, mestermurbrev' },
+    { label: 'Mesterskap', verdi: 'NM Sølv 2014' },
+    { label: 'Verv', verdi: 'Leder, lokalt murmesterlaug · Prøvenemnd' },
+    { label: 'Område', verdi: 'Hele Vestfold' },
+    { label: 'Medlem', verdi: 'Norges Murmesterforening' },
+  ],
+};
+
+export async function getOmOss(): Promise<OmOss> {
+  try {
+    const data = await client.fetch<OmOss | null>(
+      `*[_type == "omOss" && _id == "omOss"][0]{
+        kicker, h1, h1Aksent, h1Slutt, subheroLede, innhold, nokkelfakta
+      }`
+    );
+    return data ?? OM_OSS_FALLBACK;
+  } catch (err) {
+    return OM_OSS_FALLBACK;
+  }
+}
+
+// =====================================================================
+// Kontakt-siden (tekster) — singleton 'kontaktPage'
+// =====================================================================
+export type KontaktPage = {
+  kicker: string;
+  h1: string;
+  h1Aksent: string;
+  h1Slutt: string;
+  subheroLede: string;
+  direkteKicker: string;
+  direkteTittel: string;
+  direkteLede: string;
+  formTittel: string;
+};
+
+const KONTAKT_PAGE_FALLBACK: KontaktPage = {
+  kicker: 'Kontakt oss',
+  h1: 'La oss',
+  h1Aksent: 'se på jobben',
+  h1Slutt: '.',
+  subheroLede: 'Send oss en henvendelse via skjemaet, eller ring direkte for en uforpliktende prat. Vi svarer normalt innen én virkedag.',
+  direkteKicker: 'Direkte kontakt',
+  direkteTittel: 'Ring, mail, eller skriv.',
+  direkteLede: 'Det går fortest å ringe — særlig om du har en akutt sak som frostskader eller pipeproblemer. For ordinære henvendelser fungerer skjemaet eller e-post like godt.',
+  formTittel: 'Send oss en henvendelse',
+};
+
+export async function getKontaktPage(): Promise<KontaktPage> {
+  try {
+    const data = await client.fetch<KontaktPage | null>(
+      `*[_type == "kontaktPage" && _id == "kontaktPage"][0]{
+        kicker, h1, h1Aksent, h1Slutt, subheroLede,
+        direkteKicker, direkteTittel, direkteLede, formTittel
+      }`
+    );
+    return data ?? KONTAKT_PAGE_FALLBACK;
+  } catch (err) {
+    return KONTAKT_PAGE_FALLBACK;
+  }
+}

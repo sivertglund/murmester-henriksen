@@ -1,14 +1,15 @@
 ---
-import { getKontakt } from '../lib/sanity';
+import { getKontakt, getFooter } from '../lib/sanity';
 const { showHours = true } = Astro.props;
 const kontakt = await getKontakt();
+const footer = await getFooter();
 ---
 <footer class="footer">
   <div class="container footer__inner">
     <div class="footer__brand">
       <span class="footer__mark" aria-hidden="true">M·H</span>
-      <p><strong>Murmester Henriksen AS</strong><br/>Vear, Vestfold</p>
-      <p class="footer__small">Mestermur · Etablert 2008 · NM Sølv 2014</p>
+      <p><strong>{footer.firmanavn}</strong><br/>{footer.firmaadresse}</p>
+      <p class="footer__small">{footer.tagline}</p>
     </div>
     <div class="footer__col">
       <h4>Tjenester</h4>
@@ -26,8 +27,8 @@ const kontakt = await getKontakt();
         <li><a href="/om-oss">Om oss</a></li>
         <li><a href="/prosjekter">Prosjekter</a></li>
         <li><a href="/kontakt">Kontakt</a></li>
-        <li><a href="https://www.facebook.com/murmesterhenriksen" target="_blank" rel="noopener">Facebook</a></li>
-        <li><a href="https://www.instagram.com/murmesterhenriksen/" target="_blank" rel="noopener">Instagram</a></li>
+        <li><a href={footer.facebookUrl} target="_blank" rel="noopener">Facebook</a></li>
+        <li><a href={footer.instagramUrl} target="_blank" rel="noopener">Instagram</a></li>
       </ul>
     </div>
     <div class="footer__col">
@@ -36,21 +37,21 @@ const kontakt = await getKontakt();
         <li><a href={`tel:${kontakt.telefonRaw}`}>{kontakt.telefon}</a></li>
         <li><a href={`mailto:${kontakt.epost}`}>{kontakt.epost}</a></li>
       </ul>
-      {showHours && (
+      {showHours && kontakt.apningstider && (
         <>
           <h4 class="footer__sub">Åpningstider</h4>
           <ul class="footer__hours">
-            <li><span>Man–Tor</span><span>07:00–15:30</span></li>
-            <li><span>Fredag</span><span>07:00–13:00</span></li>
-            <li><span>Lør &amp; søn</span><span>Stengt</span></li>
+            <li><span>Man–Tor</span><span>{kontakt.apningstider.manTor}</span></li>
+            <li><span>Fredag</span><span>{kontakt.apningstider.fredag}</span></li>
+            <li><span>Lør &amp; søn</span><span>{kontakt.apningstider.helg}</span></li>
           </ul>
         </>
       )}
     </div>
   </div>
   <div class="footer__bottom">
-    <span>© <span id="year"></span> Murmester Henriksen AS</span>
-    <span>Medlem · Norges Murmesterforening</span>
+    <span>© <span id="year"></span> {footer.firmanavn}</span>
+    <span>{footer.medlemTekst}</span>
     <span>Designet av <a href="https://nettsnekkeren.no" target="_blank" rel="noopener">Nettsnekkeren</a></span>
   </div>
 </footer>

@@ -1,5 +1,10 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import { getOmOss } from '../lib/sanity';
+import { toHTML } from '@portabletext/to-html';
+
+const om = await getOmOss();
+const innholdHtml = om.innhold ? toHTML(om.innhold) : '';
 ---
 <Layout
   title="Om oss — Murmester Henriksen AS"
@@ -15,11 +20,9 @@ import Layout from '../layouts/Layout.astro';
         <span aria-hidden="true">/</span>
         <span>Om oss</span>
       </p>
-      <p class="kicker kicker--light">Om oss</p>
-      <h1>Mestermur Vincent <em>Henriksen</em>.</h1>
-      <p class="subhero__lede">
-        En liten mestermurbedrift i Vear, Vestfold.
-      </p>
+      <p class="kicker kicker--light">{om.kicker}</p>
+      <h1>{om.h1} <em>{om.h1Aksent}</em>{om.h1Slutt}</h1>
+      <p class="subhero__lede">{om.subheroLede}</p>
     </div>
   </section>
 
@@ -27,54 +30,60 @@ import Layout from '../layouts/Layout.astro';
     <div class="container article__inner">
       <div class="article__main">
 
-        <h2>Et lite firma</h2>
-        <p>
-          Murmester Henriksen AS er etablert i Vear, Vestfold, og har vært i
-          drift siden 2008.
-        </p>
+        {innholdHtml ? (
+          <Fragment set:html={innholdHtml} />
+        ) : (
+          <>
+            <h2>Et lite firma</h2>
+            <p>
+              Murmester Henriksen AS er etablert i Vear, Vestfold, og har vært i
+              drift siden 2008.
+            </p>
 
-        <h2>Vincent Henriksen</h2>
+            <h2>Vincent Henriksen</h2>
 
-        <div class="portrait-card">
-          <img src="/assets/vincent-workshop.jpg" alt="Vincent Henriksen, mestermur" loading="lazy" decoding="async" />
-          <div class="portrait-card__body">
-            <strong>Vincent Henriksen</strong>
-            <span>Mestermur · Daglig leder</span>
-          </div>
-        </div>
+            <div class="portrait-card">
+              <img src="/assets/vincent-workshop.jpg" alt="Vincent Henriksen, mestermur" loading="lazy" decoding="async" />
+              <div class="portrait-card__body">
+                <strong>Vincent Henriksen</strong>
+                <span>Mestermur · Daglig leder</span>
+              </div>
+            </div>
 
-        <p>
-          Vincent er utdannet murer, har gått teknisk fagskole og har
-          mestermurbrev. Han tok <strong>sølv i NM for unge murere i 2014</strong>,
-          sitter i fylkets murerprøvenemnd og <strong>leder det lokale
-          murmesterlauget</strong>.
-        </p>
-        <p>
-          Han underviser også i faget, vurderer i det og tar svenneprøver.
-        </p>
+            <p>
+              Vincent er utdannet murer, har gått teknisk fagskole og har
+              mestermurbrev. Han tok <strong>sølv i NM for unge murere i 2014</strong>,
+              sitter i fylkets murerprøvenemnd og <strong>leder det lokale
+              murmesterlauget</strong>.
+            </p>
+            <p>
+              Han underviser også i faget, vurderer i det og tar svenneprøver.
+            </p>
 
-        <h2>Hva vi tar oppdrag på</h2>
-        <p>
-          Vi arbeider over hele Vestfold. Vi gjør kalkrestaurering på
-          verneverdige bygg, teglforblending på nybygg, og det meste imellom:
-          puss, peis, pipe, flis, våtrom, skifer og naturstein.
-        </p>
-        <p>
-          Vi tar både private oppdrag og oppdrag for borettslag, bedrifter
-          og offentlig sektor.
-        </p>
+            <h2>Hva vi tar oppdrag på</h2>
+            <p>
+              Vi arbeider over hele Vestfold. Vi gjør kalkrestaurering på
+              verneverdige bygg, teglforblending på nybygg, og det meste imellom:
+              puss, peis, pipe, flis, våtrom, skifer og naturstein.
+            </p>
+            <p>
+              Vi tar både private oppdrag og oppdrag for borettslag, bedrifter
+              og offentlig sektor.
+            </p>
+          </>
+        )}
 
       </div>
 
       <aside class="article__aside">
         <h3>Nøkkelfakta</h3>
         <p style="display:grid;gap:14px;font-size:.96rem;">
-          <span><strong style="display:block;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:2px;">Etablert</strong>2008 · Vear, Vestfold</span>
-          <span><strong style="display:block;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:2px;">Mester</strong>Vincent Henriksen, mestermurbrev</span>
-          <span><strong style="display:block;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:2px;">Mesterskap</strong>NM Sølv 2014</span>
-          <span><strong style="display:block;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:2px;">Verv</strong>Leder, lokalt murmesterlaug · Prøvenemnd</span>
-          <span><strong style="display:block;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:2px;">Område</strong>Hele Vestfold</span>
-          <span><strong style="display:block;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:2px;">Medlem</strong>Norges Murmesterforening</span>
+          {om.nokkelfakta.map((f) => (
+            <span>
+              <strong style="display:block;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:2px;">{f.label}</strong>
+              {f.verdi}
+            </span>
+          ))}
         </p>
 
         <div class="related">

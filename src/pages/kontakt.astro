@@ -1,5 +1,9 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import { getKontakt, getKontaktPage } from '../lib/sanity';
+
+const kontakt = await getKontakt();
+const kp = await getKontaktPage();
 ---
 <Layout
   title="Kontakt — Murmester Henriksen AS"
@@ -15,56 +19,49 @@ import Layout from '../layouts/Layout.astro';
         <span aria-hidden="true">/</span>
         <span>Kontakt</span>
       </p>
-      <p class="kicker kicker--light">Kontakt oss</p>
-      <h1>La oss <em>se på jobben</em>.</h1>
-      <p class="subhero__lede">
-        Send oss en henvendelse via skjemaet, eller ring direkte for en
-        uforpliktende prat. Vi svarer normalt innen én virkedag.
-      </p>
+      <p class="kicker kicker--light">{kp.kicker}</p>
+      <h1>{kp.h1} <em>{kp.h1Aksent}</em>{kp.h1Slutt}</h1>
+      <p class="subhero__lede">{kp.subheroLede}</p>
     </div>
   </section>
 
   <section class="section" id="kontakt-form">
     <div class="container contact">
       <div class="contact__copy">
-        <p class="kicker">Direkte kontakt</p>
-        <h2>Ring, mail, eller skriv.</h2>
-        <p class="lead">
-          Det går fortest å ringe — særlig om du har en akutt sak som
-          frostskader eller pipeproblemer. For ordinære henvendelser fungerer
-          skjemaet eller e-post like godt.
-        </p>
+        <p class="kicker">{kp.direkteKicker}</p>
+        <h2>{kp.direkteTittel}</h2>
+        <p class="lead">{kp.direkteLede}</p>
 
         <ul class="contact__list">
           <li>
             <span class="contact__icon" aria-hidden="true">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92V21a1 1 0 01-1.11 1A19 19 0 012 4.11 1 1 0 013 3h4.09a1 1 0 011 .75l1 4a1 1 0 01-.27 1L7 10.5a16 16 0 006.5 6.5l1.75-1.75a1 1 0 011-.27l4 1a1 1 0 01.75 1z"/></svg>
             </span>
-            <div><strong>Telefon</strong><a href="tel:+4795523763">955 23 763</a></div>
+            <div><strong>Telefon</strong><a href={`tel:${kontakt.telefonRaw}`}>{kontakt.telefon}</a></div>
           </li>
           <li>
             <span class="contact__icon" aria-hidden="true">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>
             </span>
-            <div><strong>E-post</strong><a href="mailto:post@murmesterhenriksen.no">post@murmesterhenriksen.no</a></div>
+            <div><strong>E-post</strong><a href={`mailto:${kontakt.epost}`}>{kontakt.epost}</a></div>
           </li>
           <li>
             <span class="contact__icon" aria-hidden="true">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 1118 0z"/><circle cx="12" cy="10" r="3"/></svg>
             </span>
-            <div><span>Vear, 3173 Tønsberg · Vestfold</span></div>
+            <div><span>{kontakt.adresseLinje}</span></div>
           </li>
           <li>
             <span class="contact__icon" aria-hidden="true">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
             </span>
-            <div><strong>Åpningstider</strong><span>Man–Tor 07:00–15:30 · Fre 07:00–13:00</span></div>
+            <div><strong>Åpningstider</strong><span>Man–Tor {kontakt.apningstider?.manTor} · Fre {kontakt.apningstider?.fredag}</span></div>
           </li>
         </ul>
       </div>
 
       <form class="contact__form" id="contactForm" novalidate>
-        <h3>Send oss en henvendelse</h3>
+        <h3>{kp.formTittel}</h3>
         <label>
           <span>Navn *</span>
           <input type="text" name="navn" required autocomplete="name" />
@@ -110,7 +107,7 @@ import Layout from '../layouts/Layout.astro';
           </span>
         </label>
         <button type="submit" class="btn btn--primary btn--block">Send forespørsel</button>
-        <p class="contact__note">Eller ring direkte på <a href="tel:+4795523763">955 23 763</a></p>
+        <p class="contact__note">Eller ring direkte på <a href={`tel:${kontakt.telefonRaw}`}>{kontakt.telefon}</a></p>
       </form>
     </div>
   </section>
