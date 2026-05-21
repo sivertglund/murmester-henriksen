@@ -1,0 +1,69 @@
+---
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import Watermark from '../components/Watermark.astro';
+
+export interface Props {
+  title: string;
+  description: string;
+  activePage?: 'tjenester' | 'prosjekter' | 'om-oss' | 'kontakt' | null;
+  hasJsonLd?: boolean;
+}
+
+const { title, description, activePage = null, hasJsonLd = false } = Astro.props;
+---
+<!DOCTYPE html>
+<html lang="nb">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>{title}</title>
+<meta name="description" content={description} />
+<meta name="theme-color" content="#1a0f0a" />
+
+<meta property="og:type" content="website" />
+<meta property="og:locale" content="nb_NO" />
+<meta property="og:site_name" content="Murmester Henriksen AS" />
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&family=Saira+Stencil+One&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="/styles.css" />
+
+{hasJsonLd && (
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "@id": "https://murmesterhenriksen.no/#business",
+    "name": "Murmester Henriksen AS",
+    "description": "Mestermurfirma i Vear, Vestfold. Tegl, puss, kalkrestaurering, peis og pipe — etablert 2008.",
+    "telephone": "+47 955 23 763",
+    "email": "post@murmesterhenriksen.no",
+    "priceRange": "$$",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Vear",
+      "addressRegion": "Vestfold",
+      "addressCountry": "NO"
+    },
+    "areaServed": [{ "@type": "AdministrativeArea", "name": "Vestfold" }],
+    "founder": { "@type": "Person", "name": "Vincent Henriksen" },
+    "foundingDate": "2008"
+  })} />
+)}
+</head>
+<body>
+
+<Header activePage={activePage} />
+
+<slot />
+
+<Footer />
+
+<Watermark />
+
+<script is:inline src="/script.js"></script>
+</body>
+</html>

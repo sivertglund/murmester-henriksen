@@ -1,0 +1,120 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+<Layout
+  title="Kontakt — Murmester Henriksen AS"
+  description="Ta kontakt med Murmester Henriksen AS for gratis befaring og pristilbud i Vestfold. Tlf 955 23 763 · post@murmesterhenriksen.no · Vear, Vestfold."
+  activePage="kontakt"
+>
+
+<main>
+  <section class="subhero" style="--subhero-img: url('/assets/intro-bg.jpg');">
+    <div class="container subhero__inner">
+      <p class="subhero__crumbs">
+        <a href="/">Hjem</a>
+        <span aria-hidden="true">/</span>
+        <span>Kontakt</span>
+      </p>
+      <p class="kicker kicker--light">Kontakt oss</p>
+      <h1>La oss <em>se på jobben</em>.</h1>
+      <p class="subhero__lede">
+        Send oss en henvendelse via skjemaet, eller ring direkte for en
+        uforpliktende prat. Vi svarer normalt innen én virkedag.
+      </p>
+    </div>
+  </section>
+
+  <section class="section" id="kontakt-form">
+    <div class="container contact">
+      <div class="contact__copy">
+        <p class="kicker">Direkte kontakt</p>
+        <h2>Ring, mail, eller skriv.</h2>
+        <p class="lead">
+          Det går fortest å ringe — særlig om du har en akutt sak som
+          frostskader eller pipeproblemer. For ordinære henvendelser fungerer
+          skjemaet eller e-post like godt.
+        </p>
+
+        <ul class="contact__list">
+          <li>
+            <span class="contact__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92V21a1 1 0 01-1.11 1A19 19 0 012 4.11 1 1 0 013 3h4.09a1 1 0 011 .75l1 4a1 1 0 01-.27 1L7 10.5a16 16 0 006.5 6.5l1.75-1.75a1 1 0 011-.27l4 1a1 1 0 01.75 1z"/></svg>
+            </span>
+            <div><strong>Telefon</strong><a href="tel:+4795523763">955 23 763</a></div>
+          </li>
+          <li>
+            <span class="contact__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>
+            </span>
+            <div><strong>E-post</strong><a href="mailto:post@murmesterhenriksen.no">post@murmesterhenriksen.no</a></div>
+          </li>
+          <li>
+            <span class="contact__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 1118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            </span>
+            <div><span>Vear, 3173 Tønsberg · Vestfold</span></div>
+          </li>
+          <li>
+            <span class="contact__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+            </span>
+            <div><strong>Åpningstider</strong><span>Man–Tor 07:00–15:30 · Fre 07:00–13:00</span></div>
+          </li>
+        </ul>
+      </div>
+
+      <form class="contact__form" id="contactForm" novalidate>
+        <h3>Send oss en henvendelse</h3>
+        <label>
+          <span>Navn *</span>
+          <input type="text" name="navn" required autocomplete="name" />
+        </label>
+        <label>
+          <span>E-post *</span>
+          <input type="email" name="epost" required autocomplete="email" />
+        </label>
+        <label>
+          <span>Telefonnr *</span>
+          <input type="tel" name="telefon" required autocomplete="tel" />
+        </label>
+        <label>
+          <span>Adresse og sted *</span>
+          <input type="text" name="adresse" required autocomplete="street-address" />
+        </label>
+        <label>
+          <span>Hva gjelder det?</span>
+          <select name="tjeneste">
+            <option>Befaring / generelt</option>
+            <option>Teglforblending og muring</option>
+            <option>Puss</option>
+            <option>Restaurering av murverk</option>
+            <option>Rehabilitering av pipe / skorstein</option>
+            <option>Elementpipe &amp; stålpipe</option>
+            <option>Peis &amp; vedovn</option>
+            <option>Flislegging &amp; våtrom</option>
+            <option>Sparkling og gulvavretting</option>
+            <option>Skifer &amp; Naturstein</option>
+            <option>Annet</option>
+          </select>
+        </label>
+        <label>
+          <span>Beskriv jobben *</span>
+          <textarea name="melding" rows="5" required></textarea>
+        </label>
+        <label class="contact__checkbox">
+          <input type="checkbox" name="samtykke" />
+          <span>
+            Ja, jeg ønsker å bli kontaktet på e-post av Murmester Henriksen AS.
+            Ved å oppgi e-postadresse samtykker jeg til at firmaet lagrer og
+            håndterer mine personopplysninger.
+          </span>
+        </label>
+        <button type="submit" class="btn btn--primary btn--block">Send forespørsel</button>
+        <p class="contact__note">Eller ring direkte på <a href="tel:+4795523763">955 23 763</a></p>
+      </form>
+    </div>
+  </section>
+
+</main>
+
+</Layout>

@@ -1,0 +1,34 @@
+---
+export interface Props {
+  activePage?: 'tjenester' | 'prosjekter' | 'om-oss' | 'kontakt' | null;
+}
+
+const { activePage = null } = Astro.props;
+---
+<header class="nav" id="nav">
+  <div class="nav__inner">
+    <a class="nav__brand" href="/" aria-label="Murmester Henriksen forside">
+      <span class="nav__mark" aria-hidden="true">M·H</span>
+      <span class="nav__name">Murmester&nbsp;Henriksen</span>
+    </a>
+    <nav class="nav__links" aria-label="Hovedmeny">
+      <a href="/tjenester/" {...(activePage === 'tjenester' ? { 'aria-current': 'page' } : {})}>Tjenester</a>
+      <a href="/prosjekter" {...(activePage === 'prosjekter' ? { 'aria-current': 'page' } : {})}>Prosjekter</a>
+      <a href="/om-oss" {...(activePage === 'om-oss' ? { 'aria-current': 'page' } : {})}>Om oss</a>
+      <a href="/kontakt" {...(activePage === 'kontakt' ? { 'aria-current': 'page' } : {})}>Kontakt</a>
+    </nav>
+    {activePage === null && (
+      <span class="nav__status" id="navStatus" aria-live="polite">
+        <span class="nav__status-dot" aria-hidden="true"></span>
+        <span class="nav__status-text">Sjekker åpningstid…</span>
+      </span>
+    )}
+    <a href="tel:+4795523763" class="nav__cta">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92V21a1 1 0 01-1.11 1A19 19 0 012 4.11 1 1 0 013 3h4.09a1 1 0 011 .75l1 4a1 1 0 01-.27 1L7 10.5a16 16 0 006.5 6.5l1.75-1.75a1 1 0 011-.27l4 1a1 1 0 01.75 1z"/></svg>
+      955 23 763
+    </a>
+    <button class="nav__burger" aria-label="Åpne meny" aria-expanded="false" id="burger">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>

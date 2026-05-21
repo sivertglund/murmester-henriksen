@@ -1,3 +1,15 @@
-.DS_Store
-.vercel
+# Build / dependencies
 node_modules/
+dist/
+.astro/
+
+# Vercel
+.vercel
+
+# OS
+.DS_Store
+
+# Env
+.env
+.env.local
+.env.production

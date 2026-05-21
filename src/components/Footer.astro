@@ -1,0 +1,54 @@
+---
+const { showHours = true } = Astro.props;
+---
+<footer class="footer">
+  <div class="container footer__inner">
+    <div class="footer__brand">
+      <span class="footer__mark" aria-hidden="true">M·H</span>
+      <p><strong>Murmester Henriksen AS</strong><br/>Vear, Vestfold</p>
+      <p class="footer__small">Mestermur · Etablert 2008 · NM Sølv 2014</p>
+    </div>
+    <div class="footer__col">
+      <h4>Tjenester</h4>
+      <ul>
+        <li><a href="/tjenester/teglforblending">Teglforblending og muring</a></li>
+        <li><a href="/tjenester/puss">Puss</a></li>
+        <li><a href="/tjenester/restaurering-av-murverk">Restaurering av murverk</a></li>
+        <li><a href="/tjenester/peis-og-vedovn">Peis &amp; vedovn</a></li>
+        <li><a href="/tjenester/">Alle tjenester →</a></li>
+      </ul>
+    </div>
+    <div class="footer__col">
+      <h4>Bedriften</h4>
+      <ul>
+        <li><a href="/om-oss">Om oss</a></li>
+        <li><a href="/prosjekter">Prosjekter</a></li>
+        <li><a href="/kontakt">Kontakt</a></li>
+        <li><a href="https://www.facebook.com/murmesterhenriksen" target="_blank" rel="noopener">Facebook</a></li>
+        <li><a href="https://www.instagram.com/murmesterhenriksen/" target="_blank" rel="noopener">Instagram</a></li>
+      </ul>
+    </div>
+    <div class="footer__col">
+      <h4>Kontakt</h4>
+      <ul>
+        <li><a href="tel:+4795523763">955 23 763</a></li>
+        <li><a href="mailto:post@murmesterhenriksen.no">post@murmesterhenriksen.no</a></li>
+      </ul>
+      {showHours && (
+        <>
+          <h4 class="footer__sub">Åpningstider</h4>
+          <ul class="footer__hours">
+            <li><span>Man–Tor</span><span>07:00–15:30</span></li>
+            <li><span>Fredag</span><span>07:00–13:00</span></li>
+            <li><span>Lør &amp; søn</span><span>Stengt</span></li>
+          </ul>
+        </>
+      )}
+    </div>
+  </div>
+  <div class="footer__bottom">
+    <span>© <span id="year"></span> Murmester Henriksen AS</span>
+    <span>Medlem · Norges Murmesterforening</span>
+    <span>Designet av <a href="https://nettsnekkeren.no" target="_blank" rel="noopener">Nettsnekkeren</a></span>
+  </div>
+</footer>
