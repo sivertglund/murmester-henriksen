@@ -1,5 +1,7 @@
 ---
+import { getKontakt } from '../lib/sanity';
 const { showHours = true } = Astro.props;
+const kontakt = await getKontakt();
 ---
 <footer class="footer">
   <div class="container footer__inner">
@@ -31,8 +33,8 @@ const { showHours = true } = Astro.props;
     <div class="footer__col">
       <h4>Kontakt</h4>
       <ul>
-        <li><a href="tel:+4795523763">955 23 763</a></li>
-        <li><a href="mailto:post@murmesterhenriksen.no">post@murmesterhenriksen.no</a></li>
+        <li><a href={`tel:${kontakt.telefonRaw}`}>{kontakt.telefon}</a></li>
+        <li><a href={`mailto:${kontakt.epost}`}>{kontakt.epost}</a></li>
       </ul>
       {showHours && (
         <>
