@@ -33,7 +33,7 @@ const singletons = [
     title: 'Alle trenger',
     titleEmphasis: 'en murer!',
     signature: 'Murmester Henriksen er her for å hjelpe deg!',
-    primaryCtaText: 'Få gratis befaring',
+    primaryCtaText: 'Få prisantydning',
     secondaryCtaText: 'Se tjenestene',
   },
   {
@@ -76,7 +76,7 @@ const singletons = [
     tittel: 'La oss',
     tittelAksent: 'se på jobben',
     tittelSlutt: '.',
-    primarBtnTekst: 'Be om befaring',
+    primarBtnTekst: 'Be om prisantydning',
     ringBtnTekst: 'Ring 955 23 763',
   },
   {
