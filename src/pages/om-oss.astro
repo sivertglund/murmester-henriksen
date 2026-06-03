@@ -1,6 +1,5 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import BrandStripes from '../components/BrandStripes.astro';
 import { getOmOss, urlFor } from '../lib/sanity';
 import { toHTML } from '@portabletext/to-html';
 
@@ -29,10 +28,6 @@ const portrettKortImg = om.portrettKortBilde ? urlFor(om.portrettKortBilde).widt
       <p class="subhero__lede">{om.subheroLede}</p>
     </div>
   </section>
-
-  <div class="container">
-    <BrandStripes align="both" />
-  </div>
 
   <section class="article">
     <div class="container article__inner">
@@ -227,18 +222,23 @@ const portrettKortImg = om.portrettKortBilde ? urlFor(om.portrettKortBilde).widt
       </div>
 
       <aside class="article__aside">
-        <h3>Nøkkelfakta</h3>
-        <p style="display:grid;gap:14px;font-size:.96rem;">
-          {om.nokkelfakta.map((f) => (
-            <span>
-              <strong style="display:block;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:2px;">{f.label}</strong>
-              {f.verdi}
-            </span>
-          ))}
-        </p>
+        <div class="fakta-card">
+          <div class="fakta-card__head">
+            <span class="fakta-card__bar" aria-hidden="true"></span>
+            <h3>Nøkkelfakta</h3>
+          </div>
+          <dl class="fakta-card__list">
+            {om.nokkelfakta.map((f) => (
+              <div class="fakta-card__item">
+                <dt>{f.label}</dt>
+                <dd>{f.verdi}</dd>
+              </div>
+            ))}
+          </dl>
+        </div>
 
         <div class="related">
-          <h4 class="kicker">Mer</h4>
+          <h4 class="kicker">Utforsk videre</h4>
           <ul>
             <li><a href="/tjenester/">Se tjenestene →</a></li>
             <li><a href="/kontakt">Ta kontakt →</a></li>
