@@ -3410,6 +3410,7 @@ h2 em, h1 em, h3 em {
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  align-self: center;
   width: 56px;
   height: 56px;
   margin-bottom: 4px;
