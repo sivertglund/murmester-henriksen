@@ -1131,36 +1131,60 @@ h2 em, h1 em, h3 em {
   .founder__lede { margin-left: auto; margin-right: auto; }
 }
 
-/* Animert tegl-rad — bricks "legges" stein for stein når seksjonen
-   kommer i syne. Subtil mur-motiv som varmer opp overgangen til neste seksjon. */
+/* Animert tegl-rad — continuous marquee, hver rad sklir hver sin vei
+   for å gi seksjonen liv. */
 .founder__bricks {
   display: block;
   width: 100%;
-  max-width: 460px;
-  height: 56px;
+  max-width: 720px;
   margin: clamp(48px, 6vw, 76px) auto 0;
-  color: var(--clay-500);
-  opacity: .58;
+  color: var(--copper-500);
+  opacity: .55;
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 14%, #000 86%, transparent 100%);
+          mask-image: linear-gradient(90deg, transparent 0%, #000 14%, #000 86%, transparent 100%);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 4px 0;
 }
-.founder__bricks rect {
-  fill: currentColor;
-  opacity: 0;
-  transform: translateY(-14px);
-  transform-origin: center bottom;
-  transition: opacity .5s cubic-bezier(.2,.8,.2,1), transform .5s cubic-bezier(.2,.8,.2,1);
+.brick-row {
+  width: 100%;
+  overflow: hidden;
+  position: relative;
 }
-.founder__bricks.is-in rect { opacity: 1; transform: none; }
-.founder__bricks .brick-row rect:nth-child(1) { transition-delay: 0ms; }
-.founder__bricks .brick-row rect:nth-child(2) { transition-delay: 90ms; }
-.founder__bricks .brick-row rect:nth-child(3) { transition-delay: 180ms; }
-.founder__bricks .brick-row rect:nth-child(4) { transition-delay: 270ms; }
-.founder__bricks .brick-row rect:nth-child(5) { transition-delay: 360ms; }
-.founder__bricks .brick-row rect:nth-child(6) { transition-delay: 450ms; }
-.founder__bricks .brick-row--top rect:nth-child(1) { transition-delay: 540ms; }
-.founder__bricks .brick-row--top rect:nth-child(2) { transition-delay: 620ms; }
-.founder__bricks .brick-row--top rect:nth-child(3) { transition-delay: 700ms; }
-.founder__bricks .brick-row--top rect:nth-child(4) { transition-delay: 780ms; }
-.founder__bricks .brick-row--top rect:nth-child(5) { transition-delay: 860ms; }
+.brick-row--top { padding-left: 32px; }
+.brick-row__track {
+  display: flex;
+  gap: 6px;
+  width: max-content;
+  will-change: transform;
+}
+.brick-row--bot .brick-row__track {
+  animation: brickScrollRight 38s linear infinite;
+}
+.brick-row--top .brick-row__track {
+  animation: brickScrollLeft 32s linear infinite;
+}
+.brick {
+  display: block;
+  flex: 0 0 auto;
+  width: 56px;
+  height: 20px;
+  background: currentColor;
+  border-radius: 2px;
+}
+@keyframes brickScrollRight {
+  from { transform: translate3d(-50%, 0, 0); }
+  to   { transform: translate3d(0, 0, 0); }
+}
+@keyframes brickScrollLeft {
+  from { transform: translate3d(0, 0, 0); }
+  to   { transform: translate3d(-50%, 0, 0); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .brick-row__track { animation: none !important; }
+}
 
 /* Stroke-tegne på credential-ikoner — de tegnes inn som hånd-skisser */
 .cred__icon svg path,
@@ -3319,14 +3343,17 @@ h2 em, h1 em, h3 em {
   gap: 14px;
 }
 .footer__mark {
-  width: 56px; height: 56px;
-  display: grid; place-items: center;
-  border-radius: 50%;
-  background: var(--clay-500);
-  color: #fff;
-  font-family: var(--font);
-  font-size: 1.3rem;
-  letter-spacing: .04em;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 56px;
+  margin-bottom: 4px;
+}
+.footer__mark svg {
+  width: 100%;
+  height: 100%;
+  display: block;
 }
 .footer__brand p { margin: 0; }
 .footer__brand strong { color: #fff; font-weight: 600; }

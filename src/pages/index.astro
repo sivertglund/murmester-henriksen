@@ -120,24 +120,19 @@ const chipIcons: Record<string, string> = {
       </div>
     </div>
 
-    <!-- Tegl-rad: bricks "legges" når seksjonen kommer i syne -->
-    <svg class="founder__bricks" viewBox="0 0 360 60" fill="none" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
-      <g class="brick-row">
-        <rect x="2"   y="36" width="56" height="20" rx="2"/>
-        <rect x="62"  y="36" width="56" height="20" rx="2"/>
-        <rect x="122" y="36" width="56" height="20" rx="2"/>
-        <rect x="182" y="36" width="56" height="20" rx="2"/>
-        <rect x="242" y="36" width="56" height="20" rx="2"/>
-        <rect x="302" y="36" width="56" height="20" rx="2"/>
-      </g>
-      <g class="brick-row brick-row--top">
-        <rect x="32"  y="12" width="56" height="20" rx="2"/>
-        <rect x="92"  y="12" width="56" height="20" rx="2"/>
-        <rect x="152" y="12" width="56" height="20" rx="2"/>
-        <rect x="212" y="12" width="56" height="20" rx="2"/>
-        <rect x="272" y="12" width="56" height="20" rx="2"/>
-      </g>
-    </svg>
+    <!-- Tegl-rad: continuous marquee, hver rad sklir hver sin vei -->
+    <div class="founder__bricks" aria-hidden="true">
+      <div class="brick-row brick-row--top">
+        <div class="brick-row__track">
+          {Array.from({length: 24}).map(() => <span class="brick"></span>)}
+        </div>
+      </div>
+      <div class="brick-row brick-row--bot">
+        <div class="brick-row__track">
+          {Array.from({length: 24}).map(() => <span class="brick"></span>)}
+        </div>
+      </div>
+    </div>
   </div>
 </section>
 
