@@ -199,6 +199,8 @@ const chipIcons: Record<string, string> = {
     </div>
   </div>
 
+  <p class="marquee__caption">{areas.tittel} <em>{areas.tittelAksent}</em>{areas.tittelSlutt}</p>
+
 </section>
 
 <!-- ===== Mester-sitat ===== -->
@@ -253,16 +255,6 @@ const chipIcons: Record<string, string> = {
       )}
     </div>
 
-  </div>
-</section>
-
-<!-- ===== Serviceområde ===== -->
-<section class="areas" id="omrader">
-  <div class="container areas__inner">
-    <h2>{areas.tittel} <em>{areas.tittelAksent}</em>{areas.tittelSlutt}</h2>
-    <ul class="areas__list">
-      {areas.byer.map((b) => <li>{b}</li>)}
-    </ul>
   </div>
 </section>
 

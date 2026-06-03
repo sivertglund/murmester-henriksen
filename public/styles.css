@@ -1732,6 +1732,19 @@ h2 em, h1 em, h3 em {
   color: var(--clay-500);
   font-weight: 400;
 }
+.marquee__caption {
+  text-align: center;
+  margin: clamp(24px, 3.4vw, 40px) auto 0;
+  font-size: clamp(1.05rem, 1.4vw, 1.25rem);
+  font-weight: 500;
+  color: var(--ink-soft);
+  letter-spacing: -.005em;
+}
+.marquee__caption em {
+  font-style: normal;
+  color: var(--copper-500);
+  font-weight: 600;
+}
 .marquee__rows {
   display: grid;
   gap: clamp(14px, 1.6vw, 22px);
