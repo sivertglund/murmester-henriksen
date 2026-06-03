@@ -264,21 +264,10 @@ const chipIcons: Record<string, string> = {
 
 <!-- ===== Serviceområde ===== -->
 <section class="areas" id="omrader">
-  <div class="areas__pattern" aria-hidden="true"></div>
   <div class="container areas__inner">
-    <div class="areas__head scroll-fade">
-      <p class="kicker">Geografi</p>
-      <h2>{areas.tittel} <em>{areas.tittelAksent}</em>{areas.tittelSlutt}</h2>
-      <p class="areas__lede">Verkstedet står på Vear. Murverket står over hele fylket.</p>
-    </div>
-    <ul class="areas__grid">
-      {areas.byer.map((b, i) => (
-        <li class="areas__city scroll-fade" style={`--i:${i}`}>
-          <span class="areas__city-num">{String(i + 1).padStart(2, '0')}</span>
-          <span class="areas__city-name">{b}</span>
-          <span class="areas__city-line" aria-hidden="true"></span>
-        </li>
-      ))}
+    <h2>{areas.tittel} <em>{areas.tittelAksent}</em>{areas.tittelSlutt}</h2>
+    <ul class="areas__list">
+      {areas.byer.map((b) => <li>{b}</li>)}
     </ul>
   </div>
 </section>
