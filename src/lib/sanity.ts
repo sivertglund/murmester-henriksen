@@ -302,7 +302,7 @@ const CTA_FALLBACK: CTA = {
   tittel: 'La oss',
   tittelAksent: 'se på jobben',
   tittelSlutt: '.',
-  primarBtnTekst: 'Be om prisantydning',
+  primarBtnTekst: 'Kontakt oss',
   ringBtnTekst: 'Ring 955 23 763',
 };
 

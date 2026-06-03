@@ -9,7 +9,7 @@ export default defineType({
     { name: 'title', title: 'Stor tittel (første del)', type: 'string', description: 'Eks: "Alle trenger"' },
     { name: 'titleEmphasis', title: 'Tittel-aksent (vises i håndskriftfont)', type: 'string', description: 'Eks: "en murer!" — denne delen tegnes ut med pen-effekt' },
     { name: 'signature', title: 'Signatur-lenke (under tittel)', type: 'string', description: 'Eks: "Murmester Henriksen er her for å hjelpe deg!"' },
-    { name: 'primaryCtaText', title: 'Primær-knapp tekst', type: 'string', initialValue: 'Få prisantydning' },
+    { name: 'primaryCtaText', title: 'Primær-knapp tekst', type: 'string', initialValue: 'Kontakt oss' },
     { name: 'secondaryCtaText', title: 'Sekundær-knapp tekst', type: 'string', initialValue: 'Se tjenestene' },
   ],
   preview: {
