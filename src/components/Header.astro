@@ -11,8 +11,11 @@ const kontakt = await getKontakt();
 <header class="nav" id="nav">
   <div class="nav__inner">
     <a class="nav__brand" href="/" aria-label="Murmester Henriksen forside">
-      <span class="nav__mark" aria-hidden="true">M·H</span>
-      <span class="nav__name">Murmester&nbsp;Henriksen</span>
+      <img class="nav__logo" src="/assets/logo/shield.svg" alt="" width="56" height="44" />
+      <span class="nav__name">
+        <strong>Henriksen</strong>
+        <span class="nav__name-sub">MURMESTER</span>
+      </span>
     </a>
     <nav class="nav__links" aria-label="Hovedmeny">
       <a href="/tjenester/" {...(activePage === 'tjenester' ? { 'aria-current': 'page' } : {})}>Tjenester</a>
