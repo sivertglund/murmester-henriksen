@@ -869,21 +869,35 @@ h2 em, h1 em, h3 em {
 }
 .section__wave path { fill: currentColor; }
 
-/* ===== Founder + credentials section ===== */
+/* ===== Founder + credentials section — dark premium ===== */
 .founder {
   position: relative;
   isolation: isolate;
-  padding: clamp(80px, 9vw, 130px) 0 clamp(70px, 8vw, 100px);
+  padding: clamp(80px, 10vw, 140px) 0 clamp(70px, 8vw, 100px);
   overflow: hidden;
-  background: var(--bg);
+  background: var(--steel-900);
+  color: #fff;
 }
-/* Subtil grå bakgrunn — ren, ikke akvarell */
+/* Dark gradient + subtil noise/copper-glow */
 .founder::before {
   content: "";
   position: absolute;
   inset: 0;
   z-index: -1;
-  background: var(--steel-100);
+  background:
+    radial-gradient(ellipse at 30% 40%, rgba(190,84,0,.10) 0%, transparent 55%),
+    linear-gradient(180deg, var(--steel-900) 0%, #1A1A1B 100%);
+}
+/* Copper-stripe på toppen av seksjonen */
+.founder::after {
+  content: "";
+  position: absolute;
+  top: 0; left: 50%;
+  transform: translateX(-50%);
+  width: clamp(120px, 18vw, 240px);
+  height: 4px;
+  background: var(--copper-500);
+  pointer-events: none;
 }
 
 .founder__inner { max-width: 1100px; }
@@ -913,12 +927,12 @@ h2 em, h1 em, h3 em {
   /* Trukket mot venstre kant av kolonnen + skjøvet utenfor for å unngå akvarell-figuren */
   justify-self: start;
   margin-left: clamp(-60px, -3.5vw, -16px);
-  /* Halo: hvit ring + myk skygge + ekstra varm utenforring */
+  /* Halo: copper-ring + dyp skygge på dark bg */
   box-shadow:
-    0 0 0 1px rgba(255,255,255,.65),
-    0 0 0 10px rgba(255,255,255,.35),
-    0 26px 50px -16px rgba(26,15,10,.32),
-    0 8px 18px -8px rgba(26,15,10,.18);
+    0 0 0 2px var(--copper-500),
+    0 0 0 12px rgba(190,84,0,.15),
+    0 32px 60px -16px rgba(0,0,0,.55),
+    0 12px 24px -10px rgba(0,0,0,.35);
   transform: translateZ(0);
   transition: transform .55s cubic-bezier(.2,.8,.2,1), box-shadow .55s ease;
 }
@@ -927,7 +941,7 @@ h2 em, h1 em, h3 em {
   position: absolute;
   inset: 0;
   border-radius: 50%;
-  background: linear-gradient(180deg, transparent 60%, rgba(20,8,4,.18) 100%);
+  background: linear-gradient(180deg, transparent 50%, rgba(0,0,0,.25) 100%);
   pointer-events: none;
 }
 .founder__portrait img {
@@ -939,23 +953,27 @@ h2 em, h1 em, h3 em {
   transition: transform .8s cubic-bezier(.2,.8,.2,1);
 }
 .founder__portrait:hover {
-  transform: translateY(-3px);
+  transform: translateY(-4px);
   box-shadow:
-    0 0 0 1px rgba(255,255,255,.7),
-    0 0 0 12px rgba(255,255,255,.4),
-    0 32px 60px -16px rgba(26,15,10,.35);
+    0 0 0 2px var(--copper-500),
+    0 0 0 14px rgba(190,84,0,.22),
+    0 40px 70px -18px rgba(0,0,0,.65),
+    0 14px 28px -10px rgba(0,0,0,.4);
 }
 .founder__portrait:hover img { transform: scale(1.04); }
 
 .founder__copy { min-width: 0; }
 .founder__title {
   font-family: var(--font);
-  font-weight: 700;
+  font-weight: 800;
   font-size: clamp(2.4rem, 5.2vw, 4rem);
   line-height: 1;
   letter-spacing: -.03em;
-  color: var(--ink);
+  color: #fff;
   margin: 0 0 22px;
+}
+.founder__kicker {
+  color: var(--copper-500) !important;
 }
 .founder__title em {
   font-style: normal;
@@ -966,13 +984,13 @@ h2 em, h1 em, h3 em {
 .founder__lede {
   font-size: clamp(1.04rem, 1.3vw, 1.18rem);
   line-height: 1.6;
-  color: var(--ink);
+  color: rgba(255,255,255,.78);
   max-width: 56ch;
   margin: 0;
   text-wrap: pretty;
   white-space: pre-line;
 }
-.founder__lede strong { color: var(--ink); font-weight: 600; }
+.founder__lede strong { color: #fff; font-weight: 600; }
 .founder__lede em {
   font-style: normal;
   color: var(--clay-500);
@@ -980,63 +998,99 @@ h2 em, h1 em, h3 em {
   font-weight: 400;
 }
 
-/* Chip-bokser — kompakt 2x2 rute under teksten med ikon + tall + label */
+/* Chip-stats — typografi-fokusert premium spec-row med dividers */
 .founder__chips {
   list-style: none;
-  padding: 0;
-  margin: clamp(20px, 2.4vw, 28px) 0 0;
+  padding: clamp(22px, 2.6vw, 32px) 0;
+  margin: clamp(24px, 3vw, 36px) 0 0;
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 12px;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0;
+  position: relative;
 }
+/* Tynne copper-linjer over og under chips-raden */
+.founder__chips::before,
+.founder__chips::after {
+  content: "";
+  position: absolute;
+  left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent 0,
+    var(--copper-500) 18%,
+    var(--copper-500) 82%,
+    transparent 100%
+  );
+  opacity: .42;
+}
+.founder__chips::before { top: 0; }
+.founder__chips::after  { bottom: 0; }
+
 .chip {
+  position: relative;
   display: flex;
-  align-items: center;
-  gap: 14px;
-  padding: 14px 18px;
-  background: rgba(255, 255, 255, .58);
-  backdrop-filter: saturate(140%) blur(10px);
-  -webkit-backdrop-filter: saturate(140%) blur(10px);
-  border: 1px solid rgba(255, 255, 255, .65);
-  border-radius: 14px;
-  box-shadow: 0 10px 22px -12px rgba(26, 15, 10, .18);
-  transition: transform .25s cubic-bezier(.2,.8,.2,1), box-shadow .25s ease, border-color .25s ease;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  padding: 4px clamp(16px, 2vw, 28px);
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  transition: transform .35s cubic-bezier(.2,.8,.2,1);
+}
+/* Vertikale dividers mellom stats */
+.chip + .chip::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 14%;
+  bottom: 14%;
+  width: 1px;
+  background: rgba(255,255,255,.12);
 }
 .chip:hover {
   transform: translateY(-2px);
-  box-shadow: 0 18px 34px -14px rgba(26, 15, 10, .22);
-  border-color: rgba(179, 90, 59, .32);
 }
+
+/* Ikon: liten copper-aksent, ikke en stor boks */
 .chip__icon {
-  width: 38px;
-  height: 38px;
-  border-radius: 10px;
-  background: var(--clay-500);
-  color: #fff;
+  width: 28px;
+  height: 28px;
   display: grid;
   place-items: center;
   flex-shrink: 0;
-  box-shadow: 0 6px 14px -6px rgba(107, 58, 38, .45);
+  background: transparent;
+  color: var(--copper-500);
+  margin-bottom: 4px;
 }
-.chip__icon svg { width: 19px; height: 19px; }
+.chip__icon svg {
+  width: 22px;
+  height: 22px;
+  stroke-width: 1.8;
+}
+
 .chip__body {
   display: flex;
   flex-direction: column;
-  gap: 1px;
+  gap: 6px;
   min-width: 0;
 }
 .chip__num {
   font-family: var(--font);
-  color: var(--clay-700);
-  font-size: 1.12rem;
-  font-weight: 400;
-  line-height: 1.05;
-  letter-spacing: -.005em;
+  color: #fff;
+  font-size: clamp(1.8rem, 2.8vw, 2.6rem);
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -.03em;
 }
 .chip__label {
-  font-size: .82rem;
-  color: var(--ink-soft);
-  font-weight: 500;
+  font-size: .7rem;
+  font-weight: 600;
+  color: rgba(255,255,255,.55);
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  line-height: 1.2;
 }
 
 /* Stroke-tegne på chip-ikoner */
@@ -1053,8 +1107,13 @@ h2 em, h1 em, h3 em {
   stroke-dashoffset: 0;
 }
 
+@media (max-width: 880px) {
+  .founder__chips { grid-template-columns: repeat(2, 1fr); }
+  .chip:nth-child(3)::before { display: none; }
+}
 @media (max-width: 520px) {
   .founder__chips { grid-template-columns: 1fr; }
+  .chip + .chip::before { display: none; }
 }
 
 @media (max-width: 880px) {
@@ -3510,26 +3569,31 @@ h2 em, h1 em, h3 em {
   transform: none;
 }
 
-/* "Les mer om oss" — subtil pil-link under chips, ikke rød boks */
+/* "Les mer om oss" — clean pil-link på dark bg */
 .founder__more {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
-  margin-top: clamp(22px, 2.6vw, 30px);
-  padding-bottom: 4px;
-  font-weight: 600;
-  font-size: .96rem;
-  color: var(--ink);
-  border-bottom: 1px solid var(--ink-soft);
-  transition: color .2s ease, border-color .2s ease;
+  gap: 10px;
+  margin-top: clamp(26px, 3vw, 36px);
+  padding: 12px 20px 12px 22px;
+  font-weight: 700;
+  font-size: .92rem;
+  letter-spacing: .04em;
+  color: #fff;
+  background: transparent;
+  border: 1px solid rgba(255,255,255,.3);
+  border-radius: 999px;
+  transition: background .25s ease, border-color .25s ease, color .25s ease, gap .25s ease;
 }
 .founder__more svg {
-  width: 14px; height: 14px;
+  width: 16px; height: 16px;
   transition: transform .25s cubic-bezier(.2,.8,.2,1);
 }
 .founder__more:hover {
-  color: var(--clay-500);
-  border-bottom-color: var(--clay-500);
+  background: var(--copper-500);
+  border-color: var(--copper-500);
+  color: #fff;
+  gap: 14px;
 }
 .founder__more:hover svg { transform: translateX(3px); }
 
