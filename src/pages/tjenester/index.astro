@@ -1,6 +1,8 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import { KATEGORIER } from '../../lib/kategorier';
+
+const totalLeveranser = KATEGORIER.reduce((sum, k) => sum + k.underkategorier.length, 0);
 ---
 <Layout
   title="Tjenester — Murmester Henriksen AS"
@@ -9,43 +11,56 @@ import { KATEGORIER } from '../../lib/kategorier';
 >
 
 <main>
-  <section class="tj-hub-hero">
-    <div class="container tj-hub-hero__inner">
+  <section class="tj-intro">
+    <div class="container tj-intro__inner">
       <p class="subhero__crumbs">
         <a href="/">Hjem</a>
         <span aria-hidden="true">/</span>
         <span>Tjenester</span>
       </p>
-      <p class="kicker">Faget</p>
-      <h1 class="tj-hub-hero__h1">
-        Murmesterens <em>fem fag</em>
-      </h1>
-      <p class="tj-hub-hero__lede">
-        Fra grunnmur og teglforblending til antikvarisk kalkrestaurering —
-        alt utført av samme mester, fra første befaring til ferdig fuge.
-      </p>
+      <div class="tj-intro__head">
+        <p class="kicker">Faget</p>
+        <h1 class="tj-intro__h1">
+          Murmesterens <em>fem fag</em>
+        </h1>
+        <p class="tj-intro__lede">
+          Fra grunnmur og teglforblending til antikvarisk kalkrestaurering —
+          alt utført av samme mester, fra første befaring til ferdig fuge.
+        </p>
+        <div class="tj-intro__count">
+          <span class="tj-intro__count-num">{totalLeveranser}</span>
+          <span class="tj-intro__count-label">leveranser fordelt på fem fag</span>
+        </div>
+      </div>
     </div>
   </section>
 
-  <section class="tj-hub">
+  <section class="tj-list">
+    <span class="tj-list__stripe" aria-hidden="true"></span>
     <div class="container">
-      <ul class="tj-hub__grid">
-        {KATEGORIER.map((k) => (
-          <li class="tj-hub__item scroll-fade">
-            <a href={`/tjenester/${k.slug}`} class="tj-hub__card">
-              <div class="tj-hub__media">
-                <img src={k.heroBilde} alt="" loading="lazy" decoding="async" />
-                <span class="tj-hub__num" aria-hidden="true">{k.nummer}</span>
-              </div>
-              <div class="tj-hub__body">
-                <h2 class="tj-hub__title">{k.tittel}</h2>
-                <p class="tj-hub__lede">{k.kortLede}</p>
-                <div class="tj-hub__foot">
-                  <span class="tj-hub__count">{k.underkategorier.length} leveranser</span>
-                  <span class="tj-hub__arrow" aria-hidden="true">→</span>
-                </div>
-              </div>
+      <ul class="tj-list__items">
+        {KATEGORIER.map((k, i) => (
+          <li class="tj-row scroll-fade" style={`--i:${i}`}>
+            <a class="tj-row__link" href={`/tjenester/${k.slug}`}>
+              <span class="tj-row__indicator" aria-hidden="true"></span>
+              <span class="tj-row__num">{k.nummer}</span>
+              <span class="tj-row__main">
+                <span class="tj-row__head">
+                  <h2 class="tj-row__name">{k.tittel}</h2>
+                  <span class="tj-row__meta">
+                    <span class="tj-row__count">{k.underkategorier.length} leveranser</span>
+                    <span class="tj-row__arrow" aria-hidden="true">→</span>
+                  </span>
+                </span>
+                <span class="tj-row__lede">{k.kortLede}</span>
+                <span class="tj-row__leveranser">
+                  {k.underkategorier.map((u, j) => (
+                    <span class="tj-row__lv" style={`--j:${j}`}>{u.navn}</span>
+                  ))}
+                </span>
+              </span>
             </a>
+            <span class="tj-row__line" aria-hidden="true"></span>
           </li>
         ))}
       </ul>
