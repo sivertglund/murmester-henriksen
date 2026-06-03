@@ -2470,71 +2470,159 @@ h2 em, h1 em, h3 em {
   font-weight: 600;
 }
 
-/* ===== Forsidens mini-grid med 5 kategori-kort ===== */
-.fag-mini-grid {
+/* ===== Forsidens fag-tiles — bento-grid med bilder + dark overlay ===== */
+.fag-tiles {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   gap: clamp(14px, 1.6vw, 22px);
-  max-width: 1080px;
+  max-width: 1180px;
   margin: 0 auto;
 }
-/* De to siste kort sentreres i bunnraden */
-.fag-mini-grid > .fag-mini:nth-child(4) { grid-column-start: 1; }
-
-.fag-mini {
+.fag-tile {
   position: relative;
+  isolation: isolate;
+  display: block;
+  overflow: hidden;
+  border-radius: var(--radius-lg);
+  min-height: 260px;
+  color: #fff;
+  text-decoration: none;
+  cursor: pointer;
+  transition: transform .5s cubic-bezier(.2,.8,.2,1), box-shadow .5s ease;
+  box-shadow: 0 10px 30px -14px rgba(31,31,32,.25);
+}
+/* Bento layout: Muring (01) er feature, span 2 col × 2 rows */
+.fag-tile--feature {
+  grid-column: span 2;
+  grid-row: span 2;
+  min-height: 540px;
+}
+
+.fag-tile__bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background-size: cover;
+  background-position: center;
+  transition: transform 1s cubic-bezier(.2,.8,.2,1);
+  filter: saturate(.85);
+}
+.fag-tile__overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(180deg, rgba(31,31,32,.2) 0%, rgba(31,31,32,.5) 50%, rgba(31,31,32,.92) 100%);
+  pointer-events: none;
+  transition: background .35s ease;
+}
+.fag-tile__body {
+  position: relative;
+  z-index: 2;
+  height: 100%;
   display: flex;
   flex-direction: column;
+  justify-content: flex-end;
+  padding: clamp(20px, 2.2vw, 28px);
+  gap: 6px;
+}
+.fag-tile--feature .fag-tile__body {
+  padding: clamp(28px, 3vw, 44px);
   gap: 10px;
-  padding: clamp(22px, 2.4vw, 32px) clamp(22px, 2.4vw, 30px);
-  background: var(--white);
-  border: 1px solid var(--line);
-  border-radius: var(--radius-lg);
-  text-decoration: none;
-  color: var(--ink);
-  transition: transform .35s cubic-bezier(.2,.8,.2,1), box-shadow .35s ease, border-color .25s ease;
 }
-.fag-mini:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 22px 44px -18px rgba(26,15,10,.18);
-  border-color: rgba(179, 90, 59, .25);
-}
-.fag-mini__num {
+.fag-tile__num {
   font-family: var(--font);
-  font-weight: 400;
-  font-size: 1.05rem;
-  color: var(--clay-500);
-  letter-spacing: .04em;
+  font-weight: 800;
+  font-size: clamp(.78rem, 1vw, .88rem);
+  letter-spacing: .24em;
+  color: var(--copper-500);
+  padding-top: 14px;
+  border-top: 3px solid var(--copper-500);
+  display: inline-block;
+  align-self: flex-start;
 }
-.fag-mini__tittel {
-  font-size: clamp(1.2rem, 1.6vw, 1.4rem);
-  font-weight: 600;
-  margin: 0;
-  line-height: 1.2;
+.fag-tile--feature .fag-tile__num {
+  font-size: clamp(.9rem, 1.2vw, 1rem);
+  border-top-width: 4px;
 }
-.fag-mini__lede {
-  font-size: .94rem;
-  line-height: 1.5;
-  color: var(--ink-soft);
+.fag-tile__title {
+  font-family: var(--font);
+  font-weight: 800;
+  font-size: clamp(1.3rem, 1.9vw, 1.7rem);
+  line-height: 1.05;
+  letter-spacing: -.025em;
+  color: #fff;
   margin: 0;
-  flex: 1;
+  text-shadow: 0 2px 12px rgba(0,0,0,.5);
+}
+.fag-tile--feature .fag-tile__title {
+  font-size: clamp(2.2rem, 4vw, 3.2rem);
+  letter-spacing: -.035em;
+}
+.fag-tile__lede {
+  font-size: .9rem;
+  line-height: 1.4;
+  color: rgba(255,255,255,.85);
+  margin: 4px 0 0;
   text-wrap: pretty;
 }
-.fag-mini__cta {
-  margin-top: 6px;
-  font-size: .88rem;
-  font-weight: 600;
-  color: var(--clay-500);
-  transition: color .2s ease;
+.fag-tile--feature .fag-tile__lede {
+  font-size: clamp(1rem, 1.3vw, 1.15rem);
+  line-height: 1.5;
+  max-width: 38ch;
+  margin-top: 8px;
 }
-.fag-mini:hover .fag-mini__cta { color: var(--clay-700); }
+.fag-tile__cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 12px;
+  font-size: .82rem;
+  font-weight: 700;
+  letter-spacing: .04em;
+  color: #fff;
+  transition: gap .25s ease, color .2s ease;
+}
+.fag-tile__cta svg {
+  width: 16px;
+  height: 16px;
+  transition: transform .25s ease;
+}
+
+/* Hover-state — image zoom + lift + tonet copper overlay */
+.fag-tile:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 24px 50px -18px rgba(31,31,32,.45);
+}
+.fag-tile:hover .fag-tile__bg {
+  transform: scale(1.06);
+}
+.fag-tile:hover .fag-tile__overlay {
+  background: linear-gradient(180deg, rgba(31,31,32,.15) 0%, rgba(31,31,32,.4) 45%, rgba(190,84,0,.55) 100%);
+}
+.fag-tile:hover .fag-tile__cta {
+  color: var(--copper-300);
+  gap: 14px;
+}
+.fag-tile:hover .fag-tile__cta svg {
+  transform: translateX(3px);
+}
 
 @media (max-width: 980px) {
-  .fag-mini-grid { grid-template-columns: repeat(2, 1fr); }
-  .fag-mini-grid > .fag-mini:nth-child(4) { grid-column-start: auto; }
+  .fag-tiles { grid-template-columns: repeat(2, 1fr); }
+  .fag-tile--feature {
+    grid-column: span 2;
+    grid-row: span 1;
+    min-height: 340px;
+  }
 }
 @media (max-width: 600px) {
-  .fag-mini-grid { grid-template-columns: 1fr; }
+  .fag-tiles { grid-template-columns: 1fr; }
+  .fag-tile,
+  .fag-tile--feature {
+    grid-column: auto;
+    grid-row: auto;
+    min-height: 280px;
+  }
 }
 
 /* ===== Tjenester hub — cinematic hero ===== */
@@ -2620,20 +2708,61 @@ h2 em, h1 em, h3 em {
   to   { transform: scaleX(1); }
 }
 
-/* ===== Magazine-style stretched cards (5 fagområder) ===== */
+/* ===== Sticky-stack cards (5 fagområder) =====
+   Hvert kort blir "limt" og neste kort skyver oppå —
+   klassisk premium card-stack-effekt med z-index stigning. */
 .tj-mag {
-  background: var(--bg);
-  padding: clamp(80px, 10vw, 140px) 0;
+  background: var(--steel-100);
+  padding: clamp(60px, 7vw, 100px) 0 clamp(200px, 22vw, 320px);
+  position: relative;
+}
+.tj-mag .container {
+  display: block; /* ikke flex — sticky trenger normal flow */
 }
 .tj-mag__card {
+  position: sticky;
+  background: var(--white);
+  border-radius: var(--radius-lg);
+  padding: clamp(32px, 4vw, 60px);
+  margin-bottom: clamp(32px, 4vw, 56px);
   display: grid;
   grid-template-columns: 1.05fr 1fr;
-  gap: clamp(32px, 5vw, 80px);
+  gap: clamp(32px, 5vw, 64px);
   align-items: center;
-  padding: clamp(40px, 5vw, 80px) 0;
-  border-bottom: 1px solid var(--line);
+  box-shadow:
+    0 -1px 0 var(--line),
+    0 24px 70px -28px rgba(31,31,32,.22),
+    0 10px 25px -12px rgba(31,31,32,.1);
+  scroll-margin-top: 120px;
+  isolation: isolate;
+  will-change: transform;
+  transition: transform .6s cubic-bezier(.2,.8,.2,1);
 }
-.tj-mag__card:last-child { border-bottom: none; }
+/* Top + z-index stagger gir den ekte stack-effekten */
+.tj-mag__card:nth-child(1) { top: 110px; z-index: 1; }
+.tj-mag__card:nth-child(2) { top: 126px; z-index: 2; }
+.tj-mag__card:nth-child(3) { top: 142px; z-index: 3; }
+.tj-mag__card:nth-child(4) { top: 158px; z-index: 4; }
+.tj-mag__card:nth-child(5) { top: 174px; z-index: 5; }
+
+/* Subtile gradient-bakgrunner per kort så stacking-effekten er tydelig */
+.tj-mag__card:nth-child(1) { background: linear-gradient(160deg, #fff 0%, #FAFAFB 100%); }
+.tj-mag__card:nth-child(2) { background: linear-gradient(160deg, #fff 0%, #F7F7F8 100%); }
+.tj-mag__card:nth-child(3) { background: linear-gradient(160deg, #fff 0%, #F4F4F5 100%); }
+.tj-mag__card:nth-child(4) { background: linear-gradient(160deg, #fff 0%, #F1F1F3 100%); }
+.tj-mag__card:nth-child(5) { background: linear-gradient(160deg, #fff 0%, #ECECEE 100%); }
+
+/* Copper-stripe ovenpå hvert kort — Henriksens DNA */
+.tj-mag__card::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: var(--copper-500);
+  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+  pointer-events: none;
+}
+
 .tj-mag__card--rev {
   grid-template-columns: 1fr 1.05fr;
 }

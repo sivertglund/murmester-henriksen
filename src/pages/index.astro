@@ -159,13 +159,20 @@ const chipIcons: Record<string, string> = {
   </div>
 
   <div class="container">
-    <div class="fag-mini-grid">
-      {KATEGORIER.map((k) => (
-        <a class="fag-mini" href={`/tjenester/${k.slug}`}>
-          <span class="fag-mini__num" aria-hidden="true">{k.nummer}</span>
-          <h3 class="fag-mini__tittel">{k.tittel}</h3>
-          <p class="fag-mini__lede">{k.kortLede}</p>
-          <span class="fag-mini__cta">Se hva vi leverer →</span>
+    <div class="fag-tiles">
+      {KATEGORIER.map((k, i) => (
+        <a class={`fag-tile ${i === 0 ? 'fag-tile--feature' : ''} scroll-fade`} href={`/tjenester/${k.slug}`}>
+          <div class="fag-tile__bg" style={`background-image: url('${k.heroBilde}');`}></div>
+          <div class="fag-tile__overlay"></div>
+          <div class="fag-tile__body">
+            <span class="fag-tile__num" aria-hidden="true">{k.nummer}</span>
+            <h3 class="fag-tile__title">{k.tittel}</h3>
+            <p class="fag-tile__lede">{k.kortLede}</p>
+            <span class="fag-tile__cta">
+              Se hva vi leverer
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </span>
+          </div>
         </a>
       ))}
     </div>
