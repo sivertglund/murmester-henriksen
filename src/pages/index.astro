@@ -46,7 +46,6 @@ const chipIcons: Record<string, string> = {
       src="/assets/hero-wall-scrub-15s.mp4"
       muted
       playsinline
-      autoplay
       preload="auto"
       disableremoteplayback
       tabindex="-1"
@@ -289,5 +288,34 @@ const chipIcons: Record<string, string> = {
     </div>
   </div>
 </section>
+
+<script is:inline>
+  // Hold hero-videoen pauset til intro-overlay fader ut.
+  (function () {
+    var video = document.getElementById('heroVideo');
+    if (!video) return;
+    var overlay = document.getElementById('introOverlay');
+    var played = false;
+    function start() {
+      if (played) return;
+      played = true;
+      try { video.currentTime = 0; } catch (e) {}
+      var p = video.play();
+      if (p && typeof p.catch === 'function') p.catch(function () {});
+    }
+    if (!overlay || overlay.style.display === 'none') {
+      // Ingen overlay (eller allerede fjernet) — kjør videoen med en gang
+      start();
+      return;
+    }
+    // Start videoen idet intro-overlay begynner å fade ut, slik at muren
+    // bygges opp samtidig som intro forsvinner.
+    overlay.addEventListener('animationstart', function (e) {
+      if (e.animationName === 'introFadeOut') start();
+    });
+    // Backup om animationstart ikke fyrer
+    setTimeout(start, 4500);
+  })();
+</script>
 
 </Layout>
