@@ -259,6 +259,68 @@ h2 em, h1 em, h3 em {
   filter: drop-shadow(0 4px 12px rgba(190, 84, 0, .35));
 }
 
+/* ===== Intro-overlay: animert logo i sentrum ved page-load ===== */
+.intro-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: var(--steel-900);
+  display: grid;
+  place-items: center;
+  pointer-events: none;
+  animation: introFadeOut .8s cubic-bezier(.4,.1,.25,1) 2.7s forwards;
+}
+@keyframes introFadeOut {
+  from { opacity: 1; }
+  to   { opacity: 0; visibility: hidden; }
+}
+.intro-logo {
+  width: clamp(140px, 22vw, 240px);
+  height: auto;
+  /* Subtil scale-pulse for å gi liv */
+  animation: introLogoPulse 2s cubic-bezier(.4,.1,.25,1) .2s both;
+}
+@keyframes introLogoPulse {
+  0%   { transform: scale(.94); }
+  60%  { transform: scale(1.02); }
+  100% { transform: scale(1); }
+}
+
+/* Stagged tegne-inn av hver SVG-path */
+.intro-path {
+  opacity: 0;
+}
+.intro-path--outline {
+  clip-path: inset(0 100% 0 0);
+  animation: introOutlineDraw 1.2s cubic-bezier(.4,.1,.25,1) .35s forwards;
+}
+.intro-path--inner {
+  animation: introInnerFade .5s cubic-bezier(.2,.8,.2,1) 1.3s forwards;
+}
+.intro-path--orange-1 { animation: introOrangeIn .55s cubic-bezier(.2,.8,.2,1) 1.65s forwards; }
+.intro-path--orange-2 { animation: introOrangeIn .55s cubic-bezier(.2,.8,.2,1) 1.8s forwards; }
+.intro-path--orange-3 { animation: introOrangeIn .55s cubic-bezier(.2,.8,.2,1) 1.95s forwards; }
+
+@keyframes introOutlineDraw {
+  0%   { opacity: 0; clip-path: inset(0 100% 0 0); }
+  8%   { opacity: 1; }
+  100% { opacity: 1; clip-path: inset(0 0 0 0); }
+}
+@keyframes introInnerFade {
+  to { opacity: 1; }
+}
+@keyframes introOrangeIn {
+  from { opacity: 0; transform: translateX(-6px); }
+  to   { opacity: 1; transform: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .intro-overlay {
+    animation: introFadeOut .3s ease 0s forwards;
+  }
+  .intro-path { opacity: 1; clip-path: none; animation: none; }
+}
+
 /* ===== Henriksen stripe-system (fra varebilen + side 6 i grafisk profil) ===== */
 .stripe-bar {
   height: 14px;
