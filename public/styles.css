@@ -553,7 +553,7 @@ h2 em, h1 em, h3 em {
   width: clamp(180px, 20vw, 240px);
   aspect-ratio: 1;
   border-radius: 50%;
-  overflow: hidden;
+  overflow: visible;  /* tillater NM-medalje + andre overlays å stikke ut */
   isolation: isolate;
   /* Trukket mot venstre kant av kolonnen + skjøvet utenfor for å unngå akvarell-figuren */
   justify-self: start;
@@ -571,7 +571,7 @@ h2 em, h1 em, h3 em {
   content: "";
   position: absolute;
   inset: 0;
-  border-radius: inherit;
+  border-radius: 50%;
   background: linear-gradient(180deg, transparent 60%, rgba(20,8,4,.18) 100%);
   pointer-events: none;
 }
@@ -580,6 +580,7 @@ h2 em, h1 em, h3 em {
   height: 100%;
   object-fit: cover;
   display: block;
+  border-radius: 50%;
   transition: transform .8s cubic-bezier(.2,.8,.2,1);
 }
 .founder__portrait:hover {
