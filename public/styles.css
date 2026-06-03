@@ -304,15 +304,15 @@ h2 em, h1 em, h3 em {
 .intro-wordmark__name {
   font-family: var(--font);
   font-weight: 700;
-  font-size: clamp(1.4rem, 2.4vw, 1.9rem);
-  letter-spacing: -.01em;
+  font-size: clamp(2.2rem, 4vw, 3.4rem);
+  letter-spacing: -.015em;
   line-height: 1;
   color: #fff;
 }
 .intro-wordmark__sub {
   font-family: var(--font);
   font-weight: 600;
-  font-size: clamp(.62rem, .85vw, .76rem);
+  font-size: clamp(.95rem, 1.3vw, 1.2rem);
   letter-spacing: .42em;
   color: var(--copper-500);
   line-height: 1;
