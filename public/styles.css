@@ -2451,10 +2451,11 @@ h2 em, h1 em, h3 em {
   text-wrap: pretty;
 }
 
-/* ===== Mester-sitat seksjon (erstatter tomme testimonials) ===== */
+/* ===== Mester-sitat — dark dramatic premium ===== */
 .mester-sitat {
-  background: var(--bg);
-  padding: clamp(80px, 10vw, 140px) 0;
+  background: #1A1A1B;
+  color: #fff;
+  padding: clamp(110px, 14vw, 180px) 0 clamp(100px, 12vw, 160px);
   position: relative;
   isolation: isolate;
   overflow: hidden;
@@ -2463,68 +2464,132 @@ h2 em, h1 em, h3 em {
   content: "";
   position: absolute;
   inset: 0;
+  z-index: -2;
+  background:
+    radial-gradient(ellipse 70% 50% at 50% 10%, rgba(190, 84, 0, .14) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 60% at 50% 100%, rgba(190, 84, 0, .08) 0%, transparent 55%),
+    linear-gradient(180deg, #1F1F20 0%, #161617 100%);
+}
+.mester-sitat::after {
+  content: "";
+  position: absolute;
+  inset: 0;
   z-index: -1;
   background:
-    radial-gradient(ellipse at center, rgba(179, 90, 59, .06), transparent 60%),
-    repeating-linear-gradient(0deg, rgba(26,15,10,.5) 0 1px, transparent 1px 32px),
-    repeating-linear-gradient(90deg, rgba(26,15,10,.4) 0 1px, transparent 1px 96px);
-  background-blend-mode: normal;
-  opacity: .055;
+    repeating-linear-gradient(0deg, rgba(255,255,255,.018) 0 1px, transparent 1px 64px),
+    repeating-linear-gradient(90deg, rgba(255,255,255,.018) 0 1px, transparent 1px 96px);
+  pointer-events: none;
+}
+.mester-sitat__stripe-top,
+.mester-sitat__stripe-bot {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  width: clamp(60px, 10vw, 120px);
+  height: 2px;
+  background: var(--copper-500);
+  z-index: 1;
+  box-shadow: 0 0 18px rgba(190,84,0,.55);
+}
+.mester-sitat__stripe-top { top: 0; }
+.mester-sitat__stripe-bot { bottom: 0; }
+.mester-sitat__quote-mark {
+  position: absolute;
+  top: clamp(60px, 8vw, 110px);
+  left: 50%;
+  transform: translateX(-50%);
+  width: clamp(80px, 11vw, 140px);
+  height: auto;
+  color: var(--copper-500);
+  opacity: .14;
+  z-index: 0;
+  pointer-events: none;
 }
 .mester-sitat__inner {
-  max-width: 820px;
+  max-width: 940px;
   margin: 0 auto;
   text-align: center;
+  position: relative;
+  z-index: 2;
 }
 .mester-sitat__inner .kicker {
+  color: var(--copper-400);
   text-align: center;
+  margin-bottom: clamp(28px, 4vw, 40px);
 }
 .mester-sitat__quote {
-  margin: 28px 0 0;
+  margin: 0;
   padding: 0;
   border: none;
 }
-.mester-sitat__quote p {
+.mester-sitat__quote > p:first-of-type {
   font-family: var(--font);
-  font-weight: 400;
-  font-size: clamp(1.6rem, 3.2vw, 2.6rem);
-  line-height: 1.25;
-  color: var(--ink);
-  margin: 0 0 18px;
-  letter-spacing: -.01em;
+  font-weight: 300;
+  font-size: clamp(1.85rem, 3.6vw, 3rem);
+  line-height: 1.22;
+  color: #fff;
+  margin: 0 0 28px;
+  letter-spacing: -.015em;
 }
 .mester-sitat__quote p em {
   font-style: normal;
-  color: var(--clay-500);
+  color: var(--copper-400);
+  font-weight: 500;
 }
 .mester-sitat__welcome {
   font-family: var(--font) !important;
-  font-size: clamp(1.04rem, 1.4vw, 1.2rem) !important;
-  font-weight: 500 !important;
-  color: var(--ink-soft) !important;
+  font-size: clamp(1.02rem, 1.35vw, 1.18rem) !important;
+  font-weight: 400 !important;
+  color: rgba(255,255,255,.62) !important;
   letter-spacing: 0;
-  max-width: 48ch;
-  margin: 24px auto 0 !important;
+  max-width: 52ch;
+  margin: 0 auto !important;
+  line-height: 1.55;
 }
 .mester-sitat__quote footer {
-  margin-top: clamp(36px, 4.5vw, 56px);
+  margin-top: clamp(48px, 6vw, 72px);
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 2px;
+  gap: 10px;
+}
+.mester-sitat__line {
+  display: block;
+  width: 44px;
+  height: 1px;
+  background: var(--copper-500);
+  margin-bottom: 6px;
 }
 .mester-sitat__quote footer strong {
-  font-size: 1rem;
+  font-size: 1.04rem;
   font-weight: 700;
-  color: var(--ink);
-  letter-spacing: .02em;
+  color: #fff;
+  letter-spacing: .01em;
 }
-.mester-sitat__quote footer span {
-  font-size: .8rem;
-  letter-spacing: .12em;
+.mester-sitat__role {
+  font-size: .76rem !important;
+  letter-spacing: .22em !important;
   text-transform: uppercase;
-  color: var(--ink-soft);
-  font-weight: 600;
+  color: rgba(255,255,255,.5) !important;
+  font-weight: 500 !important;
+}
+
+/* Scroll-fade reveal */
+.mester-sitat .scroll-fade {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity .9s ease, transform .9s cubic-bezier(.2,.7,.3,1);
+}
+.mester-sitat .scroll-fade:nth-child(2) { transition-delay: .08s; }
+.mester-sitat .scroll-fade:nth-child(3) { transition-delay: .16s; }
+.mester-sitat .scroll-fade:nth-child(4) { transition-delay: .24s; }
+.mester-sitat.is-in .scroll-fade,
+.mester-sitat .scroll-fade.is-in {
+  opacity: 1;
+  transform: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  .mester-sitat .scroll-fade { opacity: 1; transform: none; transition: none; }
 }
 
 /* ===== Forsidens fag-tiles — minimalistisk premium ===== */
@@ -3363,71 +3428,145 @@ h2 em, h1 em, h3 em {
   font-weight: 500;
 }
 
-/* ===== Service area pills ===== */
+/* ===== Service area — editorial grid ===== */
 .areas {
   background: var(--bg);
-  padding: clamp(60px, 7vw, 90px) 0;
-  text-align: center;
+  padding: clamp(90px, 11vw, 140px) 0;
   border-top: 1px solid var(--line);
   position: relative;
   isolation: isolate;
   overflow: hidden;
 }
-/* Subtil mur-grid som fader ut mot kantene — samme tekstur som testimonials */
-.areas::before {
-  content: "";
+.areas__pattern {
   position: absolute;
   inset: 0;
   z-index: -1;
   pointer-events: none;
-  opacity: .07;
+  opacity: .04;
   background-image:
-    repeating-linear-gradient(0deg,  rgba(26,15,10,.5) 0 1px, transparent 1px 28px),
-    repeating-linear-gradient(90deg, rgba(26,15,10,.4) 0 1px, transparent 1px 86px);
-  background-position: 0 0, 14px 14px;
-  -webkit-mask-image: radial-gradient(ellipse at center, #000 30%, transparent 85%);
-          mask-image: radial-gradient(ellipse at center, #000 30%, transparent 85%);
+    repeating-linear-gradient(0deg,  rgba(26,15,10,1) 0 1px, transparent 1px 64px),
+    repeating-linear-gradient(90deg, rgba(26,15,10,1) 0 1px, transparent 1px 96px);
+  -webkit-mask-image: radial-gradient(ellipse 80% 70% at 50% 50%, #000 30%, transparent 85%);
+          mask-image: radial-gradient(ellipse 80% 70% at 50% 50%, #000 30%, transparent 85%);
 }
-.areas__inner { max-width: 800px; }
-.areas h2 {
-  margin: 0 0 14px;
+.areas__inner {
+  max-width: 1180px;
+  display: grid;
+  grid-template-columns: minmax(280px, 380px) 1fr;
+  gap: clamp(48px, 6vw, 88px);
+  align-items: start;
 }
-.areas h2 em {
+.areas__head {
+  position: sticky;
+  top: 120px;
+}
+.areas__head .kicker {
+  color: var(--copper-500);
+  margin-bottom: 18px;
+}
+.areas__head h2 {
+  margin: 0 0 18px;
+  font-size: clamp(2rem, 3.4vw, 2.8rem);
+  line-height: 1.08;
+  letter-spacing: -.02em;
+}
+.areas__head h2 em {
   font-style: normal;
-  color: var(--clay-500);
+  color: var(--copper-500);
   font-family: var(--font);
-  font-weight: 400;
+  font-weight: 700;
 }
 .areas__lede {
   color: var(--ink-soft);
-  font-size: 1.02rem;
-  max-width: 56ch;
-  margin: 0 auto clamp(28px, 3vw, 38px);
-  white-space: pre-line;
+  font-size: 1.04rem;
+  line-height: 1.55;
+  max-width: 34ch;
+  margin: 0;
 }
-.areas__list {
+.areas__grid {
   list-style: none;
   padding: 0;
   margin: 0;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0;
+  border-top: 1px solid var(--line);
+  border-left: 1px solid var(--line);
+}
+.areas__city {
+  position: relative;
+  padding: clamp(22px, 2.4vw, 30px) clamp(18px, 2vw, 26px);
+  border-right: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  background: transparent;
   display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 10px;
+  flex-direction: column;
+  gap: 14px;
+  transition: background .35s ease;
+  overflow: hidden;
 }
-.areas__list li {
-  background: var(--white);
-  border: 1px solid var(--line);
-  padding: 10px 18px;
-  border-radius: 999px;
-  font-weight: 500;
-  font-size: .95rem;
+.areas__city::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(190,84,0,.06) 0%, transparent 60%);
+  opacity: 0;
+  transition: opacity .35s ease;
+  pointer-events: none;
+}
+.areas__city:hover { background: rgba(255,255,255,.5); }
+.areas__city:hover::before { opacity: 1; }
+.areas__city-num {
+  font-size: .72rem;
+  font-weight: 700;
+  letter-spacing: .22em;
+  color: var(--copper-500);
+  font-variant-numeric: tabular-nums;
+}
+.areas__city-name {
+  font-size: clamp(1.15rem, 1.6vw, 1.42rem);
+  font-weight: 600;
   color: var(--ink);
-  transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+  letter-spacing: -.01em;
+  line-height: 1.1;
 }
-.areas__list li:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 10px 20px -10px rgba(26,15,10,.18);
-  border-color: rgba(179,90,59,.3);
+.areas__city-line {
+  display: block;
+  width: 28px;
+  height: 2px;
+  background: var(--copper-500);
+  transform-origin: left;
+  transform: scaleX(.5);
+  opacity: .6;
+  transition: transform .4s cubic-bezier(.2,.7,.3,1), opacity .35s ease;
+}
+.areas__city:hover .areas__city-line {
+  transform: scaleX(1.6);
+  opacity: 1;
+}
+
+/* Reveal stagger */
+.areas .scroll-fade {
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity .7s ease, transform .7s cubic-bezier(.2,.7,.3,1);
+  transition-delay: calc(var(--i, 0) * 40ms);
+}
+.areas .scroll-fade.is-in { opacity: 1; transform: none; }
+
+@media (max-width: 900px) {
+  .areas__inner {
+    grid-template-columns: 1fr;
+    gap: 36px;
+  }
+  .areas__head { position: static; }
+  .areas__grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 520px) {
+  .areas__grid { grid-template-columns: 1fr; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .areas .scroll-fade { opacity: 1; transform: none; transition: none; }
 }
 
 /* Inline Kontakt-link inni services-lead */

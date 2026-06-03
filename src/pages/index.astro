@@ -209,22 +209,28 @@ const chipIcons: Record<string, string> = {
 
 <!-- ===== Mester-sitat ===== -->
 <section class="mester-sitat" id="filosofi">
+  <div class="mester-sitat__stripe-top" aria-hidden="true"></div>
+  <svg class="mester-sitat__quote-mark" viewBox="0 0 100 80" fill="none" aria-hidden="true">
+    <path d="M0 80V44C0 19.7 13.3 4.7 40 0v16C26 19.3 17.3 30.7 15 50h25v30H0zm60 0V44C60 19.7 73.3 4.7 100 0v16C86 19.3 77.3 30.7 75 50h25v30H60z" fill="currentColor"/>
+  </svg>
   <div class="container mester-sitat__inner">
-    <p class="kicker">Mesterens filosofi</p>
+    <p class="kicker scroll-fade">Mesterens filosofi</p>
     <blockquote class="mester-sitat__quote">
-      <p>
+      <p class="scroll-fade">
         Jeg er stolt av <em>håndverket mitt</em>, stolt av <em>faget mitt</em>,
         og stolt av å kunne hjelpe kunder med små og store prosjekter.
       </p>
-      <p class="mester-sitat__welcome">
+      <p class="mester-sitat__welcome scroll-fade">
         Velkommen til Murmester Henriksen AS — Alle trenger en murer!
       </p>
-      <footer>
+      <footer class="scroll-fade">
+        <span class="mester-sitat__line" aria-hidden="true"></span>
         <strong>Vincent Henriksen</strong>
-        <span>Murmester · Fagskoleingeniør · Oldermann</span>
+        <span class="mester-sitat__role">Murmester · Fagskoleingeniør · Oldermann</span>
       </footer>
     </blockquote>
   </div>
+  <div class="mester-sitat__stripe-bot" aria-hidden="true"></div>
 </section>
 
 <!-- ===== Testimonials (skjult inntil ekte sitater er på plass) ===== -->
@@ -258,10 +264,21 @@ const chipIcons: Record<string, string> = {
 
 <!-- ===== Serviceområde ===== -->
 <section class="areas" id="omrader">
+  <div class="areas__pattern" aria-hidden="true"></div>
   <div class="container areas__inner">
-    <h2>{areas.tittel} <em>{areas.tittelAksent}</em>{areas.tittelSlutt}</h2>
-    <ul class="areas__list">
-      {areas.byer.map((b) => <li>{b}</li>)}
+    <div class="areas__head scroll-fade">
+      <p class="kicker">Geografi</p>
+      <h2>{areas.tittel} <em>{areas.tittelAksent}</em>{areas.tittelSlutt}</h2>
+      <p class="areas__lede">Verkstedet står på Vear. Murverket står over hele fylket.</p>
+    </div>
+    <ul class="areas__grid">
+      {areas.byer.map((b, i) => (
+        <li class="areas__city scroll-fade" style={`--i:${i}`}>
+          <span class="areas__city-num">{String(i + 1).padStart(2, '0')}</span>
+          <span class="areas__city-name">{b}</span>
+          <span class="areas__city-line" aria-hidden="true"></span>
+        </li>
+      ))}
     </ul>
   </div>
 </section>
