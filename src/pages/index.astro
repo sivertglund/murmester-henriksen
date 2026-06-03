@@ -54,14 +54,11 @@ const chipIcons: Record<string, string> = {
     <div class="hero__overlay"></div>
 
     <div class="hero__content">
+      <p class="hero__welcome-line">{hero.welcome}</p>
+
       <h1 class="hero__write" aria-label={`${hero.title} ${hero.titleEmphasis}`}>
         <span class="hero__write-text" id="heroWriteText">{hero.title} <em>{hero.titleEmphasis}</em></span>
-        <span class="hero__pen" id="heroPen" aria-hidden="true"></span>
       </h1>
-
-      <a href="/kontakt" class="hero__signature">
-        <span class="hero__signature-text">{hero.signature}</span>
-      </a>
 
       <div class="hero__cta">
         <a href="/kontakt" class="btn btn--primary">

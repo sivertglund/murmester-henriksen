@@ -65,10 +65,10 @@ export type Hero = {
 };
 
 const HERO_FALLBACK: Hero = {
-  welcome: 'Murmester · Etablert 2025 · Vear, Vestfold',
-  title: 'Velkommen til',
-  titleEmphasis: 'Murmester Henriksen',
-  signature: 'Alle trenger en murer!',
+  welcome: 'Velkommen til Murmester Henriksen',
+  title: 'Alle trenger',
+  titleEmphasis: 'en murer!',
+  signature: '',
   primaryCtaText: 'Kontakt oss',
   secondaryCtaText: 'Se tjenestene',
 };

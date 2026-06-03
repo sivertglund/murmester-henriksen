@@ -259,7 +259,9 @@ h2 em, h1 em, h3 em {
   filter: drop-shadow(0 4px 12px rgba(190, 84, 0, .35));
 }
 
-/* ===== Intro-overlay: animert logo i sentrum ved page-load ===== */
+/* ===== Intro-overlay: aggressive logo-build ved page-load =====
+   Råere tempo: outline snapper inn, hver path "stempler" på plass
+   som hammerslag. Total ~2.4s. */
 .intro-overlay {
   position: fixed;
   inset: 0;
@@ -268,50 +270,93 @@ h2 em, h1 em, h3 em {
   display: grid;
   place-items: center;
   pointer-events: none;
-  animation: introFadeOut .8s cubic-bezier(.4,.1,.25,1) 2.7s forwards;
+  /* Subtil noise/grid-tekstur i bakgrunnen for industriell vibe */
+  background-image:
+    radial-gradient(ellipse at center, rgba(190,84,0,.06) 0%, transparent 60%),
+    var(--steel-900);
+  animation: introFadeOut .6s cubic-bezier(.6,0,.3,1) 2.3s forwards;
 }
 @keyframes introFadeOut {
   from { opacity: 1; }
   to   { opacity: 0; visibility: hidden; }
 }
 .intro-logo {
-  width: clamp(140px, 22vw, 240px);
+  width: clamp(160px, 26vw, 280px);
   height: auto;
-  /* Subtil scale-pulse for å gi liv */
-  animation: introLogoPulse 2s cubic-bezier(.4,.1,.25,1) .2s both;
+  /* Snap-in scale ved start, mikro-shake ved orange-path arrivals */
+  animation:
+    introLogoSnap .35s cubic-bezier(.5, 1.6, .4, 1) 0s both,
+    introLogoShake .12s cubic-bezier(.5,0,.5,1) 1.3s,
+    introLogoShake .12s cubic-bezier(.5,0,.5,1) 1.45s,
+    introLogoShake .12s cubic-bezier(.5,0,.5,1) 1.6s;
 }
-@keyframes introLogoPulse {
-  0%   { transform: scale(.94); }
-  60%  { transform: scale(1.02); }
-  100% { transform: scale(1); }
+@keyframes introLogoSnap {
+  0%   { transform: scale(.7); opacity: 0; filter: blur(8px); }
+  60%  { opacity: 1; }
+  100% { transform: scale(1); opacity: 1; filter: blur(0); }
+}
+@keyframes introLogoShake {
+  0%, 100% { transform: scale(1) translateX(0); }
+  50%      { transform: scale(1.015) translateX(1px); }
 }
 
-/* Stagged tegne-inn av hver SVG-path */
-.intro-path {
-  opacity: 0;
-}
+/* Outline: snap-sveip fra venstre */
+.intro-path { opacity: 0; }
 .intro-path--outline {
   clip-path: inset(0 100% 0 0);
-  animation: introOutlineDraw 1.2s cubic-bezier(.4,.1,.25,1) .35s forwards;
+  animation: introOutlineSnap .55s cubic-bezier(.85,0,.15,1) .35s forwards;
 }
-.intro-path--inner {
-  animation: introInnerFade .5s cubic-bezier(.2,.8,.2,1) 1.3s forwards;
-}
-.intro-path--orange-1 { animation: introOrangeIn .55s cubic-bezier(.2,.8,.2,1) 1.65s forwards; }
-.intro-path--orange-2 { animation: introOrangeIn .55s cubic-bezier(.2,.8,.2,1) 1.8s forwards; }
-.intro-path--orange-3 { animation: introOrangeIn .55s cubic-bezier(.2,.8,.2,1) 1.95s forwards; }
-
-@keyframes introOutlineDraw {
+@keyframes introOutlineSnap {
   0%   { opacity: 0; clip-path: inset(0 100% 0 0); }
-  8%   { opacity: 1; }
+  20%  { opacity: 1; }
   100% { opacity: 1; clip-path: inset(0 0 0 0); }
 }
-@keyframes introInnerFade {
-  to { opacity: 1; }
+
+/* Inner white paths: rask flash-fade */
+.intro-path--inner {
+  animation: introInnerFlash .25s cubic-bezier(.2,.8,.2,1) 1.0s forwards;
 }
-@keyframes introOrangeIn {
-  from { opacity: 0; transform: translateX(-6px); }
-  to   { opacity: 1; transform: none; }
+@keyframes introInnerFlash {
+  0%   { opacity: 0; }
+  40%  { opacity: 1.4; }
+  100% { opacity: 1; }
+}
+
+/* Oransje paths: STAMP-effekt med radial spread + drop-shadow flash */
+.intro-path--orange-1,
+.intro-path--orange-2,
+.intro-path--orange-3 {
+  animation: introOrangeStamp .25s cubic-bezier(.5, 1.8, .4, 1) forwards;
+}
+.intro-path--orange-1 { animation-delay: 1.3s; }
+.intro-path--orange-2 { animation-delay: 1.45s; }
+.intro-path--orange-3 { animation-delay: 1.6s; }
+@keyframes introOrangeStamp {
+  0%   { opacity: 0; transform: scale(.7) translateY(-3px); filter: brightness(2.2); }
+  60%  { opacity: 1; transform: scale(1.04) translateY(0); filter: brightness(1.6); }
+  100% { opacity: 1; transform: scale(1); filter: brightness(1); }
+}
+
+/* Glow-flash bak logoen — copper-glow når oransje "stempler" */
+.intro-overlay::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 60vmin;
+  height: 60vmin;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  background: radial-gradient(circle at center, rgba(190,84,0,.45) 0%, transparent 55%);
+  opacity: 0;
+  animation:
+    introGlowFlash .35s cubic-bezier(.4,.1,.25,1) 1.3s,
+    introGlowFlash .35s cubic-bezier(.4,.1,.25,1) 1.45s,
+    introGlowFlash .35s cubic-bezier(.4,.1,.25,1) 1.6s;
+}
+@keyframes introGlowFlash {
+  0%, 100% { opacity: 0; }
+  40%      { opacity: 1; }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -319,6 +364,8 @@ h2 em, h1 em, h3 em {
     animation: introFadeOut .3s ease 0s forwards;
   }
   .intro-path { opacity: 1; clip-path: none; animation: none; }
+  .intro-logo { animation: none; }
+  .intro-overlay::before { animation: none; opacity: 0; }
 }
 
 /* ===== Henriksen stripe-system (fra varebilen + side 6 i grafisk profil) ===== */
@@ -556,17 +603,32 @@ h2 em, h1 em, h3 em {
   text-shadow: 0 2px 30px rgba(0,0,0,.35);
 }
 
-/* Hero-tittel — bold, statisk, to linjer */
+/* Welcome-linje: liten hvit, én linje, over hovedtittel */
+.hero__welcome-line {
+  margin: 0 0 clamp(8px, 1.4vw, 16px);
+  font-family: var(--font);
+  font-weight: 500;
+  font-size: clamp(.95rem, 1.6vw, 1.3rem);
+  letter-spacing: .01em;
+  color: #fff;
+  text-shadow: 0 2px 16px rgba(0,0,0,.4);
+  white-space: nowrap;
+  opacity: 0;
+  transform: translateY(12px);
+  animation: heroTitleIn .8s cubic-bezier(.2,.8,.2,1) .35s forwards;
+}
+
+/* Hovedtittel — stort statement: "Alle trenger en murer!" */
 .hero__write {
   position: relative;
   display: block;
   margin: 0;
-  font-size: clamp(2.2rem, 5.4vw, 4.8rem);
-  line-height: 1.02;
-  max-width: 14ch;
+  font-size: clamp(3rem, 9vw, 7rem);
+  line-height: .98;
+  letter-spacing: -.04em;
   opacity: 0;
-  transform: translateY(20px);
-  animation: heroTitleIn 1.1s cubic-bezier(.2,.8,.2,1) .6s forwards;
+  transform: translateY(24px);
+  animation: heroTitleIn 1.1s cubic-bezier(.2,.8,.2,1) .65s forwards;
 }
 @keyframes heroTitleIn {
   to { opacity: 1; transform: none; }
@@ -574,22 +636,27 @@ h2 em, h1 em, h3 em {
 .hero__write-text {
   display: block;
   font-family: var(--font);
-  font-weight: 700;
+  font-weight: 800;
   font-size: inherit;
-  line-height: 1.02;
-  letter-spacing: -.035em;
-  color: #fff;
-  text-shadow: 0 2px 30px rgba(0,0,0,.45);
+  line-height: inherit;
+  letter-spacing: inherit;
+  color: var(--copper-500);
+  text-shadow:
+    0 2px 30px rgba(0,0,0,.55),
+    0 0 30px rgba(190, 84, 0, .35);
 }
 .hero__write-text em {
-  display: block;
   font-style: normal;
-  color: var(--copper-500);
+  color: inherit;
   font-family: inherit;
-  font-weight: 800;
-  text-shadow:
-    0 2px 30px rgba(0,0,0,.5),
-    0 0 30px rgba(190, 84, 0, .35);
+  font-weight: inherit;
+}
+
+@media (max-width: 600px) {
+  .hero__welcome-line {
+    white-space: normal;
+    font-size: 1rem;
+  }
 }
 
 /* Signatur-badge under tittelen — clean strip, ikke stencil */
