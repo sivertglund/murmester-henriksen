@@ -104,21 +104,15 @@ const chipIcons: Record<string, string> = {
       </figure>
       <div class="founder__copy">
         <h2 class="founder__title">{founder.tittel} <em>{founder.tittelAksent}</em>{founder.tittelSlutt}</h2>
-        <p class="founder__lede">{founder.lede}</p>
-
-        <ul class="founder__chips">
-          {founder.chips.map((c) => (
-            <li class="chip">
-              <span class="chip__icon" aria-hidden="true">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" set:html={chipIcons[c.ikon] || chipIcons.clock} />
-              </span>
-              <div class="chip__body">
-                <span class="chip__num">{c.tall}</span>
-                <span class="chip__label">{c.label}</span>
-              </div>
-            </li>
-          ))}
-        </ul>
+        <p class="founder__lede">
+          Murmester Henriksen AS ble etablert med et enkelt mål — å levere håndverk
+          av høyeste kvalitet, kombinert med god kommunikasjon, faglig kompetanse
+          og personlig oppfølging.
+        </p>
+        <p class="founder__lede">
+          Som kunde møter du alltid fagpersonen som planlegger, prosjekterer
+          og utfører arbeidet.
+        </p>
 
         <a class="founder__more" href="/om-oss">
           {founder.lesMerTekst}

@@ -982,15 +982,15 @@ h2 em, h1 em, h3 em {
   font-weight: 700;
 }
 .founder__lede {
-  font-size: clamp(1.04rem, 1.3vw, 1.18rem);
-  line-height: 1.6;
-  color: rgba(255,255,255,.78);
+  font-size: clamp(1.15rem, 1.55vw, 1.42rem);
+  line-height: 1.55;
+  color: rgba(255,255,255,.82);
   max-width: 56ch;
-  margin: 0;
+  margin: 0 0 18px;
   text-wrap: pretty;
-  white-space: pre-line;
 }
-.founder__lede strong { color: #fff; font-weight: 600; }
+.founder__lede:last-of-type { margin-bottom: 0; }
+.founder__lede strong { color: #fff; font-weight: 700; }
 .founder__lede em {
   font-style: normal;
   color: var(--clay-500);
