@@ -201,10 +201,13 @@ const chipIcons: Record<string, string> = {
 
 </section>
 
-<!-- ===== Vestfold-statement (egen liten seksjon, kun tittel) ===== -->
-<section class="vestfold-statement">
-  <div class="container">
+<!-- ===== Serviceområde ===== -->
+<section class="areas" id="omrader">
+  <div class="container areas__inner">
     <h2>{areas.tittel} <em>{areas.tittelAksent}</em>{areas.tittelSlutt}</h2>
+    <ul class="areas__list">
+      {areas.byer.map((b) => <li>{b}</li>)}
+    </ul>
   </div>
 </section>
 

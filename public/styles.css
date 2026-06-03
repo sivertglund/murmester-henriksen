@@ -1732,26 +1732,6 @@ h2 em, h1 em, h3 em {
   color: var(--clay-500);
   font-weight: 400;
 }
-/* Vestfold-statement — kort moment mellom marquee og mester-sitat */
-.vestfold-statement {
-  background: var(--bg);
-  padding: clamp(70px, 9vw, 120px) 0;
-  text-align: center;
-  position: relative;
-}
-.vestfold-statement h2 {
-  margin: 0;
-  font-size: clamp(2rem, 4.2vw, 3.4rem);
-  line-height: 1.05;
-  letter-spacing: -.02em;
-  font-weight: 700;
-}
-.vestfold-statement h2 em {
-  font-style: normal;
-  color: var(--copper-500);
-  font-family: var(--font);
-  font-weight: 700;
-}
 .marquee__rows {
   display: grid;
   gap: clamp(14px, 1.6vw, 22px);
