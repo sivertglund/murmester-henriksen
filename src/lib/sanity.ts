@@ -374,7 +374,7 @@ const OM_OSS_FALLBACK: OmOss = {
   h1: 'Vincent',
   h1Aksent: 'Henriksen',
   h1Slutt: '.',
-  subheroLede: 'Murmester | Fagskoleingeniør | Oldermann | Faglig veileder.\nNorges nest beste murer i 2014.',
+  subheroLede: 'Murmester | Fagskoleingeniør | Oldermann | Faglig veileder.\n<strong>Norges nest beste murer</strong> i 2014.',
   innhold: undefined,
   nokkelfakta: [
     { label: 'Svennebrev', verdi: 'Murfaget · 2014' },

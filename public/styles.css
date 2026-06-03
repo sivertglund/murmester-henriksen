@@ -1675,11 +1675,7 @@ h2 em, h1 em, h3 em {
   from { transform: translate3d(0, 0, 0); }
   to   { transform: translate3d(-50%, 0, 0); }
 }
-/* Hold over en rad for å pause driftet — gir kunden anledning til å studere */
-.marquee__row:hover .marquee__track,
-.marquee__row:focus-within .marquee__track {
-  animation-play-state: paused;
-}
+/* Marquee fortsetter selv ved hover — kontinuerlig flow */
 .marquee__item {
   flex: 0 0 auto;
   width: clamp(260px, 28vw, 440px);
@@ -2049,6 +2045,10 @@ h2 em, h1 em, h3 em {
   white-space: pre-line;
   margin: 0 0 32px;
 }
+.subhero__lede strong {
+  color: #fff;
+  font-weight: 700;
+}
 .subhero__crumbs {
   display: inline-flex;
   align-items: center;
@@ -2127,8 +2127,6 @@ h2 em, h1 em, h3 em {
 }
 
 .article__aside {
-  position: sticky;
-  top: 110px;
   align-self: start;
   display: flex;
   flex-direction: column;
@@ -2470,11 +2468,11 @@ h2 em, h1 em, h3 em {
   font-weight: 600;
 }
 
-/* ===== Forsidens fag-tiles — bento-grid med bilder + dark overlay ===== */
+/* ===== Forsidens fag-tiles — minimalistisk premium ===== */
 .fag-tiles {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: clamp(14px, 1.6vw, 22px);
+  gap: clamp(12px, 1.4vw, 18px);
   max-width: 1180px;
   margin: 0 auto;
 }
@@ -2484,18 +2482,20 @@ h2 em, h1 em, h3 em {
   display: block;
   overflow: hidden;
   border-radius: var(--radius-lg);
-  min-height: 260px;
+  min-height: 240px;
   color: #fff;
   text-decoration: none;
   cursor: pointer;
-  transition: transform .5s cubic-bezier(.2,.8,.2,1), box-shadow .5s ease;
-  box-shadow: 0 10px 30px -14px rgba(31,31,32,.25);
+  background: var(--steel-900);
+  transition:
+    transform .55s cubic-bezier(.2,.8,.2,1),
+    box-shadow .55s ease;
+  box-shadow: 0 10px 30px -14px rgba(31,31,32,.3);
 }
-/* Bento layout: Muring (01) er feature, span 2 col × 2 rows */
 .fag-tile--feature {
   grid-column: span 2;
   grid-row: span 2;
-  min-height: 540px;
+  min-height: 500px;
 }
 
 .fag-tile__bg {
@@ -2504,16 +2504,18 @@ h2 em, h1 em, h3 em {
   z-index: 0;
   background-size: cover;
   background-position: center;
-  transition: transform 1s cubic-bezier(.2,.8,.2,1);
-  filter: saturate(.85);
+  filter: saturate(.45) brightness(.55) contrast(1.1);
+  opacity: .55;
+  transition: transform 1.2s cubic-bezier(.2,.8,.2,1), opacity .5s ease, filter .5s ease;
 }
 .fag-tile__overlay {
   position: absolute;
   inset: 0;
   z-index: 1;
-  background: linear-gradient(180deg, rgba(31,31,32,.2) 0%, rgba(31,31,32,.5) 50%, rgba(31,31,32,.92) 100%);
+  background:
+    linear-gradient(180deg, rgba(31,31,32,.5) 0%, rgba(31,31,32,.6) 50%, rgba(31,31,32,.95) 100%);
   pointer-events: none;
-  transition: background .35s ease;
+  transition: background .4s ease;
 }
 .fag-tile__body {
   position: relative;
@@ -2521,89 +2523,95 @@ h2 em, h1 em, h3 em {
   height: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
-  padding: clamp(20px, 2.2vw, 28px);
-  gap: 6px;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: clamp(20px, 2.4vw, 30px);
 }
 .fag-tile--feature .fag-tile__body {
   padding: clamp(28px, 3vw, 44px);
-  gap: 10px;
 }
+
 .fag-tile__num {
   font-family: var(--font);
   font-weight: 800;
-  font-size: clamp(.78rem, 1vw, .88rem);
-  letter-spacing: .24em;
+  font-size: clamp(.7rem, .9vw, .8rem);
+  letter-spacing: .28em;
   color: var(--copper-500);
-  padding-top: 14px;
-  border-top: 3px solid var(--copper-500);
+  padding-top: 12px;
+  border-top: 2px solid var(--copper-500);
   display: inline-block;
-  align-self: flex-start;
+  transition: border-top-width .35s ease, padding-top .35s ease;
 }
 .fag-tile--feature .fag-tile__num {
-  font-size: clamp(.9rem, 1.2vw, 1rem);
-  border-top-width: 4px;
+  font-size: clamp(.86rem, 1.1vw, 1rem);
+  border-top-width: 3px;
 }
+
 .fag-tile__title {
   font-family: var(--font);
   font-weight: 800;
-  font-size: clamp(1.3rem, 1.9vw, 1.7rem);
-  line-height: 1.05;
-  letter-spacing: -.025em;
+  font-size: clamp(1.4rem, 2.1vw, 1.9rem);
+  line-height: 1;
+  letter-spacing: -.03em;
   color: #fff;
   margin: 0;
-  text-shadow: 0 2px 12px rgba(0,0,0,.5);
+  text-shadow: 0 2px 14px rgba(0,0,0,.5);
+  align-self: flex-start;
+  transition: transform .45s cubic-bezier(.2,.8,.2,1);
 }
 .fag-tile--feature .fag-tile__title {
-  font-size: clamp(2.2rem, 4vw, 3.2rem);
-  letter-spacing: -.035em;
-}
-.fag-tile__lede {
-  font-size: .9rem;
-  line-height: 1.4;
-  color: rgba(255,255,255,.85);
-  margin: 4px 0 0;
-  text-wrap: pretty;
-}
-.fag-tile--feature .fag-tile__lede {
-  font-size: clamp(1rem, 1.3vw, 1.15rem);
-  line-height: 1.5;
-  max-width: 38ch;
-  margin-top: 8px;
-}
-.fag-tile__cta {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  margin-top: 12px;
-  font-size: .82rem;
-  font-weight: 700;
-  letter-spacing: .04em;
-  color: #fff;
-  transition: gap .25s ease, color .2s ease;
-}
-.fag-tile__cta svg {
-  width: 16px;
-  height: 16px;
-  transition: transform .25s ease;
+  font-size: clamp(2.4rem, 4.4vw, 3.6rem);
+  letter-spacing: -.04em;
 }
 
-/* Hover-state — image zoom + lift + tonet copper overlay */
+/* Pil-ikon i bunn-høyre corner */
+.fag-tile__arrow {
+  position: absolute;
+  right: clamp(20px, 2.4vw, 30px);
+  bottom: clamp(20px, 2.4vw, 30px);
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: rgba(255,255,255,.1);
+  border: 1px solid rgba(255,255,255,.18);
+  color: #fff;
+  transition: background .35s ease, transform .35s ease, border-color .35s ease;
+  z-index: 3;
+}
+.fag-tile__arrow svg {
+  width: 16px;
+  height: 16px;
+  transition: transform .35s ease;
+}
+
+/* Hover: bilde fader inn mer, copper-glow, pil snur til copper */
 .fag-tile:hover {
   transform: translateY(-4px);
-  box-shadow: 0 24px 50px -18px rgba(31,31,32,.45);
+  box-shadow: 0 28px 56px -18px rgba(31,31,32,.5);
 }
 .fag-tile:hover .fag-tile__bg {
   transform: scale(1.06);
+  opacity: .8;
+  filter: saturate(.8) brightness(.7) contrast(1.05);
 }
 .fag-tile:hover .fag-tile__overlay {
-  background: linear-gradient(180deg, rgba(31,31,32,.15) 0%, rgba(31,31,32,.4) 45%, rgba(190,84,0,.55) 100%);
+  background:
+    linear-gradient(180deg, rgba(31,31,32,.35) 0%, rgba(31,31,32,.5) 55%, rgba(190,84,0,.65) 100%);
 }
-.fag-tile:hover .fag-tile__cta {
-  color: var(--copper-300);
-  gap: 14px;
+.fag-tile:hover .fag-tile__title {
+  transform: translateY(-2px);
 }
-.fag-tile:hover .fag-tile__cta svg {
+.fag-tile:hover .fag-tile__num {
+  border-top-width: 3px;
+  padding-top: 14px;
+}
+.fag-tile:hover .fag-tile__arrow {
+  background: var(--copper-500);
+  border-color: var(--copper-500);
+}
+.fag-tile:hover .fag-tile__arrow svg {
   transform: translateX(3px);
 }
 
@@ -2612,7 +2620,7 @@ h2 em, h1 em, h3 em {
   .fag-tile--feature {
     grid-column: span 2;
     grid-row: span 1;
-    min-height: 340px;
+    min-height: 320px;
   }
 }
 @media (max-width: 600px) {
@@ -2621,7 +2629,7 @@ h2 em, h1 em, h3 em {
   .fag-tile--feature {
     grid-column: auto;
     grid-row: auto;
-    min-height: 280px;
+    min-height: 260px;
   }
 }
 

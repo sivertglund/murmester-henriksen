@@ -148,14 +148,11 @@ const chipIcons: Record<string, string> = {
   </div>
 </section>
 
-<!-- ===== Tjenester: kompakt liste — kort om hvert fagområde ===== -->
+<!-- ===== Tjenester: bento-grid med 5 fagområder ===== -->
 <section class="services-list" id="tjenester">
   <div class="container services-list__head">
+    <p class="kicker">Fem fagområder</p>
     <h2>Våre <em>tjenester</em></h2>
-    <p class="lead">
-      For oss er det viktig å levere enestående resultater.
-      Vi tilbyr et bredt spekter av tjenester:
-    </p>
   </div>
 
   <div class="container">
@@ -167,10 +164,8 @@ const chipIcons: Record<string, string> = {
           <div class="fag-tile__body">
             <span class="fag-tile__num" aria-hidden="true">{k.nummer}</span>
             <h3 class="fag-tile__title">{k.tittel}</h3>
-            <p class="fag-tile__lede">{k.kortLede}</p>
-            <span class="fag-tile__cta">
-              Se hva vi leverer
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            <span class="fag-tile__arrow" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
             </span>
           </div>
         </a>
@@ -192,10 +187,6 @@ const chipIcons: Record<string, string> = {
     <div class="marquee__head">
       <p class="kicker">Utvalgte arbeider</p>
       <h2 class="display">Murverk i <em>Vestfold</em>.</h2>
-      <p class="marquee__lede">
-        Et knippe prosjekter — fra varsom kalk på verneverdige bygg
-        til presis tegl på nye fasader.
-      </p>
     </div>
   </div>
 

@@ -25,7 +25,7 @@ const portrettKortImg = om.portrettKortBilde ? urlFor(om.portrettKortBilde).widt
       </p>
       <p class="kicker kicker--light">{om.kicker}</p>
       <h1>{om.h1} <em>{om.h1Aksent}</em>{om.h1Slutt}</h1>
-      <p class="subhero__lede">{om.subheroLede}</p>
+      <p class="subhero__lede" set:html={om.subheroLede}></p>
     </div>
   </section>
 
@@ -37,7 +37,7 @@ const portrettKortImg = om.portrettKortBilde ? urlFor(om.portrettKortBilde).widt
           <Fragment set:html={innholdHtml} />
         ) : (
           <>
-            <h2>Vincent Henriksen, Norges nest beste murer i <em>2014</em></h2>
+            <h2>Vincent Henriksen, Norges <strong>nest beste murer</strong> i <em>2014</em></h2>
             <p><strong>Murmester | Fagskoleingeniør | Oldermann | Faglig veileder</strong></p>
             <p>
               For Vincent Henriksen er murfaget langt mer enn et yrke — det er en livslang lidenskap.
