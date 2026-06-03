@@ -66,9 +66,9 @@ export type Hero = {
 
 const HERO_FALLBACK: Hero = {
   welcome: 'Murmester · Etablert 2025 · Vear, Vestfold',
-  title: 'Alle trenger',
-  titleEmphasis: 'en murer!',
-  signature: 'Velkommen til Murmester Henriksen AS – Alle trenger en murer!',
+  title: 'Velkommen til',
+  titleEmphasis: 'Murmester Henriksen',
+  signature: 'Alle trenger en murer!',
   primaryCtaText: 'Kontakt oss',
   secondaryCtaText: 'Se tjenestene',
 };
