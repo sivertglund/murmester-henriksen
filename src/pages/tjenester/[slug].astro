@@ -10,9 +10,16 @@ export async function getStaticPaths() {
 }
 
 const { kategori } = Astro.props;
-
-// Sister-kategorier (for navigasjon nederst)
 const sosken = KATEGORIER.filter((k) => k.slug !== kategori.slug);
+
+function formatPris(u: { prisFra?: string; prisTil?: string; prisEnhet?: string }): string | null {
+  if (!u.prisFra && !u.prisTil) return null;
+  const enhet = u.prisEnhet ? ` ${u.prisEnhet}` : '';
+  if (u.prisFra && u.prisTil) return `${u.prisFra}–${u.prisTil}${enhet}`;
+  if (u.prisFra) return `fra ${u.prisFra}${enhet}`;
+  if (u.prisTil) return `opp til ${u.prisTil}${enhet}`;
+  return null;
+}
 ---
 <Layout
   title={`${kategori.tittel} — Murmester Henriksen AS`}
@@ -46,24 +53,63 @@ const sosken = KATEGORIER.filter((k) => k.slug !== kategori.slug);
     </div>
   </section>
 
-  <section class="fag-grid-wrap">
+  <section class="leveranser">
     <div class="container">
-      <div class="fag-grid">
-        {kategori.underkategorier.map((u, i) => (
-          <article class="fag-card">
-            <span class="fag-card__num" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
-            <h3 class="fag-card__title">{u.navn}</h3>
-            {u.beskrivelse && <p class="fag-card__desc">{u.beskrivelse}</p>}
-            <div class="fag-card__foot">
-              {u.prisFra ? (
-                <span class="fag-card__pris"><strong>fra</strong> {u.prisFra}</span>
-              ) : (
-                <span class="fag-card__pris fag-card__pris--ask">Pris på forespørsel</span>
-              )}
-            </div>
-          </article>
-        ))}
+      <div class="leveranser__head">
+        <p class="kicker">Leveransene</p>
+        <h2 class="leveranser__h2">Det vi leverer innen <em>{kategori.tittel.toLowerCase()}</em>.</h2>
+        <p class="leveranser__lede">
+          Klikk på leveransen for å lese mer.<br />Veiledende priser oppdateres etter hvert.
+        </p>
       </div>
+
+      <ul class="leveranser__list">
+        {kategori.underkategorier.map((u, i) => {
+          const pris = formatPris(u);
+          const harInfo = Boolean(u.infoTekst);
+          return (
+            <li class="leveranse">
+              <details class="leveranse__details">
+                <summary class="leveranse__summary">
+                  <span class="leveranse__num" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
+                  <span class="leveranse__main">
+                    <span class="leveranse__navn">{u.navn}</span>
+                    {u.beskrivelse && <span class="leveranse__kort">{u.beskrivelse}</span>}
+                  </span>
+                  <span class="leveranse__meta">
+                    {pris ? (
+                      <span class="leveranse__pris">{pris}</span>
+                    ) : (
+                      <span class="leveranse__pris leveranse__pris--ask">Pris på forespørsel</span>
+                    )}
+                    {harInfo && <span class="leveranse__expand" aria-hidden="true">↓</span>}
+                  </span>
+                </summary>
+                {(harInfo || u.prisNote) && (
+                  <div class="leveranse__body">
+                    {harInfo && (
+                      <div class="leveranse__info">
+                        <p>{u.infoTekst}</p>
+                      </div>
+                    )}
+                    {u.prisNote && (
+                      <p class="leveranse__prisnote"><strong>Om prisen:</strong> {u.prisNote}</p>
+                    )}
+                    <a class="leveranse__cta" href={`/kontakt?fag=${kategori.slug}&leveranse=${encodeURIComponent(u.navn)}`}>
+                      Spør om denne leveransen
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                    </a>
+                  </div>
+                )}
+              </details>
+            </li>
+          );
+        })}
+      </ul>
+
+      <p class="leveranser__foot">
+        Usikker på hva som passer? <a href="/kontakt">Ta kontakt</a> — vi finner ut av det sammen.
+      </p>
     </div>
   </section>
 

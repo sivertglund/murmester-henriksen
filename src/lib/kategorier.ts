@@ -3,8 +3,12 @@
 
 export type Underkategori = {
   navn: string;
-  beskrivelse?: string; // Kort forklaring av hva fagarbeidet er — bra for folk som ikke kjenner muring
-  prisFra?: string;     // f.eks. "1 950 kr/m²"
+  beskrivelse?: string;  // Kort forklaring (1 setning) — bra for folk som ikke kjenner muring
+  infoTekst?: string;    // Lang-form: hva er fagarbeidet, når brukes det, hva får kunden? Vises i ekspander.
+  prisFra?: string;      // f.eks. "1 950"
+  prisTil?: string;      // f.eks. "2 400" — valgfri øvre del av spennet
+  prisEnhet?: string;    // f.eks. "kr/m²", "kr/stk", "kr/dag"
+  prisNote?: string;     // f.eks. "Avhenger av omfang" eller "Eks. mva"
 };
 
 export type Kategori = {

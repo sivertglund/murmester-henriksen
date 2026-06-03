@@ -9,61 +9,46 @@ import { KATEGORIER } from '../../lib/kategorier';
 >
 
 <main>
-  <!-- Cinematic hero med ekte prosjektbilde + dramatic overlay -->
-  <section class="tj-hero">
-    <div class="tj-hero__bg" style="--hero-img: url('/assets/projects/project-06.jpg');"></div>
-    <div class="container tj-hero__inner">
+  <section class="tj-hub-hero">
+    <div class="container tj-hub-hero__inner">
       <p class="subhero__crumbs">
         <a href="/">Hjem</a>
         <span aria-hidden="true">/</span>
         <span>Tjenester</span>
       </p>
-      <p class="kicker kicker--light">Faget</p>
-      <h1 class="tj-hero__h1">
+      <p class="kicker">Faget</p>
+      <h1 class="tj-hub-hero__h1">
         Murmesterens <em>fem fag</em>
       </h1>
-      <p class="tj-hero__lede">
+      <p class="tj-hub-hero__lede">
         Fra grunnmur og teglforblending til antikvarisk kalkrestaurering —
         alt utført av samme mester, fra første befaring til ferdig fuge.
       </p>
-      <div class="tj-hero__stripe" aria-hidden="true">
-        <span></span><span></span>
-      </div>
     </div>
   </section>
 
-  <!-- Magazine-style alternerende stretched cards -->
-  <section class="tj-mag">
+  <section class="tj-hub">
     <div class="container">
-      {KATEGORIER.map((k, i) => (
-        <article class={`tj-mag__card scroll-fade ${i % 2 === 1 ? 'tj-mag__card--rev' : ''}`}>
-          <a class="tj-mag__media" href={`/tjenester/${k.slug}`} aria-label={k.tittel}>
-            <img src={k.heroBilde} alt="" loading="lazy" decoding="async" />
-            <span class="tj-mag__media-num" aria-hidden="true">{k.nummer}</span>
-            <span class="tj-mag__media-overlay"></span>
-          </a>
-          <div class="tj-mag__body">
-            <p class="tj-mag__eyebrow">Fagområde {k.nummer}</p>
-            <h2 class="tj-mag__title">
-              <a href={`/tjenester/${k.slug}`}>{k.tittel}</a>
-            </h2>
-            <p class="tj-mag__lede">{k.kortLede}</p>
-            <p class="tj-mag__intro">{k.introTekst}</p>
-            <ul class="tj-mag__list">
-              {k.underkategorier.slice(0, 6).map((u) => (
-                <li>{u.navn}</li>
-              ))}
-              {k.underkategorier.length > 6 && (
-                <li class="tj-mag__list-more">+ {k.underkategorier.length - 6} til</li>
-              )}
-            </ul>
-            <a class="tj-mag__cta" href={`/tjenester/${k.slug}`}>
-              Se hva vi leverer
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      <ul class="tj-hub__grid">
+        {KATEGORIER.map((k) => (
+          <li class="tj-hub__item scroll-fade">
+            <a href={`/tjenester/${k.slug}`} class="tj-hub__card">
+              <div class="tj-hub__media">
+                <img src={k.heroBilde} alt="" loading="lazy" decoding="async" />
+                <span class="tj-hub__num" aria-hidden="true">{k.nummer}</span>
+              </div>
+              <div class="tj-hub__body">
+                <h2 class="tj-hub__title">{k.tittel}</h2>
+                <p class="tj-hub__lede">{k.kortLede}</p>
+                <div class="tj-hub__foot">
+                  <span class="tj-hub__count">{k.underkategorier.length} leveranser</span>
+                  <span class="tj-hub__arrow" aria-hidden="true">→</span>
+                </div>
+              </div>
             </a>
-          </div>
-        </article>
-      ))}
+          </li>
+        ))}
+      </ul>
     </div>
   </section>
 
