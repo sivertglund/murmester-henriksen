@@ -125,10 +125,10 @@
     reveals.forEach(el => io.observe(el));
 
     /* Animation-only triggers — apply .is-in without the fade-up reveal */
-    document.querySelectorAll('.founder__bricks').forEach(el => io.observe(el));
+    document.querySelectorAll('.founder__bricks, [data-reveal-stripes], .scroll-fade, .scroll-slide-left, .scroll-slide-right').forEach(el => io.observe(el));
   } else {
     reveals.forEach(el => el.classList.add('is-in'));
-    document.querySelectorAll('.founder__bricks').forEach(el => el.classList.add('is-in'));
+    document.querySelectorAll('.founder__bricks, [data-reveal-stripes], .scroll-fade, .scroll-slide-left, .scroll-slide-right').forEach(el => el.classList.add('is-in'));
   }
 
 

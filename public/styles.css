@@ -188,13 +188,18 @@ h2 em, h1 em, h3 em {
   position: fixed;
   top: 0; left: 0; right: 0;
   z-index: 50;
-  transition: background .25s ease, color .25s ease, box-shadow .25s ease;
+  transition:
+    background .35s cubic-bezier(.4,0,.2,1),
+    color .35s ease,
+    box-shadow .35s ease,
+    backdrop-filter .35s ease;
   color: #fff;
 }
 .nav__inner {
   max-width: var(--max);
   margin: 0 auto;
   padding: 18px var(--pad);
+  transition: padding .35s cubic-bezier(.4,0,.2,1);
   display: flex;
   align-items: center;
   gap: 28px;
@@ -259,9 +264,7 @@ h2 em, h1 em, h3 em {
   filter: drop-shadow(0 4px 12px rgba(190, 84, 0, .35));
 }
 
-/* ===== Intro-overlay: aggressive logo-build ved page-load =====
-   Råere tempo: outline snapper inn, hver path "stempler" på plass
-   som hammerslag. Total ~2.4s. */
+/* ===== Intro-overlay: premium/minimalistisk logo-build ===== */
 .intro-overlay {
   position: fixed;
   inset: 0;
@@ -270,11 +273,7 @@ h2 em, h1 em, h3 em {
   display: grid;
   place-items: center;
   pointer-events: none;
-  /* Subtil noise/grid-tekstur i bakgrunnen for industriell vibe */
-  background-image:
-    radial-gradient(ellipse at center, rgba(190,84,0,.06) 0%, transparent 60%),
-    var(--steel-900);
-  animation: introFadeOut .6s cubic-bezier(.6,0,.3,1) 2.3s forwards;
+  animation: introFadeOut .9s cubic-bezier(.4,0,.2,1) 2.4s forwards;
 }
 @keyframes introFadeOut {
   from { opacity: 1; }
@@ -283,89 +282,131 @@ h2 em, h1 em, h3 em {
 .intro-logo {
   width: clamp(160px, 26vw, 280px);
   height: auto;
-  /* Snap-in scale ved start, mikro-shake ved orange-path arrivals */
-  animation:
-    introLogoSnap .35s cubic-bezier(.5, 1.6, .4, 1) 0s both,
-    introLogoShake .12s cubic-bezier(.5,0,.5,1) 1.3s,
-    introLogoShake .12s cubic-bezier(.5,0,.5,1) 1.45s,
-    introLogoShake .12s cubic-bezier(.5,0,.5,1) 1.6s;
+  opacity: 0;
+  /* Rolig fade-in fra litt mindre + svak blur — premium feel */
+  animation: introLogoIn 1.4s cubic-bezier(.2,.8,.2,1) forwards;
 }
-@keyframes introLogoSnap {
-  0%   { transform: scale(.7); opacity: 0; filter: blur(8px); }
-  60%  { opacity: 1; }
-  100% { transform: scale(1); opacity: 1; filter: blur(0); }
-}
-@keyframes introLogoShake {
-  0%, 100% { transform: scale(1) translateX(0); }
-  50%      { transform: scale(1.015) translateX(1px); }
+@keyframes introLogoIn {
+  0%   { opacity: 0; transform: scale(.96); filter: blur(4px); }
+  100% { opacity: 1; transform: scale(1); filter: blur(0); }
 }
 
-/* Outline: snap-sveip fra venstre */
+/* Stroke-tegnete versjoner — tegnes inn med pen-effekt langs path-en */
+.intro-path-stroke {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  fill: none;
+  animation:
+    introDrawStroke 1.6s cubic-bezier(.7, 0, .25, 1) .25s forwards,
+    introStrokeFadeOut .5s ease 1.8s forwards;
+}
+.intro-path-stroke--2 {
+  animation-delay: .55s, 2.1s;
+}
+@keyframes introDrawStroke {
+  to { stroke-dashoffset: 0; }
+}
+@keyframes introStrokeFadeOut {
+  to { opacity: 0; }
+}
+
+/* Fyllpathene fader inn etter at stroken er tegnet */
 .intro-path { opacity: 0; }
 .intro-path--outline {
-  clip-path: inset(0 100% 0 0);
-  animation: introOutlineSnap .55s cubic-bezier(.85,0,.15,1) .35s forwards;
+  animation: introSoftFade .7s cubic-bezier(.4,0,.2,1) 1.8s forwards;
 }
-@keyframes introOutlineSnap {
-  0%   { opacity: 0; clip-path: inset(0 100% 0 0); }
-  20%  { opacity: 1; }
-  100% { opacity: 1; clip-path: inset(0 0 0 0); }
-}
-
-/* Inner white paths: rask flash-fade */
 .intro-path--inner {
-  animation: introInnerFlash .25s cubic-bezier(.2,.8,.2,1) 1.0s forwards;
+  animation: introSoftFade .6s cubic-bezier(.4,0,.2,1) 2.0s forwards;
 }
-@keyframes introInnerFlash {
-  0%   { opacity: 0; }
-  40%  { opacity: 1.4; }
-  100% { opacity: 1; }
-}
-
-/* Oransje paths: STAMP-effekt med radial spread + drop-shadow flash */
 .intro-path--orange-1,
 .intro-path--orange-2,
 .intro-path--orange-3 {
-  animation: introOrangeStamp .25s cubic-bezier(.5, 1.8, .4, 1) forwards;
+  animation: introSoftFade .7s cubic-bezier(.4,0,.2,1) forwards;
 }
-.intro-path--orange-1 { animation-delay: 1.3s; }
-.intro-path--orange-2 { animation-delay: 1.45s; }
-.intro-path--orange-3 { animation-delay: 1.6s; }
-@keyframes introOrangeStamp {
-  0%   { opacity: 0; transform: scale(.7) translateY(-3px); filter: brightness(2.2); }
-  60%  { opacity: 1; transform: scale(1.04) translateY(0); filter: brightness(1.6); }
-  100% { opacity: 1; transform: scale(1); filter: brightness(1); }
+.intro-path--orange-1 { animation-delay: 2.15s; }
+.intro-path--orange-2 { animation-delay: 2.3s; }
+.intro-path--orange-3 { animation-delay: 2.45s; }
+
+@keyframes introSoftFade {
+  from { opacity: 0; }
+  to   { opacity: 1; }
 }
 
-/* Glow-flash bak logoen — copper-glow når oransje "stempler" */
+/* Subtil copper-glow som vokser frem mens logoen ferdigstilles — kommer rolig, ingen blink */
 .intro-overlay::before {
   content: "";
   position: absolute;
   top: 50%;
   left: 50%;
-  width: 60vmin;
-  height: 60vmin;
+  width: 70vmin;
+  height: 70vmin;
   transform: translate(-50%, -50%);
   pointer-events: none;
-  background: radial-gradient(circle at center, rgba(190,84,0,.45) 0%, transparent 55%);
+  background: radial-gradient(circle at center, rgba(190, 84, 0, .18) 0%, transparent 60%);
   opacity: 0;
-  animation:
-    introGlowFlash .35s cubic-bezier(.4,.1,.25,1) 1.3s,
-    introGlowFlash .35s cubic-bezier(.4,.1,.25,1) 1.45s,
-    introGlowFlash .35s cubic-bezier(.4,.1,.25,1) 1.6s;
+  animation: introGlowEase 1.4s cubic-bezier(.4,0,.2,1) 1.4s forwards;
 }
-@keyframes introGlowFlash {
-  0%, 100% { opacity: 0; }
-  40%      { opacity: 1; }
+@keyframes introGlowEase {
+  to { opacity: 1; }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .intro-overlay {
-    animation: introFadeOut .3s ease 0s forwards;
-  }
+  .intro-overlay { animation: introFadeOut .3s ease 0s forwards; }
   .intro-path { opacity: 1; clip-path: none; animation: none; }
-  .intro-logo { animation: none; }
+  .intro-logo { animation: none; opacity: 1; }
   .intro-overlay::before { animation: none; opacity: 0; }
+}
+
+/* ===== Henriksen brand-stripes (fra grafisk profil side 6) =====
+   4 horisontale copper-linjer i to par. Slides inn fra siden ved
+   scroll-reveal. Brukes som visuelt aksent-element. */
+.brand-stripes {
+  position: relative;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: clamp(6px, .9vw, 11px);
+  padding: clamp(22px, 3vw, 36px) 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+.brand-stripes__line {
+  display: block;
+  height: clamp(4px, .55vw, 7px);
+  background: var(--copper-500);
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 1.1s cubic-bezier(.22, .68, .12, 1);
+  will-change: transform;
+}
+/* Visse striper er kortere — gir variasjon, matcher Vincents PDF side 6 */
+.brand-stripes__line:nth-child(2) { width: 85%; }
+.brand-stripes__line:nth-child(3) { width: 92%; }
+
+.brand-stripes--right .brand-stripes__line {
+  transform-origin: right center;
+  margin-left: auto;
+}
+.brand-stripes--both .brand-stripes__line:nth-child(odd) {
+  transform-origin: left center;
+}
+.brand-stripes--both .brand-stripes__line:nth-child(even) {
+  transform-origin: right center;
+  margin-left: auto;
+}
+
+.brand-stripes--steel .brand-stripes__line { background: var(--steel-600); }
+
+/* Aktiveres når seksjonen entrer viewport — staggered */
+.brand-stripes.is-in .brand-stripes__line { transform: scaleX(1); }
+.brand-stripes.is-in .brand-stripes__line:nth-child(1) { transition-delay: 0s; }
+.brand-stripes.is-in .brand-stripes__line:nth-child(2) { transition-delay: .12s; }
+.brand-stripes.is-in .brand-stripes__line:nth-child(3) { transition-delay: .24s; }
+.brand-stripes.is-in .brand-stripes__line:nth-child(4) { transition-delay: .36s; }
+
+@media (prefers-reduced-motion: reduce) {
+  .brand-stripes__line { transform: scaleX(1); transition: none; }
 }
 
 /* ===== Henriksen stripe-system (fra varebilen + side 6 i grafisk profil) ===== */
@@ -522,14 +563,29 @@ h2 em, h1 em, h3 em {
 }
 
 .nav.is-solid {
-  background: rgba(250,246,239,.94);
-  backdrop-filter: saturate(140%) blur(14px);
-  -webkit-backdrop-filter: saturate(140%) blur(14px);
+  background: rgba(255, 255, 255, .82);
+  backdrop-filter: saturate(160%) blur(16px);
+  -webkit-backdrop-filter: saturate(160%) blur(16px);
   color: var(--ink);
-  box-shadow: 0 1px 0 rgba(0,0,0,.06);
+  box-shadow:
+    0 1px 0 rgba(31,31,32,.06),
+    0 10px 30px -10px rgba(31,31,32,.08);
 }
-.nav.is-solid .nav__cta { background: var(--clay-500); color: var(--white); }
-.nav.is-solid .nav__cta:hover { background: var(--clay-700); }
+.nav.is-solid .nav__inner {
+  padding-top: 12px;
+  padding-bottom: 12px;
+}
+.nav.is-solid .nav__logo {
+  width: 30px;
+  height: 38px;
+  transition: width .35s ease, height .35s ease;
+}
+.nav.is-solid .nav__cta {
+  background: var(--copper-500);
+  color: var(--white);
+}
+.nav.is-solid .nav__cta:hover { background: var(--copper-600); }
+.nav__logo { transition: width .35s ease, height .35s ease; }
 
 /* ===== Hero ===== */
 .hero {
@@ -623,9 +679,9 @@ h2 em, h1 em, h3 em {
   position: relative;
   display: block;
   margin: 0;
-  font-size: clamp(3rem, 9vw, 7rem);
-  line-height: .98;
-  letter-spacing: -.04em;
+  font-size: clamp(2.4rem, 6.5vw, 5rem);
+  line-height: 1;
+  letter-spacing: -.035em;
   opacity: 0;
   transform: translateY(24px);
   animation: heroTitleIn 1.1s cubic-bezier(.2,.8,.2,1) .65s forwards;
@@ -640,10 +696,8 @@ h2 em, h1 em, h3 em {
   font-size: inherit;
   line-height: inherit;
   letter-spacing: inherit;
-  color: var(--copper-500);
-  text-shadow:
-    0 2px 30px rgba(0,0,0,.55),
-    0 0 30px rgba(190, 84, 0, .35);
+  color: #fff;
+  text-shadow: 0 2px 30px rgba(0,0,0,.55);
 }
 .hero__write-text em {
   font-style: normal;

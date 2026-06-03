@@ -1,5 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import BrandStripes from '../components/BrandStripes.astro';
 import { getOmOss, urlFor } from '../lib/sanity';
 import { toHTML } from '@portabletext/to-html';
 
@@ -28,6 +29,10 @@ const portrettKortImg = om.portrettKortBilde ? urlFor(om.portrettKortBilde).widt
       <p class="subhero__lede">{om.subheroLede}</p>
     </div>
   </section>
+
+  <div class="container">
+    <BrandStripes align="both" />
+  </div>
 
   <section class="article">
     <div class="container article__inner">

@@ -1,0 +1,17 @@
+---
+// Henriksen merkevarestriper — det som ligger bak logoen i grafisk profil side 6.
+// Fire copper-striper i to par, slides inn fra venstre/høyre når seksjonen entrer viewport.
+export interface Props {
+  /** Plassering: 'left' = stripes peker innover fra venstre kant, 'right' = fra høyre, 'both' = møtes på midten. */
+  align?: 'left' | 'right' | 'both';
+  /** Optional tonal variation. */
+  tone?: 'copper' | 'steel';
+}
+const { align = 'both', tone = 'copper' } = Astro.props;
+---
+<div class={`brand-stripes brand-stripes--${align} brand-stripes--${tone}`} data-reveal-stripes>
+  <span class="brand-stripes__line"></span>
+  <span class="brand-stripes__line"></span>
+  <span class="brand-stripes__line"></span>
+  <span class="brand-stripes__line"></span>
+</div>
