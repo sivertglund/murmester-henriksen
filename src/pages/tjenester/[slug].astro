@@ -1,6 +1,6 @@
 ---
 import Layout from '../../layouts/Layout.astro';
-import { KATEGORIER, getKategori } from '../../lib/kategorier';
+import { KATEGORIER } from '../../lib/kategorier';
 
 export async function getStaticPaths() {
   return KATEGORIER.map((k) => ({
@@ -10,6 +10,9 @@ export async function getStaticPaths() {
 }
 
 const { kategori } = Astro.props;
+
+// Sister-kategorier (for navigasjon nederst)
+const sosken = KATEGORIER.filter((k) => k.slug !== kategori.slug);
 ---
 <Layout
   title={`${kategori.tittel} — Murmester Henriksen AS`}
@@ -18,7 +21,7 @@ const { kategori } = Astro.props;
 >
 
 <main>
-  <section class="subhero">
+  <section class="subhero" style={`--subhero-img: url('${kategori.heroBilde}');`}>
     <div class="container subhero__inner">
       <p class="subhero__crumbs">
         <a href="/">Hjem</a>
@@ -33,31 +36,52 @@ const { kategori } = Astro.props;
     </div>
   </section>
 
-  <section class="kategori">
-    <div class="container kategori__inner">
-      <h2 class="kategori__h2">Hva vi leverer innen <em>{kategori.tittel.toLowerCase()}</em></h2>
-      <p class="lead">
-        Veiledende priser legges inn etter hvert som vi utfører oppdrag — ta kontakt
-        for et uforpliktende prisanslag på din konkrete jobb.
-      </p>
+  <section class="kategori-intro">
+    <div class="container kategori-intro__inner">
+      <p class="kicker">Om fagområdet</p>
+      <h2 class="kategori-intro__h2">
+        Hva vi gjør innen <em>{kategori.tittel.toLowerCase()}</em>
+      </h2>
+      <p class="kategori-intro__lede">{kategori.introTekst}</p>
+    </div>
+  </section>
 
-      <ul class="kategori__list">
-        {kategori.underkategorier.map((u) => (
-          <li class="kategori__item">
-            <span class="kategori__item-title">{u.navn}</span>
-            {u.prisFra ? (
-              <span class="kategori__item-pris">{u.prisFra}</span>
-            ) : (
-              <span class="kategori__item-pris kategori__item-pris--tba">Pris på forespørsel</span>
-            )}
+  <section class="fag-grid-wrap">
+    <div class="container">
+      <div class="fag-grid">
+        {kategori.underkategorier.map((u, i) => (
+          <article class="fag-card">
+            <span class="fag-card__num" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
+            <h3 class="fag-card__title">{u.navn}</h3>
+            {u.beskrivelse && <p class="fag-card__desc">{u.beskrivelse}</p>}
+            <div class="fag-card__foot">
+              {u.prisFra ? (
+                <span class="fag-card__pris"><strong>fra</strong> {u.prisFra}</span>
+              ) : (
+                <span class="fag-card__pris fag-card__pris--ask">Pris på forespørsel</span>
+              )}
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="kategori-naviger section--dark">
+    <div class="container">
+      <p class="kicker kicker--light">Andre fagområder</p>
+      <h2>Murmesterens <em>fem fag</em>.</h2>
+      <ul class="kategori-naviger__list">
+        {sosken.map((s) => (
+          <li>
+            <a href={`/tjenester/${s.slug}`} class="kategori-naviger__item">
+              <span class="kategori-naviger__num">{s.nummer}</span>
+              <span class="kategori-naviger__tittel">{s.tittel}</span>
+              <span class="kategori-naviger__arrow" aria-hidden="true">→</span>
+            </a>
           </li>
         ))}
       </ul>
-
-      <div class="kategori__cta">
-        <a href="/kontakt" class="btn btn--primary btn--lg">Be om prisantydning</a>
-        <a href="/tjenester/" class="btn btn--ghost-dark">← Tilbake til alle fagområder</a>
-      </div>
     </div>
   </section>
 

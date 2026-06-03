@@ -83,7 +83,25 @@ const chipIcons: Record<string, string> = {
 
     <div class="founder__hero">
       <figure class="founder__portrait">
-        <img src={founder.portrett ? urlFor(founder.portrett).width(500).url() : '/assets/vincent-portrait.jpg'} alt="Mestermur Vincent Henriksen" loading="lazy" decoding="async" />
+        <img src={founder.portrett ? urlFor(founder.portrett).width(500).url() : '/assets/vincent-portrait.jpg'} alt="Murmester Vincent Henriksen" loading="lazy" decoding="async" />
+        <div class="nm-medalje" aria-label="NM-sølv 2014">
+          <svg viewBox="0 0 80 80" aria-hidden="true">
+            <defs>
+              <linearGradient id="medalje-grad" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#e8c890"/>
+                <stop offset="55%" stop-color="#c39054"/>
+                <stop offset="100%" stop-color="#8a5a30"/>
+              </linearGradient>
+            </defs>
+            <circle cx="40" cy="40" r="34" fill="url(#medalje-grad)" stroke="#fff" stroke-width="2"/>
+            <circle cx="40" cy="40" r="28" fill="none" stroke="rgba(255,255,255,.4)" stroke-width="1"/>
+          </svg>
+          <span class="nm-medalje__txt">
+            <span class="nm-medalje__nm">NM</span>
+            <span class="nm-medalje__sylv">SØLV</span>
+            <span class="nm-medalje__aar">2014</span>
+          </span>
+        </div>
       </figure>
       <div class="founder__copy">
         <h2 class="founder__title">{founder.tittel} <em>{founder.tittelAksent}</em>{founder.tittelSlutt}</h2>
@@ -142,19 +160,16 @@ const chipIcons: Record<string, string> = {
   </div>
 
   <div class="container">
-    <ul class="svc-list">
+    <div class="fag-mini-grid">
       {KATEGORIER.map((k) => (
-        <li>
-          <a class="svc-row" href={`/tjenester/${k.slug}`}>
-            <span class="svc-row__num">{k.nummer}</span>
-            <span class="svc-row__title">{k.tittel}</span>
-            <span class="svc-row__arrow" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-            </span>
-          </a>
-        </li>
+        <a class="fag-mini" href={`/tjenester/${k.slug}`}>
+          <span class="fag-mini__num" aria-hidden="true">{k.nummer}</span>
+          <h3 class="fag-mini__tittel">{k.tittel}</h3>
+          <p class="fag-mini__lede">{k.kortLede}</p>
+          <span class="fag-mini__cta">Se hva vi leverer →</span>
+        </a>
       ))}
-    </ul>
+    </div>
   </div>
 
   <div class="container services-list__foot">
@@ -169,7 +184,12 @@ const chipIcons: Record<string, string> = {
 <section class="marquee" id="prosjekter-utvalg">
   <div class="container">
     <div class="marquee__head">
-      <h2 class="display">Prosjekter</h2>
+      <p class="kicker">Utvalgte arbeider</p>
+      <h2 class="display">Murverk i <em>Vestfold</em>.</h2>
+      <p class="marquee__lede">
+        Et knippe prosjekter — fra varsom kalk på verneverdige bygg
+        til presis tegl på nye fasader.
+      </p>
     </div>
   </div>
 
@@ -196,8 +216,28 @@ const chipIcons: Record<string, string> = {
 
 </section>
 
-<!-- ===== Testimonials — hva kunder sier ===== -->
-<section class="testimonials" id="anbefalinger">
+<!-- ===== Mester-sitat ===== -->
+<section class="mester-sitat" id="filosofi">
+  <div class="container mester-sitat__inner">
+    <p class="kicker">Mesterens filosofi</p>
+    <blockquote class="mester-sitat__quote">
+      <p>
+        Jeg er stolt av <em>håndverket mitt</em>, stolt av <em>faget mitt</em>,
+        og stolt av å kunne hjelpe kunder med små og store prosjekter.
+      </p>
+      <p class="mester-sitat__welcome">
+        Velkommen til Murmester Henriksen AS — Alle trenger en murer!
+      </p>
+      <footer>
+        <strong>Vincent Henriksen</strong>
+        <span>Murmester · Fagskoleingeniør · Oldermann</span>
+      </footer>
+    </blockquote>
+  </div>
+</section>
+
+<!-- ===== Testimonials (skjult inntil ekte sitater er på plass) ===== -->
+<section class="testimonials" id="anbefalinger" hidden>
   <div class="container testimonials__inner">
     <div class="testimonials__head">
       <p class="kicker">{testimonials.kicker}</p>

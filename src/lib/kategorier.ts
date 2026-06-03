@@ -1,16 +1,19 @@
 // 5 hovedkategorier, hver med underkategorier — fra Vincents tabell.
-// Når vi senere koples til Sanity, leses dette fra CMS. For nå er det hardkodet.
+// Beskrivelse + pris er valgfritt og legges inn etter hvert.
 
 export type Underkategori = {
   navn: string;
-  prisFra?: string; // f.eks. "1 950 kr/m²" — fylles inn senere
+  beskrivelse?: string; // Kort forklaring av hva fagarbeidet er — bra for folk som ikke kjenner muring
+  prisFra?: string;     // f.eks. "1 950 kr/m²"
 };
 
 export type Kategori = {
   nummer: string;
   slug: string;
   tittel: string;
-  kortLede: string;
+  kortLede: string;       // 1 setning, vises på hub-kort og forsiden
+  introTekst: string;     // 2-3 setninger, vises som intro på kategori-siden
+  heroBilde: string;      // URL eller path til hero på kategori-siden
   underkategorier: Underkategori[];
 };
 
@@ -19,83 +22,98 @@ export const KATEGORIER: Kategori[] = [
     nummer: '01',
     slug: 'muring',
     tittel: 'Muring',
-    kortLede: 'Teglforblending, Leca, Thermomur, kistemur, tørrmur, skifer og natursteinarbeid — fra fundament til ferdig fasade.',
+    kortLede: 'Tegl, Leca, Thermomur, naturstein — fra fundament til ferdig fasade.',
+    introTekst:
+      'Murverket er bygningens ryggrad. Vi murer i tegl, betongblokk og naturstein — alt fra bærevegger og kjellermurer til presisjonsforblending på fasade. Hvilket system vi velger styres av bygget, eksponeringen og uttrykket du vil ha.',
+    heroBilde: '/assets/projects/project-02.jpg',
     underkategorier: [
-      { navn: 'Teglforblending' },
-      { navn: 'Leca-muring' },
-      { navn: 'Thermomur' },
-      { navn: 'Kistemur' },
-      { navn: 'Tørrmur' },
-      { navn: 'Systemblokk' },
-      { navn: 'Bruddskifer' },
-      { navn: 'Skiferlegging av plater, trapper og vegg' },
-      { navn: 'Skiferpanel' },
-      { navn: 'Restaurering av antikvarisk murverk' },
+      { navn: 'Teglforblending', beskrivelse: 'Tradisjonell muring med tegl utenpå bærekonstruksjon. Gir en fasade som tåler vær og tid.' },
+      { navn: 'Leca-muring', beskrivelse: 'Lette blokker for bærevegger og kjellermurer. God isolasjon, raskt å mure.' },
+      { navn: 'Thermomur', beskrivelse: 'Isolerende blokk for nybygg med strenge varmekrav.' },
+      { navn: 'Kistemur', beskrivelse: 'Dobbeltvegg med hulrom — klassisk konstruksjon brukt på eldre bygg.' },
+      { navn: 'Tørrmur', beskrivelse: 'Naturstein lagt uten mørtel. Håndverksintensivt og varig.' },
+      { navn: 'Systemblokk', beskrivelse: 'Prefabrikkerte betongblokker som mures raskt og presist.' },
+      { navn: 'Bruddskifer', beskrivelse: 'Skifer i naturlige bruddflater — rustikt uttrykk på fasade eller mur.' },
+      { navn: 'Skiferlegging av plater, trapper og vegg', beskrivelse: 'Plater og blokker av skifer på trapper, inngangspartier og vegger.' },
+      { navn: 'Skiferpanel', beskrivelse: 'Moderne fasadeløsning i skifer, lett og slank.' },
+      { navn: 'Restaurering av antikvarisk murverk', beskrivelse: 'Forsiktig istandsetting av eldre murverk med originalmetoder.' },
     ],
   },
   {
     nummer: '02',
     slug: 'puss',
     tittel: 'Puss',
-    kortLede: 'Mørtelpuss, fasadepuss, fiberpuss, finpuss, samt tradisjonelle puss-teknikker til moderne og verneverdige bygg.',
+    kortLede: 'Mørtelpuss, fasadepuss, finpuss og tradisjonelle teknikker — moderne og verneverdig.',
+    introTekst:
+      'Puss er både beskyttelse og uttrykk. Vi blander mørtelen selv og velger system etter underlag og bygg. Vi pusser fasader på nybygg, restaurerer gamle puss-flater og utfører tradisjonelle teknikker som ikke alle behersker.',
+    heroBilde: '/assets/projects/project-01.jpg',
     underkategorier: [
-      { navn: 'Mørtelpuss' },
-      { navn: 'Hydraulisk kalkpuss til restaurering av antikvarisk murverk' },
-      { navn: 'Fiberpuss' },
-      { navn: 'Fasadepuss' },
-      { navn: 'Loddpuss' },
-      { navn: 'Brettskur' },
-      { navn: 'Munkepuss' },
-      { navn: 'Stenkpuss' },
-      { navn: 'Sekkeskuring' },
-      { navn: 'Kostepuss' },
+      { navn: 'Mørtelpuss', beskrivelse: 'Klassisk pussing med sement- eller kalkmørtel — for fasade eller innvendig.' },
+      { navn: 'Hydraulisk kalkpuss til restaurering', beskrivelse: 'Pust-evne kalkmørtel som bevarer antikvarisk murverk uten å skade.' },
+      { navn: 'Fiberpuss', beskrivelse: 'Fiberarmert puss som motvirker sprekkdannelse på utsatte flater.' },
+      { navn: 'Fasadepuss', beskrivelse: 'Pussede fasader på enebolig, hytte og næringsbygg.' },
+      { navn: 'Loddpuss', beskrivelse: 'Trekt med lodd og rettholt — millimeterpresis flate.' },
+      { navn: 'Brettskur', beskrivelse: 'Pussflate avglattet med brett — gir en jevn, halvgrov tekstur.' },
+      { navn: 'Munkepuss', beskrivelse: 'Tradisjonell norsk pussteknikk med karakteristisk overflate.' },
+      { navn: 'Stenkpuss', beskrivelse: 'Stenket på med kost eller maskin — rustikt, ujevnt uttrykk.' },
+      { navn: 'Sekkeskuring', beskrivelse: 'Tradisjonell finish som gir tegl en delvis dekket, varm overflate.' },
+      { navn: 'Kostepuss', beskrivelse: 'Pussflate med kost-tekstur — vanlig på kjeller og fasade.' },
     ],
   },
   {
     nummer: '03',
     slug: 'ildsted-og-skorstein',
     tittel: 'Ildsted og skorstein',
-    kortLede: 'Montering av vedovn og peisinnsats, gruepeis, samt oppføring og rehabilitering av piper — element, stål eller teglmur.',
+    kortLede: 'Vedovn, peisinnsats, gruepeis og piper — montering, oppføring og rehabilitering.',
+    introTekst:
+      'Et ildsted skal være trygt, godkjent og se bra ut. Vi monterer alt fra moderne vedovner til klassiske gruepeiser, fører opp piper i element, stål eller teglmur, og rehabiliterer eldre skorsteiner som er underkjent av feiervesenet.',
+    heroBilde: '/assets/projects/project-04.jpg',
     underkategorier: [
-      { navn: 'Montering av vedovn' },
-      { navn: 'Montering av peisinnsats og brannplater' },
-      { navn: 'Gruepeis' },
-      { navn: 'Oppføring av elementpipe' },
-      { navn: 'Oppføring av stålpipe' },
-      { navn: 'Oppføring av teglpipe' },
-      { navn: 'Rehabilitering av piper med stålrør' },
-      { navn: 'Service og vedlikehold' },
+      { navn: 'Montering av vedovn', beskrivelse: 'Komplett montering med brannplate, røykrør og tilkobling.' },
+      { navn: 'Montering av peisinnsats og brannplater', beskrivelse: 'Innsats i ny eller eksisterende peis, med brannsikring.' },
+      { navn: 'Gruepeis', beskrivelse: 'Klassisk åpen peis med grue — varmekilde og rom-element.' },
+      { navn: 'Oppføring av elementpipe', beskrivelse: 'Prefabrikkerte modulpiper — rask og forskriftsmessig montering.' },
+      { navn: 'Oppføring av stålpipe', beskrivelse: 'Lett pipeløsning, ofte brukt der plass eller statikk er en utfordring.' },
+      { navn: 'Oppføring av teglpipe', beskrivelse: 'Tradisjonell murt pipe med tegl — solid og dekorativ.' },
+      { navn: 'Rehabilitering av piper med stålrør', beskrivelse: 'Foring av eldre røykløp med stål — utfører hele jobben inkl. søknad.' },
+      { navn: 'Service og vedlikehold', beskrivelse: 'Inspeksjon, reparasjon og småfix på ildsted og pipe.' },
     ],
   },
   {
     nummer: '04',
     slug: 'flis-vatrom-betong',
     tittel: 'Flis, våtrom og betong',
-    kortLede: 'Sertifisert våtromsarbeid — baderomsstøp, membran, flislegging, fallavretting og mindre betongarbeider.',
+    kortLede: 'Sertifisert våtromsarbeid — fra støp og membran til ferdig flisbelagt bad.',
+    introTekst:
+      'Et våtrom er like solid som forarbeidet. Vi støper opp riktig fall, legger godkjent membran og fliser eller naturstein på toppen. Vi gjør også mindre betongarbeider, gulvavretting og fuktsikring.',
+    heroBilde: '/assets/projects/project-07.jpg',
     underkategorier: [
-      { navn: 'Baderomsstøp' },
-      { navn: 'Smøremembran' },
-      { navn: 'Flislegging' },
-      { navn: 'Flytavretting av gulv' },
-      { navn: 'Mindre betongarbeider' },
-      { navn: 'Fuktsikring' },
-      { navn: 'Gulvstøp' },
-      { navn: 'Falloppbygging' },
+      { navn: 'Baderomsstøp', beskrivelse: 'Støp av gulv og terskler med riktig fall til sluk.' },
+      { navn: 'Smøremembran', beskrivelse: 'Påført membran som tetter gulv og vegger før flislegging.' },
+      { navn: 'Flislegging', beskrivelse: 'Keramiske fliser, naturstein, mosaikk og storformat — gulv og vegg.' },
+      { navn: 'Flytavretting av gulv', beskrivelse: 'Selvutjevnende sparkel for plant, presist underlag.' },
+      { navn: 'Mindre betongarbeider', beskrivelse: 'Reparasjon og småstøp i betong — der det trengs.' },
+      { navn: 'Fuktsikring', beskrivelse: 'Tiltak mot fukt og vanninntrengning i utsatte konstruksjoner.' },
+      { navn: 'Gulvstøp', beskrivelse: 'Komplett støp av gulv på terreng eller dekke.' },
+      { navn: 'Falloppbygging', beskrivelse: 'Bygging av fall til sluk i våtrom, balkonger og uteareal.' },
     ],
   },
   {
     nummer: '05',
     slug: 'restaurering',
     tittel: 'Restaurering',
-    kortLede: 'Hydraulisk kalk (NHL), antikvariske og riksantikvariske arbeider, tradisjonell rapping og restaurering av eldre fasader og naturstein.',
+    kortLede: 'Hydraulisk kalk, antikvarisk og riksantikvarisk arbeid — varsomt og fagriktig.',
+    introTekst:
+      'Eldre murbygg er bygget for å puste. Med moderne sementmørtel skader man ofte mer enn man reparerer. Vi arbeider med hydraulisk kalk og tradisjonelle metoder, dokumenterer det vi gjør, og samarbeider tett med fylkets antikvarer der det kreves.',
+    heroBilde: '/assets/projects/project-03.jpg',
     underkategorier: [
-      { navn: 'Hydraulisk kalk (NHL)' },
-      { navn: 'Antikvarisk murverk' },
-      { navn: 'Riksantikvariske arbeider' },
-      { navn: 'Tradisjonell rapping' },
-      { navn: 'Restaurering av naturstein' },
-      { navn: 'Restaurering av teglfasader' },
-      { navn: 'Kulturhistoriske bygg' },
+      { navn: 'Hydraulisk kalk (NHL)', beskrivelse: 'Naturlig hydraulisk kalkmørtel — pust-evne, fleksibel, riktig for eldre bygg.' },
+      { navn: 'Antikvarisk murverk', beskrivelse: 'Murverk i tråd med antikvariske retningslinjer — eldre tegl, kalkmørtel.' },
+      { navn: 'Riksantikvariske arbeider', beskrivelse: 'Arbeid på bygg med riksantikvarisk status — dokumentert og kontrollert.' },
+      { navn: 'Tradisjonell rapping', beskrivelse: 'Eldre pusslinjer og rapping — bevart med originalmetoder.' },
+      { navn: 'Restaurering av naturstein', beskrivelse: 'Reparasjon og utskifting av enkeltsteiner og hele partier.' },
+      { navn: 'Restaurering av teglfasader', beskrivelse: 'Refuging, frostskader, utskifting av tegl — riktig mørtel, riktig farge.' },
+      { navn: 'Kulturhistoriske bygg', beskrivelse: 'Arbeid på bygg med kulturhistorisk verdi — varsomt og dokumentert.' },
     ],
   },
 ];
