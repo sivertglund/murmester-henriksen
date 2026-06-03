@@ -1161,10 +1161,10 @@ h2 em, h1 em, h3 em {
   will-change: transform;
 }
 .brick-row--bot .brick-row__track {
-  animation: brickScrollRight 38s linear infinite;
+  animation: brickScrollRight 140s linear infinite;
 }
 .brick-row--top .brick-row__track {
-  animation: brickScrollLeft 32s linear infinite;
+  animation: brickScrollLeft 120s linear infinite;
 }
 .brick {
   display: block;
