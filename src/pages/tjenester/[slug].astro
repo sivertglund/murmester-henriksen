@@ -1,0 +1,77 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { KATEGORIER, getKategori } from '../../lib/kategorier';
+
+export async function getStaticPaths() {
+  return KATEGORIER.map((k) => ({
+    params: { slug: k.slug },
+    props: { kategori: k },
+  }));
+}
+
+const { kategori } = Astro.props;
+---
+<Layout
+  title={`${kategori.tittel} — Murmester Henriksen AS`}
+  description={kategori.kortLede}
+  activePage="tjenester"
+>
+
+<main>
+  <section class="subhero">
+    <div class="container subhero__inner">
+      <p class="subhero__crumbs">
+        <a href="/">Hjem</a>
+        <span aria-hidden="true">/</span>
+        <a href="/tjenester/">Tjenester</a>
+        <span aria-hidden="true">/</span>
+        <span>{kategori.tittel}</span>
+      </p>
+      <p class="kicker kicker--light">Fagområde {kategori.nummer}</p>
+      <h1>{kategori.tittel}</h1>
+      <p class="subhero__lede">{kategori.kortLede}</p>
+    </div>
+  </section>
+
+  <section class="kategori">
+    <div class="container kategori__inner">
+      <h2 class="kategori__h2">Hva vi leverer innen <em>{kategori.tittel.toLowerCase()}</em></h2>
+      <p class="lead">
+        Veiledende priser legges inn etter hvert som vi utfører oppdrag — ta kontakt
+        for et uforpliktende prisanslag på din konkrete jobb.
+      </p>
+
+      <ul class="kategori__list">
+        {kategori.underkategorier.map((u) => (
+          <li class="kategori__item">
+            <span class="kategori__item-title">{u.navn}</span>
+            {u.prisFra ? (
+              <span class="kategori__item-pris">{u.prisFra}</span>
+            ) : (
+              <span class="kategori__item-pris kategori__item-pris--tba">Pris på forespørsel</span>
+            )}
+          </li>
+        ))}
+      </ul>
+
+      <div class="kategori__cta">
+        <a href="/kontakt" class="btn btn--primary btn--lg">Be om prisantydning</a>
+        <a href="/tjenester/" class="btn btn--ghost-dark">← Tilbake til alle fagområder</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-strip section--dark">
+    <div class="container cta-strip__inner">
+      <p class="kicker kicker--light">Klar for å starte?</p>
+      <h2>La oss <em>se på jobben</em>.</h2>
+      <p class="cta-strip__lede">Vi gir et tydelig, skriftlig prisanslag basert på dine ønsker.</p>
+      <div class="cta-strip__btns">
+        <a href="/kontakt" class="btn btn--primary btn--lg">Be om prisantydning</a>
+        <a href="tel:+4795523763" class="btn btn--ghost btn--lg">Ring 955 23 763</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+</Layout>

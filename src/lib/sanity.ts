@@ -65,11 +65,11 @@ export type Hero = {
 };
 
 const HERO_FALLBACK: Hero = {
-  welcome: 'Mestermur · Etablert 2008 · Vear, Vestfold',
+  welcome: 'Murmester · Etablert 2025 · Vear, Vestfold',
   title: 'Alle trenger',
   titleEmphasis: 'en murer!',
-  signature: 'Murmester Henriksen er her for å hjelpe deg!',
-  primaryCtaText: 'Få prisantydning',
+  signature: 'Velkommen til Murmester Henriksen AS – Alle trenger en murer!',
+  primaryCtaText: 'Kontakt oss',
   secondaryCtaText: 'Se tjenestene',
 };
 
@@ -196,15 +196,15 @@ export type Founder = {
 };
 
 const FOUNDER_FALLBACK: Founder = {
-  kicker: 'Mestermur · Vear, Vestfold · siden 2008',
+  kicker: 'Murmester · Vear, Vestfold · etablert 2025',
   tittel: 'Murmester',
   tittelAksent: 'Henriksen',
   tittelSlutt: '.',
-  lede: 'Velkommen til Murmester Henriksen AS, din pålitelige partner for mur, puss, flis, naturstein, peis, pipe og mer. Med over 15 års bransjeerfaring leverer vi kvalitetstjenester til både privat- og næringskunder.',
+  lede: 'Murmester Henriksen AS ble etablert med et enkelt mål – å levere håndverk av høyeste kvalitet, kombinert med god kommunikasjon, faglig kompetanse og personlig oppfølging. Som kunde møter du alltid fagpersonen som planlegger, prosjekterer og utfører arbeidet.',
   chips: [
-    { tall: '15+', label: 'års erfaring', ikon: 'clock' },
+    { tall: '10+', label: 'år i faget', ikon: 'clock' },
     { tall: '2014', label: 'NM-sølv i muring', ikon: 'trophy' },
-    { tall: '9', label: 'fagområder', ikon: 'grid' },
+    { tall: '5', label: 'fagområder', ikon: 'grid' },
     { tall: 'Vestfold', label: 'hele fylket', ikon: 'pin' },
   ],
   lesMerTekst: 'Les mer om oss',
@@ -332,7 +332,7 @@ export type Footer = {
 const FOOTER_FALLBACK: Footer = {
   firmanavn: 'Murmester Henriksen AS',
   firmaadresse: 'Vear, Vestfold',
-  tagline: 'Mestermur · Etablert 2008 · NM Sølv 2014',
+  tagline: 'Murmester · Etablert 2025 · NM-sølv 2014',
   medlemTekst: 'Medlem · Norges Murmesterforening',
   facebookUrl: 'https://www.facebook.com/murmesterhenriksen',
   instagramUrl: 'https://www.instagram.com/murmesterhenriksen/',
@@ -370,17 +370,20 @@ export type OmOss = {
 const OM_OSS_FALLBACK: OmOss = {
   kicker: 'Om oss',
   portrettKortNavn: 'Vincent Henriksen',
-  portrettKortRolle: 'Mestermur · Daglig leder',
-  h1: 'Mestermur Vincent',
+  portrettKortRolle: 'Murmester · Fagskoleingeniør · Oldermann',
+  h1: 'Vincent',
   h1Aksent: 'Henriksen',
   h1Slutt: '.',
-  subheroLede: 'En liten mestermurbedrift i Vear, Vestfold.',
+  subheroLede: 'Murmester | Fagskoleingeniør | Oldermann | Faglig veileder.\nNorges nest beste murer i 2014.',
   innhold: undefined,
   nokkelfakta: [
-    { label: 'Etablert', verdi: '2008 · Vear, Vestfold' },
-    { label: 'Mester', verdi: 'Vincent Henriksen, mestermurbrev' },
-    { label: 'Mesterskap', verdi: 'NM Sølv 2014' },
-    { label: 'Verv', verdi: 'Leder, lokalt murmesterlaug · Prøvenemnd' },
+    { label: 'Svennebrev', verdi: 'Murfaget · 2014' },
+    { label: 'Mesterskap', verdi: 'NM-sølv 2014' },
+    { label: 'Murmester', verdi: '2022' },
+    { label: 'Fagskoleingeniør', verdi: '2022' },
+    { label: 'Verv', verdi: 'Oldermann · Vestfold Murmesterlaug (2025–)' },
+    { label: 'Prøvenemnd', verdi: 'Koordinator & sensor, Mur- og flisleggerfaget i Vestfold (2019–)' },
+    { label: 'Bedrift', verdi: 'Murmester Henriksen AS · Etablert 2025' },
     { label: 'Område', verdi: 'Hele Vestfold' },
     { label: 'Medlem', verdi: 'Norges Murmesterforening' },
   ],
@@ -423,7 +426,7 @@ const KONTAKT_PAGE_FALLBACK: KontaktPage = {
   subheroLede: 'Send oss en henvendelse via skjemaet, eller ring direkte for en uforpliktende prat. Vi svarer normalt innen én virkedag.',
   direkteKicker: 'Direkte kontakt',
   direkteTittel: 'Ring, mail, eller skriv.',
-  direkteLede: 'Det går fortest å ringe — særlig om du har en akutt sak som frostskader eller pipeproblemer. For ordinære henvendelser fungerer skjemaet eller e-post like godt.',
+  direkteLede: 'Ta en telefon eller sms om det er hastesak — pipeproblemer fra feiervesenet, fuktskader på våtrom, frostskader eller lignende. Uforpliktende prisantydning gis ved innsending av bilder og informasjon om ønsket arbeid eller spørsmål.',
   formTittel: 'Send oss en henvendelse',
 };
 

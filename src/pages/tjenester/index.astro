@@ -1,12 +1,10 @@
 ---
 import Layout from '../../layouts/Layout.astro';
-import { getTjenester } from '../../lib/sanity';
-
-const tjenester = await getTjenester();
+import { KATEGORIER } from '../../lib/kategorier';
 ---
 <Layout
   title="Tjenester — Murmester Henriksen AS"
-  description="Mestermurens domene strekker seg fra grunnmur og forblending til antikvarisk kalkrestaurering."
+  description="Murmester Henriksen AS leverer fem hovedfag innen muring: muring, puss, ildsted og skorstein, flis/våtrom/betong, og restaurering."
   activePage="tjenester"
 >
 
@@ -21,21 +19,21 @@ const tjenester = await getTjenester();
       <p class="kicker kicker--light">Faget</p>
       <h1>Tjenester</h1>
       <p class="subhero__lede">
-        Mestermurens domene strekker seg fra grunnmur og forblending til
-        antikvarisk kalkrestaurering. Velg et fagområde for å se hvordan vi
-        arbeider innenfor det.
+        Murmesterens domene strekker seg fra grunnmur og forblending til
+        antikvarisk kalkrestaurering. Velg et fagområde for å se hva vi
+        leverer innenfor det.
       </p>
     </div>
   </section>
 
   <section class="tj-grid">
     <div class="container tj-grid__inner">
-      {tjenester.map((t) => (
-        <a class="tj-card" href={`/tjenester/${t.slug.current}`}>
-          <span class="tj-card__icon" aria-hidden="true">{t.nummer}</span>
-          <h3 class="tj-card__title" set:html={t.tittel} />
-          {t.kortLede && <p class="tj-card__lede">{t.kortLede}</p>}
-          <span class="tj-card__cta">Mer info</span>
+      {KATEGORIER.map((k) => (
+        <a class="tj-card" href={`/tjenester/${k.slug}`}>
+          <span class="tj-card__icon" aria-hidden="true">{k.nummer}</span>
+          <h3 class="tj-card__title">{k.tittel}</h3>
+          <p class="tj-card__lede">{k.kortLede}</p>
+          <span class="tj-card__cta">Se hva vi leverer</span>
         </a>
       ))}
     </div>

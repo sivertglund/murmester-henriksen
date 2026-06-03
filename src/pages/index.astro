@@ -1,13 +1,13 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import {
-  getHero, getFounder, getTjenester, getProsjekter,
+  getHero, getFounder, getProsjekter,
   getTestimonials, getAreas, getCTA, prosjektImageSrc, urlFor,
 } from '../lib/sanity';
+import { KATEGORIER } from '../lib/kategorier';
 
 const hero = await getHero();
 const founder = await getFounder();
-const tjenester = await getTjenester();
 const prosjekter = await getProsjekter();
 const testimonials = await getTestimonials();
 const areas = await getAreas();
@@ -26,8 +26,8 @@ const chipIcons: Record<string, string> = {
 };
 ---
 <Layout
-  title="Murmester Henriksen AS — Mestermur i Vestfold · Tegl, puss, kalk, peis"
-  description="Murmester Henriksen AS er en mestermur i Vear som arbeider med teglforblending, puss, hydraulisk kalkrestaurering, peis og pipe i hele Vestfold. Etablert 2008. NM-sølv 2014."
+  title="Murmester Henriksen AS — Murmester i Vestfold · Tegl, puss, kalk, peis, flis"
+  description="Murmester Henriksen AS leverer fem fagområder innen muring i hele Vestfold: muring, puss, ildsted og skorstein, flis/våtrom/betong, og restaurering. Drevet av murmester Vincent Henriksen, NM-sølv 2014."
   hasJsonLd={true}
 >
 
@@ -143,11 +143,11 @@ const chipIcons: Record<string, string> = {
 
   <div class="container">
     <ul class="svc-list">
-      {tjenester.map((t) => (
+      {KATEGORIER.map((k) => (
         <li>
-          <a class="svc-row" href={`/tjenester/${t.slug.current}`}>
-            <span class="svc-row__num">{t.nummer}</span>
-            <span class="svc-row__title" set:html={t.tittel} />
+          <a class="svc-row" href={`/tjenester/${k.slug}`}>
+            <span class="svc-row__num">{k.nummer}</span>
+            <span class="svc-row__title">{k.tittel}</span>
             <span class="svc-row__arrow" aria-hidden="true">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
             </span>
