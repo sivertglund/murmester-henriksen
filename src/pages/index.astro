@@ -299,18 +299,10 @@ const chipIcons: Record<string, string> = {
         });
       }
     }
-    if (!overlay || overlay.style.display === 'none') {
-      start();
-      return;
-    }
-    // Start videoen NÅR intro-overlay BEGYNNER å fade ut (animationstart
-    // fyrer ved start av introFadeOut, ~4.5s). Da har videoen ca 0.9s
-    // på seg til å laste + dekode + spille frame 1 mens overlay fader
-    // ut over toppen. Når overlay er borte, er videoen allerede i gang.
-    overlay.addEventListener('animationstart', function (e) {
-      if (e.animationName === 'introFadeOut') start();
-    });
-    setTimeout(start, 4500);
+    // Start videoen umiddelbart — den ligger bak intro-overlay og
+    // bygger muren mens overlay fader ut. Når brukeren ser den, har
+    // den allerede murt litt — litt under halve er bygd.
+    start();
   })();
 </script>
 
