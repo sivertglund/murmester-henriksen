@@ -1,6 +1,7 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import BrickRow from '../../components/BrickRow.astro';
+import FagShield from '../../components/FagShield.astro';
 import { KATEGORIER } from '../../lib/kategorier';
 
 export async function getStaticPaths() {
@@ -21,6 +22,8 @@ function formatPris(u: { prisFra?: string; prisTil?: string; prisEnhet?: string 
   if (u.prisTil) return `opp til ${u.prisTil}${enhet}`;
   return null;
 }
+
+const SHIELD_PATH = "M 1 0.4521 C 1 0.5468, 0.9734 0.6349, 0.9208 0.7132 C 0.8794 0.7761, 0.8205 0.8331, 0.7468 0.8829 C 0.6367 0.9573, 0.5267 0.9924, 0.5001 1 C 0.4735 0.9924, 0.3634 0.9573, 0.2533 0.8829 C 0.1797 0.8331, 0.1207 0.7761, 0.0793 0.7132 C 0.0267 0.6349, 0 0.5468, 0 0.4521 L 0 0.1352 C 0.0245 0.133, 0.0736 0.1275, 0.1395 0.1144 C 0.2587 0.0909, 0.3835 0.0514, 0.5001 0 C 0.6166 0.0514, 0.7414 0.0909, 0.8605 0.1144 C 0.9272 0.1281, 0.9755 0.133, 1 0.1352 Z";
 ---
 <Layout
   title={`${kategori.tittel} — Murmester Henriksen AS`}
@@ -29,21 +32,50 @@ function formatPris(u: { prisFra?: string; prisTil?: string; prisEnhet?: string 
 >
 
 <main>
-  <section class="subhero" style={`--subhero-img: url('${kategori.heroBilde}');`}>
-    <div class="container subhero__inner">
-      <p class="subhero__crumbs">
+  <!-- SVG-clipPath for skjold-shapes -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <defs>
+      <clipPath id="shieldClip" clipPathUnits="objectBoundingBox">
+        <path d={SHIELD_PATH} />
+      </clipPath>
+    </defs>
+  </svg>
+
+  <!-- 1. Hero på murvegg-bg med fag-skjold som visuell anker -->
+  <section class="fag-hero">
+    <div class="fag-hero__bricks fag-hero__bricks--top" aria-hidden="true">
+      <BrickRow variant="marquee" tone="copper" rows={1} size="sm" />
+    </div>
+
+    <div class="container fag-hero__inner">
+      <p class="fag-hero__crumbs">
         <a href="/">Hjem</a>
         <span aria-hidden="true">/</span>
         <a href="/tjenester/">Tjenester</a>
         <span aria-hidden="true">/</span>
         <span>{kategori.tittel}</span>
       </p>
+
+      <div class="fag-hero__emblem">
+        <svg class="fag-hero__shield" viewBox="0 0 1 1" preserveAspectRatio="none" aria-hidden="true">
+          <path fill="rgba(245,241,234,.04)" stroke="rgba(245,241,234,.7)" stroke-width="2" stroke-linejoin="round" vector-effect="non-scaling-stroke" d={SHIELD_PATH} />
+        </svg>
+        <div class="fag-hero__icon">
+          <FagShield slug={kategori.slug} />
+        </div>
+      </div>
+
       <p class="kicker kicker--light">Fagområde {kategori.nummer}</p>
-      <h1>{kategori.tittel}</h1>
-      <p class="subhero__lede">{kategori.kortLede}</p>
+      <h1 class="fag-hero__h1">{kategori.tittel}</h1>
+      <p class="fag-hero__lede">{kategori.kortLede}</p>
+    </div>
+
+    <div class="fag-hero__bricks fag-hero__bricks--bot" aria-hidden="true">
+      <BrickRow variant="marquee" tone="copper" rows={1} size="sm" />
     </div>
   </section>
 
+  <!-- 2. Om fagområdet — lys varm bg -->
   <section class="kategori-intro">
     <div class="container kategori-intro__inner">
       <p class="kicker">Om fagområdet</p>
@@ -54,6 +86,7 @@ function formatPris(u: { prisFra?: string; prisTil?: string; prisEnhet?: string 
     </div>
   </section>
 
+  <!-- 3. Leveranser tabell -->
   <section class="leveranser">
     <div class="container">
       <div class="leveranser__head">
@@ -114,17 +147,25 @@ function formatPris(u: { prisFra?: string; prisTil?: string; prisEnhet?: string 
     </div>
   </section>
 
-  <section class="kategori-naviger section--dark">
+  <!-- 4. Andre fagområder som mini-skjold -->
+  <section class="andre-fag">
     <div class="container">
-      <p class="kicker kicker--light">Andre fagområder</p>
-      <h2>Andre <em>fagområder</em></h2>
-      <ul class="kategori-naviger__list">
+      <p class="kicker">Utforsk videre</p>
+      <h2 class="andre-fag__h2">Andre <em>fagområder</em></h2>
+
+      <ul class="andre-fag__list">
         {sosken.map((s) => (
-          <li>
-            <a href={`/tjenester/${s.slug}`} class="kategori-naviger__item">
-              <span class="kategori-naviger__num">{s.nummer}</span>
-              <span class="kategori-naviger__tittel">{s.tittel}</span>
-              <span class="kategori-naviger__arrow" aria-hidden="true">→</span>
+          <li class="andre-fag__item">
+            <a class="andre-fag__link" href={`/tjenester/${s.slug}`}>
+              <div class="andre-fag__emblem">
+                <svg class="andre-fag__shield" viewBox="0 0 1 1" preserveAspectRatio="none" aria-hidden="true">
+                  <path fill="#F2EAD8" stroke="rgba(190,84,0,.35)" stroke-width="2" stroke-linejoin="round" vector-effect="non-scaling-stroke" d={SHIELD_PATH} />
+                </svg>
+                <div class="andre-fag__icon">
+                  <FagShield slug={s.slug} />
+                </div>
+              </div>
+              <span class="andre-fag__name">{s.tittel}</span>
             </a>
           </li>
         ))}
@@ -132,14 +173,11 @@ function formatPris(u: { prisFra?: string; prisTil?: string; prisEnhet?: string 
     </div>
   </section>
 
+  <!-- 5. CTA-strip -->
   <section class="cta-strip section--dark">
-    <div class="cta-strip__bricks">
-      <BrickRow variant="marquee" tone="copper" rows={1} size="sm" />
-    </div>
     <div class="container cta-strip__inner">
       <p class="kicker kicker--light">Klar for å starte?</p>
       <h2>La oss <em>se på jobben</em>.</h2>
-      <p class="cta-strip__lede">Vi gir et tydelig, skriftlig prisanslag basert på dine ønsker.</p>
       <div class="cta-strip__btns">
         <a href="/kontakt" class="btn btn--primary btn--lg">Kontakt oss</a>
         <a href="tel:+4795523763" class="btn btn--ghost btn--lg">Ring 955 23 763</a>

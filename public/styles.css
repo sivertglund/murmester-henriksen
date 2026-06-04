@@ -3633,6 +3633,198 @@ h2 em, h1 em, h3 em {
   background: transparent;
 }
 
+/* ===== Fag-detail hero (mørk vegg + skjold som anker) ===== */
+.fag-hero {
+  position: relative;
+  padding: clamp(120px, 14vw, 180px) 0 clamp(80px, 10vw, 130px);
+  background:
+    linear-gradient(180deg, rgba(20,20,20,.62) 0%, rgba(15,15,15,.82) 100%),
+    url('/assets/tj-bg-wall.webp') center/cover no-repeat fixed;
+  color: #fff;
+  overflow: hidden;
+}
+@media (max-width: 720px) {
+  .fag-hero { background-attachment: scroll; }
+}
+.fag-hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 50% 35% at 50% 0%, rgba(190,84,0,.16) 0%, transparent 60%);
+  pointer-events: none;
+  z-index: 0;
+}
+.fag-hero__bricks {
+  position: absolute;
+  left: 0;
+  right: 0;
+  z-index: 1;
+  opacity: .5;
+  pointer-events: none;
+}
+.fag-hero__bricks--top { top: 0; }
+.fag-hero__bricks--bot { bottom: 0; transform: scaleX(-1); }
+.fag-hero__inner {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  max-width: 760px;
+}
+.fag-hero__crumbs {
+  font-size: .76rem;
+  font-weight: 600;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,.55);
+  margin: 0 0 clamp(36px, 4.4vw, 56px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+.fag-hero__crumbs a {
+  color: rgba(255,255,255,.55);
+  text-decoration: none;
+  transition: color .2s ease;
+}
+.fag-hero__crumbs a:hover { color: var(--copper-400); }
+.fag-hero__crumbs span[aria-hidden] { color: rgba(255,255,255,.25); }
+
+.fag-hero__emblem {
+  position: relative;
+  width: clamp(120px, 14vw, 170px);
+  aspect-ratio: 156 / 200;
+  margin: 0 auto clamp(28px, 3.4vw, 40px);
+}
+.fag-hero__shield {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+.fag-hero__icon {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 18% 18% 22%;
+}
+.fag-hero__icon .fag-icon {
+  width: 100%;
+  height: 100%;
+  color: var(--copper-400);
+}
+
+.fag-hero .kicker {
+  color: var(--copper-400);
+  margin-bottom: 14px;
+}
+.fag-hero__h1 {
+  margin: 0 0 18px;
+  font-size: clamp(2.6rem, 5.4vw, 4.4rem);
+  line-height: 1;
+  letter-spacing: -.03em;
+  font-weight: 700;
+  color: #fff;
+}
+.fag-hero__lede {
+  margin: 0 auto;
+  font-size: clamp(1.05rem, 1.4vw, 1.22rem);
+  color: rgba(255,255,255,.72);
+  line-height: 1.55;
+  max-width: 50ch;
+}
+
+/* ===== Andre fagområder — mini-skjold rad ===== */
+.andre-fag {
+  background: var(--bg);
+  padding: clamp(70px, 9vw, 120px) 0;
+}
+.andre-fag .kicker { color: var(--copper-500); margin-bottom: 14px; }
+.andre-fag__h2 {
+  margin: 0 0 clamp(36px, 4.4vw, 56px);
+  font-size: clamp(2rem, 3vw, 2.4rem);
+  line-height: 1.05;
+  letter-spacing: -.02em;
+  font-weight: 700;
+}
+.andre-fag__h2 em {
+  font-style: normal;
+  color: var(--copper-500);
+  font-family: var(--font);
+  font-weight: 700;
+}
+.andre-fag__list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: clamp(16px, 2vw, 28px);
+}
+.andre-fag__item { display: flex; }
+.andre-fag__link {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  width: 100%;
+  text-decoration: none;
+  color: var(--ink);
+  padding: 18px 8px 14px;
+  border-radius: var(--radius-lg);
+  transition: transform .4s cubic-bezier(.2,.8,.2,1);
+}
+.andre-fag__link:hover { transform: translateY(-4px); }
+.andre-fag__emblem {
+  position: relative;
+  width: clamp(72px, 8vw, 96px);
+  aspect-ratio: 156 / 200;
+  transition: filter .35s ease;
+}
+.andre-fag__link:hover .andre-fag__emblem {
+  filter: drop-shadow(0 8px 16px rgba(190,84,0,.2));
+}
+.andre-fag__shield {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+.andre-fag__icon {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 22% 24% 28%;
+  pointer-events: none;
+}
+.andre-fag__icon .fag-icon {
+  width: 100%;
+  height: 100%;
+  color: var(--copper-700);
+  transition: color .35s ease;
+}
+.andre-fag__link:hover .andre-fag__icon .fag-icon { color: var(--copper-500); }
+.andre-fag__name {
+  font-size: .98rem;
+  font-weight: 700;
+  color: var(--ink);
+  letter-spacing: -.005em;
+  text-align: center;
+  margin-top: 4px;
+}
+
+@media (max-width: 720px) {
+  .andre-fag__list { grid-template-columns: repeat(2, 1fr); gap: 14px; }
+}
+@media (max-width: 420px) {
+  .andre-fag__list { grid-template-columns: 1fr; max-width: 240px; margin-inline: auto; }
+}
+
 /* Tegl-bookends top + bot */
 .tj-cards__bricks {
   position: absolute;
@@ -3705,25 +3897,18 @@ h2 em, h1 em, h3 em {
 }
 .tj-card__link:hover { transform: translateY(-6px); }
 
-/* Skjold-bakgrunn — klippes til skjold-shape */
+/* Skjold-bakgrunn — klippes til skjold-shape, ren cream-tone uten grid */
 .tj-card__link::before {
   content: "";
   position: absolute;
   inset: 0;
   z-index: 0;
   clip-path: url(#shieldClip);
-  background:
-    repeating-linear-gradient(0deg,
-      rgba(122,53,0,.07) 0 1px,
-      transparent 1px 30px),
-    repeating-linear-gradient(90deg,
-      rgba(122,53,0,.05) 0 1px,
-      transparent 1px 70px),
-    linear-gradient(155deg, #EBE0CC 0%, #E0D2BA 100%);
-  transition: filter .35s ease;
+  background: linear-gradient(165deg, #F2EAD8 0%, #E5D8BD 100%);
+  transition: filter .35s ease, background .35s ease;
 }
 .tj-card__link:hover::before {
-  filter: brightness(1.04) saturate(1.1);
+  filter: brightness(1.05);
 }
 
 /* Skjold-outline (SVG-stroke) som visuell ramme */
