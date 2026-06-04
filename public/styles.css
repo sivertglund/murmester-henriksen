@@ -3598,34 +3598,40 @@ h2 em, h1 em, h3 em {
   overflow: hidden;
 }
 
-/* Mørk variant — fagmerker på murvegg */
+/* Tjenester-stage: murvegg-bakgrunn som dekker både fagmerker
+   og CTA-strip-seksjonen. Fixed attachment gir lett parallax-feel. */
+.tj-stage {
+  position: relative;
+  isolation: isolate;
+  background:
+    linear-gradient(180deg, rgba(20,20,20,.6) 0%, rgba(15,15,15,.78) 100%),
+    url('/assets/tj-bg-wall.webp') center/cover no-repeat fixed;
+}
+@media (max-width: 720px) {
+  .tj-stage { background-attachment: scroll; }
+}
+
+/* Mørk variant — gjør tj-cards transparent så vegg-bg viser */
 .tj-cards--dark {
-  background: var(--steel-900);
+  background: transparent;
   color: #fff;
 }
 .tj-cards--dark::before {
-  /* Subtil radial glow oppe i midten */
+  /* Subtil radial copper-glow oppe midten — gjenspeiler lyset i veggen */
   content: "";
   position: absolute;
   inset: 0;
   background:
-    radial-gradient(ellipse 70% 40% at 50% 0%, rgba(190,84,0,.12) 0%, transparent 60%),
-    radial-gradient(ellipse 50% 30% at 50% 100%, rgba(190,84,0,.08) 0%, transparent 55%);
-  pointer-events: none;
-  z-index: 0;
-}
-.tj-cards--dark::after {
-  /* Diskret grid-tekstur */
-  content: "";
-  position: absolute;
-  inset: 0;
-  background-image:
-    repeating-linear-gradient(0deg, rgba(255,255,255,.018) 0 1px, transparent 1px 64px),
-    repeating-linear-gradient(90deg, rgba(255,255,255,.018) 0 1px, transparent 1px 96px);
+    radial-gradient(ellipse 60% 35% at 50% 0%, rgba(190,84,0,.16) 0%, transparent 60%);
   pointer-events: none;
   z-index: 0;
 }
 .tj-cards--dark .container { position: relative; z-index: 2; }
+
+/* CTA-strip på murveggen — bytte solid clay-bg til transparent */
+.cta-strip--on-wall {
+  background: transparent;
+}
 
 /* Tegl-bookends top + bot */
 .tj-cards__bricks {
@@ -3637,7 +3643,11 @@ h2 em, h1 em, h3 em {
   pointer-events: none;
 }
 .tj-cards__bricks--top { top: 0; }
-.tj-cards__bricks--bot { bottom: 0; }
+.tj-cards__bricks--bot {
+  bottom: 0;
+  /* Motsatt retning av top-raden */
+  transform: scaleX(-1);
+}
 
 /* Header øverst på tjenester */
 .tj-header {

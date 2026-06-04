@@ -199,7 +199,7 @@ const FOUNDER_FALLBACK: Founder = {
   kicker: 'Murmester · Vear, Vestfold · etablert 2025',
   tittel: 'Murmester',
   tittelAksent: 'Henriksen',
-  tittelSlutt: '.',
+  tittelSlutt: '',
   lede: 'Murmester Henriksen AS ble etablert med et enkelt mål – å levere håndverk av høyeste kvalitet, kombinert med god kommunikasjon, faglig kompetanse og personlig oppfølging. Som kunde møter du alltid fagpersonen som planlegger, prosjekterer og utfører arbeidet.',
   chips: [
     { tall: '10+', label: 'år i faget', ikon: 'clock' },
@@ -240,7 +240,7 @@ const TESTIMONIALS_FALLBACK: Testimonials = {
   kicker: 'Anbefalinger',
   tittel: 'Hva kundene',
   tittelAksent: 'faktisk sier',
-  tittelSlutt: '.',
+  tittelSlutt: '',
   sitater: [],
 };
 
@@ -270,7 +270,7 @@ export type Areas = {
 const AREAS_FALLBACK: Areas = {
   tittel: 'Vi dekker hele',
   tittelAksent: 'Vestfold',
-  tittelSlutt: '.',
+  tittelSlutt: '',
   byer: ['Hvasser', 'Nøtterøy', 'Tønsberg', 'Larvik', 'Tjøme', 'Sandefjord', 'Horten', 'Skoppum', 'Sande', 'Stokke'],
 };
 
@@ -373,7 +373,7 @@ const OM_OSS_FALLBACK: OmOss = {
   portrettKortRolle: 'Murmester · Fagskoleingeniør · Oldermann',
   h1: 'Vincent',
   h1Aksent: 'Henriksen',
-  h1Slutt: '.',
+  h1Slutt: '',
   subheroLede: 'Murmester | Fagskoleingeniør | Oldermann | Faglig veileder.\n<strong>Norges nest beste murer</strong> i 2014.',
   innhold: undefined,
   nokkelfakta: [

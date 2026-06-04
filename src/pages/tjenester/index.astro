@@ -21,6 +21,7 @@ import { KATEGORIER } from '../../lib/kategorier';
     </defs>
   </svg>
 
+  <div class="tj-stage">
   <section class="tj-cards tj-cards--dark">
     <div class="tj-cards__bricks tj-cards__bricks--top" aria-hidden="true">
       <BrickRow variant="marquee" tone="copper" rows={1} size="sm" />
@@ -29,8 +30,8 @@ import { KATEGORIER } from '../../lib/kategorier';
     <div class="container">
       <header class="tj-header">
         <p class="kicker kicker--light">Faget</p>
-        <h1 class="tj-header__title">Tjenester.</h1>
-        <p class="tj-header__sub">Klikk på et fag for å se leveransene.</p>
+        <h1 class="tj-header__title">Våre tjenester</h1>
+        <p class="tj-header__sub">Fem fag — utforsk hva som leveres innenfor hver.</p>
       </header>
 
       <ul class="tj-cards__grid">
@@ -50,7 +51,6 @@ import { KATEGORIER } from '../../lib/kategorier';
                   d="M 1 0.4521 C 1 0.5468, 0.9734 0.6349, 0.9208 0.7132 C 0.8794 0.7761, 0.8205 0.8331, 0.7468 0.8829 C 0.6367 0.9573, 0.5267 0.9924, 0.5001 1 C 0.4735 0.9924, 0.3634 0.9573, 0.2533 0.8829 C 0.1797 0.8331, 0.1207 0.7761, 0.0793 0.7132 C 0.0267 0.6349, 0 0.5468, 0 0.4521 L 0 0.1352 C 0.0245 0.133, 0.0736 0.1275, 0.1395 0.1144 C 0.2587 0.0909, 0.3835 0.0514, 0.5001 0 C 0.6166 0.0514, 0.7414 0.0909, 0.8605 0.1144 C 0.9272 0.1281, 0.9755 0.133, 1 0.1352 Z"
                 />
               </svg>
-              <span class="tj-card__num">{k.nummer}</span>
               <div class="tj-card__inner">
                 <FagShield slug={k.slug} />
                 <h2 class="tj-card__title">{k.tittel}</h2>
@@ -68,7 +68,7 @@ import { KATEGORIER } from '../../lib/kategorier';
     </div>
   </section>
 
-  <section class="cta-strip section--dark">
+  <section class="cta-strip section--dark cta-strip--on-wall">
     <div class="cta-strip__bricks">
       <BrickRow variant="marquee" tone="copper" rows={1} size="sm" />
     </div>
@@ -82,6 +82,7 @@ import { KATEGORIER } from '../../lib/kategorier';
       </div>
     </div>
   </section>
+  </div>
 </main>
 
 </Layout>
