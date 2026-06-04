@@ -1893,7 +1893,7 @@ h2 em, h1 em, h3 em {
   isolation: isolate;
   overflow: hidden;
 }
-/* Contact page — watercolor brick wall as a soft ambient backdrop */
+/* Contact page — watercolor brick wall som ambient backdrop (samme som live) */
 #kontakt-form {
   position: relative;
   isolation: isolate;
@@ -1903,29 +1903,15 @@ h2 em, h1 em, h3 em {
   content: "";
   position: absolute;
   inset: 0;
-  z-index: -2;
-  background:
-    radial-gradient(ellipse 60% 50% at 50% 20%, rgba(190, 84, 0, .06) 0%, transparent 60%),
-    linear-gradient(180deg, var(--bg) 0%, #F2EDE3 100%);
-}
-#kontakt-form::after {
-  /* Akvarell-tegl ambient backdrop */
-  content: "";
-  position: absolute;
-  inset: 0;
   z-index: -1;
-  pointer-events: none;
-  opacity: .07;
-  background-image:
-    repeating-linear-gradient(0deg,
-      rgba(122,53,0,.55) 0 1px,
-      transparent 1px 28px),
-    repeating-linear-gradient(90deg,
-      rgba(122,53,0,.45) 0 1px,
-      transparent 1px 64px);
-  background-position: 0 0, 32px 14px;
-  -webkit-mask-image: radial-gradient(ellipse 90% 80% at 50% 50%, #000 30%, transparent 95%);
-          mask-image: radial-gradient(ellipse 90% 80% at 50% 50%, #000 30%, transparent 95%);
+  background:
+    linear-gradient(180deg, rgba(245,241,234,.78) 0%, rgba(245,241,234,.92) 100%),
+    url('/assets/contact-bg.jpg') center/cover no-repeat,
+    var(--bg);
+  background-attachment: fixed, fixed, fixed;
+}
+@media (max-width: 720px) {
+  #kontakt-form::before { background-attachment: scroll; }
 }
 
 .contact {
