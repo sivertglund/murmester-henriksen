@@ -3594,6 +3594,74 @@ h2 em, h1 em, h3 em {
 .tj-cards {
   background: var(--bg);
   padding: clamp(120px, 14vw, 180px) 0 clamp(80px, 10vw, 140px);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Mørk variant — fagmerker på murvegg */
+.tj-cards--dark {
+  background: var(--steel-900);
+  color: #fff;
+}
+.tj-cards--dark::before {
+  /* Subtil radial glow oppe i midten */
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 70% 40% at 50% 0%, rgba(190,84,0,.12) 0%, transparent 60%),
+    radial-gradient(ellipse 50% 30% at 50% 100%, rgba(190,84,0,.08) 0%, transparent 55%);
+  pointer-events: none;
+  z-index: 0;
+}
+.tj-cards--dark::after {
+  /* Diskret grid-tekstur */
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    repeating-linear-gradient(0deg, rgba(255,255,255,.018) 0 1px, transparent 1px 64px),
+    repeating-linear-gradient(90deg, rgba(255,255,255,.018) 0 1px, transparent 1px 96px);
+  pointer-events: none;
+  z-index: 0;
+}
+.tj-cards--dark .container { position: relative; z-index: 2; }
+
+/* Tegl-bookends top + bot */
+.tj-cards__bricks {
+  position: absolute;
+  left: 0;
+  right: 0;
+  z-index: 1;
+  opacity: .5;
+  pointer-events: none;
+}
+.tj-cards__bricks--top { top: 0; }
+.tj-cards__bricks--bot { bottom: 0; }
+
+/* Header øverst på tjenester */
+.tj-header {
+  text-align: center;
+  margin-bottom: clamp(60px, 7vw, 96px);
+  position: relative;
+}
+.tj-header .kicker {
+  color: var(--copper-400);
+  margin-bottom: 18px;
+}
+.tj-header__title {
+  margin: 0 0 12px;
+  font-size: clamp(2.6rem, 5.4vw, 4.4rem);
+  line-height: 1;
+  letter-spacing: -.03em;
+  font-weight: 700;
+  color: #fff;
+}
+.tj-header__sub {
+  margin: 0;
+  font-size: clamp(.98rem, 1.2vw, 1.08rem);
+  color: rgba(255,255,255,.55);
+  letter-spacing: -.005em;
 }
 .tj-cards__grid {
   list-style: none;
