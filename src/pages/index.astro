@@ -299,10 +299,10 @@ const chipIcons: Record<string, string> = {
         });
       }
     }
-    // Start videoen umiddelbart — den ligger bak intro-overlay og
-    // bygger muren mens overlay fader ut. Når brukeren ser den, har
-    // den allerede murt litt — litt under halve er bygd.
-    start();
+    // Start videoen ~3.5s ut i page-load. Da har videoen spilt ~1.9s
+    // av 15s når intro-overlay (5.4s) er ferdig — bare 10-15% av muren
+    // er bygd opp ved første blikk, fortsetter naturlig derfra.
+    setTimeout(start, 3500);
   })();
 </script>
 
