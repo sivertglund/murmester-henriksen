@@ -1252,13 +1252,6 @@ h2 em, h1 em, h3 em {
   margin: clamp(48px, 6vw, 76px) auto 0;
 }
 
-/* Tegl-motif på tjenester-intro (under H1-blokken) */
-.tj-intro__bricks {
-  max-width: 920px;
-  margin: clamp(48px, 6vw, 72px) auto 0;
-  padding: 0 var(--pad);
-}
-.tj-intro__bricks .brick-deco { opacity: .25; }
 
 /* Tegl-motif på mester-sitat (subtle stack-reveal over sitatet) */
 .mester-sitat__bricks {
@@ -1288,6 +1281,9 @@ h2 em, h1 em, h3 em {
 .cta-strip__bricks .brick-deco {
   color: var(--copper-500);
   opacity: .35;
+  /* Dekker helt til høyre — kun fade-inn fra venstre */
+  -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 8%, #000 100%);
+          mask-image: linear-gradient(90deg, transparent 0%, #000 8%, #000 100%);
 }
 .cta-strip__inner { position: relative; z-index: 1; }
 
@@ -3596,79 +3592,12 @@ h2 em, h1 em, h3 em {
   .fag-grid { grid-template-columns: 1fr; }
 }
 
-/* ===== Tjenester intro — typografi-led inngang ===== */
-.tj-intro {
-  background: var(--bg);
-  padding: clamp(110px, 14vw, 170px) 0 clamp(50px, 6vw, 80px);
-  position: relative;
-  overflow: hidden;
-}
-.tj-intro::before {
-  /* Subtil copper aksent-stripe oppe til høyre */
-  content: "";
-  position: absolute;
-  top: clamp(120px, 14vw, 170px);
-  right: 0;
-  width: clamp(120px, 20vw, 260px);
-  height: 2px;
-  background: var(--copper-500);
-  opacity: .7;
-  transform-origin: right;
-  animation: tjStripeIn 1.2s cubic-bezier(.2,.8,.2,1) .2s both;
-}
-@keyframes tjStripeIn {
-  from { transform: scaleX(0); }
-  to   { transform: scaleX(1); }
-}
-.tj-intro__head { max-width: 980px; }
-.tj-intro .kicker { color: var(--copper-500); margin-bottom: 22px; }
-.tj-intro__h1 {
-  margin: 0 0 28px;
-  font-size: clamp(2.8rem, 6.2vw, 5.4rem);
-  line-height: .98;
-  letter-spacing: -.035em;
-  font-weight: 700;
-}
-.tj-intro__h1 em {
-  font-style: normal;
-  color: var(--copper-500);
-  font-family: var(--font);
-  font-weight: 700;
-}
-.tj-intro__lede {
-  margin: 0 0 40px;
-  font-size: clamp(1.1rem, 1.5vw, 1.32rem);
-  color: var(--ink-soft);
-  max-width: 60ch;
-  line-height: 1.55;
-}
-.tj-intro__count {
-  display: inline-flex;
-  align-items: baseline;
-  gap: 14px;
-  padding-top: 22px;
-  border-top: 2px solid var(--copper-500);
-}
-.tj-intro__count-num {
-  font-size: clamp(2rem, 3vw, 2.6rem);
-  font-weight: 800;
-  color: var(--copper-500);
-  font-variant-numeric: tabular-nums;
-  letter-spacing: -.02em;
-  line-height: 1;
-}
-.tj-intro__count-label {
-  font-size: .92rem;
-  letter-spacing: .15em;
-  text-transform: uppercase;
-  color: var(--ink-soft);
-  font-weight: 600;
-}
+/* (Drop tj-intro — skjoldene leder direkte) */
 
 /* ===== Tjenester-kort — fem skjold-formede fagmerker ===== */
 .tj-cards {
   background: var(--bg);
-  padding: clamp(40px, 6vw, 80px) 0 clamp(80px, 10vw, 140px);
+  padding: clamp(120px, 14vw, 180px) 0 clamp(80px, 10vw, 140px);
 }
 .tj-cards__grid {
   list-style: none;
@@ -3689,7 +3618,7 @@ h2 em, h1 em, h3 em {
 
 .tj-card {
   display: flex;
-  aspect-ratio: 5 / 6;
+  aspect-ratio: 156 / 200;  /* matcher Henriksen-logoens proporsjon */
 }
 .tj-card__link {
   position: relative;
