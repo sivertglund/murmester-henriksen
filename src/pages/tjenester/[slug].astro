@@ -75,26 +75,12 @@ const SHIELD_PATH = "M 1 0.4521 C 1 0.5468, 0.9734 0.6349, 0.9208 0.7132 C 0.879
     </div>
   </section>
 
-  <!-- 2. Om fagområdet — lys varm bg -->
-  <section class="kategori-intro">
-    <div class="container kategori-intro__inner">
-      <p class="kicker">Om fagområdet</p>
-      <h2 class="kategori-intro__h2">
-        Hva vi gjør innen <em>{kategori.tittel.toLowerCase()}</em>
-      </h2>
-      <p class="kategori-intro__lede">{kategori.introTekst}</p>
-    </div>
-  </section>
-
-  <!-- 3. Leveranser tabell -->
+  <!-- 2. Leveranser tabell -->
   <section class="leveranser">
     <div class="container">
       <div class="leveranser__head">
         <p class="kicker">Leveransene</p>
         <h2 class="leveranser__h2">Det vi leverer innen <em>{kategori.tittel.toLowerCase()}</em></h2>
-        <p class="leveranser__lede">
-          Klikk på leveransen for å lese mer.<br />Veiledende priser oppdateres etter hvert.
-        </p>
       </div>
 
       <ul class="leveranser__list">
@@ -108,13 +94,12 @@ const SHIELD_PATH = "M 1 0.4521 C 1 0.5468, 0.9734 0.6349, 0.9208 0.7132 C 0.879
                   <span class="leveranse__num" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
                   <span class="leveranse__main">
                     <span class="leveranse__navn">{u.navn}</span>
-                    {u.beskrivelse && <span class="leveranse__kort">{u.beskrivelse}</span>}
                   </span>
                   <span class="leveranse__meta">
                     {pris ? (
                       <span class="leveranse__pris">{pris}</span>
                     ) : (
-                      <span class="leveranse__pris leveranse__pris--ask">Pris på forespørsel</span>
+                      <span class="leveranse__pris leveranse__pris--ask">Spør om pris</span>
                     )}
                     {harInfo && <span class="leveranse__expand" aria-hidden="true">↓</span>}
                   </span>
