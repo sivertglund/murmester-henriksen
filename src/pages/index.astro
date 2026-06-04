@@ -136,23 +136,23 @@ const chipIcons: Record<string, string> = {
   </div>
 
   <div class="container">
-    <div class="fag-tiles">
+    <ul class="fag-tiles">
       {KATEGORIER.map((k, i) => (
-        <a class={`fag-tile scroll-fade`} href={`/tjenester/${k.slug}`} style={`--i:${i}`}>
-          <div class="fag-tile__icon">
-            <FagShield slug={k.slug} />
-          </div>
-          <div class="fag-tile__body">
-            <span class="fag-tile__num" aria-hidden="true">{k.nummer}</span>
-            <h3 class="fag-tile__title">{k.tittel}</h3>
-            <p class="fag-tile__lede">{k.kortLede}</p>
-          </div>
-          <span class="fag-tile__arrow" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-          </span>
-        </a>
+        <li class="fag-tile scroll-fade" style={`--i:${i}`}>
+          <a class="fag-tile__link" href={`/tjenester/${k.slug}`}>
+            <div class="fag-tile__emblem">
+              <svg class="fag-tile__shield" viewBox="0 0 1 1" preserveAspectRatio="none" aria-hidden="true">
+                <path fill="#F2EAD8" stroke="rgba(190,84,0,.4)" stroke-width="2.5" stroke-linejoin="round" vector-effect="non-scaling-stroke" d="M 1 0.4521 C 1 0.5468, 0.9734 0.6349, 0.9208 0.7132 C 0.8794 0.7761, 0.8205 0.8331, 0.7468 0.8829 C 0.6367 0.9573, 0.5267 0.9924, 0.5001 1 C 0.4735 0.9924, 0.3634 0.9573, 0.2533 0.8829 C 0.1797 0.8331, 0.1207 0.7761, 0.0793 0.7132 C 0.0267 0.6349, 0 0.5468, 0 0.4521 L 0 0.1352 C 0.0245 0.133, 0.0736 0.1275, 0.1395 0.1144 C 0.2587 0.0909, 0.3835 0.0514, 0.5001 0 C 0.6166 0.0514, 0.7414 0.0909, 0.8605 0.1144 C 0.9272 0.1281, 0.9755 0.133, 1 0.1352 Z" />
+              </svg>
+              <div class="fag-tile__icon">
+                <FagShield slug={k.slug} />
+              </div>
+            </div>
+            <span class="fag-tile__title">{k.tittel}</span>
+          </a>
+        </li>
       ))}
-    </div>
+    </ul>
   </div>
 
   <div class="container services-list__foot">

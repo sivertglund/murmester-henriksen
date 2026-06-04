@@ -3010,127 +3010,80 @@ h2 em, h1 em, h3 em {
   .mester-sitat .scroll-fade { opacity: 1; transform: none; transition: none; }
 }
 
-/* ===== Forsidens fag-tiles — glassmorphism på mørk pussvegg ===== */
+/* ===== Forsidens fag-tiles — 5 små skjold på pussvegg ===== */
 .fag-tiles {
+  list-style: none;
+  padding: 0;
+  margin: 0 auto;
   display: grid;
   grid-template-columns: repeat(5, 1fr);
-  gap: clamp(14px, 1.6vw, 22px);
-  max-width: 1200px;
-  margin: 0 auto;
+  gap: clamp(14px, 1.8vw, 28px);
+  max-width: 1100px;
   position: relative;
   z-index: 1;
 }
-.fag-tile {
-  position: relative;
+.fag-tile { display: flex; }
+.fag-tile__link {
   display: flex;
   flex-direction: column;
-  padding: clamp(22px, 2.4vw, 30px) clamp(20px, 2.2vw, 28px) clamp(20px, 2.2vw, 26px);
+  align-items: center;
+  gap: clamp(12px, 1.4vw, 18px);
+  width: 100%;
+  padding: 14px 8px 10px;
   text-decoration: none;
   color: var(--ink);
-  border-radius: 18px;
-  isolation: isolate;
-  overflow: hidden;
-  background: rgba(255,255,255,.42);
-  border: 1px solid rgba(255,255,255,.6);
-  backdrop-filter: blur(18px) saturate(1.2);
-  -webkit-backdrop-filter: blur(18px) saturate(1.2);
-  box-shadow:
-    0 1px 0 rgba(255,255,255,.6) inset,
-    0 18px 40px -22px rgba(31,31,32,.18);
-  transition:
-    transform .5s cubic-bezier(.2,.8,.2,1),
-    background .35s ease,
-    border-color .35s ease,
-    box-shadow .5s ease;
+  border-radius: 12px;
+  transition: transform .45s cubic-bezier(.2,.8,.2,1);
 }
-.fag-tile::before {
-  content: "";
+.fag-tile__link:hover { transform: translateY(-6px); }
+
+.fag-tile__emblem {
+  position: relative;
+  width: clamp(100px, 11vw, 140px);
+  aspect-ratio: 156 / 200;
+  transition: filter .35s ease;
+}
+.fag-tile__link:hover .fag-tile__emblem {
+  filter: drop-shadow(0 14px 24px rgba(190,84,0,.25));
+}
+.fag-tile__shield {
   position: absolute;
-  top: 0;
-  left: 0;
+  inset: 0;
   width: 100%;
   height: 100%;
-  background: linear-gradient(135deg, rgba(190,84,0,.06) 0%, transparent 50%);
-  opacity: 0;
-  transition: opacity .4s ease;
-  pointer-events: none;
-  border-radius: 18px;
+  transition: filter .35s ease;
 }
-.fag-tile:hover {
-  transform: translateY(-6px);
-  background: rgba(255,255,255,.6);
-  border-color: rgba(190,84,0,.4);
-  box-shadow:
-    0 1px 0 rgba(255,255,255,.8) inset,
-    0 28px 56px -18px rgba(31,31,32,.28),
-    0 4px 12px rgba(190,84,0,.12);
+.fag-tile__link:hover .fag-tile__shield path {
+  stroke: var(--copper-500);
 }
-.fag-tile:hover::before { opacity: 1; }
-
 .fag-tile__icon {
-  width: clamp(54px, 5vw, 70px);
-  height: clamp(54px, 5vw, 70px);
+  position: absolute;
+  inset: 0;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: clamp(18px, 2.2vw, 26px);
-  color: var(--copper-500);
-  transition: transform .55s cubic-bezier(.2,.8,.2,1), color .35s ease;
+  padding: 22% 24% 28%;
+  pointer-events: none;
 }
 .fag-tile__icon .fag-icon {
   width: 100%;
   height: 100%;
+  color: var(--copper-700);
+  transition: color .35s ease, transform .55s cubic-bezier(.2,.8,.2,1);
 }
-.fag-tile:hover .fag-tile__icon {
-  transform: scale(1.1) rotate(-3deg);
-  color: var(--copper-600);
+.fag-tile__link:hover .fag-tile__icon .fag-icon {
+  color: var(--copper-500);
+  transform: scale(1.08);
 }
 
-.fag-tile__body { flex: 1; display: flex; flex-direction: column; }
-.fag-tile__num {
-  font-size: .72rem;
-  font-weight: 800;
-  letter-spacing: .22em;
-  color: var(--copper-500);
-  margin-bottom: 8px;
-  font-variant-numeric: tabular-nums;
-}
 .fag-tile__title {
-  margin: 0 0 8px;
-  font-size: clamp(1.05rem, 1.3vw, 1.18rem);
+  font-size: clamp(.98rem, 1.2vw, 1.12rem);
   font-weight: 700;
-  letter-spacing: -.015em;
-  line-height: 1.15;
+  letter-spacing: -.005em;
+  text-align: center;
   color: var(--ink);
-}
-.fag-tile__lede {
-  margin: 0;
-  font-size: .85rem;
-  line-height: 1.45;
-  color: var(--ink-soft);
-  flex: 1;
-}
-
-.fag-tile__arrow {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
-  margin-top: clamp(18px, 2vw, 24px);
-  color: var(--copper-500);
-  border: 1px solid rgba(190,84,0,.3);
-  transition: background .35s ease, color .35s ease, transform .5s cubic-bezier(.2,.8,.2,1),
-              border-color .35s ease;
-  align-self: flex-start;
-}
-.fag-tile__arrow svg { width: 14px; height: 14px; }
-.fag-tile:hover .fag-tile__arrow {
-  background: var(--copper-500);
-  border-color: var(--copper-500);
-  color: #fff;
-  transform: translateX(4px);
+  line-height: 1.15;
+  text-wrap: balance;
 }
 
 /* Stagger reveal */
@@ -3142,14 +3095,15 @@ h2 em, h1 em, h3 em {
 }
 .services-list .scroll-fade.is-in { opacity: 1; transform: none; }
 
-@media (max-width: 1000px) {
-  .fag-tiles { grid-template-columns: repeat(2, 1fr); }
+@media (max-width: 720px) {
+  .fag-tiles { grid-template-columns: repeat(3, 1fr); gap: 20px; }
 }
-@media (max-width: 560px) {
-  .fag-tiles { grid-template-columns: 1fr; }
+@media (max-width: 480px) {
+  .fag-tiles { grid-template-columns: repeat(2, 1fr); gap: 16px; }
 }
 @media (prefers-reduced-motion: reduce) {
   .services-list .scroll-fade { opacity: 1; transform: none; transition: none; }
+  .fag-tile__link:hover { transform: none; }
 }
 
 /* ===== Tjenester hub — cinematic hero ===== */
