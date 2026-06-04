@@ -3747,7 +3747,7 @@ h2 em, h1 em, h3 em {
   font-weight: 600;
 }
 
-/* ===== Tjenester-kort — fem fag som mursteiner i løperforbandt ===== */
+/* ===== Tjenester-kort — fem skjold-formede fagmerker ===== */
 .tj-cards {
   background: var(--bg);
   padding: clamp(40px, 6vw, 80px) 0 clamp(80px, 10vw, 140px);
@@ -3758,209 +3758,168 @@ h2 em, h1 em, h3 em {
   margin: 0;
   display: grid;
   grid-template-columns: repeat(6, 1fr);
-  gap: clamp(14px, 1.8vw, 22px);
+  gap: clamp(20px, 2.4vw, 36px) clamp(16px, 2vw, 28px);
+  max-width: 1100px;
+  margin-inline: auto;
 }
-/* Løperforbandt: 3 kort over (span 2 hver), 2 kort under (span 3 hver) */
+/* 3 over (span 2 hver) + 2 under sentrert (start col 2 og 4) */
 .tj-card:nth-child(1),
 .tj-card:nth-child(2),
 .tj-card:nth-child(3) { grid-column: span 2; }
-.tj-card:nth-child(4),
-.tj-card:nth-child(5) { grid-column: span 3; }
+.tj-card:nth-child(4) { grid-column: 2 / span 2; }
+.tj-card:nth-child(5) { grid-column: 4 / span 2; }
 
 .tj-card {
   display: flex;
-  min-height: 240px;
+  aspect-ratio: 5 / 6;
 }
 .tj-card__link {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  padding: clamp(28px, 3vw, 40px);
   position: relative;
-  isolation: isolate;
-  overflow: hidden;
-  background:
-    /* Subtil teglmønster — løperforbandt */
-    repeating-linear-gradient(0deg,
-      rgba(122,53,0,.08) 0 1px,
-      transparent 1px 30px),
-    repeating-linear-gradient(90deg,
-      rgba(122,53,0,.06) 0 1px,
-      transparent 1px 70px),
-    /* Varm clay-tone som basis (ikke hvit) */
-    linear-gradient(155deg, #EBE0CC 0%, #E0D2BA 100%);
-  background-position: 0 0, 0 0, 0 0;
-  border: 1px solid rgba(122,53,0,.18);
-  border-radius: var(--radius-lg);
+  display: block;
+  width: 100%;
   text-decoration: none;
   color: var(--ink);
-  transition:
-    transform .4s cubic-bezier(.2,.8,.2,1),
-    border-color .3s ease,
-    box-shadow .4s ease;
-  box-shadow: 0 1px 0 rgba(122,53,0,.08), 0 6px 18px -10px rgba(31,31,32,.18);
+  isolation: isolate;
+  transition: transform .5s cubic-bezier(.2,.8,.2,1);
 }
+.tj-card__link:hover { transform: translateY(-6px); }
+
+/* Skjold-bakgrunn — klippes til skjold-shape */
 .tj-card__link::before {
-  /* Mørtel-aksent topp — copper highlight på toppen som en murskift-fuge */
   content: "";
   position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 3px;
-  background: linear-gradient(90deg,
-    transparent 0%,
-    var(--copper-500) 25%,
-    var(--copper-500) 75%,
-    transparent 100%);
-  opacity: .55;
-  transform-origin: center;
-  transform: scaleX(.7);
-  transition: transform .5s cubic-bezier(.2,.8,.2,1), opacity .3s ease;
-}
-.tj-card__link:hover {
-  transform: translateY(-4px);
-  border-color: rgba(122,53,0,.4);
-  box-shadow: 0 1px 0 rgba(122,53,0,.12), 0 20px 36px -16px rgba(31,31,32,.22);
+  inset: 0;
+  z-index: 0;
+  clip-path: url(#shieldClip);
+  background:
+    repeating-linear-gradient(0deg,
+      rgba(122,53,0,.07) 0 1px,
+      transparent 1px 30px),
+    repeating-linear-gradient(90deg,
+      rgba(122,53,0,.05) 0 1px,
+      transparent 1px 70px),
+    linear-gradient(155deg, #EBE0CC 0%, #E0D2BA 100%);
+  transition: filter .35s ease;
 }
 .tj-card__link:hover::before {
-  transform: scaleX(1);
-  opacity: 1;
+  filter: brightness(1.04) saturate(1.1);
 }
 
-/* Skjold-emblem som topp-aksent på hvert fag-kort */
-.tj-card__emblem {
-  position: relative;
-  width: clamp(90px, 10vw, 120px);
-  height: clamp(108px, 12vw, 144px);
-  margin: 0 0 clamp(18px, 2.4vw, 28px);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.tj-card__num {
+/* Skjold-outline (SVG-stroke) som visuell ramme */
+.tj-card__frame {
   position: absolute;
-  top: -2px;
-  right: -12px;
-  font-size: .78rem;
-  font-weight: 800;
-  letter-spacing: .18em;
-  color: var(--copper-700);
-  font-variant-numeric: tabular-nums;
-  background: var(--bg);
-  padding: 4px 8px;
-  border-radius: 4px;
-  z-index: 2;
-}
-
-/* Selve skjoldet */
-.fag-shield {
-  position: relative;
+  inset: 0;
   width: 100%;
   height: 100%;
+  z-index: 1;
+  color: rgba(122,53,0,.45);
+  transition: color .35s ease;
+  pointer-events: none;
+}
+.tj-card__link:hover .tj-card__frame { color: var(--copper-500); }
+
+/* Nummer-chip oppe til høyre */
+.tj-card__num {
+  position: absolute;
+  top: clamp(14px, 2vw, 22px);
+  right: clamp(20px, 2.6vw, 30px);
+  font-size: .74rem;
+  font-weight: 800;
+  letter-spacing: .22em;
+  color: var(--copper-700);
+  font-variant-numeric: tabular-nums;
+  z-index: 3;
+}
+
+/* Innhold-container — sentrert i skjoldets bredeste del */
+.tj-card__inner {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 18% 18% 22%;  /* skjold er smalest øverst og nederst */
+  gap: clamp(8px, 1vw, 14px);
+}
+
+/* Fag-ikon */
+.fag-icon {
+  width: clamp(54px, 7vw, 76px);
+  height: clamp(54px, 7vw, 76px);
   color: var(--copper-700);
   transition: color .35s ease, transform .5s cubic-bezier(.2,.8,.2,1);
 }
-.fag-shield__frame {
-  position: absolute;
-  inset: 0;
+.fag-icon svg {
   width: 100%;
   height: 100%;
   display: block;
 }
-.fag-shield__path {
-  transition: stroke-width .35s ease;
-}
-.fag-shield__icon {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 22% 22% 26%;  /* skjold er smalere nederst */
-}
-.fag-shield__icon svg {
-  width: 100%;
-  height: 100%;
-  color: var(--copper-700);
-  transition: color .35s ease, transform .5s cubic-bezier(.2,.8,.2,1);
+.tj-card__link:hover .fag-icon {
+  color: var(--copper-500);
+  transform: scale(1.06);
 }
 
-.tj-card__link:hover .fag-shield { transform: scale(1.05); }
-.tj-card__link:hover .fag-shield__path { stroke-width: 3; }
-.tj-card__link:hover .fag-shield__icon svg { color: var(--copper-500); }
 .tj-card__title {
-  margin: 0 0 14px;
-  font-size: clamp(1.55rem, 2.2vw, 1.95rem);
+  margin: 0;
+  font-size: clamp(1.18rem, 1.5vw, 1.42rem);
   font-weight: 700;
-  line-height: 1.05;
-  letter-spacing: -.02em;
+  line-height: 1.1;
+  letter-spacing: -.015em;
   color: var(--ink);
-  position: relative;
-  z-index: 1;
 }
 .tj-card__lede {
-  margin: 0 0 auto;
-  font-size: 1rem;
+  margin: 0;
+  font-size: clamp(.82rem, 1vw, .94rem);
   color: var(--ink-soft);
-  line-height: 1.55;
-  position: relative;
-  z-index: 1;
-}
-.tj-card__foot {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 14px;
-  margin-top: clamp(28px, 3vw, 36px);
-  padding-top: 16px;
-  border-top: 1px solid rgba(122,53,0,.15);
-  position: relative;
-  z-index: 1;
+  line-height: 1.4;
+  max-width: 22ch;
 }
 .tj-card__count {
-  font-size: .8rem;
+  margin-top: 4px;
+  font-size: .72rem;
   font-weight: 700;
   letter-spacing: .14em;
   text-transform: uppercase;
   color: var(--copper-700);
+  transition: color .25s ease;
 }
-.tj-card__arrow {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 38px;
-  height: 38px;
-  color: var(--copper-700);
-  transition: transform .35s cubic-bezier(.2,.8,.2,1);
-}
-.tj-card__arrow svg { width: 18px; height: 18px; }
-.tj-card__link:hover .tj-card__arrow { transform: translateX(6px); }
+.tj-card__link:hover .tj-card__count { color: var(--copper-500); }
 
-/* Scroll-entrance — kun fade med stagger */
+/* Scroll-entrance */
 .tj-cards .scroll-fade {
   opacity: 0;
-  transform: translateY(16px);
-  transition: opacity .6s ease, transform .6s cubic-bezier(.2,.8,.2,1);
-  transition-delay: calc(var(--i, 0) * 80ms);
+  transform: translateY(20px);
+  transition: opacity .7s ease, transform .7s cubic-bezier(.2,.8,.2,1);
+  transition-delay: calc(var(--i, 0) * 90ms);
 }
 .tj-cards .scroll-fade.is-in { opacity: 1; transform: none; }
 
 @media (max-width: 900px) {
-  .tj-cards__grid { grid-template-columns: repeat(2, 1fr); }
+  .tj-cards__grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+  }
+  .tj-card:nth-child(1),
+  .tj-card:nth-child(2),
+  .tj-card:nth-child(3),
+  .tj-card:nth-child(4) { grid-column: span 1; }
+  .tj-card:nth-child(5) { grid-column: 1 / span 2; max-width: 50%; margin-inline: auto; }
+}
+@media (max-width: 560px) {
+  .tj-cards__grid { grid-template-columns: 1fr; max-width: 320px; }
   .tj-card:nth-child(1),
   .tj-card:nth-child(2),
   .tj-card:nth-child(3),
   .tj-card:nth-child(4),
-  .tj-card:nth-child(5) { grid-column: span 1; }
-  .tj-card:nth-child(5) { grid-column: span 2; }
-}
-@media (max-width: 600px) {
-  .tj-cards__grid { grid-template-columns: 1fr; }
-  .tj-card:nth-child(5) { grid-column: span 1; }
+  .tj-card:nth-child(5) { grid-column: span 1; max-width: none; }
 }
 @media (prefers-reduced-motion: reduce) {
   .tj-cards .scroll-fade { opacity: 1; transform: none; transition: none; }
+  .tj-card__link:hover { transform: none; }
 }
 
 /* ===== Leveranser — fag-detail leveransetabell ===== */

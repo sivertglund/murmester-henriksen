@@ -1,78 +1,54 @@
 ---
 /**
- * Skjold-emblem som ramme rundt et fag-ikon. Tar logoens skjold-shape
- * (uten H/MH-letterforms) og setter en fag-spesifikk ikon inni.
+ * Fag-ikon. Brukes inni skjold-formet tjeneste-kort.
+ * (Skjoldformen kommer fra clip-path på kortet selv.)
  */
 export interface Props {
   slug: string; // muring | puss | ildsted-og-skorstein | flis-vatrom-betong | restaurering
 }
 const { slug } = Astro.props;
 ---
-<div class="fag-shield" data-slug={slug}>
-  <svg class="fag-shield__frame" viewBox="0 0 200 240" aria-hidden="true">
-    <!-- Skjold-omriss matchende Henriksen-logo (rotert vertikal),
-         men forenklet til ren outline uten innfyll. -->
-    <path
-      class="fag-shield__path"
-      fill="none"
-      stroke="currentColor"
-      stroke-width="2.5"
-      stroke-linejoin="round"
-      d="M 16 18 Q 13 12 20 10 L 180 10 Q 187 12 184 18 Q 178 38 178 60 Q 178 100 184 134 Q 187 140 184 144 Q 175 168 158 188 Q 132 218 100 230 Q 68 218 42 188 Q 25 168 16 144 Q 13 140 16 134 Q 22 100 22 60 Q 22 38 16 18 Z"
-    />
-  </svg>
-
-  <div class="fag-shield__icon">
-    {slug === 'muring' && (
-      <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true">
-        <!-- 3 stablede mursteiner i løperforbandt -->
-        <rect x="10" y="14" width="20" height="10" rx="1"/>
-        <rect x="34" y="14" width="20" height="10" rx="1"/>
-        <rect x="22" y="27" width="20" height="10" rx="1"/>
-        <rect x="10" y="40" width="20" height="10" rx="1"/>
-        <rect x="34" y="40" width="20" height="10" rx="1"/>
-      </svg>
-    )}
-    {slug === 'puss' && (
-      <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true">
-        <!-- Mursleiv: håndtak + blad i diagonal -->
-        <path d="M 14 50 L 26 38" />
-        <path d="M 26 38 L 50 14 L 54 18 L 30 42 Z" />
-        <!-- Underlinjer som puss-strøk -->
-        <path d="M 10 56 L 32 56" stroke-width="1.6" opacity=".6" />
-        <path d="M 14 60 L 42 60" stroke-width="1.6" opacity=".4" />
-      </svg>
-    )}
-    {slug === 'ildsted-og-skorstein' && (
-      <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true">
-        <!-- Flamme inni skorstein-konture -->
-        <path d="M 32 12 Q 26 22 28 30 Q 22 28 22 36 Q 22 46 32 50 Q 42 46 42 36 Q 42 28 36 30 Q 38 22 32 12 Z" />
-        <!-- Skorstein-underbase -->
-        <path d="M 16 54 L 48 54" />
-        <path d="M 20 58 L 44 58" stroke-width="1.6" opacity=".5" />
-      </svg>
-    )}
-    {slug === 'flis-vatrom-betong' && (
-      <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true">
-        <!-- 2x2 flis-grid med vannmønster -->
-        <rect x="12" y="12" width="18" height="18" rx="1.5"/>
-        <rect x="34" y="12" width="18" height="18" rx="1.5"/>
-        <rect x="12" y="34" width="18" height="18" rx="1.5"/>
-        <rect x="34" y="34" width="18" height="18" rx="1.5"/>
-        <!-- Vanndråpe i midten -->
-        <path d="M 32 20 Q 26 28 32 32 Q 38 28 32 20 Z" fill="currentColor" opacity=".4" stroke="none" />
-      </svg>
-    )}
-    {slug === 'restaurering' && (
-      <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true">
-        <!-- Gammelt bygg med bue (kirke/portal-form) -->
-        <path d="M 14 52 L 14 28 Q 14 14 32 14 Q 50 14 50 28 L 50 52" />
-        <path d="M 8 52 L 56 52" />
-        <!-- Indre detalj — kvadrant-vinduer -->
-        <path d="M 26 28 L 26 38" opacity=".5" stroke-width="1.6"/>
-        <path d="M 38 28 L 38 38" opacity=".5" stroke-width="1.6"/>
-        <path d="M 32 22 L 32 44" opacity=".5" stroke-width="1.6"/>
-      </svg>
-    )}
-  </div>
+<div class="fag-icon">
+  {slug === 'muring' && (
+    <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true">
+      <rect x="10" y="14" width="20" height="10" rx="1"/>
+      <rect x="34" y="14" width="20" height="10" rx="1"/>
+      <rect x="22" y="27" width="20" height="10" rx="1"/>
+      <rect x="10" y="40" width="20" height="10" rx="1"/>
+      <rect x="34" y="40" width="20" height="10" rx="1"/>
+    </svg>
+  )}
+  {slug === 'puss' && (
+    <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true">
+      <path d="M 14 50 L 26 38" />
+      <path d="M 26 38 L 50 14 L 54 18 L 30 42 Z" />
+      <path d="M 10 56 L 32 56" stroke-width="1.6" opacity=".6" />
+      <path d="M 14 60 L 42 60" stroke-width="1.6" opacity=".4" />
+    </svg>
+  )}
+  {slug === 'ildsted-og-skorstein' && (
+    <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true">
+      <path d="M 32 12 Q 26 22 28 30 Q 22 28 22 36 Q 22 46 32 50 Q 42 46 42 36 Q 42 28 36 30 Q 38 22 32 12 Z" />
+      <path d="M 16 54 L 48 54" />
+      <path d="M 20 58 L 44 58" stroke-width="1.6" opacity=".5" />
+    </svg>
+  )}
+  {slug === 'flis-vatrom-betong' && (
+    <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true">
+      <rect x="12" y="12" width="18" height="18" rx="1.5"/>
+      <rect x="34" y="12" width="18" height="18" rx="1.5"/>
+      <rect x="12" y="34" width="18" height="18" rx="1.5"/>
+      <rect x="34" y="34" width="18" height="18" rx="1.5"/>
+      <path d="M 32 20 Q 26 28 32 32 Q 38 28 32 20 Z" fill="currentColor" opacity=".4" stroke="none" />
+    </svg>
+  )}
+  {slug === 'restaurering' && (
+    <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true">
+      <path d="M 14 52 L 14 28 Q 14 14 32 14 Q 50 14 50 28 L 50 52" />
+      <path d="M 8 52 L 56 52" />
+      <path d="M 26 28 L 26 38" opacity=".5" stroke-width="1.6"/>
+      <path d="M 38 28 L 38 38" opacity=".5" stroke-width="1.6"/>
+      <path d="M 32 22 L 32 44" opacity=".5" stroke-width="1.6"/>
+    </svg>
+  )}
 </div>
