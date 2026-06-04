@@ -8,6 +8,7 @@ import {
   getTestimonials, getAreas, getCTA, prosjektImageSrc, urlFor,
 } from '../lib/sanity';
 import { KATEGORIER } from '../lib/kategorier';
+import FagShield from '../components/FagShield.astro';
 
 const hero = await getHero();
 const founder = await getFounder();
@@ -126,7 +127,7 @@ const chipIcons: Record<string, string> = {
   </div>
 </section>
 
-<!-- ===== Tjenester: bento-grid med 5 fagområder ===== -->
+<!-- ===== Tjenester: glassmorphism-tiles på pussvegg-bg ===== -->
 <section class="services-list" id="tjenester">
   <div class="container services-list__head">
     <p class="kicker">Fem fagområder</p>
@@ -136,16 +137,18 @@ const chipIcons: Record<string, string> = {
   <div class="container">
     <div class="fag-tiles">
       {KATEGORIER.map((k, i) => (
-        <a class={`fag-tile ${i === 0 ? 'fag-tile--feature' : ''} scroll-fade`} href={`/tjenester/${k.slug}`}>
-          <div class="fag-tile__bg" style={`background-image: url('${k.heroBilde}');`}></div>
-          <div class="fag-tile__overlay"></div>
+        <a class={`fag-tile scroll-fade`} href={`/tjenester/${k.slug}`} style={`--i:${i}`}>
+          <div class="fag-tile__icon">
+            <FagShield slug={k.slug} />
+          </div>
           <div class="fag-tile__body">
             <span class="fag-tile__num" aria-hidden="true">{k.nummer}</span>
             <h3 class="fag-tile__title">{k.tittel}</h3>
-            <span class="fag-tile__arrow" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-            </span>
+            <p class="fag-tile__lede">{k.kortLede}</p>
           </div>
+          <span class="fag-tile__arrow" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </span>
         </a>
       ))}
     </div>
