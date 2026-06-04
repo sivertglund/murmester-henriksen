@@ -3053,6 +3053,14 @@ h2 em, h1 em, h3 em {
   height: 100%;
   transition: filter .35s ease;
 }
+/* Tving non-scaling-stroke på alle skjold-paths så stroke-tykkelse
+   er identisk på topp, sider og bunn (uavhengig av aspect-stretch) */
+.fag-tile__shield path,
+.andre-fag__shield path,
+.fag-hero__shield path,
+.tj-card__frame path {
+  vector-effect: non-scaling-stroke;
+}
 .fag-tile__link:hover .fag-tile__shield path {
   stroke: var(--copper-500);
 }
