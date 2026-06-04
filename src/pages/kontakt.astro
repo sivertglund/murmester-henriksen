@@ -1,6 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import { getKontakt, getKontaktPage } from '../lib/sanity';
+import { KATEGORIER } from '../lib/kategorier';
 
 const kontakt = await getKontakt();
 const kp = await getKontaktPage();
@@ -81,16 +82,8 @@ const kp = await getKontaktPage();
         <label>
           <span>Hva gjelder det?</span>
           <select name="tjeneste">
-            <option>Prisantydning / generelt</option>
-            <option>Teglforblending og muring</option>
-            <option>Puss</option>
-            <option>Restaurering av murverk</option>
-            <option>Rehabilitering av pipe / skorstein</option>
-            <option>Elementpipe &amp; stålpipe</option>
-            <option>Peis &amp; vedovn</option>
-            <option>Flislegging &amp; våtrom</option>
-            <option>Sparkling og gulvavretting</option>
-            <option>Skifer &amp; Naturstein</option>
+            <option>Generelt / prisantydning</option>
+            {KATEGORIER.map((k) => <option>{k.tittel}</option>)}
             <option>Annet</option>
           </select>
         </label>

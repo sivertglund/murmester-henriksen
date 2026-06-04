@@ -82,8 +82,8 @@ const SHIELD_PATH = "M 1 0.4521 C 1 0.5468, 0.9734 0.6349, 0.9208 0.7132 C 0.879
   <section class="leveranser">
     <div class="container">
       <div class="leveranser__head">
-        <p class="kicker">Leveransene</p>
         <h2 class="leveranser__h2">Det vi leverer innen <em>{kategori.tittel.toLowerCase()}</em></h2>
+        <p class="leveranser__note">Pris på forespørsel</p>
       </div>
 
       <ul class="leveranser__list">
@@ -99,11 +99,7 @@ const SHIELD_PATH = "M 1 0.4521 C 1 0.5468, 0.9734 0.6349, 0.9208 0.7132 C 0.879
                     <span class="leveranse__navn">{u.navn}</span>
                   </span>
                   <span class="leveranse__meta">
-                    {pris ? (
-                      <span class="leveranse__pris">{pris}</span>
-                    ) : (
-                      <span class="leveranse__pris leveranse__pris--ask">Spør om pris</span>
-                    )}
+                    {pris && <span class="leveranse__pris">{pris}</span>}
                     {harInfo && <span class="leveranse__expand" aria-hidden="true">↓</span>}
                   </span>
                 </summary>

@@ -1504,14 +1504,13 @@ h2 em, h1 em, h3 em {
 }
 
 /* ===== Forsiden-stage: lys pussvegg-bg som dekker tjenester →
-   marquee → filosofi. Subtil tekstur, varm sand-grunntone. ===== */
+   marquee. Samme wash som .fag-stage på detail-sidene. ===== */
 .fp-stage {
   position: relative;
   isolation: isolate;
   color: var(--ink);
   background:
-    /* Lett warm wash, men slipper mer pusstekstur gjennom enn før */
-    linear-gradient(180deg, rgba(245,241,234,.78) 0%, rgba(245,241,234,.88) 100%),
+    linear-gradient(180deg, rgba(232,222,200,.78) 0%, rgba(232,222,200,.88) 100%),
     url('/assets/forside-tjenester-bg.webp') center/cover no-repeat fixed;
 }
 @media (max-width: 720px) {
@@ -4077,6 +4076,14 @@ h2 em, h1 em, h3 em {
   color: var(--ink-soft);
   font-size: 1.02rem;
   line-height: 1.55;
+}
+.leveranser__note {
+  margin: 14px 0 0;
+  font-size: .8rem;
+  font-weight: 700;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--copper-500);
 }
 
 .leveranser__list {
