@@ -1,0 +1,49 @@
+---
+/**
+ * Gjenbrukbart tegl-motiv som varianter.
+ *
+ * variant:
+ *   - 'marquee'  → kontinuerlig drift (default, founder bruker dette)
+ *   - 'stack'    → bricks "legges" en og en når den kommer i syne
+ *   - 'static'   → stillende rader, kun tekstur
+ *
+ * tone:
+ *   - 'copper'   → varm rust-tone (default)
+ *   - 'steel'    → mørk grå-tone for lyse seksjoner
+ *   - 'subtle'   → svak/dempet for ambient bruk
+ *
+ * rows: antall rader (default 2)
+ * size: 'sm' | 'md' | 'lg' (default 'md')
+ */
+export interface Props {
+  variant?: 'marquee' | 'stack' | 'static';
+  tone?: 'copper' | 'steel' | 'subtle';
+  rows?: number;
+  size?: 'sm' | 'md' | 'lg';
+  className?: string;
+}
+
+const {
+  variant = 'marquee',
+  tone = 'copper',
+  rows = 2,
+  size = 'md',
+  className = '',
+} = Astro.props;
+
+const bricksPerRow = 28;
+---
+<div
+  class={`brick-deco brick-deco--${variant} brick-deco--${tone} brick-deco--${size} ${className}`}
+  aria-hidden="true"
+>
+  {Array.from({length: rows}).map((_, r) => (
+    <div class={`brick-row ${r % 2 === 0 ? 'brick-row--top' : 'brick-row--bot'}`}>
+      <div class="brick-row__track">
+        {Array.from({length: bricksPerRow}).map((_, i) => (
+          <span class="brick" style={`--bi:${i}`}></span>
+        ))}
+      </div>
+    </div>
+  ))}
+</div>

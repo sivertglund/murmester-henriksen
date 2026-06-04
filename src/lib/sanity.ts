@@ -334,7 +334,7 @@ const FOOTER_FALLBACK: Footer = {
   firmaadresse: 'Vear, Vestfold',
   tagline: 'Murmester · Etablert 2025 · NM-sølv 2014',
   medlemTekst: 'Medlem · Norges Murmesterforening',
-  facebookUrl: 'https://www.facebook.com/murmesterhenriksen',
+  facebookUrl: 'https://www.facebook.com/profile.php?id=61573745327073',
   instagramUrl: 'https://www.instagram.com/murmesterhenriksen/',
 };
 

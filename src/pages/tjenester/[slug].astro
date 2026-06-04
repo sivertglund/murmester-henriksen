@@ -1,5 +1,6 @@
 ---
 import Layout from '../../layouts/Layout.astro';
+import BrickRow from '../../components/BrickRow.astro';
 import { KATEGORIER } from '../../lib/kategorier';
 
 export async function getStaticPaths() {
@@ -132,6 +133,9 @@ function formatPris(u: { prisFra?: string; prisTil?: string; prisEnhet?: string 
   </section>
 
   <section class="cta-strip section--dark">
+    <div class="cta-strip__bricks">
+      <BrickRow variant="marquee" tone="copper" rows={1} size="sm" />
+    </div>
     <div class="container cta-strip__inner">
       <p class="kicker kicker--light">Klar for å starte?</p>
       <h2>La oss <em>se på jobben</em>.</h2>

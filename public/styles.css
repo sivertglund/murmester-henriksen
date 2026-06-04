@@ -1152,48 +1152,62 @@ h2 em, h1 em, h3 em {
   .founder__lede { margin-left: auto; margin-right: auto; }
 }
 
-/* Animert tegl-rad — continuous marquee, hver rad sklir hver sin vei
-   for å gi seksjonen liv. */
-.founder__bricks {
-  display: block;
-  width: 100%;
-  max-width: 720px;
-  margin: clamp(48px, 6vw, 76px) auto 0;
-  color: var(--copper-500);
-  opacity: .55;
-  overflow: hidden;
-  -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 14%, #000 86%, transparent 100%);
-          mask-image: linear-gradient(90deg, transparent 0%, #000 14%, #000 86%, transparent 100%);
+/* ===== Gjenbrukbart tegl-motiv (brick-deco) =====
+   variant: marquee | stack | static
+   tone:    copper | steel | subtle
+   size:    sm | md | lg
+   Brukt på flere seksjoner som signatur-motif. */
+.brick-deco {
   display: flex;
   flex-direction: column;
-  gap: 6px;
-  padding: 4px 0;
+  width: 100%;
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 12%, #000 88%, transparent 100%);
+          mask-image: linear-gradient(90deg, transparent 0%, #000 12%, #000 88%, transparent 100%);
+  pointer-events: none;
 }
+/* Toner */
+.brick-deco--copper { color: var(--copper-500); opacity: .55; }
+.brick-deco--steel  { color: var(--steel-600); opacity: .15; }
+.brick-deco--subtle { color: var(--copper-500); opacity: .18; }
+/* Størrelser */
+.brick-deco--sm { gap: 4px; padding: 2px 0; }
+.brick-deco--sm .brick { width: 38px; height: 14px; }
+.brick-deco--md { gap: 6px; padding: 4px 0; }
+.brick-deco--md .brick { width: 56px; height: 20px; }
+.brick-deco--lg { gap: 8px; padding: 6px 0; }
+.brick-deco--lg .brick { width: 72px; height: 26px; }
+
 .brick-row {
   width: 100%;
   overflow: hidden;
   position: relative;
 }
-.brick-row--top { padding-left: 32px; }
+.brick-row--bot { padding-left: 32px; }
+.brick-deco--sm .brick-row--bot { padding-left: 22px; }
+.brick-deco--lg .brick-row--bot { padding-left: 42px; }
 .brick-row__track {
   display: flex;
   gap: 6px;
   width: max-content;
   will-change: transform;
 }
-.brick-row--bot .brick-row__track {
-  animation: brickScrollRight 140s linear infinite;
-}
-.brick-row--top .brick-row__track {
-  animation: brickScrollLeft 120s linear infinite;
-}
+.brick-deco--sm .brick-row__track { gap: 4px; }
+.brick-deco--lg .brick-row__track { gap: 8px; }
+
 .brick {
   display: block;
   flex: 0 0 auto;
-  width: 56px;
-  height: 20px;
   background: currentColor;
   border-radius: 2px;
+}
+
+/* MARQUEE — kontinuerlig drift */
+.brick-deco--marquee .brick-row:nth-child(odd) .brick-row__track {
+  animation: brickScrollLeft 120s linear infinite;
+}
+.brick-deco--marquee .brick-row:nth-child(even) .brick-row__track {
+  animation: brickScrollRight 140s linear infinite;
 }
 @keyframes brickScrollRight {
   from { transform: translate3d(-50%, 0, 0); }
@@ -1203,9 +1217,76 @@ h2 em, h1 em, h3 em {
   from { transform: translate3d(0, 0, 0); }
   to   { transform: translate3d(-50%, 0, 0); }
 }
+
+/* STACK — bricks "legges" stein for stein når seksjonen kommer i syne */
+.brick-deco--stack .brick {
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: opacity .5s cubic-bezier(.2,.8,.2,1), transform .5s cubic-bezier(.2,.8,.2,1);
+  transition-delay: calc(var(--bi, 0) * 60ms);
+}
+.brick-deco--stack.is-in .brick {
+  opacity: 1;
+  transform: none;
+}
+.brick-deco--stack .brick-row--bot .brick {
+  transition-delay: calc((var(--bi, 0) * 60ms) + 800ms);
+}
+
+/* STATIC — ingen animasjon, bare tekstur */
+.brick-deco--static .brick-row__track {
+  animation: none;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .brick-row__track { animation: none !important; }
+  .brick-deco--stack .brick { opacity: 1 !important; transform: none !important; transition: none !important; }
 }
+
+/* Founder-spesifikk wrapper for tegl-motif (bevarer eksisterende plassering) */
+.founder .brick-deco {
+  max-width: 720px;
+  margin: clamp(48px, 6vw, 76px) auto 0;
+}
+
+/* Tegl-motif på tjenester-intro (under H1-blokken) */
+.tj-intro__bricks {
+  max-width: 920px;
+  margin: clamp(48px, 6vw, 72px) auto 0;
+  padding: 0 var(--pad);
+}
+.tj-intro__bricks .brick-deco { opacity: .25; }
+
+/* Tegl-motif på mester-sitat (subtle stack-reveal over sitatet) */
+.mester-sitat__bricks {
+  position: absolute;
+  top: clamp(40px, 5vw, 70px);
+  left: 0;
+  right: 0;
+  z-index: 1;
+  display: flex;
+  justify-content: center;
+}
+.mester-sitat__bricks .brick-deco {
+  max-width: 420px;
+  opacity: .22;
+}
+
+/* Tegl-motif som top-banner på CTA-strip (mørk seksjon) */
+.cta-strip { position: relative; overflow: hidden; }
+.cta-strip__bricks {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 0;
+  opacity: .65;
+}
+.cta-strip__bricks .brick-deco {
+  color: var(--copper-500);
+  opacity: .35;
+}
+.cta-strip__inner { position: relative; z-index: 1; }
 
 /* Stroke-tegne på credential-ikoner — de tegnes inn som hånd-skisser */
 .cred__icon svg path,
@@ -3370,12 +3451,32 @@ h2 em, h1 em, h3 em {
   transition:
     transform .35s cubic-bezier(.2,.8,.2,1),
     border-color .25s ease,
-    box-shadow .35s ease;
+    box-shadow .35s ease,
+    background .35s ease;
 }
 .tj-card__link:hover {
   transform: translateY(-3px);
   border-color: rgba(190,84,0,.35);
   box-shadow: 0 14px 30px -16px rgba(31,31,32,.14);
+}
+
+/* CTA-kort variant — det 6. kortet ('Mangler du noe?') */
+.tj-card--cta .tj-card__link {
+  background:
+    linear-gradient(155deg, rgba(190,84,0,.06) 0%, rgba(190,84,0,.02) 60%, #fff 100%);
+  border-color: rgba(190,84,0,.25);
+  border-style: dashed;
+}
+.tj-card--cta .tj-card__link:hover {
+  background:
+    linear-gradient(155deg, rgba(190,84,0,.12) 0%, rgba(190,84,0,.04) 60%, #fff 100%);
+  border-color: var(--copper-500);
+  border-style: solid;
+}
+.tj-card--cta .tj-card__num {
+  font-size: 1.8rem;
+  letter-spacing: 0;
+  line-height: 1;
 }
 .tj-card__num {
   font-size: .82rem;

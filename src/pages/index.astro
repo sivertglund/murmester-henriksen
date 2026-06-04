@@ -1,6 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import IntroLogo from '../components/IntroLogo.astro';
+import BrickRow from '../components/BrickRow.astro';
 import BrandStripes from '../components/BrandStripes.astro';
 import {
   getHero, getFounder, getProsjekter,
@@ -120,19 +121,9 @@ const chipIcons: Record<string, string> = {
       </div>
     </div>
 
-    <!-- Tegl-rad: continuous marquee, hver rad sklir hver sin vei -->
-    <div class="founder__bricks" aria-hidden="true">
-      <div class="brick-row brick-row--top">
-        <div class="brick-row__track">
-          {Array.from({length: 24}).map(() => <span class="brick"></span>)}
-        </div>
-      </div>
-      <div class="brick-row brick-row--bot">
-        <div class="brick-row__track">
-          {Array.from({length: 24}).map(() => <span class="brick"></span>)}
-        </div>
-      </div>
-    </div>
+    <!-- Tegl-motif: continuous marquee som signatur i founder-seksjonen -->
+    <BrickRow variant="marquee" tone="copper" rows={2} size="md" />
+
   </div>
 </section>
 
@@ -208,6 +199,9 @@ const chipIcons: Record<string, string> = {
 <!-- ===== Mester-sitat ===== -->
 <section class="mester-sitat" id="filosofi">
   <div class="mester-sitat__stripe-top" aria-hidden="true"></div>
+  <div class="mester-sitat__bricks scroll-fade">
+    <BrickRow variant="stack" tone="subtle" rows={1} size="sm" className="scroll-fade" />
+  </div>
   <svg class="mester-sitat__quote-mark" viewBox="0 0 100 80" fill="none" aria-hidden="true">
     <path d="M0 80V44C0 19.7 13.3 4.7 40 0v16C26 19.3 17.3 30.7 15 50h25v30H0zm60 0V44C60 19.7 73.3 4.7 100 0v16C86 19.3 77.3 30.7 75 50h25v30H60z" fill="currentColor"/>
   </svg>
@@ -262,6 +256,9 @@ const chipIcons: Record<string, string> = {
 
 <!-- ===== CTA-strip før kart ===== -->
 <section class="cta-strip section--dark">
+  <div class="cta-strip__bricks">
+    <BrickRow variant="marquee" tone="copper" rows={1} size="sm" />
+  </div>
   <div class="container cta-strip__inner">
     <p class="kicker kicker--light">{cta.kicker}</p>
     <h2>{cta.tittel} <em>{cta.tittelAksent}</em>{cta.tittelSlutt}</h2>
@@ -279,31 +276,26 @@ const chipIcons: Record<string, string> = {
 </section>
 
 <script is:inline>
-  // Hold hero-videoen pauset til intro-overlay fader ut.
+  // Start hero-videoen så snart vi kan — den ligger bak intro-overlay,
+  // så muren rekker å bygges litt før overlay fader ut (~5.4s).
+  // Resultat: når introen er ferdig, er muren ca. 35% bygd opp.
   (function () {
     var video = document.getElementById('heroVideo');
     if (!video) return;
-    var overlay = document.getElementById('introOverlay');
-    var played = false;
-    function start() {
-      if (played) return;
-      played = true;
-      try { video.currentTime = 0; } catch (e) {}
-      var p = video.play();
-      if (p && typeof p.catch === 'function') p.catch(function () {});
+    try { video.currentTime = 0; } catch (e) {}
+    var p = video.play();
+    if (p && typeof p.catch === 'function') {
+      p.catch(function () {
+        // Hvis autoplay blokkeres, prøv igjen ved første brukerinteraksjon
+        var retry = function () {
+          video.play().catch(function () {});
+          document.removeEventListener('click', retry);
+          document.removeEventListener('touchstart', retry);
+        };
+        document.addEventListener('click', retry, { once: true });
+        document.addEventListener('touchstart', retry, { once: true });
+      });
     }
-    if (!overlay || overlay.style.display === 'none') {
-      // Ingen overlay (eller allerede fjernet) — kjør videoen med en gang
-      start();
-      return;
-    }
-    // Start videoen idet intro-overlay begynner å fade ut, slik at muren
-    // bygges opp samtidig som intro forsvinner.
-    overlay.addEventListener('animationstart', function (e) {
-      if (e.animationName === 'introFadeOut') start();
-    });
-    // Backup om animationstart ikke fyrer
-    setTimeout(start, 4500);
   })();
 </script>
 
