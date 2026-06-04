@@ -1503,31 +1503,40 @@ h2 em, h1 em, h3 em {
   background: var(--clay-500);
 }
 
-/* ===== Services list — glassmorphism på ekte pussvegg ===== */
-.services-list {
-  padding: clamp(90px, 10vw, 140px) 0 clamp(90px, 10vw, 140px);
-  border-top: 1px solid var(--line);
+/* ===== Forsiden-stage: lys pussvegg-bg som dekker tjenester →
+   marquee → filosofi. Subtil tekstur, varm sand-grunntone. ===== */
+.fp-stage {
   position: relative;
   isolation: isolate;
-  overflow: hidden;
-  background:
-    /* Soft warm wash for kontrast */
-    linear-gradient(180deg, rgba(240,232,216,.5) 0%, rgba(240,232,216,.7) 100%),
-    url('/assets/forside-tjenester-bg.webp') center/cover no-repeat fixed;
   color: var(--ink);
+  background:
+    /* Lett warm wash, men slipper mer pusstekstur gjennom enn før */
+    linear-gradient(180deg, rgba(245,241,234,.78) 0%, rgba(245,241,234,.88) 100%),
+    url('/assets/forside-tjenester-bg.webp') center/cover no-repeat fixed;
 }
 @media (max-width: 720px) {
-  .services-list { background-attachment: scroll; }
+  .fp-stage { background-attachment: scroll; }
 }
-.services-list::before {
+.fp-stage::before {
+  /* Subtil radial copper-glow oppe — gjenspeiler lyset i bildet */
   content: "";
   position: absolute;
   inset: 0;
-  z-index: 0;
   background:
-    radial-gradient(ellipse 60% 40% at 50% 0%, rgba(190,84,0,.10) 0%, transparent 60%);
+    radial-gradient(ellipse 60% 30% at 50% 0%, rgba(190,84,0,.08) 0%, transparent 60%);
   pointer-events: none;
+  z-index: 0;
 }
+.fp-stage > section { position: relative; z-index: 1; }
+
+/* ===== Services list — på fp-stage ===== */
+.services-list {
+  padding: clamp(90px, 10vw, 140px) 0 clamp(90px, 10vw, 140px);
+  position: relative;
+  background: transparent;
+  color: var(--ink);
+}
+.fp-stage .services-list::before { display: none; }
 /* Subtil oransje stripe-aksent øverst på services-list (matcher varebilen) */
 .services-list::after {
   content: "";
@@ -1823,7 +1832,7 @@ h2 em, h1 em, h3 em {
 
 /* ===== Marquee — scroll-koblede prosjektrader ===== */
 .marquee {
-  background: var(--bg);
+  background: transparent;
   padding: clamp(60px, 7vw, 90px) 0;
   overflow: hidden;
   position: relative;
@@ -2858,47 +2867,17 @@ h2 em, h1 em, h3 em {
   text-wrap: pretty;
 }
 
-/* ===== Mester-sitat — varm lys cinematic pause ===== */
+/* ===== Mester-sitat — lys cinematic pause på fp-stage ===== */
 .mester-sitat {
-  background: var(--bg);
+  background: transparent;
   color: var(--ink);
   padding: clamp(110px, 14vw, 180px) 0 clamp(100px, 12vw, 160px);
   position: relative;
   isolation: isolate;
   overflow: hidden;
 }
-.mester-sitat::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  z-index: -2;
-  background:
-    radial-gradient(ellipse 70% 50% at 50% 10%, rgba(190, 84, 0, .07) 0%, transparent 60%),
-    radial-gradient(ellipse 60% 60% at 50% 100%, rgba(190, 84, 0, .05) 0%, transparent 55%),
-    linear-gradient(180deg, #F2EDE3 0%, #F7F3EB 100%);
-}
-.mester-sitat::after {
-  /* Akvarell-tegl mønster som ambient backdrop */
-  content: "";
-  position: absolute;
-  inset: 0;
-  z-index: -1;
-  pointer-events: none;
-  opacity: .08;
-  background-image:
-    /* horisontale mørtellinjer hver 28px */
-    repeating-linear-gradient(0deg,
-      rgba(122,53,0,.55) 0 1px,
-      transparent 1px 28px),
-    /* vertikale mørtellinjer hver 64px */
-    repeating-linear-gradient(90deg,
-      rgba(122,53,0,.45) 0 1px,
-      transparent 1px 64px);
-  /* offset annenhver rad for løperforbandt */
-  background-position: 0 0, 32px 14px;
-  -webkit-mask-image: radial-gradient(ellipse 90% 80% at 50% 50%, #000 30%, transparent 90%);
-          mask-image: radial-gradient(ellipse 90% 80% at 50% 50%, #000 30%, transparent 90%);
-}
+.mester-sitat::before { display: none; }
+.mester-sitat::after { display: none; }
 .mester-sitat__stripe-top { display: none; }
 .mester-sitat__stripe-bot {
   position: absolute;
@@ -3010,7 +2989,7 @@ h2 em, h1 em, h3 em {
   .mester-sitat .scroll-fade { opacity: 1; transform: none; transition: none; }
 }
 
-/* ===== Forsidens fag-tiles — glassmorphism på pussvegg ===== */
+/* ===== Forsidens fag-tiles — glassmorphism på mørk pussvegg ===== */
 .fag-tiles {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
@@ -3044,7 +3023,6 @@ h2 em, h1 em, h3 em {
     box-shadow .5s ease;
 }
 .fag-tile::before {
-  /* Subtil copper-shine top-left ved hover */
   content: "";
   position: absolute;
   top: 0;
