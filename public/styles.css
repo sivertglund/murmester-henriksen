@@ -2867,17 +2867,39 @@ h2 em, h1 em, h3 em {
   text-wrap: pretty;
 }
 
-/* ===== Mester-sitat — lys cinematic pause på fp-stage ===== */
+/* ===== Mester-sitat — varm lys cinematic pause ===== */
 .mester-sitat {
-  background: transparent;
+  background: var(--bg);
   color: var(--ink);
   padding: clamp(110px, 14vw, 180px) 0 clamp(100px, 12vw, 160px);
   position: relative;
   isolation: isolate;
   overflow: hidden;
 }
-.mester-sitat::before { display: none; }
-.mester-sitat::after { display: none; }
+.mester-sitat::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  background:
+    radial-gradient(ellipse 70% 50% at 50% 10%, rgba(190, 84, 0, .07) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 60% at 50% 100%, rgba(190, 84, 0, .05) 0%, transparent 55%),
+    linear-gradient(180deg, #F2EDE3 0%, #F7F3EB 100%);
+}
+.mester-sitat::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  opacity: .08;
+  background-image:
+    repeating-linear-gradient(0deg, rgba(122,53,0,.55) 0 1px, transparent 1px 28px),
+    repeating-linear-gradient(90deg, rgba(122,53,0,.45) 0 1px, transparent 1px 64px);
+  background-position: 0 0, 32px 14px;
+  -webkit-mask-image: radial-gradient(ellipse 90% 80% at 50% 50%, #000 30%, transparent 90%);
+          mask-image: radial-gradient(ellipse 90% 80% at 50% 50%, #000 30%, transparent 90%);
+}
 .mester-sitat__stripe-top { display: none; }
 .mester-sitat__stripe-bot {
   position: absolute;
@@ -3701,6 +3723,35 @@ h2 em, h1 em, h3 em {
   line-height: 1.55;
   max-width: 50ch;
 }
+
+/* ===== Fag-detail stage: pussvegg-bg med litt mørkere wash for
+   contrast — dekker leveranser + andre fagområder ===== */
+.fag-stage {
+  position: relative;
+  isolation: isolate;
+  background:
+    /* Lett mørkere wash enn forsiden så pussen leser bedre */
+    linear-gradient(180deg, rgba(232,222,200,.78) 0%, rgba(232,222,200,.88) 100%),
+    url('/assets/forside-tjenester-bg.webp') center/cover no-repeat fixed;
+}
+@media (max-width: 720px) {
+  .fag-stage { background-attachment: scroll; }
+}
+.fag-stage::before {
+  /* Subtil copper-glow midten — overgang mellom hero og leveranser */
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 60% 30% at 50% 0%, rgba(190,84,0,.08) 0%, transparent 60%);
+  pointer-events: none;
+  z-index: 0;
+}
+.fag-stage > section { position: relative; z-index: 1; background: transparent; }
+
+/* Leveranser + andre-fag i fag-stage får transparent bg */
+.fag-stage .leveranser,
+.fag-stage .andre-fag { background: transparent; }
 
 /* ===== Andre fagområder — mini-skjold rad ===== */
 .andre-fag {
