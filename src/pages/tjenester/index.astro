@@ -35,32 +35,28 @@ const totalLeveranser = KATEGORIER.reduce((sum, k) => sum + k.underkategorier.le
     </div>
   </section>
 
-  <section class="tj-list">
-    <span class="tj-list__stripe" aria-hidden="true"></span>
+  <section class="tj-cards">
     <div class="container">
-      <ul class="tj-list__items">
+      <ul class="tj-cards__grid">
         {KATEGORIER.map((k, i) => (
-          <li class="tj-row scroll-fade" style={`--i:${i}`}>
-            <a class="tj-row__link" href={`/tjenester/${k.slug}`}>
-              <span class="tj-row__indicator" aria-hidden="true"></span>
-              <span class="tj-row__num">{k.nummer}</span>
-              <span class="tj-row__main">
-                <span class="tj-row__head">
-                  <h2 class="tj-row__name">{k.tittel}</h2>
-                  <span class="tj-row__meta">
-                    <span class="tj-row__count">{k.underkategorier.length} leveranser</span>
-                    <span class="tj-row__arrow" aria-hidden="true">→</span>
-                  </span>
+          <li class="tj-card scroll-fade" style={`--i:${i}`}>
+            <a href={`/tjenester/${k.slug}`} class="tj-card__link">
+              <span class="tj-card__corner" aria-hidden="true"></span>
+              <div class="tj-card__top">
+                <span class="tj-card__num">{k.nummer}</span>
+                <span class="tj-card__num-line" aria-hidden="true"></span>
+                <span class="tj-card__eyebrow">Fagområde</span>
+              </div>
+              <h2 class="tj-card__title">{k.tittel}</h2>
+              <p class="tj-card__lede">{k.kortLede}</p>
+              <div class="tj-card__divider" aria-hidden="true"></div>
+              <div class="tj-card__foot">
+                <span class="tj-card__count">{k.underkategorier.length} leveranser</span>
+                <span class="tj-card__arrow" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
                 </span>
-                <span class="tj-row__lede">{k.kortLede}</span>
-                <span class="tj-row__leveranser">
-                  {k.underkategorier.map((u, j) => (
-                    <span class="tj-row__lv" style={`--j:${j}`}>{u.navn}</span>
-                  ))}
-                </span>
-              </span>
+              </div>
             </a>
-            <span class="tj-row__line" aria-hidden="true"></span>
           </li>
         ))}
       </ul>
