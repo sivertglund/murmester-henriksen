@@ -268,26 +268,40 @@ const chipIcons: Record<string, string> = {
 </section>
 
 <script is:inline>
-  // Start hero-videoen så snart vi kan — den ligger bak intro-overlay,
-  // så muren rekker å bygges litt før overlay fader ut (~5.4s).
-  // Resultat: når introen er ferdig, er muren ca. 35% bygd opp.
+  // Vent med hero-videoen til intro-overlay er ferdig. Da starter muren
+  // sin oppbygning akkurat når brukeren ser den — ikke før.
   (function () {
     var video = document.getElementById('heroVideo');
     if (!video) return;
-    try { video.currentTime = 0; } catch (e) {}
-    var p = video.play();
-    if (p && typeof p.catch === 'function') {
-      p.catch(function () {
-        // Hvis autoplay blokkeres, prøv igjen ved første brukerinteraksjon
-        var retry = function () {
-          video.play().catch(function () {});
-          document.removeEventListener('click', retry);
-          document.removeEventListener('touchstart', retry);
-        };
-        document.addEventListener('click', retry, { once: true });
-        document.addEventListener('touchstart', retry, { once: true });
-      });
+    var overlay = document.getElementById('introOverlay');
+    var started = false;
+    function start() {
+      if (started) return;
+      started = true;
+      try { video.currentTime = 0; } catch (e) {}
+      var p = video.play();
+      if (p && typeof p.catch === 'function') {
+        p.catch(function () {
+          var retry = function () {
+            video.play().catch(function () {});
+            document.removeEventListener('click', retry);
+            document.removeEventListener('touchstart', retry);
+          };
+          document.addEventListener('click', retry, { once: true });
+          document.addEventListener('touchstart', retry, { once: true });
+        });
+      }
     }
+    if (!overlay || overlay.style.display === 'none') {
+      start();
+      return;
+    }
+    // Start videoen NÅR intro-overlay er ferdig faded ut
+    overlay.addEventListener('animationend', function (e) {
+      if (e.animationName === 'introFadeOut') start();
+    });
+    // Backup om animationend ikke fyrer (intro varer ca. 5.4s total)
+    setTimeout(start, 5800);
   })();
 </script>
 
