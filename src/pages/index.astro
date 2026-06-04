@@ -50,8 +50,7 @@ const chipIcons: Record<string, string> = {
       preload="auto"
       disableremoteplayback
       tabindex="-1"
-      aria-hidden="true"
-      poster="/assets/hero-wall-poster.jpg"></video>
+      aria-hidden="true"></video>
     <div class="hero__overlay"></div>
 
     <div class="hero__content">
@@ -204,8 +203,7 @@ const chipIcons: Record<string, string> = {
     <p class="kicker scroll-fade">Mesterens filosofi</p>
     <blockquote class="mester-sitat__quote">
       <p class="scroll-fade">
-        <em>Kvalitet er aldri tilfeldig.</em> Godt håndverk handler om kunnskap,
-        erfaring og stolthet — i hver detalj.
+        Godt håndverk handler om <em>kunnskap, erfaring, nøyaktighet og stolthet</em> i arbeidet.
       </p>
       <footer class="scroll-fade">
         <span class="mester-sitat__line" aria-hidden="true"></span>
@@ -268,13 +266,19 @@ const chipIcons: Record<string, string> = {
 </section>
 
 <script is:inline>
-  // Vent med hero-videoen til intro-overlay er ferdig. Da starter muren
-  // sin oppbygning akkurat når brukeren ser den — ikke før.
+  // Vent med hero-videoen til intro-overlay er ferdig. Video er skjult
+  // til første frame er dekodet — så bruker ikke ser end-frame eller hopp.
   (function () {
     var video = document.getElementById('heroVideo');
     if (!video) return;
+    video.style.opacity = '0';
     var overlay = document.getElementById('introOverlay');
     var started = false;
+    function revealOnFirstFrame() {
+      video.style.transition = 'opacity .35s ease';
+      video.style.opacity = '1';
+    }
+    video.addEventListener('playing', revealOnFirstFrame, { once: true });
     function start() {
       if (started) return;
       started = true;
@@ -296,11 +300,9 @@ const chipIcons: Record<string, string> = {
       start();
       return;
     }
-    // Start videoen NÅR intro-overlay er ferdig faded ut
     overlay.addEventListener('animationend', function (e) {
       if (e.animationName === 'introFadeOut') start();
     });
-    // Backup om animationend ikke fyrer (intro varer ca. 5.4s total)
     setTimeout(start, 5800);
   })();
 </script>

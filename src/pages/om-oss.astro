@@ -3,15 +3,13 @@ import Layout from '../layouts/Layout.astro';
 import { getOmOss, urlFor } from '../lib/sanity';
 
 const om = await getOmOss();
-
-const subheroImg = om.subheroBilde ? urlFor(om.subheroBilde).width(1400).url() : '/assets/vincent-portrait.jpg';
 const portrettKortImg = om.portrettKortBilde ? urlFor(om.portrettKortBilde).width(800).url() : '/assets/vincent-workshop.jpg';
 
-// Timeline-data for Faglig reise
+// Timeline-data for Faglig reise (Vincents egne tekster)
 const reise = [
   { year: '2012', title: 'Starten på karrieren', body: 'Vincent startet sin yrkeskarriere innen murfaget og utviklet raskt en sterk interesse for både tradisjonelt og moderne murhåndverk.' },
-  { year: '2014', title: 'Svennebrev og NM-sølv', body: 'I 2014 avla Vincent svenneprøven i murfaget. Samme år deltok han i Norgesmesterskapet for murere og oppnådde en sølvmedalje — en prestasjon som bekreftet både ferdigheter, nøyaktighet og faglig dedikasjon.' },
-  { year: '2014–2024', title: 'Byggeplass og ledelse', body: 'Gjennom denne perioden arbeidet Vincent på en rekke små og store prosjekter som både utførende murer og BAS. Etter hvert gikk han videre inn i lederroller som prosjektleder, avdelingsleder og faglig leder innad i bedrift, med ansvar for planlegging, koordinering, kvalitetssikring og oppfølging av prosjekter. Denne kombinasjonen av praktisk erfaring og ledelsesansvar har gitt en solid forståelse for hele byggeprosessen — fra prosjektering til ferdig resultat.' },
+  { year: '2014', title: 'Svennebrev og sølvmedalje i Norgesmesterskapet', body: 'I 2014 avla Vincent svenneprøven i murfaget. Samme år deltok han i Norgesmesterskapet for murere og oppnådde en sølvmedalje — en prestasjon som bekreftet både ferdigheter, nøyaktighet og faglig dedikasjon.' },
+  { year: '2014–2024', title: 'Erfaring fra byggeplass og ledelse', body: 'Gjennom denne perioden arbeidet Vincent på en rekke små og store prosjekter som både utførende murer og BAS. Etter hvert gikk han videre inn i lederroller som prosjektleder, avdelingsleder og faglig leder innad i bedrift, med ansvar for planlegging, koordinering, kvalitetssikring og oppfølging av prosjekter. Denne kombinasjonen av praktisk erfaring og ledelsesansvar har gitt en solid forståelse for hele byggeprosessen — fra prosjektering til ferdig resultat.' },
   { year: '2019', title: 'Medlem av Prøvenemnda', body: 'Vincent ble oppnevnt som sensor i Prøvenemnda for Mur- og flisleggerfaget i Vestfold. Gjennom arbeidet i prøvenemnda har han vært med på å sikre kvaliteten på fremtidens fagarbeidere og bidra til å opprettholde høye standarder i bransjen. I 2021 tok han også mer ansvar ved å bli koordinator for Vestfold.' },
   { year: '2022', title: 'Fagskoleingeniør og Murmester', body: 'I 2022 fullførte Vincent utdanning som både fagskoleingeniør og murmester. Kombinasjonen av praktisk erfaring og formell utdanning gir et solid grunnlag for å håndtere både tekniske, administrative og faglige utfordringer i moderne byggeprosjekter.' },
   { year: '2025', title: 'Etablering av Murmester Henriksen AS', body: 'I 2025 tok Vincent steget fullt ut og etablerte Murmester Henriksen AS. Målet med selskapet er å levere håndverk av høyeste kvalitet innen mur, puss, flis, naturstein og rehabilitering — med fagkunnskap, kvalitet og kundetilfredshet som de viktigste verdiene.' },
@@ -26,16 +24,16 @@ const reise = [
 >
 
 <main>
-  <section class="subhero subhero--portrait" style={`--subhero-img: url('${subheroImg}'); --subhero-pos: right top;`}>
-    <div class="container subhero__inner">
+  <section class="om-top">
+    <div class="container om-top__inner">
       <p class="subhero__crumbs">
         <a href="/">Hjem</a>
         <span aria-hidden="true">/</span>
         <span>Om oss</span>
       </p>
-      <p class="kicker kicker--light">{om.kicker}</p>
-      <h1>{om.h1} <em>{om.h1Aksent}</em>{om.h1Slutt}</h1>
-      <p class="subhero__lede" set:html={om.subheroLede}></p>
+      <p class="kicker">{om.kicker}</p>
+      <h1 class="om-top__h1">{om.h1} <em>{om.h1Aksent}</em>{om.h1Slutt}</h1>
+      <p class="om-top__lede" set:html={om.subheroLede}></p>
     </div>
   </section>
 
@@ -46,8 +44,9 @@ const reise = [
 
         <!-- ===== Mesteren ===== -->
         <section class="om-section" id="om-mesteren">
-          <p class="kicker">Del 01</p>
-          <h2 class="om-section__title">Mesteren.</h2>
+          <h2 class="om-section__title">
+            Vincent Henriksen, Norges <strong>nest beste murer</strong> i <em>2014</em>
+          </h2>
 
           <p class="om-section__lede">
             <strong>Murmester | Fagskoleingeniør | Oldermann | Faglig veileder</strong>
@@ -74,38 +73,11 @@ const reise = [
               <span>{om.portrettKortRolle}</span>
             </div>
           </div>
-
-          <h3 class="om-h3">Filosofien</h3>
-          <p>
-            Jeg mener at kvalitet aldri er tilfeldig. Godt håndverk handler om kunnskap,
-            erfaring, nøyaktighet og stolthet i arbeidet. Hver detalj teller, og målet er
-            alltid å levere løsninger som både ser bra ut i dag og som varer i mange år
-            fremover.
-          </p>
-          <p>
-            For meg er det like viktig at kunden føler seg ivaretatt gjennom hele prosessen
-            som at sluttresultatet holder høyeste faglige standard. Derfor er kvalitet,
-            ryddighet og god kommunikasjon grunnpilarene i alt arbeid som utføres gjennom
-            Murmester Henriksen AS.
-          </p>
-
-          <blockquote class="quote-block">
-            <p>
-              «Jeg er stolt av håndverket mitt, stolt av faget mitt, og stolt av å kunne
-              hjelpe kunder med små og store prosjekter. Velkommen til Murmester Henriksen AS
-              — Alle trenger en murer!»
-            </p>
-            <footer>— Vincent Henriksen</footer>
-          </blockquote>
         </section>
 
-        <!-- ===== Reisen ===== -->
-        <section class="om-section" id="om-reisen">
-          <p class="kicker">Del 02</p>
-          <h2 class="om-section__title">Reisen.</h2>
-          <p class="om-section__lede">
-            Fra svennebrev og NM-sølv i 2014 til Oldermann og eget firma i 2025.
-          </p>
+        <!-- ===== Faglig reise ===== -->
+        <section class="om-section" id="om-reise">
+          <h2 class="om-section__title">Faglig <em>reise</em></h2>
 
           <ol class="timeline">
             {reise.map((r) => (
@@ -139,13 +111,36 @@ const reise = [
           </div>
         </section>
 
-        <!-- ===== Bedriften ===== -->
-        <section class="om-section" id="om-bedriften">
-          <p class="kicker">Del 03</p>
-          <h2 class="om-section__title">Bedriften.</h2>
-          <p class="om-section__lede">
-            Murmester Henriksen AS — etablert 2025, drevet av mester selv.
+        <!-- ===== Min filosofi ===== -->
+        <section class="om-section" id="om-filosofi">
+          <h2 class="om-section__title">Min <em>filosofi</em></h2>
+
+          <p>
+            Jeg mener at kvalitet aldri er tilfeldig. Godt håndverk handler om kunnskap,
+            erfaring, nøyaktighet og stolthet i arbeidet. Hver detalj teller, og målet er
+            alltid å levere løsninger som både ser bra ut i dag og som varer i mange år
+            fremover.
           </p>
+          <p>
+            For meg er det like viktig at kunden føler seg ivaretatt gjennom hele prosessen
+            som at sluttresultatet holder høyeste faglige standard. Derfor er kvalitet,
+            ryddighet og god kommunikasjon grunnpilarene i alt arbeid som utføres gjennom
+            Murmester Henriksen AS.
+          </p>
+
+          <blockquote class="quote-block">
+            <p>
+              «Jeg er stolt av håndverket mitt, stolt av faget mitt, og stolt av å kunne
+              hjelpe kunder med små og store prosjekter. Velkommen til Murmester Henriksen AS
+              — Alle trenger en murer!»
+            </p>
+            <footer>— Vincent Henriksen</footer>
+          </blockquote>
+        </section>
+
+        <!-- ===== Om bedriften ===== -->
+        <section class="om-section" id="om-bedriften">
+          <h2 class="om-section__title">Om <em>bedriften</em></h2>
 
           <p>
             Murmester Henriksen AS ble etablert med et enkelt mål — å levere håndverk av
@@ -202,9 +197,10 @@ const reise = [
         <nav class="om-toc" aria-label="Innhold">
           <p class="om-toc__head">Innhold</p>
           <ol class="om-toc__list">
-            <li><a href="#om-mesteren" class="om-toc__link" data-toc>01 — Mesteren</a></li>
-            <li><a href="#om-reisen" class="om-toc__link" data-toc>02 — Reisen</a></li>
-            <li><a href="#om-bedriften" class="om-toc__link" data-toc>03 — Bedriften</a></li>
+            <li><a href="#om-mesteren" class="om-toc__link" data-toc>Mesteren</a></li>
+            <li><a href="#om-reise" class="om-toc__link" data-toc>Faglig reise</a></li>
+            <li><a href="#om-filosofi" class="om-toc__link" data-toc>Min filosofi</a></li>
+            <li><a href="#om-bedriften" class="om-toc__link" data-toc>Om bedriften</a></li>
           </ol>
         </nav>
 
@@ -238,18 +234,15 @@ const reise = [
 </main>
 
 <script is:inline>
-  // Scroll-spy: highlight active TOC link basert på hvilken seksjon som er i viewport
   (function () {
     var sections = document.querySelectorAll('.om-section');
     var links = document.querySelectorAll('[data-toc]');
     if (!sections.length || !links.length || !('IntersectionObserver' in window)) return;
-
     var byId = {};
     links.forEach(function (a) {
       var id = (a.getAttribute('href') || '').replace('#', '');
       if (id) byId[id] = a;
     });
-
     var io = new IntersectionObserver(function (entries) {
       entries.forEach(function (e) {
         if (e.isIntersecting) {
@@ -259,7 +252,6 @@ const reise = [
         }
       });
     }, { rootMargin: '-30% 0px -55% 0px', threshold: 0 });
-
     sections.forEach(function (s) { io.observe(s); });
   })();
 </script>

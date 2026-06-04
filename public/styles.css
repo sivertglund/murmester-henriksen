@@ -2276,10 +2276,48 @@ h2 em, h1 em, h3 em {
 .subhero__crumbs a:hover { color: #fff; border-bottom-color: rgba(255,255,255,.5); }
 
 /* ===== Service / generic article body ===== */
-/* ===== Om-oss artikkel (restrukturert: Mesteren / Reisen / Bedriften + sticky TOC) ===== */
+/* ===== Om-oss topp — ren tekst-intro, ingen subhero-portrait ===== */
+.om-top {
+  background: var(--bg);
+  padding: clamp(110px, 14vw, 170px) 0 clamp(40px, 5vw, 64px);
+  position: relative;
+}
+.om-top__inner { max-width: 920px; }
+.om-top .subhero__crumbs {
+  color: var(--ink-soft);
+  margin-bottom: 22px;
+}
+.om-top .subhero__crumbs a { color: var(--ink-soft); }
+.om-top .subhero__crumbs a:hover { color: var(--copper-500); }
+.om-top .kicker { color: var(--copper-500); margin-bottom: 18px; }
+.om-top__h1 {
+  margin: 0 0 22px;
+  font-size: clamp(2.6rem, 5.4vw, 4.6rem);
+  line-height: 1;
+  letter-spacing: -.03em;
+  font-weight: 700;
+  color: var(--ink);
+}
+.om-top__h1 em {
+  font-style: normal;
+  color: var(--copper-500);
+  font-family: var(--font);
+  font-weight: 700;
+}
+.om-top__lede {
+  margin: 0;
+  font-size: clamp(1.1rem, 1.5vw, 1.32rem);
+  color: var(--ink-soft);
+  max-width: 56ch;
+  line-height: 1.55;
+  white-space: pre-line;
+}
+.om-top__lede strong { color: var(--ink); }
+
+/* ===== Om-oss artikkel (4 hovedseksjoner + sticky TOC) ===== */
 .om-article {
   background: var(--bg);
-  padding: clamp(60px, 8vw, 100px) 0 clamp(80px, 10vw, 130px);
+  padding: clamp(20px, 3vw, 40px) 0 clamp(80px, 10vw, 130px);
 }
 .om-article__inner {
   max-width: 1200px;
@@ -2305,11 +2343,22 @@ h2 em, h1 em, h3 em {
 }
 .om-section__title {
   margin: 0 0 14px;
-  font-size: clamp(2.2rem, 3.6vw, 3.2rem);
-  line-height: 1.02;
-  letter-spacing: -.03em;
+  font-size: clamp(2rem, 3.2vw, 2.8rem);
+  line-height: 1.05;
+  letter-spacing: -.025em;
   font-weight: 700;
   color: var(--ink);
+  scroll-margin-top: 110px;
+}
+.om-section__title em {
+  font-style: normal;
+  color: var(--copper-500);
+  font-family: var(--font);
+  font-weight: 700;
+}
+.om-section__title strong {
+  color: var(--ink);
+  font-weight: 700;
 }
 .om-section__lede {
   margin: 0 0 clamp(28px, 3vw, 38px);
@@ -2397,7 +2446,7 @@ h2 em, h1 em, h3 em {
   box-shadow: 0 0 0 4px var(--bg);
   z-index: 1;
 }
-.timeline__entry:first-child .timeline__node {
+.timeline__entry:last-child .timeline__node {
   background: var(--copper-500);
 }
 .timeline__year {
