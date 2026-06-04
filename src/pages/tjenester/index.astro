@@ -41,15 +41,9 @@ const totalLeveranser = KATEGORIER.reduce((sum, k) => sum + k.underkategorier.le
         {KATEGORIER.map((k, i) => (
           <li class="tj-card scroll-fade" style={`--i:${i}`}>
             <a href={`/tjenester/${k.slug}`} class="tj-card__link">
-              <span class="tj-card__corner" aria-hidden="true"></span>
-              <div class="tj-card__top">
-                <span class="tj-card__num">{k.nummer}</span>
-                <span class="tj-card__num-line" aria-hidden="true"></span>
-                <span class="tj-card__eyebrow">Fagområde</span>
-              </div>
+              <span class="tj-card__num">{k.nummer}</span>
               <h2 class="tj-card__title">{k.tittel}</h2>
               <p class="tj-card__lede">{k.kortLede}</p>
-              <div class="tj-card__divider" aria-hidden="true"></div>
               <div class="tj-card__foot">
                 <span class="tj-card__count">{k.underkategorier.length} leveranser</span>
                 <span class="tj-card__arrow" aria-hidden="true">
