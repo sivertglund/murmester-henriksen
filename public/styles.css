@@ -4003,12 +4003,16 @@ h2 em, h1 em, h3 em {
   .tj-card:nth-child(3),
   .tj-card:nth-child(4) { grid-column: span 1; }
   .tj-card:nth-child(5) {
-    /* Sentrert med EKSAKT samme bredde som card 1-4:
-       50% av grid minus halv-gap = 1-kol cell-bredde */
     grid-column: 1 / span 2;
     max-width: calc(50% - 12px);
     margin-inline: auto;
   }
+  /* Drop lede + grid-auto-rows lik så alle kort blir identisk høyde
+     uavhengig av innholdslengde — Restaurering blir samme størrelse
+     som Flis, Muring osv. */
+  .tj-cards__grid { grid-auto-rows: 1fr; }
+  .tj-card__lede { display: none; }
+  .tj-card__inner { padding: 22% 16% 24%; gap: 10px; }
 }
 @media (max-width: 560px) {
   .tj-cards__grid { grid-template-columns: 1fr; max-width: 320px; }
