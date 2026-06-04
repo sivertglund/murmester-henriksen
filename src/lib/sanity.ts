@@ -425,7 +425,7 @@ const KONTAKT_PAGE_FALLBACK: KontaktPage = {
   h1Slutt: '.',
   subheroLede: 'Send oss en henvendelse via skjemaet, eller ring direkte for en uforpliktende prat. Vi svarer normalt innen én virkedag.',
   direkteKicker: 'Direkte kontakt',
-  direkteTittel: 'Ring, mail, eller skriv.',
+  direkteTittel: 'Slik når du oss.',
   direkteLede: 'Ta en telefon eller sms om det er hastesak — pipeproblemer fra feiervesenet, fuktskader på våtrom, frostskader eller lignende. Uforpliktende prisantydning gis ved innsending av bilder og informasjon om ønsket arbeid eller spørsmål.',
   formTittel: 'Send oss en henvendelse',
 };

@@ -2,8 +2,6 @@
 import Layout from '../../layouts/Layout.astro';
 import BrickRow from '../../components/BrickRow.astro';
 import { KATEGORIER } from '../../lib/kategorier';
-
-const totalLeveranser = KATEGORIER.reduce((sum, k) => sum + k.underkategorier.length, 0);
 ---
 <Layout
   title="Tjenester — Murmester Henriksen AS"
@@ -22,16 +20,12 @@ const totalLeveranser = KATEGORIER.reduce((sum, k) => sum + k.underkategorier.le
       <div class="tj-intro__head">
         <p class="kicker">Faget</p>
         <h1 class="tj-intro__h1">
-          Murmesterens <em>fem fag</em>
+          Fem fag, <em>samme hånd</em>.
         </h1>
         <p class="tj-intro__lede">
           Fra grunnmur og teglforblending til antikvarisk kalkrestaurering —
           alt utført av samme mester, fra første befaring til ferdig fuge.
         </p>
-        <div class="tj-intro__count">
-          <span class="tj-intro__count-num">{totalLeveranser}</span>
-          <span class="tj-intro__count-label">leveranser fordelt på fem fag</span>
-        </div>
       </div>
     </div>
     <div class="tj-intro__bricks">
@@ -57,19 +51,6 @@ const totalLeveranser = KATEGORIER.reduce((sum, k) => sum + k.underkategorier.le
             </a>
           </li>
         ))}
-        <li class="tj-card tj-card--cta scroll-fade" style={`--i:${KATEGORIER.length}`}>
-          <a href="/kontakt" class="tj-card__link">
-            <span class="tj-card__num">+</span>
-            <h2 class="tj-card__title">Mangler du noe?</h2>
-            <p class="tj-card__lede">Vi gjør mer enn de fem fagene over. Si fra hva du trenger, så finner vi en løsning.</p>
-            <div class="tj-card__foot">
-              <span class="tj-card__count">Snakk med oss</span>
-              <span class="tj-card__arrow" aria-hidden="true">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-              </span>
-            </div>
-          </a>
-        </li>
       </ul>
     </div>
   </section>
