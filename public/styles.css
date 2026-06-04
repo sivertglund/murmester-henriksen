@@ -2276,6 +2276,277 @@ h2 em, h1 em, h3 em {
 .subhero__crumbs a:hover { color: #fff; border-bottom-color: rgba(255,255,255,.5); }
 
 /* ===== Service / generic article body ===== */
+/* ===== Om-oss artikkel (restrukturert: Mesteren / Reisen / Bedriften + sticky TOC) ===== */
+.om-article {
+  background: var(--bg);
+  padding: clamp(60px, 8vw, 100px) 0 clamp(80px, 10vw, 130px);
+}
+.om-article__inner {
+  max-width: 1200px;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 280px);
+  gap: clamp(40px, 5vw, 72px);
+  align-items: start;
+}
+.om-main {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(60px, 8vw, 100px);
+  max-width: 740px;
+}
+
+/* Hver av de tre hovedseksjonene */
+.om-section {
+  scroll-margin-top: 110px;
+}
+.om-section .kicker {
+  color: var(--copper-500);
+  margin-bottom: 14px;
+}
+.om-section__title {
+  margin: 0 0 14px;
+  font-size: clamp(2.2rem, 3.6vw, 3.2rem);
+  line-height: 1.02;
+  letter-spacing: -.03em;
+  font-weight: 700;
+  color: var(--ink);
+}
+.om-section__lede {
+  margin: 0 0 clamp(28px, 3vw, 38px);
+  font-size: clamp(1.05rem, 1.4vw, 1.2rem);
+  color: var(--ink-soft);
+  line-height: 1.55;
+  max-width: 60ch;
+}
+.om-section__lede strong { color: var(--ink); font-weight: 600; }
+.om-main p {
+  font-size: 1.06rem;
+  line-height: 1.7;
+  color: var(--ink-soft);
+  margin: 0 0 1em;
+  max-width: 64ch;
+}
+.om-main p strong { color: var(--ink); font-weight: 600; }
+.om-h3 {
+  font-size: clamp(1.3rem, 1.7vw, 1.5rem);
+  font-weight: 700;
+  margin: clamp(32px, 4vw, 44px) 0 14px;
+  letter-spacing: -.015em;
+  color: var(--ink);
+}
+.om-main .portrait-card {
+  margin: clamp(28px, 3.4vw, 44px) 0 clamp(28px, 3.4vw, 40px);
+}
+.om-main .quote-block {
+  margin: clamp(28px, 3vw, 40px) 0 0;
+  padding: clamp(24px, 2.8vw, 32px) 0 clamp(24px, 2.8vw, 32px) clamp(24px, 2.6vw, 32px);
+  border-left: 3px solid var(--copper-500);
+}
+.om-main .quote-block p {
+  font-size: clamp(1.1rem, 1.5vw, 1.3rem);
+  line-height: 1.5;
+  color: var(--ink);
+  margin: 0;
+  font-style: italic;
+  max-width: none;
+}
+.om-main .quote-block footer {
+  margin-top: 14px;
+  color: var(--ink-soft);
+  font-size: .95rem;
+  font-weight: 600;
+}
+
+/* Timeline — visuell faglig reise */
+.timeline {
+  list-style: none;
+  padding: 0;
+  margin: clamp(16px, 2vw, 28px) 0 clamp(28px, 4vw, 48px);
+  position: relative;
+}
+.timeline::before {
+  /* Vertikal linje gjennom hele timeline */
+  content: "";
+  position: absolute;
+  top: 8px;
+  bottom: 8px;
+  left: 7px;
+  width: 1px;
+  background: linear-gradient(180deg,
+    var(--copper-500) 0%,
+    rgba(190,84,0,.3) 100%);
+}
+.timeline__entry {
+  position: relative;
+  padding: 0 0 clamp(28px, 3.4vw, 40px) clamp(34px, 4vw, 48px);
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  gap: 6px 18px;
+  align-items: baseline;
+}
+.timeline__entry:last-child { padding-bottom: 0; }
+.timeline__node {
+  position: absolute;
+  top: 8px;
+  left: 0;
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  background: var(--bg);
+  border: 2px solid var(--copper-500);
+  box-shadow: 0 0 0 4px var(--bg);
+  z-index: 1;
+}
+.timeline__entry:first-child .timeline__node {
+  background: var(--copper-500);
+}
+.timeline__year {
+  grid-column: 1;
+  font-size: .82rem;
+  font-weight: 700;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--copper-500);
+  white-space: nowrap;
+  padding-top: 6px;
+}
+.timeline__body {
+  grid-column: 2;
+}
+.timeline__title {
+  margin: 0 0 8px;
+  font-size: clamp(1.08rem, 1.4vw, 1.22rem);
+  font-weight: 700;
+  letter-spacing: -.01em;
+  color: var(--ink);
+  line-height: 1.25;
+}
+.timeline__body p {
+  margin: 0;
+  font-size: 1rem;
+  line-height: 1.65;
+  color: var(--ink-soft);
+}
+
+/* Lister i Bedriften-seksjonen */
+.utforer__list,
+.kursinger__list {
+  list-style: none;
+  padding: 0;
+  margin: 14px 0 24px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px 24px;
+}
+.utforer__list li,
+.kursinger__list li {
+  padding-left: 22px;
+  position: relative;
+  font-size: 1rem;
+  color: var(--ink);
+  line-height: 1.5;
+}
+.utforer__list li::before,
+.kursinger__list li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: .55em;
+  width: 12px;
+  height: 2px;
+  background: var(--copper-500);
+}
+.om-closer {
+  margin-top: clamp(28px, 3vw, 40px) !important;
+  padding-top: clamp(20px, 2.4vw, 28px);
+  border-top: 1px solid var(--line);
+  font-size: 1.12rem !important;
+  color: var(--ink) !important;
+}
+
+/* Aside med sticky TOC + fakta-card + related */
+.om-aside {
+  position: sticky;
+  top: 110px;
+  align-self: start;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+.om-toc {
+  background: transparent;
+}
+.om-toc__head {
+  font-size: .72rem;
+  font-weight: 700;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  margin: 0 0 14px;
+}
+.om-toc__list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  border-left: 1px solid var(--line);
+}
+.om-toc__link {
+  display: block;
+  padding: 10px 14px;
+  font-size: .92rem;
+  font-weight: 500;
+  color: var(--ink-soft);
+  text-decoration: none;
+  border-left: 2px solid transparent;
+  margin-left: -1px;
+  transition: color .25s ease, border-color .25s ease, background .25s ease;
+  letter-spacing: -.005em;
+}
+.om-toc__link:hover {
+  color: var(--ink);
+  background: rgba(190,84,0,.04);
+}
+.om-toc__link.is-active {
+  color: var(--copper-500);
+  border-left-color: var(--copper-500);
+  font-weight: 700;
+}
+
+/* Responsiv: legg aside under main på mindre skjermer */
+@media (max-width: 900px) {
+  .om-article__inner {
+    grid-template-columns: 1fr;
+    gap: clamp(40px, 6vw, 64px);
+  }
+  .om-aside {
+    position: static;
+    order: -1;  /* TOC vises FØR innholdet på mobil */
+  }
+  .om-toc__list {
+    flex-direction: row;
+    flex-wrap: wrap;
+    border-left: none;
+    border-top: 1px solid var(--line);
+    padding-top: 12px;
+  }
+  .om-toc__link {
+    border-left: none;
+    border-top: 2px solid transparent;
+    margin-left: 0;
+    margin-top: -1px;
+    padding: 8px 14px;
+  }
+  .om-toc__link.is-active {
+    border-left: none;
+    border-top-color: var(--copper-500);
+  }
+  .utforer__list,
+  .kursinger__list { grid-template-columns: 1fr; }
+}
+
 .article {
   padding: clamp(60px, 8vw, 100px) 0 clamp(80px, 10vw, 130px);
   background: var(--bg);

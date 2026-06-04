@@ -1,13 +1,23 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import { getOmOss, urlFor } from '../lib/sanity';
-import { toHTML } from '@portabletext/to-html';
 
 const om = await getOmOss();
-const innholdHtml = om.innhold ? toHTML(om.innhold) : '';
 
 const subheroImg = om.subheroBilde ? urlFor(om.subheroBilde).width(1400).url() : '/assets/vincent-portrait.jpg';
 const portrettKortImg = om.portrettKortBilde ? urlFor(om.portrettKortBilde).width(800).url() : '/assets/vincent-workshop.jpg';
+
+// Timeline-data for Faglig reise
+const reise = [
+  { year: '2012', title: 'Starten på karrieren', body: 'Vincent startet sin yrkeskarriere innen murfaget og utviklet raskt en sterk interesse for både tradisjonelt og moderne murhåndverk.' },
+  { year: '2014', title: 'Svennebrev og NM-sølv', body: 'I 2014 avla Vincent svenneprøven i murfaget. Samme år deltok han i Norgesmesterskapet for murere og oppnådde en sølvmedalje — en prestasjon som bekreftet både ferdigheter, nøyaktighet og faglig dedikasjon.' },
+  { year: '2014–2024', title: 'Byggeplass og ledelse', body: 'Gjennom denne perioden arbeidet Vincent på en rekke små og store prosjekter som både utførende murer og BAS. Etter hvert gikk han videre inn i lederroller som prosjektleder, avdelingsleder og faglig leder innad i bedrift, med ansvar for planlegging, koordinering, kvalitetssikring og oppfølging av prosjekter. Denne kombinasjonen av praktisk erfaring og ledelsesansvar har gitt en solid forståelse for hele byggeprosessen — fra prosjektering til ferdig resultat.' },
+  { year: '2019', title: 'Medlem av Prøvenemnda', body: 'Vincent ble oppnevnt som sensor i Prøvenemnda for Mur- og flisleggerfaget i Vestfold. Gjennom arbeidet i prøvenemnda har han vært med på å sikre kvaliteten på fremtidens fagarbeidere og bidra til å opprettholde høye standarder i bransjen. I 2021 tok han også mer ansvar ved å bli koordinator for Vestfold.' },
+  { year: '2022', title: 'Fagskoleingeniør og Murmester', body: 'I 2022 fullførte Vincent utdanning som både fagskoleingeniør og murmester. Kombinasjonen av praktisk erfaring og formell utdanning gir et solid grunnlag for å håndtere både tekniske, administrative og faglige utfordringer i moderne byggeprosjekter.' },
+  { year: '2025', title: 'Etablering av Murmester Henriksen AS', body: 'I 2025 tok Vincent steget fullt ut og etablerte Murmester Henriksen AS. Målet med selskapet er å levere håndverk av høyeste kvalitet innen mur, puss, flis, naturstein og rehabilitering — med fagkunnskap, kvalitet og kundetilfredshet som de viktigste verdiene.' },
+  { year: '2025', title: 'Valgt til Oldermann', body: 'Samme år ble Vincent valgt til Oldermann for Vestfold Murmesterlaug. Gjennom dette vervet arbeider han tett med Norske Murmestres Landsforening og andre aktører i bransjen for å styrke murfaget, fremme fagutdanning og bidra til rekruttering av nye fagarbeidere.' },
+  { year: 'I dag', title: 'Koordinator og faglig veileder', body: 'I dag er Vincent koordinator for Prøvenemnda i Mur- og flisleggerfaget i Vestfold. Han fungerer også som veileder og instruktør for lærlinger gjennom Opplæringskontoret når behovet oppstår, og er en aktiv bidragsyter til kompetanseutvikling i bransjen.' },
+];
 ---
 <Layout
   title="Om oss — Murmester Henriksen AS"
@@ -29,86 +39,91 @@ const portrettKortImg = om.portrettKortBilde ? urlFor(om.portrettKortBilde).widt
     </div>
   </section>
 
-  <section class="article">
-    <div class="container article__inner">
-      <div class="article__main">
+  <div class="om-article">
+    <div class="container om-article__inner">
 
-        {innholdHtml ? (
-          <Fragment set:html={innholdHtml} />
-        ) : (
-          <>
-            <h2>Vincent Henriksen, Norges <strong>nest beste murer</strong> i <em>2014</em></h2>
-            <p><strong>Murmester | Fagskoleingeniør | Oldermann | Faglig veileder</strong></p>
-            <p>
-              For Vincent Henriksen er murfaget langt mer enn et yrke — det er en livslang lidenskap.
-              Gjennom mer enn et tiår i bransjen har han bygget opp en bred kompetanse innen
-              muring, puss, flislegging, skifer, naturstein, skorsteiner, rehabilitering av eldre verk
-              og mer. Samtidig har han engasjert seg sterkt i utviklingen av murfaget gjennom
-              opplæring, prøvenemndsarbeid og verv i bransjeorganisasjoner.
-            </p>
-            <p>
-              Vincent er kjent for å være detaljorientert, strukturert og kvalitetsbevisst i alt han gjør.
-              Han mener at godt håndverk handler om mer enn det ferdige resultatet — det handler
-              også om god kommunikasjon, ryddige prosesser og en kundeopplevelse som skaper
-              trygghet gjennom hele prosjektet.
-            </p>
+      <article class="om-main">
 
-            <div class="portrait-card">
-              <img src={portrettKortImg} alt={`${om.portrettKortNavn}, murmester`} loading="lazy" decoding="async" />
-              <div class="portrait-card__body">
-                <strong>{om.portrettKortNavn}</strong>
-                <span>{om.portrettKortRolle}</span>
-              </div>
+        <!-- ===== Mesteren ===== -->
+        <section class="om-section" id="om-mesteren">
+          <p class="kicker">Del 01</p>
+          <h2 class="om-section__title">Mesteren.</h2>
+
+          <p class="om-section__lede">
+            <strong>Murmester | Fagskoleingeniør | Oldermann | Faglig veileder</strong>
+          </p>
+
+          <p>
+            For Vincent Henriksen er murfaget langt mer enn et yrke — det er en livslang lidenskap.
+            Gjennom mer enn et tiår i bransjen har han bygget opp en bred kompetanse innen
+            muring, puss, flislegging, skifer, naturstein, skorsteiner, rehabilitering av eldre verk
+            og mer. Samtidig har han engasjert seg sterkt i utviklingen av murfaget gjennom
+            opplæring, prøvenemndsarbeid og verv i bransjeorganisasjoner.
+          </p>
+          <p>
+            Vincent er kjent for å være detaljorientert, strukturert og kvalitetsbevisst i alt han gjør.
+            Han mener at godt håndverk handler om mer enn det ferdige resultatet — det handler
+            også om god kommunikasjon, ryddige prosesser og en kundeopplevelse som skaper
+            trygghet gjennom hele prosjektet.
+          </p>
+
+          <div class="portrait-card">
+            <img src={portrettKortImg} alt={`${om.portrettKortNavn}, murmester`} loading="lazy" decoding="async" />
+            <div class="portrait-card__body">
+              <strong>{om.portrettKortNavn}</strong>
+              <span>{om.portrettKortRolle}</span>
             </div>
+          </div>
 
-            <h2>Faglig <em>reise</em></h2>
+          <h3 class="om-h3">Filosofien</h3>
+          <p>
+            Jeg mener at kvalitet aldri er tilfeldig. Godt håndverk handler om kunnskap,
+            erfaring, nøyaktighet og stolthet i arbeidet. Hver detalj teller, og målet er
+            alltid å levere løsninger som både ser bra ut i dag og som varer i mange år
+            fremover.
+          </p>
+          <p>
+            For meg er det like viktig at kunden føler seg ivaretatt gjennom hele prosessen
+            som at sluttresultatet holder høyeste faglige standard. Derfor er kvalitet,
+            ryddighet og god kommunikasjon grunnpilarene i alt arbeid som utføres gjennom
+            Murmester Henriksen AS.
+          </p>
 
-            <h3>2012 — Starten på karrieren</h3>
+          <blockquote class="quote-block">
             <p>
-              Vincent startet sin yrkeskarriere innen murfaget og utviklet raskt en sterk
-              interesse for både tradisjonelt og moderne murhåndverk.
+              «Jeg er stolt av håndverket mitt, stolt av faget mitt, og stolt av å kunne
+              hjelpe kunder med små og store prosjekter. Velkommen til Murmester Henriksen AS
+              — Alle trenger en murer!»
             </p>
+            <footer>— Vincent Henriksen</footer>
+          </blockquote>
+        </section>
 
-            <h3>2014 — Svennebrev og sølvmedalje i Norgesmesterskapet</h3>
-            <p>
-              I 2014 avla Vincent svenneprøven i murfaget. Samme år deltok han i
-              Norgesmesterskapet for murere og oppnådde en sølvmedalje — en prestasjon som
-              bekreftet både ferdigheter, nøyaktighet og faglig dedikasjon.
-            </p>
+        <!-- ===== Reisen ===== -->
+        <section class="om-section" id="om-reisen">
+          <p class="kicker">Del 02</p>
+          <h2 class="om-section__title">Reisen.</h2>
+          <p class="om-section__lede">
+            Fra svennebrev og NM-sølv i 2014 til Oldermann og eget firma i 2025.
+          </p>
 
-            <h3>2014–2024 — Erfaring fra byggeplass og ledelse</h3>
-            <p>
-              Gjennom denne perioden arbeidet Vincent på en rekke små og store prosjekter
-              som både utførende murer og BAS. Etter hvert gikk han videre inn i lederroller
-              som prosjektleder, avdelingsleder og faglig leder innad i bedrift, med ansvar
-              for planlegging, koordinering, kvalitetssikring og oppfølging av prosjekter.
-            </p>
-            <p>
-              Denne kombinasjonen av praktisk erfaring og ledelsesansvar har gitt en solid
-              forståelse for hele byggeprosessen — fra prosjektering til ferdig resultat.
-            </p>
+          <ol class="timeline">
+            {reise.map((r) => (
+              <li class="timeline__entry">
+                <span class="timeline__node" aria-hidden="true"></span>
+                <div class="timeline__year">{r.year}</div>
+                <div class="timeline__body">
+                  <h3 class="timeline__title">{r.title}</h3>
+                  <p>{r.body}</p>
+                </div>
+              </li>
+            ))}
+          </ol>
 
-            <h3>2019 — Medlem av Prøvenemnda</h3>
-            <p>
-              Vincent ble oppnevnt som sensor i Prøvenemnda for Mur- og flisleggerfaget i Vestfold.
-              Gjennom arbeidet i prøvenemnda har han vært med på å sikre kvaliteten på fremtidens
-              fagarbeidere og bidra til å opprettholde høye standarder i bransjen. I 2021 tok han
-              også mer ansvar ved å bli koordinator for Vestfold.
-            </p>
-
-            <h3>2022 — Fagskoleingeniør og Murmester</h3>
-            <p>
-              I 2022 fullførte Vincent utdanning som både fagskoleingeniør og murmester.
-              Kombinasjonen av praktisk erfaring og formell utdanning gir et solid grunnlag
-              for å håndtere både tekniske, administrative og faglige utfordringer i moderne
-              byggeprosjekter.
-            </p>
-
-            <h3>Kursinger og tilleggsutdannelse</h3>
-            <p>
-              Gjennom kurs og etterutdanning har Vincent videreutviklet sin kompetanse innen blant annet:
-            </p>
-            <ul>
+          <div class="kursinger">
+            <h3 class="om-h3">Kursinger og tilleggsutdannelse</h3>
+            <p>Gjennom kurs og etterutdanning har Vincent videreutviklet sin kompetanse innen blant annet:</p>
+            <ul class="kursinger__list">
               <li>Rehabilitering av skorsteiner og ildsteder</li>
               <li>Skifer- og natursteinsarbeider</li>
               <li>Tradisjonell pusskunst og rapping</li>
@@ -121,107 +136,78 @@ const portrettKortImg = om.portrettKortBilde ? urlFor(om.portrettKortBilde).widt
               bygg har blitt en viktig del av hans faglige profil — i tillegg til moderne
               håndverksdisipliner.
             </p>
+          </div>
+        </section>
 
-            <h3>2025 — Etablering av Murmester Henriksen AS</h3>
-            <p>
-              I 2025 tok Vincent steget fullt ut og etablerte Murmester Henriksen AS.
-              Målet med selskapet er å levere håndverk av høyeste kvalitet innen mur, puss,
-              flis, naturstein og rehabilitering — med fagkunnskap, kvalitet og kundetilfredshet
-              som de viktigste verdiene.
-            </p>
+        <!-- ===== Bedriften ===== -->
+        <section class="om-section" id="om-bedriften">
+          <p class="kicker">Del 03</p>
+          <h2 class="om-section__title">Bedriften.</h2>
+          <p class="om-section__lede">
+            Murmester Henriksen AS — etablert 2025, drevet av mester selv.
+          </p>
 
-            <h3>2025 — Valgt til Oldermann</h3>
-            <p>
-              Samme år ble Vincent valgt til Oldermann for Vestfold Murmesterlaug. Gjennom
-              dette vervet arbeider han tett med Norske Murmestres Landsforening og andre
-              aktører i bransjen for å styrke murfaget, fremme fagutdanning og bidra til
-              rekruttering av nye fagarbeidere.
-            </p>
+          <p>
+            Murmester Henriksen AS ble etablert med et enkelt mål — å levere håndverk av
+            høyeste kvalitet, kombinert med god kommunikasjon, faglig kompetanse og
+            personlig oppfølging.
+          </p>
+          <p>
+            Bedriften drives av murmester og fagskoleingeniør Vincent Henriksen, som
+            gjennom mange år i bransjen har opparbeidet seg bred erfaring innen mur-,
+            puss-, flis- og rehabiliteringsarbeider. Som kunde møter du alltid fagpersonen
+            som planlegger, prosjekterer og utfører arbeidet. Det gir korte beslutningsveier,
+            god oppfølging og trygghet for at kvaliteten ivaretas gjennom hele prosjektet.
+          </p>
+          <p>
+            Selv om Murmester Henriksen AS i dag er en mindre virksomhet, har vi et stort
+            og solid nettverk av samarbeidspartnere. Vi samarbeider tett med etablerte
+            håndverksbedrifter og andre faggrupper når prosjektet krever det. Det gjør at
+            vi kan påta oss både små og store oppdrag — samtidig som vi beholder den
+            personlige oppfølgingen og kvalitetssikringen som kjennetegner en
+            håndverksbedrift med stolthet for faget.
+          </p>
 
-            <h3>I dag — Koordinator og faglig veileder</h3>
-            <p>
-              I dag er Vincent koordinator for Prøvenemnda i Mur- og flisleggerfaget i Vestfold.
-              Han fungerer også som veileder og instruktør for lærlinger gjennom
-              Opplæringskontoret når behovet oppstår, og er en aktiv bidragsyter til
-              kompetanseutvikling i bransjen.
-            </p>
+          <h3 class="om-h3">Vi utfører blant annet</h3>
+          <ul class="utforer__list">
+            <li>Murarbeider</li>
+            <li>Teglforblending</li>
+            <li>Puss- og fasadearbeider</li>
+            <li>Flislegging og våtrom</li>
+            <li>Skifer- og natursteinsarbeider</li>
+            <li>Rehabilitering av eldre murverk</li>
+            <li>Rehabilitering av skorstein / pipe</li>
+            <li>Service av ovner og feiing av piper</li>
+            <li>Skorsteiner, ildsteder og peiser</li>
+            <li>Restaurering og antikvariske arbeider</li>
+            <li>Prosjektering og faglige vurderinger</li>
+          </ul>
 
-            <h2>Min <em>filosofi</em></h2>
-            <p>
-              Jeg mener at kvalitet aldri er tilfeldig. Godt håndverk handler om kunnskap,
-              erfaring, nøyaktighet og stolthet i arbeidet. Hver detalj teller, og målet er
-              alltid å levere løsninger som både ser bra ut i dag og som varer i mange år
-              fremover.
-            </p>
-            <p>
-              For meg er det like viktig at kunden føler seg ivaretatt gjennom hele prosessen
-              som at sluttresultatet holder høyeste faglige standard. Derfor er kvalitet,
-              ryddighet og god kommunikasjon grunnpilarene i alt arbeid som utføres gjennom
-              Murmester Henriksen AS.
-            </p>
-            <blockquote class="quote-block">
-              <p>
-                «Jeg er stolt av håndverket mitt, stolt av faget mitt, og stolt av å kunne
-                hjelpe kunder med små og store prosjekter. Velkommen til Murmester Henriksen AS
-                — Alle trenger en murer!»
-              </p>
-              <footer>— Vincent Henriksen</footer>
-            </blockquote>
+          <p>
+            For oss handler godt håndverk om mer enn å levere et ferdig produkt. Det
+            handler om tillit, fagkunnskap og kvalitet i alle ledd. Gjennom gode
+            samarbeidspartnere, moderne løsninger og tradisjonelt håndverk kan vi tilby
+            komplette løsninger med fokus på varige resultater.
+          </p>
+          <p>
+            Når du velger Murmester Henriksen AS, velger du en bedrift som setter
+            kvalitet, fagstolthet og kundeopplevelse først.
+          </p>
+          <p class="om-closer"><strong>Murmester Henriksen AS — Alle trenger en murer!</strong></p>
+        </section>
 
-            <h2>Om <em>bedriften</em></h2>
-            <p>
-              Murmester Henriksen AS ble etablert med et enkelt mål — å levere håndverk av
-              høyeste kvalitet, kombinert med god kommunikasjon, faglig kompetanse og
-              personlig oppfølging.
-            </p>
-            <p>
-              Bedriften drives av murmester og fagskoleingeniør Vincent Henriksen, som
-              gjennom mange år i bransjen har opparbeidet seg bred erfaring innen mur-,
-              puss-, flis- og rehabiliteringsarbeider. Som kunde møter du alltid fagpersonen
-              som planlegger, prosjekterer og utfører arbeidet. Det gir korte beslutningsveier,
-              god oppfølging og trygghet for at kvaliteten ivaretas gjennom hele prosjektet.
-            </p>
-            <p>
-              Selv om Murmester Henriksen AS i dag er en mindre virksomhet, har vi et stort
-              og solid nettverk av samarbeidspartnere. Vi samarbeider tett med etablerte
-              håndverksbedrifter og andre faggrupper når prosjektet krever det. Det gjør at
-              vi kan påta oss både små og store oppdrag — samtidig som vi beholder den
-              personlige oppfølgingen og kvalitetssikringen som kjennetegner en
-              håndverksbedrift med stolthet for faget.
-            </p>
+      </article>
 
-            <h3>Vi utfører blant annet</h3>
-            <ul>
-              <li>Murarbeider</li>
-              <li>Teglforblending</li>
-              <li>Puss- og fasadearbeider</li>
-              <li>Flislegging og våtrom</li>
-              <li>Skifer- og natursteinsarbeider</li>
-              <li>Rehabilitering av eldre murverk</li>
-              <li>Rehabilitering av skorstein / pipe</li>
-              <li>Service av ovner og feiing av piper</li>
-              <li>Skorsteiner, ildsteder og peiser</li>
-              <li>Restaurering og antikvariske arbeider</li>
-              <li>Prosjektering og faglige vurderinger</li>
-            </ul>
+      <aside class="om-aside">
+        <nav class="om-toc" aria-label="Innhold">
+          <p class="om-toc__head">Innhold</p>
+          <ol class="om-toc__list">
+            <li><a href="#om-mesteren" class="om-toc__link" data-toc>01 — Mesteren</a></li>
+            <li><a href="#om-reisen" class="om-toc__link" data-toc>02 — Reisen</a></li>
+            <li><a href="#om-bedriften" class="om-toc__link" data-toc>03 — Bedriften</a></li>
+          </ol>
+        </nav>
 
-            <p>
-              For oss handler godt håndverk om mer enn å levere et ferdig produkt. Det
-              handler om tillit, fagkunnskap og kvalitet i alle ledd. Gjennom gode
-              samarbeidspartnere, moderne løsninger og tradisjonelt håndverk kan vi tilby
-              komplette løsninger med fokus på varige resultater.
-            </p>
-            <p>
-              Når du velger Murmester Henriksen AS, velger du en bedrift som setter
-              kvalitet, fagstolthet og kundeopplevelse først.
-            </p>
-            <p><strong>Murmester Henriksen AS — Alle trenger en murer!</strong></p>
-          </>
-        )}
-
-      </div>
-
-      <aside class="article__aside">
         <div class="fakta-card">
           <div class="fakta-card__head">
             <span class="fakta-card__bar" aria-hidden="true"></span>
@@ -245,9 +231,37 @@ const portrettKortImg = om.portrettKortBilde ? urlFor(om.portrettKortBilde).widt
           </ul>
         </div>
       </aside>
+
     </div>
-  </section>
+  </div>
 
 </main>
+
+<script is:inline>
+  // Scroll-spy: highlight active TOC link basert på hvilken seksjon som er i viewport
+  (function () {
+    var sections = document.querySelectorAll('.om-section');
+    var links = document.querySelectorAll('[data-toc]');
+    if (!sections.length || !links.length || !('IntersectionObserver' in window)) return;
+
+    var byId = {};
+    links.forEach(function (a) {
+      var id = (a.getAttribute('href') || '').replace('#', '');
+      if (id) byId[id] = a;
+    });
+
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) {
+          links.forEach(function (a) { a.classList.remove('is-active'); });
+          var active = byId[e.target.id];
+          if (active) active.classList.add('is-active');
+        }
+      });
+    }, { rootMargin: '-30% 0px -55% 0px', threshold: 0 });
+
+    sections.forEach(function (s) { io.observe(s); });
+  })();
+</script>
 
 </Layout>
