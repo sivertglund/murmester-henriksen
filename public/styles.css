@@ -9,7 +9,9 @@
   --copper-500: #BE5400;   /* hoved-oransje (Canyon Copper) */
   --copper-600: #A04600;   /* hover-dypere */
   --copper-700: #7A3500;   /* dypeste rust */
+  --copper-400: #D86A1F;   /* mellom-lys */
   --copper-300: #E0832F;   /* lysere accent */
+  --copper-200: #ECA460;   /* veldig lys — for tekst/ikoner på mørk bg */
 
   /* Industriell mørk grå — fra varebilen */
   --steel-900: #1F1F20;    /* dypeste, for hero overlay */
@@ -3086,11 +3088,11 @@ h2 em, h1 em, h3 em {
 .fag-tile__icon .fag-icon {
   width: 100%;
   height: 100%;
-  color: var(--copper-400);
+  color: var(--copper-300);
   transition: color .35s ease, transform .55s cubic-bezier(.2,.8,.2,1);
 }
 .fag-tile__link:hover .fag-tile__icon .fag-icon {
-  color: var(--copper-300);
+  color: var(--copper-200);
   transform: scale(1.08);
 }
 
@@ -3792,10 +3794,10 @@ h2 em, h1 em, h3 em {
 .andre-fag__icon .fag-icon {
   width: 100%;
   height: 100%;
-  color: var(--copper-400);
+  color: var(--copper-300);
   transition: color .35s ease;
 }
-.andre-fag__link:hover .andre-fag__icon .fag-icon { color: var(--copper-300); }
+.andre-fag__link:hover .andre-fag__icon .fag-icon { color: var(--copper-200); }
 .andre-fag__name {
   font-size: .98rem;
   font-weight: 700;
