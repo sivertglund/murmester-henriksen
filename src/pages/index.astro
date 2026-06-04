@@ -47,7 +47,7 @@ const chipIcons: Record<string, string> = {
       src="/assets/hero-wall-scrub-15s.mp4"
       muted
       playsinline
-      preload="auto"
+      preload="none"
       disableremoteplayback
       tabindex="-1"
       aria-hidden="true"></video>
@@ -266,22 +266,23 @@ const chipIcons: Record<string, string> = {
 </section>
 
 <script is:inline>
-  // Vent med hero-videoen til intro-overlay er ferdig. Video er skjult
-  // til første frame er dekodet — så bruker ikke ser end-frame eller hopp.
+  // Hero-video: preload="none" + opacity:0 i CSS sikrer at ingen frame
+  // vises før play() er kalt og første frame er dekodet. Video gjøres
+  // synlig først via .is-playing klassen — fyrer på 'playing' event,
+  // som garantert er etter frame 0 er rendret.
   (function () {
     var video = document.getElementById('heroVideo');
     if (!video) return;
-    video.style.opacity = '0';
     var overlay = document.getElementById('introOverlay');
     var started = false;
-    function revealOnFirstFrame() {
-      video.style.transition = 'opacity .35s ease';
-      video.style.opacity = '1';
-    }
-    video.addEventListener('playing', revealOnFirstFrame, { once: true });
+    video.addEventListener('playing', function () {
+      video.classList.add('is-playing');
+    }, { once: true });
     function start() {
       if (started) return;
       started = true;
+      // Last inn videoen først (preload='none' krevde dette)
+      try { video.load(); } catch (e) {}
       try { video.currentTime = 0; } catch (e) {}
       var p = video.play();
       if (p && typeof p.catch === 'function') {

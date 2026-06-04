@@ -669,7 +669,8 @@ h2 em, h1 em, h3 em {
   initial-value: 0;
 }
 
-/* Hero video — autoplays forward */
+/* Hero video — autoplays forward. Skjult som default for å unngå
+   at end-frame eller cached buffer-frame blinker frem før play(). */
 .hero__video {
   position: absolute;
   inset: 0;
@@ -678,7 +679,10 @@ h2 em, h1 em, h3 em {
   object-fit: cover;
   pointer-events: none;
   background: var(--clay-900);
+  opacity: 0;
+  transition: opacity .35s ease;
 }
+.hero__video.is-playing { opacity: 1; }
 
 .hero__overlay {
   position: absolute;
@@ -2276,48 +2280,34 @@ h2 em, h1 em, h3 em {
 .subhero__crumbs a:hover { color: #fff; border-bottom-color: rgba(255,255,255,.5); }
 
 /* ===== Service / generic article body ===== */
-/* ===== Om-oss topp — ren tekst-intro, ingen subhero-portrait ===== */
-.om-top {
-  background: var(--bg);
-  padding: clamp(110px, 14vw, 170px) 0 clamp(40px, 5vw, 64px);
-  position: relative;
-}
-.om-top__inner { max-width: 920px; }
-.om-top .subhero__crumbs {
-  color: var(--ink-soft);
-  margin-bottom: 22px;
-}
-.om-top .subhero__crumbs a { color: var(--ink-soft); }
-.om-top .subhero__crumbs a:hover { color: var(--copper-500); }
-.om-top .kicker { color: var(--copper-500); margin-bottom: 18px; }
-.om-top__h1 {
-  margin: 0 0 22px;
-  font-size: clamp(2.6rem, 5.4vw, 4.6rem);
-  line-height: 1;
-  letter-spacing: -.03em;
-  font-weight: 700;
-  color: var(--ink);
-}
-.om-top__h1 em {
-  font-style: normal;
-  color: var(--copper-500);
-  font-family: var(--font);
-  font-weight: 700;
-}
-.om-top__lede {
-  margin: 0;
-  font-size: clamp(1.1rem, 1.5vw, 1.32rem);
-  color: var(--ink-soft);
-  max-width: 56ch;
-  line-height: 1.55;
-  white-space: pre-line;
-}
-.om-top__lede strong { color: var(--ink); }
-
 /* ===== Om-oss artikkel (4 hovedseksjoner + sticky TOC) ===== */
 .om-article {
   background: var(--bg);
-  padding: clamp(20px, 3vw, 40px) 0 clamp(80px, 10vw, 130px);
+  padding: clamp(110px, 13vw, 160px) 0 clamp(80px, 10vw, 130px);
+}
+.om-crumbs {
+  font-size: .78rem;
+  font-weight: 600;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  margin: 0 0 clamp(28px, 4vw, 44px);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.om-crumbs a {
+  color: var(--ink-soft);
+  text-decoration: none;
+  transition: color .2s ease;
+}
+.om-crumbs a:hover { color: var(--copper-500); }
+.om-crumbs span[aria-hidden] { color: var(--line); }
+
+.om-section__title--h1 {
+  font-size: clamp(2.4rem, 4.4vw, 3.8rem) !important;
+  line-height: 1 !important;
+  margin-bottom: clamp(18px, 2.2vw, 28px) !important;
 }
 .om-article__inner {
   max-width: 1200px;

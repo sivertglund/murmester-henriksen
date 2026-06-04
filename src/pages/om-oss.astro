@@ -24,29 +24,22 @@ const reise = [
 >
 
 <main>
-  <section class="om-top">
-    <div class="container om-top__inner">
-      <p class="subhero__crumbs">
-        <a href="/">Hjem</a>
-        <span aria-hidden="true">/</span>
-        <span>Om oss</span>
-      </p>
-      <p class="kicker">{om.kicker}</p>
-      <h1 class="om-top__h1">{om.h1} <em>{om.h1Aksent}</em>{om.h1Slutt}</h1>
-      <p class="om-top__lede" set:html={om.subheroLede}></p>
-    </div>
-  </section>
-
   <div class="om-article">
     <div class="container om-article__inner">
 
       <article class="om-main">
 
+        <p class="om-crumbs">
+          <a href="/">Hjem</a>
+          <span aria-hidden="true">/</span>
+          <span>Om oss</span>
+        </p>
+
         <!-- ===== Mesteren ===== -->
         <section class="om-section" id="om-mesteren">
-          <h2 class="om-section__title">
+          <h1 class="om-section__title om-section__title--h1">
             Vincent Henriksen, Norges <strong>nest beste murer</strong> i <em>2014</em>
-          </h2>
+          </h1>
 
           <p class="om-section__lede">
             <strong>Murmester | Fagskoleingeniør | Oldermann | Faglig veileder</strong>
