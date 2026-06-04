@@ -1280,10 +1280,9 @@ h2 em, h1 em, h3 em {
 }
 .cta-strip__bricks .brick-deco {
   color: var(--copper-500);
-  opacity: .35;
-  /* Dekker helt til høyre — kun fade-inn fra venstre */
-  -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 8%, #000 100%);
-          mask-image: linear-gradient(90deg, transparent 0%, #000 8%, #000 100%);
+  opacity: .55;
+  /* Bruker brick-deco-defaultens fade-mask (samme som mester-sitat).
+     bricksPerRow=28 sørger for at racet er bredere enn viewport. */
 }
 .cta-strip__inner { position: relative; z-index: 1; }
 
@@ -1775,14 +1774,6 @@ h2 em, h1 em, h3 em {
   text-align: center;
   position: relative;
   overflow: hidden;
-}
-.cta-strip::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background:
-    radial-gradient(ellipse at 50% 0%, rgba(180, 90, 60, .25), transparent 60%);
-  pointer-events: none;
 }
 .cta-strip__inner {
   position: relative;
