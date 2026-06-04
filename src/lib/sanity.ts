@@ -370,7 +370,7 @@ export type OmOss = {
 const OM_OSS_FALLBACK: OmOss = {
   kicker: 'Om oss',
   portrettKortNavn: 'Vincent Henriksen',
-  portrettKortRolle: 'Murmester · Fagskoleingeniør · Oldermann',
+  portrettKortRolle: 'Murmester · Fagskoleingeniør · Oldermann · Faglig veileder',
   h1: 'Vincent',
   h1Aksent: 'Henriksen',
   h1Slutt: '',

@@ -9,7 +9,7 @@ export default defineType({
     { name: 'subheroBilde', title: 'Subhero bakgrunnsbilde (portrett)', type: 'image', options: { hotspot: true } },
     { name: 'portrettKortBilde', title: 'Portrett-kort bilde (i artikkelen)', type: 'image', options: { hotspot: true } },
     { name: 'portrettKortNavn', title: 'Portrett-kort navn', type: 'string', initialValue: 'Vincent Henriksen' },
-    { name: 'portrettKortRolle', title: 'Portrett-kort rolle', type: 'string', initialValue: 'Mestermur · Daglig leder' },
+    { name: 'portrettKortRolle', title: 'Portrett-kort rolle', type: 'string', initialValue: 'Murmester · Fagskoleingeniør · Oldermann · Faglig veileder' },
     { name: 'h1', title: 'H1 (første del)', type: 'string', initialValue: 'Mestermur Vincent' },
     { name: 'h1Aksent', title: 'H1-aksent', type: 'string', initialValue: 'Henriksen' },
     { name: 'h1Slutt', title: 'H1 — etter aksent', type: 'string', initialValue: '.' },
