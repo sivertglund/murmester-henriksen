@@ -1,6 +1,7 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import BrickRow from '../../components/BrickRow.astro';
+import FagShield from '../../components/FagShield.astro';
 import { KATEGORIER } from '../../lib/kategorier';
 ---
 <Layout
@@ -39,7 +40,10 @@ import { KATEGORIER } from '../../lib/kategorier';
         {KATEGORIER.map((k, i) => (
           <li class="tj-card scroll-fade" style={`--i:${i}`}>
             <a href={`/tjenester/${k.slug}`} class="tj-card__link">
-              <span class="tj-card__num">{k.nummer}</span>
+              <div class="tj-card__emblem">
+                <FagShield slug={k.slug} />
+                <span class="tj-card__num">{k.nummer}</span>
+              </div>
               <h2 class="tj-card__title">{k.tittel}</h2>
               <p class="tj-card__lede">{k.kortLede}</p>
               <div class="tj-card__foot">

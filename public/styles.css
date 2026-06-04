@@ -2503,6 +2503,35 @@ h2 em, h1 em, h3 em {
   color: var(--ink) !important;
 }
 
+/* CTA-boks: 'Se alle tjenestene' etter Vi utfører-listen */
+.utforer__cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  margin: clamp(20px, 2.6vw, 32px) 0 clamp(8px, 1vw, 14px);
+  padding: 14px 22px;
+  background: var(--copper-500);
+  color: #fff;
+  text-decoration: none;
+  border-radius: 999px;
+  font-weight: 700;
+  font-size: .98rem;
+  letter-spacing: -.005em;
+  transition: background .25s ease, transform .35s cubic-bezier(.2,.8,.2,1),
+              box-shadow .35s ease;
+  box-shadow: 0 6px 18px -10px rgba(190,84,0,.6);
+}
+.utforer__cta:hover {
+  background: var(--copper-600);
+  transform: translateY(-2px);
+  box-shadow: 0 12px 26px -10px rgba(190,84,0,.7);
+}
+.utforer__cta-arrow {
+  font-size: 1.15rem;
+  transition: transform .35s cubic-bezier(.2,.8,.2,1);
+}
+.utforer__cta:hover .utforer__cta-arrow { transform: translateX(4px); }
+
 /* Aside med sticky TOC + fakta-card + related */
 .om-aside {
   position: sticky;
@@ -3799,16 +3828,67 @@ h2 em, h1 em, h3 em {
   opacity: 1;
 }
 
-.tj-card__num {
-  font-size: .85rem;
-  font-weight: 800;
-  letter-spacing: .22em;
-  color: var(--copper-700);
-  margin-bottom: clamp(22px, 2.6vw, 32px);
-  font-variant-numeric: tabular-nums;
+/* Skjold-emblem som topp-aksent på hvert fag-kort */
+.tj-card__emblem {
   position: relative;
-  z-index: 1;
+  width: clamp(90px, 10vw, 120px);
+  height: clamp(108px, 12vw, 144px);
+  margin: 0 0 clamp(18px, 2.4vw, 28px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
+.tj-card__num {
+  position: absolute;
+  top: -2px;
+  right: -12px;
+  font-size: .78rem;
+  font-weight: 800;
+  letter-spacing: .18em;
+  color: var(--copper-700);
+  font-variant-numeric: tabular-nums;
+  background: var(--bg);
+  padding: 4px 8px;
+  border-radius: 4px;
+  z-index: 2;
+}
+
+/* Selve skjoldet */
+.fag-shield {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  color: var(--copper-700);
+  transition: color .35s ease, transform .5s cubic-bezier(.2,.8,.2,1);
+}
+.fag-shield__frame {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+.fag-shield__path {
+  transition: stroke-width .35s ease;
+}
+.fag-shield__icon {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 22% 22% 26%;  /* skjold er smalere nederst */
+}
+.fag-shield__icon svg {
+  width: 100%;
+  height: 100%;
+  color: var(--copper-700);
+  transition: color .35s ease, transform .5s cubic-bezier(.2,.8,.2,1);
+}
+
+.tj-card__link:hover .fag-shield { transform: scale(1.05); }
+.tj-card__link:hover .fag-shield__path { stroke-width: 3; }
+.tj-card__link:hover .fag-shield__icon svg { color: var(--copper-500); }
 .tj-card__title {
   margin: 0 0 14px;
   font-size: clamp(1.55rem, 2.2vw, 1.95rem);
