@@ -165,7 +165,7 @@ const chipIcons: Record<string, string> = {
   <div class="container">
     <div class="marquee__head">
       <p class="kicker">Utvalgte arbeider</p>
-      <h2 class="display">Murverk i <em>Vestfold</em>.</h2>
+      <h2 class="marquee__display">{areas.tittel} <em>{areas.tittelAksent}</em>{areas.tittelSlutt}</h2>
     </div>
   </div>
 
@@ -190,17 +190,12 @@ const chipIcons: Record<string, string> = {
     </div>
   </div>
 
-  <div class="container marquee__outro">
-    <p class="marquee__outro-line">{areas.tittel} <em>{areas.tittelAksent}</em>{areas.tittelSlutt}</p>
-  </div>
-
 </section>
 
 <!-- ===== Mester-sitat ===== -->
 <section class="mester-sitat" id="filosofi">
-  <div class="mester-sitat__stripe-top" aria-hidden="true"></div>
-  <div class="mester-sitat__bricks scroll-fade">
-    <BrickRow variant="stack" tone="subtle" rows={1} size="sm" className="scroll-fade" />
+  <div class="mester-sitat__bricks">
+    <BrickRow variant="marquee" tone="subtle" rows={1} size="sm" />
   </div>
   <svg class="mester-sitat__quote-mark" viewBox="0 0 100 80" fill="none" aria-hidden="true">
     <path d="M0 80V44C0 19.7 13.3 4.7 40 0v16C26 19.3 17.3 30.7 15 50h25v30H0zm60 0V44C60 19.7 73.3 4.7 100 0v16C86 19.3 77.3 30.7 75 50h25v30H60z" fill="currentColor"/>

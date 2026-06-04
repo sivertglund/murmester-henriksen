@@ -1834,22 +1834,8 @@ h2 em, h1 em, h3 em {
   font-weight: 400;
 }
 
-/* Outro-linje: avslutter marqueen som en synlig statement */
-.marquee__outro {
-  margin-top: clamp(56px, 7vw, 96px);
-  text-align: center;
-  position: relative;
-}
-.marquee__outro::before {
-  content: "";
-  display: block;
-  width: 48px;
-  height: 2px;
-  background: var(--copper-500);
-  margin: 0 auto clamp(28px, 3.4vw, 40px);
-  border-radius: 1px;
-}
-.marquee__outro-line {
+/* Display-tittel over bildeserien — 'Vi dekker hele Vestfold.' */
+.marquee__display {
   margin: 0;
   font-family: var(--font);
   font-weight: 700;
@@ -1858,7 +1844,7 @@ h2 em, h1 em, h3 em {
   letter-spacing: -.02em;
   color: var(--ink);
 }
-.marquee__outro-line em {
+.marquee__display em {
   font-style: normal;
   color: var(--copper-500);
   font-family: var(--font);
@@ -2655,10 +2641,11 @@ h2 em, h1 em, h3 em {
   -webkit-mask-image: radial-gradient(ellipse 90% 80% at 50% 50%, #000 30%, transparent 90%);
           mask-image: radial-gradient(ellipse 90% 80% at 50% 50%, #000 30%, transparent 90%);
 }
-.mester-sitat__stripe-top,
+.mester-sitat__stripe-top { display: none; }
 .mester-sitat__stripe-bot {
   position: absolute;
   left: 50%;
+  bottom: 0;
   transform: translateX(-50%);
   width: clamp(60px, 10vw, 120px);
   height: 2px;
@@ -2666,8 +2653,6 @@ h2 em, h1 em, h3 em {
   z-index: 1;
   box-shadow: 0 0 18px rgba(190,84,0,.35);
 }
-.mester-sitat__stripe-top { top: 0; }
-.mester-sitat__stripe-bot { bottom: 0; }
 .mester-sitat__quote-mark {
   position: absolute;
   top: clamp(60px, 8vw, 110px);
