@@ -4015,12 +4015,23 @@ h2 em, h1 em, h3 em {
   .tj-card__inner { padding: 22% 16% 24%; gap: 10px; }
 }
 @media (max-width: 560px) {
-  .tj-cards__grid { grid-template-columns: 1fr; max-width: 320px; }
+  .tj-cards__grid {
+    grid-template-columns: 1fr;
+    width: 100%;
+    max-width: 280px;
+    margin-inline: auto;
+    box-sizing: border-box;
+  }
   .tj-card:nth-child(1),
   .tj-card:nth-child(2),
   .tj-card:nth-child(3),
   .tj-card:nth-child(4),
-  .tj-card:nth-child(5) { grid-column: span 1; max-width: none; }
+  .tj-card:nth-child(5) {
+    grid-column: span 1;
+    max-width: none;
+    width: 100%;
+    box-sizing: border-box;
+  }
 }
 @media (prefers-reduced-motion: reduce) {
   .tj-cards .scroll-fade { opacity: 1; transform: none; transition: none; }
