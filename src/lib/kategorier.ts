@@ -49,13 +49,13 @@ export const KATEGORIER: Kategori[] = [
       { navn: 'Restaurering av antikvarisk murverk', beskrivelse: 'Forsiktig istandsetting av eldre murverk med originalmetoder.' },
     ],
     galleri: [
-      { src: '/assets/galleri/muring/tegl-1.jpg', alt: 'Teglforblending — Murmester Henriksen' },
-      { src: '/assets/galleri/muring/tegl-2.jpg', alt: 'Teglmuring — Murmester Henriksen' },
-      { src: '/assets/galleri/muring/tegl-3.jpg', alt: 'Teglarbeid — Murmester Henriksen' },
-      { src: '/assets/galleri/muring/tegl-4.jpg', alt: 'Tegl — Murmester Henriksen' },
-      { src: '/assets/galleri/muring/naturstein-1.jpg', alt: 'Naturstein-muring' },
-      { src: '/assets/galleri/muring/naturstein-2.jpg', alt: 'Naturstein — StoneWall' },
-      { src: '/assets/galleri/muring/skifer-oppdal.jpg', alt: 'Skifer fra Oppdal' },
+      { src: '/assets/galleri/muring/tegl-1.jpg', alt: 'Tegl' },
+      { src: '/assets/galleri/muring/tegl-2.jpg', alt: 'Tegl' },
+      { src: '/assets/galleri/muring/tegl-3.jpg', alt: 'Tegl' },
+      { src: '/assets/galleri/muring/tegl-4.jpg', alt: 'Tegl' },
+      { src: '/assets/galleri/muring/naturstein-1.jpg', alt: 'StoneWall' },
+      { src: '/assets/galleri/muring/naturstein-2.jpg', alt: 'StoneWall' },
+      { src: '/assets/galleri/muring/skifer-oppdal.jpg', alt: 'Skifer Oppdal' },
     ],
   },
   {
@@ -79,9 +79,9 @@ export const KATEGORIER: Kategori[] = [
       { navn: 'Kostepuss', beskrivelse: 'Pussflate med kost-tekstur — vanlig på kjeller og fasade.' },
     ],
     galleri: [
-      { src: '/assets/galleri/puss/mortelpuss.jpg', alt: 'Mørtelpuss — Murmester Henriksen' },
+      { src: '/assets/galleri/puss/mortelpuss.jpg', alt: 'Mørtelpuss' },
       { src: '/assets/galleri/puss/fiberpuss.jpg', alt: 'Fiberpuss' },
-      { src: '/assets/galleri/puss/pipepuss.jpg', alt: 'Pussing av pipe' },
+      { src: '/assets/galleri/puss/pipepuss.jpg', alt: 'Pipepuss' },
     ],
   },
   {
@@ -103,12 +103,12 @@ export const KATEGORIER: Kategori[] = [
       { navn: 'Service og vedlikehold', beskrivelse: 'Inspeksjon, reparasjon og småfix på ildsted og pipe.' },
     ],
     galleri: [
-      { src: '/assets/galleri/ildsted/peis-1.jpg', alt: 'Peis — Murmester Henriksen' },
+      { src: '/assets/galleri/ildsted/peis-1.jpg', alt: 'Peis' },
       { src: '/assets/galleri/ildsted/peis-2.jpg', alt: 'Peis' },
       { src: '/assets/galleri/ildsted/peis-3.jpg', alt: 'Peis' },
-      { src: '/assets/galleri/ildsted/vedovn.jpg', alt: 'Montering av vedovn' },
-      { src: '/assets/galleri/ildsted/pipe-rehab.jpg', alt: 'Rehabilitering av pipe' },
-      { src: '/assets/galleri/ildsted/stenpeis.jpg', alt: 'Stenpeis i naturstein' },
+      { src: '/assets/galleri/ildsted/vedovn.jpg', alt: 'Vedovn' },
+      { src: '/assets/galleri/ildsted/pipe-rehab.jpg', alt: 'Rehabilitering pipe' },
+      { src: '/assets/galleri/ildsted/stenpeis.jpg', alt: 'StoneWall og peis' },
     ],
   },
   {
@@ -130,7 +130,7 @@ export const KATEGORIER: Kategori[] = [
       { navn: 'Falloppbygging', beskrivelse: 'Bygging av fall til sluk i våtrom, balkonger og uteareal.' },
     ],
     galleri: [
-      { src: '/assets/galleri/flis-vatrom/flis.jpg', alt: 'Flislegging — Murmester Henriksen' },
+      { src: '/assets/galleri/flis-vatrom/flis.jpg', alt: 'Flis' },
       { src: '/assets/galleri/flis-vatrom/forskalling-stop.jpg', alt: 'Forskalling og støp' },
     ],
   },
@@ -152,9 +152,9 @@ export const KATEGORIER: Kategori[] = [
       { navn: 'Kulturhistoriske bygg', beskrivelse: 'Arbeid på bygg med kulturhistorisk verdi — varsomt og dokumentert.' },
     ],
     galleri: [
-      { src: '/assets/galleri/restaurering/antikvarisk-1.jpg', alt: 'Antikvarisk murverk — Murmester Henriksen' },
+      { src: '/assets/galleri/restaurering/antikvarisk-1.jpg', alt: 'Antikvarisk arbeid' },
       { src: '/assets/galleri/restaurering/antikvarisk-2.jpg', alt: 'Antikvarisk arbeid' },
-      { src: '/assets/galleri/restaurering/restaurering-tegl-pipe.jpg', alt: 'Restaurering av tegl og pipe' },
+      { src: '/assets/galleri/restaurering/restaurering-tegl-pipe.jpg', alt: 'Restaurering tegl og pipe' },
     ],
   },
 ];
