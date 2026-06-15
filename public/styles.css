@@ -3777,7 +3777,46 @@ h2 em, h1 em, h3 em {
   object-fit: cover;
   transition: transform .8s cubic-bezier(.2,.8,.2,1);
 }
-.fag-galleri__item:hover img { transform: scale(1.04); }
+.fag-galleri__item:hover img,
+.fag-galleri__item:focus-within img { transform: scale(1.04); }
+
+/* Caption: vises ved hover med gradient-overlay nede */
+.fag-galleri__caption {
+  position: absolute;
+  inset: auto 0 0 0;
+  padding: 18px 18px 14px;
+  color: #fff;
+  font-family: var(--font);
+  font-size: .95rem;
+  font-weight: 600;
+  letter-spacing: .01em;
+  line-height: 1.2;
+  background: linear-gradient(to top, rgba(20,16,14,.82) 0%, rgba(20,16,14,.55) 55%, transparent 100%);
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity .35s ease, transform .45s cubic-bezier(.2,.8,.2,1);
+  pointer-events: none;
+}
+.fag-galleri__caption::before {
+  content: "";
+  display: inline-block;
+  width: 22px;
+  height: 2px;
+  background: var(--copper-300, var(--copper-500));
+  margin-right: 10px;
+  vertical-align: middle;
+  transform: translateY(-2px);
+}
+.fag-galleri__item:hover .fag-galleri__caption,
+.fag-galleri__item:focus-within .fag-galleri__caption {
+  opacity: 1;
+  transform: none;
+}
+/* Touch-enheter har ingen hover — vis caption alltid */
+@media (hover: none) {
+  .fag-galleri__caption { opacity: 1; transform: none; }
+}
+
 @media (max-width: 720px) {
   .fag-galleri__grid,
   .fag-galleri__grid[data-count="2"],
