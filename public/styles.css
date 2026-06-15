@@ -308,17 +308,19 @@ h2 em, h1 em, h3 em {
 .intro-wordmark__name {
   font-family: var(--font-brand);
   font-weight: 800;
-  font-size: clamp(3rem, 5.6vw, 4.6rem);
-  letter-spacing: -.03em;
+  font-size: clamp(2.6rem, 5vw, 4rem);
+  letter-spacing: -.02em;
+  text-transform: uppercase;
   line-height: 1;
   color: #fff;
 }
 .intro-wordmark__sub {
   font-family: var(--font-brand);
-  font-weight: 700;
-  font-size: clamp(.78rem, 1.1vw, .95rem);
-  letter-spacing: .48em;
+  font-weight: 800;
+  font-size: clamp(1.25rem, 2vw, 1.8rem);
+  letter-spacing: .14em;
   color: var(--copper-500);
+  text-transform: uppercase;
   line-height: 1;
 }
 @keyframes introFadeOut {
@@ -542,18 +544,21 @@ h2 em, h1 em, h3 em {
 .nav__name strong {
   font-family: var(--font-brand);
   font-weight: 800;
-  font-size: 1.55rem;
-  letter-spacing: -.025em;
+  font-size: 1.4rem;
+  letter-spacing: -.015em;
+  text-transform: uppercase;
   line-height: 1;
   color: inherit;
 }
 .nav__name-sub {
   font-family: var(--font-brand);
-  font-size: .52rem;
-  font-weight: 700;
-  letter-spacing: .36em;
+  font-size: .72rem;
+  font-weight: 800;
+  letter-spacing: .12em;
   color: var(--copper-500);
-  margin-top: 2px;
+  text-transform: uppercase;
+  line-height: 1;
+  margin-bottom: 3px;
 }
 .nav__links {
   margin-left: auto;
