@@ -143,20 +143,20 @@ export type Prosjekt = {
   rekkefolge?: number;
 };
 
-// Fallback list mirrors current static project files in /assets/projects/
+// Fallback-list med Vincents bilder fra galleri-mappene
 const PROSJEKTER_FALLBACK: Prosjekt[] = [
-  { _id: 'fb-p01', tittel: 'Pussfasade på sokkel', bildeUrl: '/assets/projects/project-01.jpg', rekkefolge: 1 },
-  { _id: 'fb-p02', tittel: 'Murverk', bildeUrl: '/assets/projects/project-02.jpg', rekkefolge: 2 },
-  { _id: 'fb-p03', tittel: 'Restaurert murverk', bildeUrl: '/assets/projects/project-03.jpg', rekkefolge: 3 },
-  { _id: 'fb-p04', tittel: 'Peis', bildeUrl: '/assets/projects/project-04.jpg', rekkefolge: 4 },
-  { _id: 'fb-p05', tittel: 'Pipe-rehabilitering', bildeUrl: '/assets/projects/project-05.jpg', rekkefolge: 5 },
-  { _id: 'fb-p06', tittel: 'Teglforblending', bildeUrl: '/assets/projects/project-06.jpg', rekkefolge: 6 },
-  { _id: 'fb-p07', tittel: 'Flislegging', bildeUrl: '/assets/projects/project-07.jpg', rekkefolge: 7 },
-  { _id: 'fb-p08', tittel: 'Sparkling og gulvavretting', bildeUrl: '/assets/projects/project-08.jpg', rekkefolge: 8 },
-  { _id: 'fb-p09', tittel: 'Skifer og naturstein', bildeUrl: '/assets/projects/project-09.jpg', rekkefolge: 9 },
-  { _id: 'fb-p10', tittel: 'Murverk', bildeUrl: '/assets/projects/project-10.jpg', rekkefolge: 10 },
-  { _id: 'fb-p11', tittel: 'Murverk', bildeUrl: '/assets/projects/project-11.jpg', rekkefolge: 11 },
-  { _id: 'fb-p12', tittel: 'Elementpipe', bildeUrl: '/assets/projects/project-12.jpg', rekkefolge: 12 },
+  { _id: 'fb-p01', tittel: 'Teglforblending', bildeUrl: '/assets/galleri/muring/tegl-1.jpg', rekkefolge: 1 },
+  { _id: 'fb-p02', tittel: 'Mørtelpuss', bildeUrl: '/assets/galleri/puss/mortelpuss.jpg', rekkefolge: 2 },
+  { _id: 'fb-p03', tittel: 'Antikvarisk arbeid', bildeUrl: '/assets/galleri/restaurering/antikvarisk-1.jpg', rekkefolge: 3 },
+  { _id: 'fb-p04', tittel: 'Peis', bildeUrl: '/assets/galleri/ildsted/peis-1.jpg', rekkefolge: 4 },
+  { _id: 'fb-p05', tittel: 'Pipe-rehabilitering', bildeUrl: '/assets/galleri/ildsted/pipe-rehab.jpg', rekkefolge: 5 },
+  { _id: 'fb-p06', tittel: 'Tegl', bildeUrl: '/assets/galleri/muring/tegl-2.jpg', rekkefolge: 6 },
+  { _id: 'fb-p07', tittel: 'Flislegging', bildeUrl: '/assets/galleri/flis-vatrom/flis.jpg', rekkefolge: 7 },
+  { _id: 'fb-p08', tittel: 'Fiberpuss', bildeUrl: '/assets/galleri/puss/fiberpuss.jpg', rekkefolge: 8 },
+  { _id: 'fb-p09', tittel: 'Skifer fra Oppdal', bildeUrl: '/assets/galleri/muring/skifer-oppdal.jpg', rekkefolge: 9 },
+  { _id: 'fb-p10', tittel: 'Naturstein', bildeUrl: '/assets/galleri/muring/naturstein-1.jpg', rekkefolge: 10 },
+  { _id: 'fb-p11', tittel: 'Vedovn', bildeUrl: '/assets/galleri/ildsted/vedovn.jpg', rekkefolge: 11 },
+  { _id: 'fb-p12', tittel: 'Restaurering av tegl og pipe', bildeUrl: '/assets/galleri/restaurering/restaurering-tegl-pipe.jpg', rekkefolge: 12 },
 ];
 
 export async function getProsjekter(): Promise<Prosjekt[]> {

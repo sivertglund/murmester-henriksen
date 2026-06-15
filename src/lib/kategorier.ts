@@ -11,6 +11,11 @@ export type Underkategori = {
   prisNote?: string;     // f.eks. "Avhenger av omfang" eller "Eks. mva"
 };
 
+export type GalleriBilde = {
+  src: string;
+  alt: string;
+};
+
 export type Kategori = {
   nummer: string;
   slug: string;
@@ -19,6 +24,7 @@ export type Kategori = {
   introTekst: string;     // 2-3 setninger, vises som intro på kategori-siden
   heroBilde: string;      // URL eller path til hero på kategori-siden
   underkategorier: Underkategori[];
+  galleri?: GalleriBilde[]; // Bilder fra Vincent — vises som strip på detalj-siden
 };
 
 export const KATEGORIER: Kategori[] = [
@@ -42,6 +48,15 @@ export const KATEGORIER: Kategori[] = [
       { navn: 'Skiferpanel', beskrivelse: 'Moderne fasadeløsning i skifer, lett og slank.' },
       { navn: 'Restaurering av antikvarisk murverk', beskrivelse: 'Forsiktig istandsetting av eldre murverk med originalmetoder.' },
     ],
+    galleri: [
+      { src: '/assets/galleri/muring/tegl-1.jpg', alt: 'Teglforblending — Murmester Henriksen' },
+      { src: '/assets/galleri/muring/tegl-2.jpg', alt: 'Teglmuring — Murmester Henriksen' },
+      { src: '/assets/galleri/muring/tegl-3.jpg', alt: 'Teglarbeid — Murmester Henriksen' },
+      { src: '/assets/galleri/muring/tegl-4.jpg', alt: 'Tegl — Murmester Henriksen' },
+      { src: '/assets/galleri/muring/naturstein-1.jpg', alt: 'Naturstein-muring' },
+      { src: '/assets/galleri/muring/naturstein-2.jpg', alt: 'Naturstein — StoneWall' },
+      { src: '/assets/galleri/muring/skifer-oppdal.jpg', alt: 'Skifer fra Oppdal' },
+    ],
   },
   {
     nummer: '02',
@@ -63,6 +78,11 @@ export const KATEGORIER: Kategori[] = [
       { navn: 'Sekkeskuring', beskrivelse: 'Tradisjonell finish som gir tegl en delvis dekket, varm overflate.' },
       { navn: 'Kostepuss', beskrivelse: 'Pussflate med kost-tekstur — vanlig på kjeller og fasade.' },
     ],
+    galleri: [
+      { src: '/assets/galleri/puss/mortelpuss.jpg', alt: 'Mørtelpuss — Murmester Henriksen' },
+      { src: '/assets/galleri/puss/fiberpuss.jpg', alt: 'Fiberpuss' },
+      { src: '/assets/galleri/puss/pipepuss.jpg', alt: 'Pussing av pipe' },
+    ],
   },
   {
     nummer: '03',
@@ -81,6 +101,14 @@ export const KATEGORIER: Kategori[] = [
       { navn: 'Oppføring av teglpipe', beskrivelse: 'Tradisjonell murt pipe med tegl — solid og dekorativ.' },
       { navn: 'Rehabilitering av piper med stålrør', beskrivelse: 'Foring av eldre røykløp med stål — utfører hele jobben inkl. søknad.' },
       { navn: 'Service og vedlikehold', beskrivelse: 'Inspeksjon, reparasjon og småfix på ildsted og pipe.' },
+    ],
+    galleri: [
+      { src: '/assets/galleri/ildsted/peis-1.jpg', alt: 'Peis — Murmester Henriksen' },
+      { src: '/assets/galleri/ildsted/peis-2.jpg', alt: 'Peis' },
+      { src: '/assets/galleri/ildsted/peis-3.jpg', alt: 'Peis' },
+      { src: '/assets/galleri/ildsted/vedovn.jpg', alt: 'Montering av vedovn' },
+      { src: '/assets/galleri/ildsted/pipe-rehab.jpg', alt: 'Rehabilitering av pipe' },
+      { src: '/assets/galleri/ildsted/stenpeis.jpg', alt: 'Stenpeis i naturstein' },
     ],
   },
   {
@@ -101,6 +129,10 @@ export const KATEGORIER: Kategori[] = [
       { navn: 'Gulvstøp', beskrivelse: 'Komplett støp av gulv på terreng eller dekke.' },
       { navn: 'Falloppbygging', beskrivelse: 'Bygging av fall til sluk i våtrom, balkonger og uteareal.' },
     ],
+    galleri: [
+      { src: '/assets/galleri/flis-vatrom/flis.jpg', alt: 'Flislegging — Murmester Henriksen' },
+      { src: '/assets/galleri/flis-vatrom/forskalling-stop.jpg', alt: 'Forskalling og støp' },
+    ],
   },
   {
     nummer: '05',
@@ -118,6 +150,11 @@ export const KATEGORIER: Kategori[] = [
       { navn: 'Restaurering av naturstein', beskrivelse: 'Reparasjon og utskifting av enkeltsteiner og hele partier.' },
       { navn: 'Restaurering av teglfasader', beskrivelse: 'Refuging, frostskader, utskifting av tegl — riktig mørtel, riktig farge.' },
       { navn: 'Kulturhistoriske bygg', beskrivelse: 'Arbeid på bygg med kulturhistorisk verdi — varsomt og dokumentert.' },
+    ],
+    galleri: [
+      { src: '/assets/galleri/restaurering/antikvarisk-1.jpg', alt: 'Antikvarisk murverk — Murmester Henriksen' },
+      { src: '/assets/galleri/restaurering/antikvarisk-2.jpg', alt: 'Antikvarisk arbeid' },
+      { src: '/assets/galleri/restaurering/restaurering-tegl-pipe.jpg', alt: 'Restaurering av tegl og pipe' },
     ],
   },
 ];
