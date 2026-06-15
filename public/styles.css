@@ -308,16 +308,16 @@ h2 em, h1 em, h3 em {
 .intro-wordmark__name {
   font-family: var(--font-brand);
   font-weight: 800;
-  font-size: clamp(2.4rem, 4.4vw, 3.6rem);
-  letter-spacing: -.025em;
+  font-size: clamp(3rem, 5.6vw, 4.6rem);
+  letter-spacing: -.03em;
   line-height: 1;
   color: #fff;
 }
 .intro-wordmark__sub {
   font-family: var(--font-brand);
-  font-weight: 600;
-  font-size: clamp(.85rem, 1.2vw, 1.05rem);
-  letter-spacing: .44em;
+  font-weight: 700;
+  font-size: clamp(.78rem, 1.1vw, .95rem);
+  letter-spacing: .48em;
   color: var(--copper-500);
   line-height: 1;
 }
@@ -542,16 +542,18 @@ h2 em, h1 em, h3 em {
 .nav__name strong {
   font-family: var(--font-brand);
   font-weight: 800;
-  font-size: 1.18rem;
-  letter-spacing: -.02em;
+  font-size: 1.55rem;
+  letter-spacing: -.025em;
+  line-height: 1;
   color: inherit;
 }
 .nav__name-sub {
   font-family: var(--font-brand);
-  font-size: .56rem;
-  font-weight: 600;
-  letter-spacing: .32em;
+  font-size: .52rem;
+  font-weight: 700;
+  letter-spacing: .36em;
   color: var(--copper-500);
+  margin-top: 2px;
 }
 .nav__links {
   margin-left: auto;

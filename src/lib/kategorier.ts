@@ -55,7 +55,7 @@ export const KATEGORIER: Kategori[] = [
       { src: '/assets/galleri/muring/tegl-4.jpg', alt: 'Tegl' },
       { src: '/assets/galleri/muring/naturstein-1.jpg', alt: 'StoneWall' },
       { src: '/assets/galleri/muring/naturstein-2.jpg', alt: 'StoneWall' },
-      { src: '/assets/galleri/muring/skifer-oppdal.jpg', alt: 'Skifer Oppdal' },
+      { src: '/assets/galleri/muring/skifer-oppdal.jpg', alt: 'Skifer' },
     ],
   },
   {
@@ -103,8 +103,6 @@ export const KATEGORIER: Kategori[] = [
       { navn: 'Service og vedlikehold', beskrivelse: 'Inspeksjon, reparasjon og småfix på ildsted og pipe.' },
     ],
     galleri: [
-      { src: '/assets/galleri/ildsted/peis-1.jpg', alt: 'Peis' },
-      { src: '/assets/galleri/ildsted/peis-2.jpg', alt: 'Peis' },
       { src: '/assets/galleri/ildsted/peis-3.jpg', alt: 'Peis' },
       { src: '/assets/galleri/ildsted/vedovn.jpg', alt: 'Vedovn' },
       { src: '/assets/galleri/ildsted/pipe-rehab.jpg', alt: 'Rehabilitering pipe' },
@@ -153,7 +151,6 @@ export const KATEGORIER: Kategori[] = [
     ],
     galleri: [
       { src: '/assets/galleri/restaurering/antikvarisk-1.jpg', alt: 'Antikvarisk arbeid' },
-      { src: '/assets/galleri/restaurering/antikvarisk-2.jpg', alt: 'Antikvarisk arbeid' },
       { src: '/assets/galleri/restaurering/restaurering-tegl-pipe.jpg', alt: 'Restaurering tegl og pipe' },
     ],
   },
