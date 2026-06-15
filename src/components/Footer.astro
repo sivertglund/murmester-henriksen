@@ -20,15 +20,15 @@ const footer = await getFooter();
           </g>
         </svg>
       </span>
-      <p><strong>{footer.firmanavn}</strong><br/>{footer.firmaadresse}</p>
+      <p><strong>{footer.firmanavn.replace(/\s+AS$/i, '')}</strong><br/>{footer.firmaadresse}</p>
     </div>
     <div class="footer__col">
       <h4>Tjenester</h4>
       <ul>
-        <li><a href="/tjenester/teglforblending">Teglforblending og muring</a></li>
+        <li><a href="/tjenester/muring">Muring</a></li>
         <li><a href="/tjenester/puss">Puss</a></li>
-        <li><a href="/tjenester/restaurering-av-murverk">Restaurering av murverk</a></li>
-        <li><a href="/tjenester/peis-og-vedovn">Peis &amp; vedovn</a></li>
+        <li><a href="/tjenester/restaurering">Restaurering</a></li>
+        <li><a href="/tjenester/ildsted-og-skorstein">Ildsted og skorstein</a></li>
         <li><a href="/tjenester/">Alle tjenester →</a></li>
       </ul>
     </div>

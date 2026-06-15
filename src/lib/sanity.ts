@@ -333,7 +333,7 @@ const FOOTER_FALLBACK: Footer = {
   firmanavn: 'Murmester Henriksen AS',
   firmaadresse: 'Vear, Vestfold',
   tagline: 'Murmester · Etablert 2025 · NM-sølv 2014',
-  medlemTekst: 'Medlem · Norges Murmesterforening',
+  medlemTekst: 'Medlem av Norske Murmestres Landsforening & Vestfold Murmesterlaug',
   facebookUrl: 'https://www.facebook.com/profile.php?id=61573745327073',
   instagramUrl: 'https://www.instagram.com/murmesterhenriksen/',
 };
