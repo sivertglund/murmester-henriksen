@@ -227,28 +227,48 @@ export async function getFounder(): Promise<Founder> {
 // =====================================================================
 // Testimonials — singleton 'testimonials'
 // =====================================================================
-export type Sitat = { tekst: string; navn: string; meta?: string };
+export type Sitat = {
+  tekst: string;
+  navn: string;
+  meta?: string;
+  stjerner?: number;
+  dato?: string;
+  kildeUrl?: string;
+};
 export type Testimonials = {
   kicker: string;
   tittel: string;
   tittelAksent: string;
   tittelSlutt: string;
   sitater: Sitat[];
+  giAnmeldelseUrl: string;
+  seAlleUrl?: string;
 };
 
 const TESTIMONIALS_FALLBACK: Testimonials = {
-  kicker: 'Anbefalinger',
+  kicker: 'Anmeldelser',
   tittel: 'Hva kundene',
   tittelAksent: 'faktisk sier',
   tittelSlutt: '',
-  sitater: [],
+  giAnmeldelseUrl: 'https://g.page/r/Ca94wioTazv3EBM/review',
+  seAlleUrl: 'https://g.page/r/Ca94wioTazv3EBM',
+  sitater: [
+    {
+      tekst: 'Tønsberg hyggeligste murer!',
+      navn: 'Tor Eirik Moen',
+      meta: 'Local Guide',
+      stjerner: 5,
+      dato: 'for 4 måneder siden',
+      kildeUrl: 'https://share.google/ScST8NoQNu5lIPXHt',
+    },
+  ],
 };
 
 export async function getTestimonials(): Promise<Testimonials> {
   try {
     const data = await client.fetch<Testimonials | null>(
       `*[_type == "testimonials" && _id == "testimonials"][0]{
-        kicker, tittel, tittelAksent, tittelSlutt, sitater
+        kicker, tittel, tittelAksent, tittelSlutt, sitater, giAnmeldelseUrl, seAlleUrl
       }`
     );
     return data ?? TESTIMONIALS_FALLBACK;

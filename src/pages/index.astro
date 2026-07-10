@@ -217,30 +217,67 @@ const chipIcons: Record<string, string> = {
 </section>
 
 
-<!-- ===== Testimonials (skjult inntil ekte sitater er på plass) ===== -->
-<section class="testimonials" id="anbefalinger" hidden>
+<!-- ===== Anmeldelser ===== -->
+<section class="testimonials" id="anbefalinger">
   <div class="container testimonials__inner">
     <div class="testimonials__head">
       <p class="kicker">{testimonials.kicker}</p>
       <h2>{testimonials.tittel} <em>{testimonials.tittelAksent}</em>{testimonials.tittelSlutt}</h2>
     </div>
 
-    <div class="testimonials__grid">
-      {testimonials.sitater && testimonials.sitater.length > 0 ? (
-        testimonials.sitater.map((s) => (
-          <figure class="quote">
-            <div class="quote__stars" aria-label="5 av 5 stjerner">★★★★★</div>
-            <blockquote><p>{s.tekst}</p></blockquote>
-            <figcaption><strong>{s.navn}</strong>{s.meta && <span>{s.meta}</span>}</figcaption>
-          </figure>
-        ))
-      ) : (
-        <>
-          <figure class="quote quote--empty" aria-hidden="true"></figure>
-          <figure class="quote quote--empty" aria-hidden="true"></figure>
-          <figure class="quote quote--empty" aria-hidden="true"></figure>
-        </>
-      )}
+    {testimonials.sitater && testimonials.sitater.length > 0 && (
+      <div class={`testimonials__grid testimonials__grid--${testimonials.sitater.length}`}>
+        {testimonials.sitater.map((s) => {
+          const stjerner = s.stjerner ?? 5;
+          const sitatMarkup = (
+            <>
+              <div class="quote__stars" aria-label={`${stjerner} av 5 stjerner`}>
+                {'★'.repeat(stjerner)}<span class="quote__stars-off" aria-hidden="true">{'★'.repeat(5 - stjerner)}</span>
+              </div>
+              <blockquote class="quote__body"><p>{s.tekst}</p></blockquote>
+              <figcaption class="quote__meta">
+                <strong class="quote__navn">{s.navn}</strong>
+                <span class="quote__submeta">
+                  {s.meta && <span>{s.meta}</span>}
+                  {s.dato && <span>{s.dato}</span>}
+                </span>
+              </figcaption>
+              {s.kildeUrl && (
+                <span class="quote__source">
+                  Se på Google
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
+                </span>
+              )}
+            </>
+          );
+          return s.kildeUrl ? (
+            <a class="quote quote--link" href={s.kildeUrl} target="_blank" rel="noopener nofollow" aria-label={`Anmeldelse fra ${s.navn} på Google`}>
+              {sitatMarkup}
+            </a>
+          ) : (
+            <figure class="quote">{sitatMarkup}</figure>
+          );
+        })}
+      </div>
+    )}
+
+    <!-- Bidra-panel: QR + "Gi en anmeldelse på Google" -->
+    <div class="review-cta">
+      <div class="review-cta__body">
+        <p class="kicker">Bidra selv</p>
+        <h3 class="review-cta__h3">Har vi jobbet for deg?</h3>
+        <p class="review-cta__lede">Vi setter enormt pris på en anmeldelse — det hjelper både oss og neste kunde.</p>
+        <a class="btn btn--primary review-cta__btn" href={testimonials.giAnmeldelseUrl} target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          Gi en anmeldelse på Google
+        </a>
+      </div>
+      <div class="review-cta__qr" aria-hidden="true">
+        <div class="review-cta__qr-frame">
+          <img src="/assets/anmeldelser/qr-google-review.svg" alt="" width="140" height="140" />
+        </div>
+        <p class="review-cta__qr-caption">Skann for å gi en anmeldelse</p>
+      </div>
     </div>
 
   </div>

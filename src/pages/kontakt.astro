@@ -1,10 +1,11 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import { getKontakt, getKontaktPage } from '../lib/sanity';
+import { getKontakt, getKontaktPage, getTestimonials } from '../lib/sanity';
 import { KATEGORIER } from '../lib/kategorier';
 
 const kontakt = await getKontakt();
 const kp = await getKontaktPage();
+const testimonials = await getTestimonials();
 ---
 <Layout
   title="Kontakt — Murmester Henriksen AS"
@@ -102,6 +103,29 @@ const kp = await getKontaktPage();
         <button type="submit" class="btn btn--primary btn--block">Send forespørsel</button>
         <p class="contact__note">Eller ring direkte på <a href={`tel:${kontakt.telefonRaw}`}>{kontakt.telefon}</a></p>
       </form>
+    </div>
+  </section>
+
+  <!-- Bidra-panel: gi en anmeldelse på Google -->
+  <section class="section section--soft" id="anmeldelse">
+    <div class="container">
+      <div class="review-cta">
+        <div class="review-cta__body">
+          <p class="kicker">Bidra selv</p>
+          <h3 class="review-cta__h3">Har vi jobbet for deg tidligere?</h3>
+          <p class="review-cta__lede">Vi setter enormt pris på en anmeldelse — det hjelper både oss og neste kunde.</p>
+          <a class="btn btn--primary review-cta__btn" href={testimonials.giAnmeldelseUrl} target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            Gi en anmeldelse på Google
+          </a>
+        </div>
+        <div class="review-cta__qr" aria-hidden="true">
+          <div class="review-cta__qr-frame">
+            <img src="/assets/anmeldelser/qr-google-review.svg" alt="" width="140" height="140" />
+          </div>
+          <p class="review-cta__qr-caption">Skann for å gi en anmeldelse</p>
+        </div>
+      </div>
     </div>
   </section>
 
